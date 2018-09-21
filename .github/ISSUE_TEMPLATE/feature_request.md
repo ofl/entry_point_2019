@@ -1,17 +1,16 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: 機能要求
+about: 機能要求の整理と内容を記す
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 機能要求
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+### 資料
++
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### 作業
++ [ ]
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### 完了条件
++
