@@ -17,7 +17,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecurepass
       POSTGRES_DB: app_development
-    command: bundle exec foreman start -f Procfile.dev
+    command: bundle exec rails s -b 0.0.0.0 -p 3000
 
   postgres:
     env_file: .env
