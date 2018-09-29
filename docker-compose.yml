@@ -1,0 +1,36 @@
+version: '3'
+services:
+  rails:
+    env_file: .env
+    build:
+      context: .
+    image: ${DEVELOPER_NAME}/${PROJECT_NAME}_rails:${APP_VERSION}
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - bundle-volume:/usr/local/bundle
+      - .ash_history:/root/.ash_history
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecurepass
+      POSTGRES_DB: app_development
+    command: bundle exec rails s -b 0.0.0.0 -p 3000
+
+  postgres:
+    env_file: .env
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecurepass
+      POSTGRES_DB: app_development
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+
+volumes:
+  postgresql-data:
+    driver: local
+  bundle-volume:
