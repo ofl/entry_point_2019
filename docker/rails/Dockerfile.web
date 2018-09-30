@@ -14,3 +14,13 @@ RUN \
   bundle config build.nokogiri --use-system-libraries
 
 WORKDIR $APP_ROOT
+
+COPY Gemfile Gemfile.lock ./
+
+RUN \
+  set -x && \
+  bundle install -j4
+
+ADD . $APP_ROOT
+
+CMD ["rails", "server", "-b", "0.0.0.0"]

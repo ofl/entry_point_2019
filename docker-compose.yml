@@ -4,6 +4,7 @@ services:
     env_file: .env
     build:
       context: .
+      dockerfile: ./docker/rails/Dockerfile.develop
     image: ${DEVELOPER_NAME}/${PROJECT_NAME}_rails:${APP_VERSION}
     ports:
       - '3000:3000'

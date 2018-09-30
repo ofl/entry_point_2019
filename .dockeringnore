@@ -1,0 +1,10 @@
+## Environment normalisation:
+.git*
+.rspec
+log
+tmp
+doc
+vendor/assets
+node_modules
+
+.env*
