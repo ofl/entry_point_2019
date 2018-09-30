@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+  gem 'brakeman'
+  gem 'bundler-audit'
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
