@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :email, uniqueness: true
+
+  has_many :articles, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 end
