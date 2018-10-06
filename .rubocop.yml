@@ -98,7 +98,7 @@ Layout/IndentationConsistency:
 
 # Two spaces, no tabs (for indentation).
 Layout/IndentationWidth:
-  Enabled: true
+  Enabled: false
 
 Layout/LeadingCommentSpace:
   Enabled: true
@@ -172,6 +172,8 @@ Layout/TrailingBlankLines:
 # No trailing whitespace.
 Layout/TrailingWhitespace:
   Enabled: true
+  Exclude:
+    - 'config/initializers/sorcery.rb'
 
 # Use quotes for string literals when they are enough.
 Style/UnneededPercentQ:
