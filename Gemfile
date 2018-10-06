@@ -29,6 +29,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'brakeman'
+  gem 'bullet'
   gem 'bundler-audit'
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop', require: false
