@@ -5,3 +5,38 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+def create(*args)
+  FactoryBot.create(*args)
+end
+
+def create_user(name = Faker::Internet.user_name.slice(0...15))
+  user = create(:user, name: name, email: Faker::Internet.email)
+  user
+end
+
+users = []
+
+unless User.exists?
+  users << create_user('testuser')
+
+  10.times do
+    users << create_user
+  end
+end
+
+articles = []
+
+unless Article.exists?
+  users.each do |user|
+    rand(5).times do
+      articles << create(:article, user: user)
+    end
+  end
+
+  articles.each do |article|
+    rand(3).times do
+      create(:comment, user: users.sample, article: article)
+    end
+  end
+end
