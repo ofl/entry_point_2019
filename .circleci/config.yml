@@ -64,6 +64,10 @@ jobs:
 workflows:
   version: 2
 
+  build_and_deploy:
+    jobs:
+      - build
+
   auto_bundle_update:
     triggers:
       - schedule:
