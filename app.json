@@ -1,0 +1,53 @@
+{
+  "name": "entry_point_2019",
+  "scripts": {
+  },
+  "env": {
+    "APP_VERSION": {
+      "required": true
+    },
+    "DEVELOPER_NAME": {
+      "required": true
+    },
+    "FACEBOOK_APP_ID": {
+      "required": true
+    },
+    "FACEBOOK_APP_SECRET": {
+      "required": true
+    },
+    "PROJECT_NAME": {
+      "required": true
+    },
+    "S3_ACCESS_KEY_ID": {
+      "required": true
+    },
+    "S3_BUCKET": {
+      "required": true
+    },
+    "S3_REGION": {
+      "required": true
+    },
+    "S3_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "TWITTER_API_KEY": {
+      "required": true
+    },
+    "TWITTER_API_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
