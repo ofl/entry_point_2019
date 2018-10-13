@@ -18,6 +18,10 @@ AllCops:
     - 'bin/rspec'
     - 'bin/yarn'
     - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'public/css/**/*'
+    - 'public/js/**/*'
+    - 'vendor/**/*'
     - 'railties/test/fixtures/tmp/**/*'
 
 Performance:
