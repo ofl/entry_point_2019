@@ -21,6 +21,18 @@ jobs:
           name: "before_test: setup db"
           command: docker-compose run --rm rails rails db:create db:migrate
       - run:
+          name: "before_test: install javascript dependencies"
+          command: docker-compose run --rm yarn install
+      # - run:
+      #     name: "eslint"
+      #     command: docker-compose run --rm yarn run lint:js
+      # - run:
+      #     name: "stylelint"
+      #     command: docker-compose run --rm yarn run lint:css
+      - run:
+          name: "before_test: build assets"
+          command: docker-compose run --rm yarn run prod
+      - run:
           name: rspec
           command: >
             docker-compose run
