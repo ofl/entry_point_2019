@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_user_article, only: [:edit, :update, :destroy]
 
   # GET /articles
   # GET /articles.json
@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @article = Article.find(params[:id])
   end
 
   # GET /articles/new
@@ -24,7 +25,7 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.build(article_params)
 
     respond_to do |format|
       if @article.save
@@ -63,12 +64,12 @@ class ArticlesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
+    def set_current_user_article
+      @article = current_user.articles.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.fetch(:article, {})
+      params.require(:article).permit(:title, :body)
     end
 end
