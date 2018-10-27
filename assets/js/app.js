@@ -5,6 +5,7 @@ import 'vuetify/dist/vuetify.min.css'
 const componentsList = {
   'main-component': require('./components/pages/Main.vue'),
   'article-list-component': require('./components/pages/ArticleList.vue'),
+  'article-detail-component': require('./components/pages/ArticleDetail.vue'),
 }
 
 Vue.use(Vuetify)
