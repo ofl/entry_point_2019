@@ -28,12 +28,13 @@
       'my-footer': Footer
     },
     props: {
-      articles: {
-        type: Array
+      rails: {
+        type: Object
       }
     },
     data: () => ({
       toolbarTitle: 'Articles',
+      articles: rails.articles,
     })
     // ページ全体に及ぶロジックを記述
   };
