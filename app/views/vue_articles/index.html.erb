@@ -1,0 +1,7 @@
+<div id="app">
+  <article-list-component :articles="articles" />
+</div>
+
+<script>
+  rails.articles = <%= raw @articles.to_json(include: :user) %>;
+</script>
