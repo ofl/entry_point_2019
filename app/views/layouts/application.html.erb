@@ -14,6 +14,7 @@
 
     <script>
       rails = window.rails = {};
+      rails.currentUser = <%= current_user ? raw(current_user.to_json) : nil %>;
     </script>
   </head>
 

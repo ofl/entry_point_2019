@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire" v-cloak>
-    <my-navigation></my-navigation>
+    <my-navigation :currentUser="currentUser"></my-navigation>
     <my-toolbar :title="toolbarTitle"></my-toolbar>
     <my-content :article="article"></my-content>
     <my-footer></my-footer>
@@ -35,6 +35,7 @@
     data: () => ({
       toolbarTitle: 'Article',
       article: rails.article,
+      currentUser: rails.currentUser,
     })
     // ページ全体に及ぶロジックを記述
   };

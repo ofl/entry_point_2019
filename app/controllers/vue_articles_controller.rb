@@ -3,7 +3,7 @@ class VueArticlesController < ApplicationController
 
   # GET /vue_articles
   def index
-    @articles = Article.all
+    @articles = Article.includes(:user).all
   end
 
   # GET /vue_articles/1

@@ -21,18 +21,42 @@
           <v-list-tile-title>Articles</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-divider
+        v-if=isLoggedIn()
+        dark
+        class="my-3"
+      ></v-divider>
+      <v-list-tile
+        v-if=isLoggedIn()
+        @click="onClickMenu('/vue_articles')"
+      >
+        <v-list-tile-action>
+          <v-icon>contact_mail</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>{{ currentUser.name }}</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
   export default {
+    props: {
+      currentUser: {
+        type: Object
+      }
+    },
     data: () => ({
       drawer: null
     }),
     methods: {
       onClickMenu(path) {
         location.href = path;
+      },
+      isLoggedIn() {
+        return !!this.currentUser
       }
     }
   }
