@@ -2,7 +2,7 @@
   <v-app id="inspire" v-cloak>
     <my-navigation :currentUser="currentUser"></my-navigation>
     <my-toolbar :title="toolbarTitle"></my-toolbar>
-    <my-content :article="article"></my-content>
+    <my-content :article="article" :currentUser="currentUser"></my-content>
     <my-footer></my-footer>
   </v-app>
 </template>

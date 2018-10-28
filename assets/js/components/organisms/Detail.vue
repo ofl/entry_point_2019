@@ -15,8 +15,12 @@
         </v-card-title>
 
         <v-card-actions>
+          <v-btn
+            v-if=isOwner()
+            flat color="orange"
+            @click="onClickEditBtn()"
+          >Edit</v-btn>
           <v-btn flat color="orange">Share</v-btn>
-          <v-btn flat color="orange">Explore</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -28,6 +32,17 @@
     props: {
       article: {
         type: Object
+      },
+      currentUser: {
+        type: Object
+      }
+    },
+    methods: {
+      onClickEditBtn() {
+        location.pathname = `/vue_articles/${this.article.id}/edit`;
+      },
+      isOwner() {
+        return this.article.user_id == this.currentUser.id;
       }
     }
   }

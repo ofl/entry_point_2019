@@ -6,7 +6,7 @@
         align-center
       >
         <v-flex text-xs-center>
-          <article-detail :article="article"></article-detail>
+          <article-detail :article="article" :currentUser="currentUser"></article-detail>
         </v-flex>
       </v-layout>
     </v-container>
@@ -23,6 +23,9 @@
     },
     props: {
       article: {
+        type: Object
+      },
+      currentUser: {
         type: Object
       }
     }
