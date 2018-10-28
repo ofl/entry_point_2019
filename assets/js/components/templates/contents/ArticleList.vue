@@ -6,7 +6,7 @@
         align-center
       >
         <v-flex text-xs-center>
-          <article-list :articles="articles"></article-list>
+          <article-list :articles="articles" @click-item="onClickItem"></article-list>
         </v-flex>
       </v-layout>
     </v-container>
@@ -24,6 +24,11 @@
     props: {
       articles: {
         type: Array
+      }
+    },
+    methods: {
+      onClickItem(id) {
+        location.href = `vue_articles/${id}`;
       }
     }
   }

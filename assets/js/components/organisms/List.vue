@@ -4,7 +4,7 @@
       v-for="article in articles"
       :key="article.id"
       avatar
-      @click=""
+      @click="click(article.id)"
     >
       <v-list-tile-avatar>
         <v-icon :class="[article.iconClass]">{{ article.icon }}</v-icon>
@@ -29,6 +29,11 @@
     props: {
       articles: {
         type: Array
+      }
+    },
+    methods: {
+      click(id) {
+        this.$emit('click-item', id);
       }
     }
   }
