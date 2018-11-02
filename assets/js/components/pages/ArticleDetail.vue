@@ -2,7 +2,7 @@
   <v-app id="inspire" v-cloak>
     <my-navigation :currentUser="currentUser"></my-navigation>
     <my-toolbar :title="toolbarTitle"></my-toolbar>
-    <my-content :article="article" :currentUser="currentUser"></my-content>
+    <my-content :article="article" :currentUser="currentUser" :flashes="flashes"></my-content>
     <my-footer></my-footer>
   </v-app>
 </template>
@@ -36,6 +36,7 @@
       toolbarTitle: 'Article',
       article: rails.article,
       currentUser: rails.currentUser,
+      flashes: rails.flashJson,
     })
     // ページ全体に及ぶロジックを記述
   };

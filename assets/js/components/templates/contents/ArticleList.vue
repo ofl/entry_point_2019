@@ -1,5 +1,6 @@
 <template>
   <v-content>
+    <flashes :flashes="flashes"></flashes>
     <v-container fluid fill-height>
       <v-layout
         justify-center
@@ -15,15 +16,20 @@
 
 <script>
   import List from '../../organisms/List.vue';
+  import Flashes from '../../organisms/Flashes.vue';
 
   export default {
     name: 'article-list-contents',
     components: {
       'article-list': List,
+      'flashes': Flashes,
     },
     props: {
       articles: {
         type: Array
+      },
+      flashes: {
+        type: Object
       }
     },
     methods: {

@@ -1,5 +1,6 @@
 <template>
   <v-content>
+    <flashes :flashes="flashes"></flashes>
     <v-container fluid fill-height>
       <v-layout
         justify-center
@@ -15,17 +16,22 @@
 
 <script>
   import Detail from '../../organisms/Detail.vue';
+  import Flashes from '../../organisms/Flashes.vue';
 
   export default {
     name: 'article-detail-contents',
     components: {
       'article-detail': Detail,
+      'flashes': Flashes,
     },
     props: {
       article: {
         type: Object
       },
       currentUser: {
+        type: Object
+      },
+      flashes: {
         type: Object
       }
     }

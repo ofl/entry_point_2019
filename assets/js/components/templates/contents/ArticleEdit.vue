@@ -1,5 +1,6 @@
 <template>
   <v-content>
+    <flashes :flashes="flashes"></flashes>
     <v-container fluid fill-height>
       <v-layout
         justify-center
@@ -15,14 +16,19 @@
 
 <script>
   import Form from '../../organisms/Form.vue';
+  import Flashes from '../../organisms/Flashes.vue';
 
   export default {
     name: 'article-edit-contents',
     components: {
       'article-edit': Form,
+      'flashes': Flashes,
     },
     props: {
       article: {
+        type: Object
+      },
+      flashes: {
         type: Object
       }
     }

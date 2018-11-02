@@ -2,7 +2,7 @@
   <v-app id="inspire" v-cloak>
     <my-navigation :currentUser="currentUser"></my-navigation>
     <my-toolbar :title="toolbarTitle"></my-toolbar>
-    <my-content :articles="articles"></my-content>
+    <my-content :articles="articles" :flashes="flashes"></my-content>
     <my-footer></my-footer>
   </v-app>
 </template>
@@ -36,6 +36,7 @@
       toolbarTitle: 'Articles',
       articles: rails.articles,
       currentUser: rails.currentUser,
+      flashes: rails.flashJson,
     })
   };
 </script>
