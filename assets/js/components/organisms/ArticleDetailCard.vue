@@ -16,9 +16,9 @@
 
         <v-card-actions>
           <v-btn
-            v-if=isOwner()
-            flat color="orange"
+            v-if=isOwner
             @click="onClickEditBtn()"
+            flat color="orange"
           >Edit</v-btn>
           <v-btn flat color="orange">Share</v-btn>
         </v-card-actions>
@@ -29,6 +29,8 @@
 
 <script>
   export default {
+    name: 'ArticleDetailCard',
+
     props: {
       article: {
         type: Object
@@ -37,13 +39,17 @@
         type: Object
       }
     },
-    methods: {
-      onClickEditBtn() {
-        location.pathname = `/vue_articles/${this.article.id}/edit`;
-      },
-      isOwner() {
+
+    computed: {
+      isOwner () {
         return this.article.user_id == this.currentUser.id;
       }
+    },
+
+    methods: {
+      onClickEditBtn () {
+        location.pathname = `/vue_articles/${this.article.id}/edit`;
+      },
     }
   }
 </script>

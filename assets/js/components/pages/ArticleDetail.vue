@@ -1,43 +1,51 @@
 <template>
   <v-app id="inspire" v-cloak>
-    <my-navigation :currentUser="currentUser"></my-navigation>
-    <my-toolbar :title="toolbarTitle"></my-toolbar>
-    <my-content :article="article" :currentUser="currentUser" :flashes="flashes"></my-content>
-    <my-footer></my-footer>
+    <TheNavigation :currentUser="currentUser" />
+    <TheToolbar :title="toolbarTitle" />
+    <AppContent
+      :article="article"
+      :currentUser="currentUser"
+      :flashes="flashes"
+    />
+    <TheFooter />
   </v-app>
 </template>
+
+<script>
+  import TheNavigation from '../templates/TheNavigation.vue';
+  import TheToolbar from '../templates/TheToolbar.vue';
+  import TheFooter from '../templates/TheFooter.vue';
+  import AppContent from '../templates/contents/ArticleDetailContent.vue';
+
+  export default {
+    name: 'ArticleDetail',
+
+    components: {
+      'TheNavigation': TheNavigation,
+      'TheToolbar': TheToolbar,
+      'AppContent': AppContent,
+      'TheFooter': TheFooter
+    },
+
+    props: {
+      rails: {
+        type: Object
+      }
+    },
+
+    data () {
+      return {
+        toolbarTitle: 'Article',
+        article: rails.article,
+        currentUser: rails.currentUser,
+        flashes: rails.flashJson,
+      }
+    },
+  };
+</script>
 
 <style>
   [v-cloak] {
     /* display: none; */
   }
 </style>
-
-<script>
-  import Navigation from '../templates/Navigation.vue';
-  import Toolbar from '../templates/Toolbar.vue';
-  import Footer from '../templates/Footer.vue';
-  import Content from '../templates/contents/ArticleDetail.vue';
-
-  export default {
-    name: 'article-detail',
-    components: {
-      'my-navigation': Navigation,
-      'my-toolbar': Toolbar,
-      'my-content': Content,
-      'my-footer': Footer
-    },
-    props: {
-      rails: {
-        type: Object
-      }
-    },
-    data: () => ({
-      toolbarTitle: 'Article',
-      article: rails.article,
-      currentUser: rails.currentUser,
-      flashes: rails.flashJson,
-    })
-    // ページ全体に及ぶロジックを記述
-  };
-</script>

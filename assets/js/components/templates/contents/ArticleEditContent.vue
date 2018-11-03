@@ -1,13 +1,13 @@
 <template>
   <v-content>
-    <flashes :flashes="flashes"></flashes>
+    <TheFlashes :flashes="flashes" />
     <v-container fluid fill-height>
       <v-layout
         justify-center
         align-center
       >
         <v-flex text-xs-center>
-          <article-detail :article="article" :currentUser="currentUser"></article-detail>
+          <ArticleEditForm :article="article"></ArticleEditForm>
         </v-flex>
       </v-layout>
     </v-container>
@@ -15,20 +15,19 @@
 </template>
 
 <script>
-  import Detail from '../../organisms/Detail.vue';
-  import Flashes from '../../organisms/Flashes.vue';
+  import ArticleEditForm from '../../organisms/ArticleEditForm.vue';
+  import TheFlashes from '../../organisms/TheFlashes.vue';
 
   export default {
-    name: 'article-detail-contents',
+    name: 'ArticleEditContent',
+
     components: {
-      'article-detail': Detail,
-      'flashes': Flashes,
+      'ArticleEditForm': ArticleEditForm,
+      'TheFlashes': TheFlashes,
     },
+
     props: {
       article: {
-        type: Object
-      },
-      currentUser: {
         type: Object
       },
       flashes: {

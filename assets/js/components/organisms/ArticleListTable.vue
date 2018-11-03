@@ -26,13 +26,16 @@
 
 <script>
   export default {
+    name: 'ArticleListTable',
+
     props: {
       articles: {
         type: Array
       }
     },
+
     methods: {
-      click(id) {
+      click (id) {
         this.$emit('click-item', id);
       }
     }

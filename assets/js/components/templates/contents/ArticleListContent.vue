@@ -1,13 +1,16 @@
 <template>
   <v-content>
-    <flashes :flashes="flashes"></flashes>
+    <TheFlashes :flashes="flashes" />
     <v-container fluid fill-height>
       <v-layout
         justify-center
         align-center
       >
         <v-flex text-xs-center>
-          <article-list :articles="articles" @click-item="onClickItem"></article-list>
+          <ArticleListTable
+            :articles="articles"
+            @click-item="onClickItem"
+          />
         </v-flex>
       </v-layout>
     </v-container>
@@ -15,15 +18,17 @@
 </template>
 
 <script>
-  import List from '../../organisms/List.vue';
-  import Flashes from '../../organisms/Flashes.vue';
+  import ArticleListTable from '../../organisms/ArticleListTable.vue';
+  import TheFlashes from '../../organisms/TheFlashes.vue';
 
   export default {
-    name: 'article-list-contents',
+    name: 'ArticleListContent',
+
     components: {
-      'article-list': List,
-      'flashes': Flashes,
+      'ArticleListTable': ArticleListTable,
+      'TheFlashes': TheFlashes,
     },
+
     props: {
       articles: {
         type: Array
@@ -32,8 +37,9 @@
         type: Object
       }
     },
+
     methods: {
-      onClickItem(id) {
+      onClickItem (id) {
         location.href = `vue_articles/${id}`;
       }
     }

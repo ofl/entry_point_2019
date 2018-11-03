@@ -1,22 +1,24 @@
 <template>
   <div>
-    <flash
+    <AppFlash
       v-for="(value, key) in flashes"
       :key="key"
       :flashKey="key"
       :flashValue="value"
-    ></flash>
+    />
   </div>
 </template>
 
 <script>
-  import Flash from '../molecules/Flash.vue';
+  import AppFlash from '../molecules/AppFlash.vue';
 
   export default {
-    name: 'flashes',
+    name: 'TheFlashes',
+
     components: {
-      'flash': Flash,
+      'AppFlash': AppFlash,
     },
+
     props: {
       flashes: {
         type: Object

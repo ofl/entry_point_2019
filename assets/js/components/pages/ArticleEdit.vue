@@ -1,41 +1,46 @@
 <template>
   <v-app id="inspire" v-cloak>
-    <my-navigation></my-navigation>
-    <my-toolbar :title="toolbarTitle"></my-toolbar>
-    <my-content :article="article"></my-content>
-    <my-footer></my-footer>
+    <TheNavigation />
+    <TheToolbar :title="toolbarTitle" />
+    <AppContent :article="article" />
+    <TheFooter />
   </v-app>
 </template>
+
+<script>
+  import TheNavigation from '../templates/TheNavigation.vue';
+  import TheToolbar from '../templates/TheToolbar.vue';
+  import TheFooter from '../templates/TheFooter.vue';
+  import AppContent from '../templates/contents/ArticleEditContent.vue';
+
+  export default {
+    name: 'ArticleEdit',
+
+    components: {
+      'TheNavigation': TheNavigation,
+      'TheToolbar': TheToolbar,
+      'AppContent': AppContent,
+      'TheFooter': TheFooter
+    },
+
+    props: {
+      rails: {
+        type: Object
+      }
+    },
+
+    data () {
+      return {
+        toolbarTitle: 'Edit Article',
+        article: rails.article,
+      }
+    },
+  };
+</script>
+
 
 <style>
   [v-cloak] {
     /* display: none; */
   }
 </style>
-
-<script>
-  import Navigation from '../templates/Navigation.vue';
-  import Toolbar from '../templates/Toolbar.vue';
-  import Footer from '../templates/Footer.vue';
-  import Content from '../templates/contents/ArticleEdit.vue';
-
-  export default {
-    name: 'article-detail',
-    components: {
-      'my-navigation': Navigation,
-      'my-toolbar': Toolbar,
-      'my-content': Content,
-      'my-footer': Footer
-    },
-    props: {
-      rails: {
-        type: Object
-      }
-    },
-    data: () => ({
-      toolbarTitle: 'Edit Article',
-      article: rails.article,
-    })
-    // ページ全体に及ぶロジックを記述
-  };
-</script>

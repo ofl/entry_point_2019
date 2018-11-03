@@ -12,6 +12,8 @@
 
 <script>
   export default {
+    name: 'AppFlash',
+
     props: {
       flashKey: {
         type: String
@@ -20,11 +22,13 @@
         type: String
       }
     },
+
     data () {
       return {
         alert: true
       }
     },
+
     computed: {
       alertType () {
         if (this.flashKey == 'notice') {

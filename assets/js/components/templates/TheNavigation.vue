@@ -13,6 +13,7 @@
           <v-list-tile-title>Home</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+
       <v-list-tile @click="onClickMenu('/vue_articles')">
         <v-list-tile-action>
           <v-icon>contact_mail</v-icon>
@@ -21,13 +22,15 @@
           <v-list-tile-title>Articles</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+
       <v-divider
-        v-if=isLoggedIn()
+        v-if=isLoggedIn
         dark
         class="my-3"
       ></v-divider>
+
       <v-list-tile
-        v-if=isLoggedIn()
+        v-if=isLoggedIn
         @click="onClickMenu('/vue_articles')"
       >
         <v-list-tile-action>
@@ -43,21 +46,30 @@
 
 <script>
   export default {
+    name: 'TheNavigation',
+
     props: {
       currentUser: {
         type: Object
       }
     },
-    data: () => ({
-      drawer: null
-    }),
-    methods: {
-      onClickMenu(path) {
-        location.href = path;
-      },
-      isLoggedIn() {
+
+    data () {
+      return {
+        drawer: null,
+      }
+    },
+
+    computed: {
+      isLoggedIn () {
         return !!this.currentUser
       }
+    },
+
+    methods: {
+      onClickMenu (path) {
+        location.href = path;
+      },
     }
   }
 </script>
