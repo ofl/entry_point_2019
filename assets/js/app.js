@@ -7,6 +7,7 @@ const componentsList = {
   'article-list-component': require('./components/pages/ArticleList.vue'),
   'article-detail-component': require('./components/pages/ArticleDetail.vue'),
   'article-edit-component': require('./components/pages/ArticleEdit.vue'),
+  'article-new-component': require('./components/pages/ArticleNew.vue'),
 }
 
 Vue.use(Vuetify)

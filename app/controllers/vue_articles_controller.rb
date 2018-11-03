@@ -3,7 +3,7 @@ class VueArticlesController < ApplicationController
 
   # GET /vue_articles
   def index
-    @articles = Article.includes(:user).all
+    @articles = Article.includes(:user).all.order(created_at: :desc)
   end
 
   # GET /vue_articles/1
@@ -13,7 +13,7 @@ class VueArticlesController < ApplicationController
 
   # GET /vue_articles/new
   def new
-    @article = Article.new
+    @article = current_user.articles.build
   end
 
   # GET /vue_articles/1/edit
@@ -25,7 +25,7 @@ class VueArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      redirect_to(vue_article_path(@article), notice: 'User was successfully created')
+      redirect_to(vue_article_path(@article), notice: 'Article was successfully created.')
     else
       render :new
     end
@@ -34,7 +34,7 @@ class VueArticlesController < ApplicationController
   # PATCH/PUT /vue_articles/1
   def update
     if @article.update(article_params)
-      redirect_to(vue_article_path(@article), notice: 'User was successfully @article.update(article_params)')
+      redirect_to(vue_article_path(@article), notice: 'Article was successfully updated.')
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class VueArticlesController < ApplicationController
   # DELETE /vue_articles/1
   def destroy
     @article.destroy
-    redirect_to vue_articles_url, notice: 'was was successfully destroyed.'
+    redirect_to vue_articles_url, notice: 'Article was successfully destroyed.'
   end
 
   private

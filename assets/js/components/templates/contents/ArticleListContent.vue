@@ -1,19 +1,28 @@
 <template>
   <v-content>
     <TheFlashes :flashes="flashes" />
-    <v-container fluid fill-height>
-      <v-layout
-        justify-center
-        align-center
-      >
-        <v-flex text-xs-center>
-          <ArticleListTable
-            :articles="articles"
-            @click-item="onClickItem"
-          />
-        </v-flex>
-      </v-layout>
-    </v-container>
+    <d-block>
+      <v-container fluid>
+        <v-layout
+          justify-center
+          align-center
+        >
+          <v-flex text-xs-center>
+            <ArticleListTable
+              :articles="articles"
+              @click-item="onClickItem"
+            />
+          </v-flex>
+        </v-layout>
+      </v-container>
+
+      <div class="new-button">
+        <v-btn
+          @click="onClickNewBtn()"
+          color="info"
+        >New</v-btn>
+      </div>
+    </d-block>
   </v-content>
 </template>
 
@@ -41,7 +50,10 @@
     methods: {
       onClickItem (id) {
         location.href = `vue_articles/${id}`;
-      }
+      },
+      onClickNewBtn () {
+        location.href = 'vue_articles/new';
+      },
     }
   }
 </script>
