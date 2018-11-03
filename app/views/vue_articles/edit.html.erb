@@ -1,6 +1,7 @@
-<h1>Editing Article</h1>
+<div id="app" data-vue="article-edit">
+  <article-edit-component />
+</div>
 
-<%= render 'form', article: @article %>
-
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>
+<script>
+  rails.article = <%= raw @article.to_json(include: :user) %>;
+</script>

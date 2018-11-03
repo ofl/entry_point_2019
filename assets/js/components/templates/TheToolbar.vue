@@ -1,20 +1,25 @@
 <template>
   <v-toolbar color="indigo" dark fixed app>
-    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-toolbar-side-icon @click.stop="drawer = !drawer" />
     <v-toolbar-title>{{ title }}</v-toolbar-title>
   </v-toolbar>
 </template>
 
 <script>
   export default {
-    data: () => ({
-      drawer: null,
-    }),
+    name: 'TheToolbar',
+
     props: {
       title: {
+        type: String,
         default: 'Application',
-        type: String
       }
-    }
+    },
+
+    data () {
+      return {
+        drawer: null,
+      }
+    },
   }
 </script>

@@ -1,5 +1,7 @@
-<h1>New Article</h1>
+<div id="app" data-vue="article-new">
+  <article-new-component />
+</div>
 
-<%= render 'form', article: @article %>
-
-<%= link_to 'Back', vue_articles_path %>
+<script>
+  rails.article = <%= raw @article.to_json(include: :user) %>;
+</script>

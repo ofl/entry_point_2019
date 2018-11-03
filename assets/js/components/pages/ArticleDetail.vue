@@ -3,7 +3,8 @@
     <TheNavigation :currentUser="currentUser" />
     <TheToolbar :title="toolbarTitle" />
     <AppContent
-      :articles="articles"
+      :article="article"
+      :currentUser="currentUser"
       :flashes="flashes"
     />
     <TheFooter />
@@ -14,10 +15,10 @@
   import TheNavigation from '../templates/TheNavigation.vue';
   import TheToolbar from '../templates/TheToolbar.vue';
   import TheFooter from '../templates/TheFooter.vue';
-  import AppContent from '../templates/contents/ArticleListContent.vue';
+  import AppContent from '../templates/contents/ArticleDetailContent.vue';
 
   export default {
-    name: 'ArticleList',
+    name: 'ArticleDetail',
 
     components: {
       'TheNavigation': TheNavigation,
@@ -34,8 +35,8 @@
 
     data () {
       return {
-        toolbarTitle: 'Articles',
-        articles: rails.articles,
+        toolbarTitle: 'Article',
+        article: rails.article,
         currentUser: rails.currentUser,
         flashes: rails.flashJson,
       }
