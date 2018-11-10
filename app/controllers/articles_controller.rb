@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_current_user_article, only: [:edit, :update, :destroy]
+  skip_before_action :require_login, only: [:index, :show]
 
   # GET /articles
   # GET /articles.json
