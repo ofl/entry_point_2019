@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <TheFlashes :flashes="flashes" />
-    <d-block>
+    <div>
       <v-container fluid>
         <v-layout
           justify-center
@@ -22,7 +22,7 @@
           color="info"
         >New</v-btn>
       </div>
-    </d-block>
+    </div>
   </v-content>
 </template>
 
@@ -49,10 +49,10 @@
 
     methods: {
       onClickItem (id) {
-        location.href = `vue_articles/${id}`;
+        location.href = `/vue_articles/${id}`;
       },
       onClickNewBtn () {
-        location.href = 'vue_articles/new';
+        location.href = '/vue_articles/new';
       },
     }
   }

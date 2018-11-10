@@ -11,6 +11,10 @@
             :article="article"
             :currentUser="currentUser"
           />
+          <ArticleDetailComments
+            :comments="article.comments"
+            :currentUser="currentUser"
+          />
         </v-flex>
       </v-layout>
     </v-container>
@@ -19,6 +23,7 @@
 
 <script>
   import ArticleDetailCard from '../../organisms/ArticleDetailCard.vue';
+  import ArticleDetailComments from '../../organisms/ArticleDetailComments.vue';
   import TheFlashes from '../../organisms/TheFlashes.vue';
 
   export default {
@@ -26,6 +31,7 @@
 
     components: {
       'ArticleDetailCard': ArticleDetailCard,
+      'ArticleDetailComments': ArticleDetailComments,
       'TheFlashes': TheFlashes,
     },
 

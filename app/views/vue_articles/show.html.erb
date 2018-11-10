@@ -3,5 +3,5 @@
 </div>
 
 <script>
-  rails.article = <%= raw @article.to_json(include: :user) %>;
+  rails.article = <%= raw @article.to_json(include: { user: { only: [:id, :name] }, comments: { include: { user: { only: [:id, :name] } } } }) %>;
 </script>
