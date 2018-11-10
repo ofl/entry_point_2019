@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/DescribeClass
+RSpec.describe 'Mutations::Comments::Destroy' do # rubocop:disable RSpec/DescribeClass
   include GraphqlSpecHelper
 
   let!(:user) { create(:user) }
@@ -10,8 +10,8 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
 
   let(:query) do
     <<~QUERY
-      mutation UpdateComment($variables:updateCommentInput!) {
-        updateComment(input: $variables) {
+      mutation DestroyComment($variables:destroyCommentInput!) {
+        destroyComment(input: $variables) {
           comment {
             body
             user {
@@ -26,14 +26,11 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
       }
     QUERY
   end
-  let(:operation_name) { 'UpdateComment' }
+  let(:operation_name) { 'DestroyComment' }
   let(:variables) do
     {
       'variables': {
         'id': id,
-        'attributes': {
-          'body': body
-        }
       }
     }
   end
@@ -47,24 +44,19 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
     context '入力値が正しい場合' do
       let(:expected_value) do
         {
-          updateComment: {
-            comment: {
-              body: body,
-              user: {
-                name: user.name
-              }
-            },
+          destroyComment: {
+            comment: nil,
             errors: []
           }
         }.deep_stringify_keys
       end
 
-      it 'コメントのデータが返ること' do
+      it 'コメントがnilで返ること' do
         expect(data).to eq expected_value
       end
 
-      it 'コメントが増えないこと' do
-        expect { subject }.not_to change(Comment, :count)
+      it 'コメントが削除されること' do
+        expect { subject }.to change(Comment, :count).by(-1)
       end
     end
 
@@ -74,7 +66,7 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
       let(:expected_value) do
         {
           message: "Couldn't find Comment with 'id'=999999",
-          path: ['updateComment'],
+          path: ['destroyComment'],
           locations: [{ line: 2, column: 3 }],
           extensions: { 'code' => 'Errors::NotFound' }
         }.deep_stringify_keys
@@ -84,35 +76,7 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
         expect(errors[0]).to eq expected_value
       end
 
-      it 'コメントが増えないこと' do
-        expect { subject }.not_to change(Comment, :count)
-      end
-    end
-
-    context 'bodyが空文字列だった場合' do
-      let(:body) { '' }
-
-      let(:expected_value) do
-        {
-          updateComment: {
-            comment: nil,
-            errors: [error]
-          }
-        }.deep_stringify_keys
-      end
-
-      let(:error) do
-        {
-          message: "can't be blank",
-          path: ['attributes', 'body'],
-        }
-      end
-
-      it 'Errorが返ること' do
-        expect(data).to eq expected_value
-      end
-
-      it 'コメントが増えないこと' do
+      it 'コメントが削除されないこと' do
         expect { subject }.not_to change(Comment, :count)
       end
     end
@@ -123,7 +87,7 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
       let(:expected_value) do
         {
           message: 'アクセスできません',
-          path: ['updateComment'],
+          path: ['destroyComment'],
           locations: [{ line: 2, column: 3 }],
           extensions: { 'code' => 'Errors::Forbidden' }
         }.deep_stringify_keys
@@ -133,7 +97,7 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
         expect(errors[0]).to eq expected_value
       end
 
-      it 'コメントが増えないこと' do
+      it 'コメントが削除されないこと' do
         expect { subject }.not_to change(Comment, :count)
       end
     end
@@ -143,7 +107,7 @@ RSpec.describe 'Mutations::Comments::Update' do # rubocop:disable RSpec/Describe
     let(:expected_value) do
       {
         message: 'ログインが必要です',
-        path: ['updateComment'],
+        path: ['destroyComment'],
         locations: [{ line: 2, column: 3 }],
         extensions: { 'code' => 'Errors::Unauthorized' }
       }.deep_stringify_keys
