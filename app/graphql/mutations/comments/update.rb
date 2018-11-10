@@ -1,23 +1,23 @@
-class Mutations::Comments::Create < GraphQL::Schema::RelayClassicMutation
-  graphql_name 'createComment'
-  description 'コメントの追加'
+class Mutations::Comments::Update < GraphQL::Schema::RelayClassicMutation
+  graphql_name 'updateComment'
+  description 'コメントの修正'
 
   null true
 
-  argument :article_id, ID, required: true, description: '記事ID'
+  argument :id, ID, description: 'コメントID', required: true
   argument :attributes, Types::CommentAttributes, required: true, description: 'コメント属性'
 
   field :comment, Types::CommentType, null: true
   field :errors, [Types::UserError], null: false
 
-  def resolve(article_id:, attributes:)
+  def resolve(id:, attributes:)
     current_user = context[:current_user]
     raise Errors::Unauthorized if current_user.nil?
 
-    article = Article.find(article_id)
-    comment = article.comments.build(attributes.to_h.merge(user: current_user))
+    comment = Comment.find(id)
+    raise Errors::Forbidden if comment.user != current_user
 
-    if comment.save
+    if comment.update(attributes.to_h)
       { comment: comment, errors: [] }
     else
       user_errors = comment.errors.map { |attribute, message| { path: ['attributes', attribute], message: message } }
