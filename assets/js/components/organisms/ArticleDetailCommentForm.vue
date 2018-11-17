@@ -2,6 +2,10 @@
   <v-layout class="comment-form">
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
+        <div id="user" v-if="currentUser">
+          <div>こんにちは{{currentUser.name}}さん</div>
+        </div>
+
         <v-form
           v-model="valid"
           ref="form"
@@ -37,14 +41,24 @@
 </template>
 
 <script>
+  import gql from 'graphql-tag';
+  const helloGQL = gql`
+    query CurrentUser{
+      currentUser {
+        id
+        name
+      }
+    }
+  `;
+
   export default {
     name: 'ArticleDetailCommentForm',
 
-    props: {
-      currentUser: {
-        type: Object
-      }
-    },
+    // props: {
+    //   currentUser: {
+    //     type: Object
+    //   }
+    // },
 
     data () {
       return {
@@ -61,7 +75,9 @@
           attributes: {
             body: ""
           }
-        }
+        },
+
+        currentUser: null,
       }
     },
 
@@ -71,7 +87,13 @@
       clear () {
         this.$refs.form.reset()
       },
-    }
+    },
+
+    apollo: {
+      currentUser: {
+        query: helloGQL,
+      }
+    },
   }
 </script>
 
