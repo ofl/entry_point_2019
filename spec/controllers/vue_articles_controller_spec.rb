@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ArticlesController, type: :controller do
+RSpec.describe VueArticlesController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
 
   let(:valid_attributes) {
@@ -66,7 +66,7 @@ RSpec.describe ArticlesController, type: :controller do
 
       it 'redirects to the created article' do
         post :create, params: { article: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(Article.last)
+        expect(response).to redirect_to(vue_article_url(Article.last))
       end
     end
 
@@ -98,7 +98,7 @@ RSpec.describe ArticlesController, type: :controller do
       it 'redirects to the article' do
         article = Article.create! valid_attributes.merge(user: user)
         put :update, params: { id: article.to_param, article: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(article)
+        expect(response).to redirect_to(vue_article_url(article))
       end
     end
 
@@ -126,7 +126,7 @@ RSpec.describe ArticlesController, type: :controller do
     it 'redirects to the articles list' do
       article = Article.create! valid_attributes.merge(user: user)
       delete :destroy, params: { id: article.to_param }, session: valid_session
-      expect(response).to redirect_to(articles_url)
+      expect(response).to redirect_to(vue_articles_url)
     end
   end
 end

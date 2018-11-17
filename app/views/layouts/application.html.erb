@@ -9,10 +9,10 @@
     <%= stylesheet_bundle_tag 'app' %>
     <%= javascript_bundle_tag 'app' %>
 
+    <%= Gon::Base.render_data %>
+
     <script>
-      const rails = window.rails = {};
-      rails.currentUser = <%= current_user ? raw(current_user.to_json) : nil %>;
-      rails.flashJson = <%= raw Hash[flash.map{|k,v| [k,ERB::Util.h(v)] }].to_json %>;
+      gon.flashJson = <%= raw Hash[flash.map{|k,v| [k,ERB::Util.h(v)] }].to_json %>;
     </script>
   </head>
 

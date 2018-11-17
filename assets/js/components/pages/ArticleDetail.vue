@@ -27,18 +27,12 @@
       'TheFooter': TheFooter
     },
 
-    props: {
-      rails: {
-        type: Object
-      }
-    },
-
     data () {
       return {
         toolbarTitle: 'Article',
-        article: rails.article,
-        currentUser: rails.currentUser,
-        flashes: rails.flashJson,
+        article: gon.article,
+        currentUser: gon.currentUser,
+        flashes: gon.flashJson,
       }
     },
   };

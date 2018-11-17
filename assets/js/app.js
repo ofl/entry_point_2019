@@ -25,9 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const vm = new Vue({
     el: '#app',
-    data: () => ({
-      rails: rails,
-    }),
   });
   vms.push(vm)
 })
