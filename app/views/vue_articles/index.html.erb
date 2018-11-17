@@ -1,7 +1,3 @@
 <div id="app" data-vue="article-list">
   <article-list-component />
 </div>
-
-<script>
-  rails.articles = <%= raw @articles.to_json(include: :user) %>;
-</script>
