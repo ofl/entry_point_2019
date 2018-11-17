@@ -1,6 +1,16 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import ApolloClient from 'apollo-boost'
+import VueApollo from 'vue-apollo'
+
 import 'vuetify/dist/vuetify.min.css'
+
+const apolloProvider = new VueApollo({
+  defaultClient: new ApolloClient({
+    uri: 'http://localhost:3000/graphql'
+  })
+})
+Vue.use(VueApollo)
 
 const componentsList = {
   'main-component': require('./components/pages/Main.vue'),
@@ -25,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const vm = new Vue({
     el: '#app',
+    apolloProvider,
   });
   vms.push(vm)
 })
