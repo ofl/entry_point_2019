@@ -23,16 +23,10 @@
       'TheFooter': TheFooter
     },
 
-    props: {
-      rails: {
-        type: Object
-      }
-    },
-
     data () {
       return {
         toolbarTitle: 'Edit Article',
-        article: rails.article,
+        article: gon.article,
       }
     },
   };
