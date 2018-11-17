@@ -1,11 +1,11 @@
 <template>
-  <v-layout>
+  <v-layout class="comment-list-card">
     <v-flex xs12 sm6 offset-sm3>
       <v-card>
         <v-list two-line>
            <template v-for="(comment, index) in comments">
              <v-list-tile
-               :key="comment.id"
+               :key="commentKey(comment.id)"
                avatar
                @click=""
              >
@@ -46,16 +46,16 @@
       }
     },
 
-    computed: {
-      isOwner () {
-        return this.comments.user_id == this.currentUser.id;
-      }
-    },
-
     methods: {
-      onClickEditBtn () {
-        location.pathname = `/vue_articles/${this.article.id}/edit`;
+      commentKey(id) {
+        return `comment-${id}`;
       },
     }
   }
 </script>
+
+<style scoped>
+.comment-list-card {
+  margin-top: 20px;
+}
+</style>
