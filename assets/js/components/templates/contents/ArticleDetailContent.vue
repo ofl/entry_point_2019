@@ -15,6 +15,9 @@
             :comments="article.comments"
             :currentUser="currentUser"
           />
+          <ArticleDetailCommentForm
+            :currentUser="currentUser"
+          />
         </v-flex>
       </v-layout>
     </v-container>
@@ -24,6 +27,7 @@
 <script>
   import ArticleDetailCard from '../../organisms/ArticleDetailCard.vue';
   import ArticleDetailComments from '../../organisms/ArticleDetailComments.vue';
+  import ArticleDetailCommentForm from '../../organisms/ArticleDetailCommentForm.vue';
   import TheFlashes from '../../organisms/TheFlashes.vue';
 
   export default {
@@ -32,6 +36,7 @@
     components: {
       'ArticleDetailCard': ArticleDetailCard,
       'ArticleDetailComments': ArticleDetailComments,
+      'ArticleDetailCommentForm': ArticleDetailCommentForm,
       'TheFlashes': TheFlashes,
     },
 
