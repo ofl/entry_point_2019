@@ -1,5 +1,5 @@
 class GraphqlController < ActionController::API
-  before_action :require_login
+  include Sorcery::Controller
 
   def execute
     variables = ensure_hash(params[:variables])
