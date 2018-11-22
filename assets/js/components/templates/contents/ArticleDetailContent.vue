@@ -17,6 +17,7 @@
           />
           <ArticleDetailCommentForm
             :currentUser="currentUser"
+            :articleId="article.id"
           />
         </v-flex>
       </v-layout>

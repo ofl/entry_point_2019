@@ -15,7 +15,7 @@
         >
 
           <v-textarea
-            v-model="comment.attributes.body"
+            v-model="body"
             :rules="bodyRules"
             label="Body"
             name="comment[body]"
@@ -24,7 +24,7 @@
 
           <v-btn
             :disabled="!valid"
-            @click="onClickNewBtn"
+            @click="addComment"
           >
             submit
           </v-btn>
@@ -41,60 +41,85 @@
 </template>
 
 <script>
-  import gql from 'graphql-tag';
-  const helloGQL = gql`
-    query CurrentUser{
-      currentUser {
+import gql from 'graphql-tag';
+
+const HelloQuery = gql`
+  query CurrentUser{
+    currentUser {
+      id
+      name
+    }
+  }
+`;
+const AddCommentMutation = gql`
+  mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
+    createComment(input: {articleId:$articleId,attributes: $attributes}) {
+      comment {
         id
-        name
+        body
+        user {
+          id
+          name
+        }
       }
     }
-  `;
-
-  export default {
-    name: 'ArticleDetailCommentForm',
-
-    // props: {
-    //   currentUser: {
-    //     type: Object
-    //   }
-    // },
-
-    data () {
-      return {
-        valid: true,
-
-        body: '',
-        bodyRules: [
-          v => !!v || 'Body is required',
-          v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
-        ],
-
-        comment: {
-          articleId: "",
-          attributes: {
-            body: ""
-          }
-        },
-
-        currentUser: null,
-      }
-    },
-
-    methods: {
-      onClickNewBtn () {
-      },
-      clear () {
-        this.$refs.form.reset()
-      },
-    },
-
-    apollo: {
-      currentUser: {
-        query: helloGQL,
-      }
-    },
   }
+`;
+
+export default {
+  name: 'ArticleDetailCommentForm',
+
+  props: {
+    articleId: {
+      type: Number
+    }
+  },
+
+  data () {
+    return {
+      valid: true,
+
+      body: '',
+      bodyRules: [
+        v => !!v || 'Body is required',
+        v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
+      ],
+
+      currentUser: null,
+    }
+  },
+
+  methods: {
+    clear () {
+      this.$refs.form.reset()
+    },
+
+    async addComment() {
+      await this.$apollo.mutate({
+        mutation: AddCommentMutation,
+        variables: {
+          articleId: this.articleId,
+          attributes: {
+            body: this.body,
+          },
+        },
+      }).then((data) => {
+        // Result
+        console.log(data)
+        this.clear();
+      }).catch((error) => {
+        // Error
+        console.error(error)
+      })
+    }
+  },
+
+  apollo: {
+    currentUser: {
+      query: HelloQuery,
+    }
+  },
+}
 </script>
 
 <style scoped>
