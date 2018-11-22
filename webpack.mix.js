@@ -12,8 +12,7 @@ let mix = require('laravel-mix');
  */
 
 mix.setPublicPath('public')
-    .js('assets/js/app.js', 'js')
-    .stylus('assets/stylus/app.styl', 'css');
+    .js('assets/js/app.js', 'js');
 
 if (mix.inProduction()) {
     mix.version();
