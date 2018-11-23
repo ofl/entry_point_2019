@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
+import Buefy from 'buefy'
+
+Vue.use(Buefy)
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
