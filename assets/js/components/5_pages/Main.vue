@@ -1,7 +1,10 @@
 <template>
-  <div id="inspire" v-cloak>
+  <div>
     <TheNavigation :currentUser="currentUser" />
-    <AppContent />
+    <AppContent
+      :currentUser="currentUser"
+      :flashes="flashes"
+    />
     <TheFooter />
   </div>
 </template>
@@ -23,6 +26,7 @@ export default {
   data () {
     return {
       currentUser: gon.currentUser,
+      flashes: gon.flashJson,
     }
   },
 };

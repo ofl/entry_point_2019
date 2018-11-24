@@ -58,21 +58,32 @@
           v-if=isLoggedIn
           class="navbar-item"
           href="#"
-          @click.stop.prevent="onClickMenu('/logout')"
+          @click.stop.prevent="onClickLogout()"
         >
           <span class="icon">
             <i class="fas fa-envelope"></i>
           </span>
           <span>Logout</span>
         </a>
+
+        <DeleteForm
+          requestPath="/logout"
+          ref="deleteSession"
+        />
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import DeleteForm from '../2_molecules/DeleteForm.vue';
+
 export default {
   name: 'TheNavigation',
+
+  components: {
+    'DeleteForm': DeleteForm,
+  },
 
   props: {
     currentUser: {
@@ -95,6 +106,10 @@ export default {
   methods: {
     onClickMenu (path) {
       location.href = path;
+    },
+    onClickLogout () {
+      console.log(this.$refs.deleteSession);
+      this.$refs.deleteSession.$refs.form.submit()
     },
   }
 }
