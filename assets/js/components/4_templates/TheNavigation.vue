@@ -70,7 +70,7 @@
           v-if=isLoggedIn
           class="navbar-item"
           href="#"
-          @click.stop.prevent="onClickLogout()"
+          @click.stop.prevent="confirmLogout()"
         >
           <span class="icon">
             <i class="fas fa-sign-out-alt"></i>
@@ -119,13 +119,18 @@ export default {
     onClickMenu (path) {
       location.href = path;
     },
-    onClickLogout () {
-      console.log(this.$refs.deleteSession);
-      this.$refs.deleteSession.$refs.form.submit()
-    },
     toggleMenu () {
       this.isActive = !this.isActive;
-    }
+    },
+    confirmLogout () {
+      this.$dialog.confirm({
+        message: 'Are you sure?',
+        onConfirm: () => this.logout()
+      })
+    },
+    logout () {
+      this.$refs.deleteSession.$refs.form.submit()
+    },
   }
 }
 </script>
