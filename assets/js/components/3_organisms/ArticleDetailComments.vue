@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ArticleComment from '../molecules/ArticleComment.vue';
+import ArticleComment from '../2_molecules/ArticleComment.vue';
 
 export default {
   name: 'ArticleDetailComments',

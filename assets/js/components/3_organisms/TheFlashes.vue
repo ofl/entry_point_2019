@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import AppFlash from '../molecules/AppFlash.vue';
+import AppFlash from '../2_molecules/AppFlash.vue';
 
 export default {
   name: 'TheFlashes',

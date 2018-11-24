@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import ArticleListTable from '../../organisms/ArticleListTable.vue';
-import TheFlashes from '../../organisms/TheFlashes.vue';
+import ArticleListTable from '../../3_organisms/ArticleListTable.vue';
+import TheFlashes from '../../3_organisms/TheFlashes.vue';
 
 export default {
   name: 'ArticleListContent',
