@@ -1,5 +1,5 @@
 <template>
-  <div id="inspire" v-cloak>
+  <div>
     <TheNavigation :currentUser="currentUser" />
     <AppContent
       :article="article"

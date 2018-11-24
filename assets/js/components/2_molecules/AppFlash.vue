@@ -1,7 +1,6 @@
 <template>
   <div>
     <b-notification
-      v-model="alert"
       :type="alertType"
       :active.sync="isActive"
       auto-close

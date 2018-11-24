@@ -45,7 +45,7 @@
       />
     </b-field>
 
-    <div class="field">
+    <b-field>
       <p class="control">
         <button
           class="button field is-primary"
@@ -64,7 +64,7 @@
           <span>Clear</span>
         </button>
       </p>
-    </div>
+    </b-field>
   </form>
 </template>
 
