@@ -31,7 +31,7 @@
           @click.stop.prevent="onClickMenu('/')"
         >
           <span class="icon">
-            <i class="fas fa-info"></i>
+            <i class="fas fa-home"></i>
           </span>
           <span>Home</span>
         </a>
@@ -41,7 +41,7 @@
           @click.stop.prevent="onClickMenu('/vue_articles')"
         >
           <span class="icon">
-            <i class="fas fa-bars"></i>
+            <i class="fas fa-file-alt"></i>
           </span>
           <span>Vue Articles</span>
         </a>
@@ -62,7 +62,7 @@
           @click.stop.prevent="onClickMenu('/login')"
         >
           <span class="icon">
-            <i class="fas fa-th-list"></i>
+            <i class="fas fa-sign-in-alt"></i>
           </span>
           <span>Login</span>
         </a>
@@ -73,7 +73,7 @@
           @click.stop.prevent="onClickLogout()"
         >
           <span class="icon">
-            <i class="fas fa-envelope"></i>
+            <i class="fas fa-sign-out-alt"></i>
           </span>
           <span>Logout</span>
         </a>
