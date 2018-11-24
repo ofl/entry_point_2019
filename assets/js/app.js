@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
+import Buefy from 'buefy'
 
-import 'vuetify/dist/vuetify.min.css'
+Vue.use(Buefy)
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
@@ -19,8 +19,6 @@ const componentsList = {
   'article-edit-component': require('./components/pages/ArticleEdit.vue'),
   'article-new-component': require('./components/pages/ArticleNew.vue'),
 }
-
-Vue.use(Vuetify)
 
 let vms = []
 

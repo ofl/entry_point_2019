@@ -1,59 +1,50 @@
 <template>
-  <v-content>
+  <section class="section main-contents">
     <TheFlashes :flashes="flashes" />
-    <div>
-      <v-container fluid>
-        <v-layout
-          justify-center
-          align-center
-        >
-          <v-flex text-xs-center>
-            <ArticleListTable
-              :articles="articles"
-              @click-item="onClickItem"
-            />
-          </v-flex>
-        </v-layout>
-      </v-container>
+
+    <div class="container">
+      <ArticleListTable
+        :articles="articles"
+      />
 
       <div class="new-button">
-        <v-btn
+        <button
+          class="button field is-info"
           @click="onClickNewBtn()"
-          color="info"
-        >New</v-btn>
+        >
+          <b-icon icon="pencil"></b-icon>
+          <span>New</span>
+        </button>
       </div>
     </div>
-  </v-content>
+  </section class="section">
 </template>
 
 <script>
-  import ArticleListTable from '../../organisms/ArticleListTable.vue';
-  import TheFlashes from '../../organisms/TheFlashes.vue';
+import ArticleListTable from '../../organisms/ArticleListTable.vue';
+import TheFlashes from '../../organisms/TheFlashes.vue';
 
-  export default {
-    name: 'ArticleListContent',
+export default {
+  name: 'ArticleListContent',
 
-    components: {
-      'ArticleListTable': ArticleListTable,
-      'TheFlashes': TheFlashes,
+  components: {
+    'ArticleListTable': ArticleListTable,
+    'TheFlashes': TheFlashes,
+  },
+
+  props: {
+    articles: {
+      type: Array
     },
-
-    props: {
-      articles: {
-        type: Array
-      },
-      flashes: {
-        type: Object
-      }
-    },
-
-    methods: {
-      onClickItem (id) {
-        location.href = `/vue_articles/${id}`;
-      },
-      onClickNewBtn () {
-        location.href = '/vue_articles/new';
-      },
+    flashes: {
+      type: Object
     }
+  },
+
+  methods: {
+    onClickNewBtn () {
+      location.href = '/vue_articles/new';
+    },
   }
+}
 </script>
