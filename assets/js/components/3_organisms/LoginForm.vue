@@ -1,7 +1,7 @@
 <template>
   <form
     v-model="valid"
-    action="/user_sessions"
+    action="/login"
     ref="form"
     accept-charset="UTF-8"
     method="POST"
