@@ -47,7 +47,13 @@
     </b-field>
 
     <b-field>
-      <b-checkbox>Remember me</b-checkbox>
+      <label class="checkbox">
+        <input
+          type="checkbox"
+          name="remember_me"
+        >
+        Remember Me
+      </label>
     </b-field>
 
     <button
