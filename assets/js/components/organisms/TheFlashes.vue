@@ -10,19 +10,19 @@
 </template>
 
 <script>
-  import AppFlash from '../molecules/AppFlash.vue';
+import AppFlash from '../molecules/AppFlash.vue';
 
-  export default {
-    name: 'TheFlashes',
+export default {
+  name: 'TheFlashes',
 
-    components: {
-      'AppFlash': AppFlash,
-    },
+  components: {
+    'AppFlash': AppFlash,
+  },
 
-    props: {
-      flashes: {
-        type: Object
-      }
+  props: {
+    flashes: {
+      type: Object
     }
   }
+}
 </script>

@@ -1,56 +1,50 @@
 <template>
-  <v-content>
+  <section class="section main-contents">
     <TheFlashes :flashes="flashes" />
-    <v-container fluid fill-height>
-      <v-layout
-        justify-center
-        align-center
-      >
-        <v-flex text-xs-center>
-          <ArticleDetailCard
-            :article="article"
-            :currentUser="currentUser"
-          />
-          <ArticleDetailComments
-            :comments="article.comments"
-            :currentUser="currentUser"
-          />
-          <ArticleDetailCommentForm
-            :currentUser="currentUser"
-            :articleId="article.id"
-          />
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-content>
+
+    <div class="container">
+      <ArticleDetailCard
+        :article="article"
+        :currentUser="currentUser"
+      />
+      <ArticleDetailComments
+        :comments="article.comments"
+        :currentUser="currentUser"
+      />
+      <ArticleDetailCommentForm
+        :currentUser="currentUser"
+        :articleId="article.id"
+      />
+    </div>
+  </section>
 </template>
 
 <script>
-  import ArticleDetailCard from '../../organisms/ArticleDetailCard.vue';
-  import ArticleDetailComments from '../../organisms/ArticleDetailComments.vue';
-  import ArticleDetailCommentForm from '../../organisms/ArticleDetailCommentForm.vue';
-  import TheFlashes from '../../organisms/TheFlashes.vue';
+import ArticleDetailCard from '../../organisms/ArticleDetailCard.vue';
+import ArticleDetailComments from '../../organisms/ArticleDetailComments.vue';
+import ArticleDetailCommentForm from '../../organisms/ArticleDetailCommentForm.vue';
+import TheFlashes from '../../organisms/TheFlashes.vue';
 
-  export default {
-    name: 'ArticleDetailContent',
+export default {
+  name: 'ArticleDetailContent',
 
-    components: {
-      'ArticleDetailCard': ArticleDetailCard,
-      'ArticleDetailComments': ArticleDetailComments,
-      'ArticleDetailCommentForm': ArticleDetailCommentForm,
-      'TheFlashes': TheFlashes,
+  components: {
+    'ArticleDetailCard': ArticleDetailCard,
+    'ArticleDetailComments': ArticleDetailComments,
+    'ArticleDetailCommentForm': ArticleDetailCommentForm,
+    'TheFlashes': TheFlashes,
+  },
+
+  props: {
+    article: {
+      type: Object
     },
-
-    props: {
-      article: {
-        type: Object
-      },
-      currentUser: {
-        type: Object
-      },
-      flashes: {
-        type: Object
-      }
+    currentUser: {
+      type: Object
+    },
+    flashes: {
+      type: Object
     }
   }
+}
 </script>

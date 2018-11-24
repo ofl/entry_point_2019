@@ -1,5 +1,5 @@
 <template>
-  <v-form
+  <form
     v-model="valid"
     :action="requestPath"
     ref="form"
@@ -22,90 +22,104 @@
       name="_method"
       :value="requestMethod"
     />
-    <v-text-field
-      v-model="article.title"
-      :rules="titleRules"
-      :counter="100"
-      label="Title"
-      name="article[title]"
-      required
-    />
 
-    <v-textarea
-      v-model="article.body"
-      :rules="bodyRules"
-      label="Body"
-      name="article[body]"
-      required
-    />
+    <b-field label="Title">
+      <b-input
+        v-model="article.title"
+        :rules="titleRules"
+        :counter="100"
+        name="article[title]"
+        placeholder="Title ..."
+        required
+      />
+    </b-field>
 
-    <v-btn
-      :disabled="!valid"
-      @click="submit"
-    >
-      submit
-    </v-btn>
+    <b-field label="Body">
+      <b-input
+        v-model="article.body"
+        :rules="bodyRules"
+        name="article[body]"
+        type="textarea"
+        placeholder="Body ..."
+        required
+      />
+    </b-field>
 
-    <v-btn
-      @click="clear"
-    >
-      clear
-    </v-btn>
-  </v-form>
+    <div class="field">
+      <p class="control">
+        <button
+          class="button field is-primary"
+          :disabled="!valid"
+          @click="submit"
+        >
+          <b-icon icon="pencil"></b-icon>
+          <span>Submit</span>
+        </button>
+
+        <button
+          class="button field is-info"
+          @click="clear"
+        >
+          <b-icon icon="eraser"></b-icon>
+          <span>Clear</span>
+        </button>
+      </p>
+    </div>
+  </form>
 </template>
 
 <script>
-  export default {
-    name: 'ArticleEditForm',
+export default {
+  name: 'ArticleEditForm',
 
-    props: {
-      article: {
-        type: Object
+  props: {
+    article: {
+      type: Object
+    }
+  },
+
+  data () {
+    return {
+      valid: true,
+
+      title: '',
+      titleRules: [
+        v => !!v || 'Title is required',
+        v => (v && v.length <= 100) || 'Title must be less than 100 characters'
+      ],
+
+      body: '',
+      bodyRules: [
+        v => !!v || 'Body is required',
+        v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
+      ],
+    }
+  },
+
+  computed: {
+    csrfToken () {
+      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    },
+    requestPath () {
+      return this.isUpdate ? `/vue_articles/${this.article.id}` : '/vue_articles';
+    },
+    requestMethod () {
+      return this.isUpdate ? 'put' : 'post';
+    },
+    isUpdate () {
+      return !!this.article.id;
+    },
+  },
+
+  methods: {
+    submit () {
+      if (this.$refs.form.validate()) {
+        this.$refs.form.$el.submit();
       }
     },
-
-    data () {
-      return {
-        valid: true,
-
-        title: '',
-        titleRules: [
-          v => !!v || 'Title is required',
-          v => (v && v.length <= 100) || 'Title must be less than 100 characters'
-        ],
-
-        body: '',
-        bodyRules: [
-          v => !!v || 'Body is required',
-          v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
-        ],
-      }
+    clear () {
+      this.$refs.form.reset()
     },
-
-    computed: {
-      csrfToken () {
-        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      },
-      requestPath () {
-        return this.isUpdate ? `/vue_articles/${this.article.id}` : '/vue_articles';
-      },
-      requestMethod () {
-        return this.isUpdate ? 'put' : 'post';
-      },
-      isUpdate () {
-        return !!this.article.id;
-      },
-    },
-
-    methods: {
-      submit () {
-        if (this.$refs.form.validate()) {
-          this.$refs.form.$el.submit();
-        }
-      },
-      clear () {
-        this.$refs.form.reset()
-      },
-    },
-  }
+  },
+}
 </script>

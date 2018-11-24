@@ -1,55 +1,78 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-          aspect-ratio="2.75"
-        ></v-img>
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+      </figure>
+    </div>
 
-        <v-card-title primary-title>
-          <div>
-            <h3 class="headline mb-0">{{ article.title }}</h3>
-            <div>{{ article.body }}</div>
-          </div>
-        </v-card-title>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">{{ article.user.name }}</p>
+          <p class="subtitle is-6">{{ article.user.name }}</p>
+        </div>
+      </div>
 
-        <v-card-actions>
-          <v-btn
-            v-if=isOwner
-            @click="onClickEditBtn()"
-            flat color="orange"
-          >Edit</v-btn>
-          <v-btn flat color="orange">Share</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+      <div class="content">
+        {{ article.body }}
+        <br>
+        <time datetime="article.created_at">{{ article.created_at }}</time>
+      </div>
+    </div>
+    <footer
+      v-if=isOwner
+      class="card-footer"
+    >
+      <a
+        @click="onClickEditBtn()"
+        href="#"
+        class="card-footer-item"
+      >
+        Edit
+      </a>
+      <a
+        @click="onClickDeleteBtn()"
+        href="#"
+        class="card-footer-item"
+      >
+        Delete
+      </a>
+    </footer>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'ArticleDetailCard',
+export default {
+  name: 'ArticleDetailCard',
 
-    props: {
-      article: {
-        type: Object
-      },
-      currentUser: {
-        type: Object
-      }
+  props: {
+    article: {
+      type: Object
     },
-
-    computed: {
-      isOwner () {
-        return this.article.user_id == this.currentUser.id;
-      }
-    },
-
-    methods: {
-      onClickEditBtn () {
-        location.pathname = `/vue_articles/${this.article.id}/edit`;
-      },
+    currentUser: {
+      type: Object
     }
+  },
+
+  computed: {
+    isOwner () {
+      return this.article.user_id == this.currentUser.id;
+    }
+  },
+
+  methods: {
+    onClickEditBtn () {
+      location.pathname = `/vue_articles/${this.article.id}/edit`;
+    },
+    onClickDeleteBtn () {
+      location.pathname = `/vue_articles/${this.article.id}/edit`;
+    },
   }
+}
 </script>

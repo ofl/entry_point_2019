@@ -1,32 +1,29 @@
 <template>
-  <v-app id="inspire" v-cloak>
-    <TheNavigation />
-    <TheToolbar />
+  <div id="inspire" v-cloak>
+    <TheNavigation :currentUser="currentUser" />
     <AppContent />
     <TheFooter />
-  </v-app>
+  </div>
 </template>
 
 <script>
-  import TheNavigation from '../templates/TheNavigation.vue';
-  import TheToolbar from '../templates/TheToolbar.vue';
-  import TheFooter from '../templates/TheFooter.vue';
-  import AppContent from '../templates/contents/Main.vue';
+import TheNavigation from '../templates/TheNavigation.vue';
+import TheFooter from '../templates/TheFooter.vue';
+import AppContent from '../templates/contents/Main.vue';
 
-  export default {
-    name: 'Main',
+export default {
+  name: 'Main',
 
-    components: {
-      'TheNavigation': TheNavigation,
-      'TheToolbar': TheToolbar,
-      'AppContent': AppContent,
-      'TheFooter': TheFooter
+  components: {
+    'TheNavigation': TheNavigation,
+    'AppContent': AppContent,
+    'TheFooter': TheFooter
+  },
+
+  data () {
+    return {
+      currentUser: gon.currentUser,
     }
-  };
+  },
+};
 </script>
-
-<style>
-  [v-cloak] {
-    /* display: none; */
-  }
-</style>

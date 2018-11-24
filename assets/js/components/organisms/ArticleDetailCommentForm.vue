@@ -1,43 +1,57 @@
 <template>
-  <v-layout class="comment-form">
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <div id="user" v-if="currentUser">
-          <div>こんにちは{{currentUser.name}}さん</div>
+  <article class="media comment-form">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img src="https://bulma.io/images/placeholders/128x128.png">
+      </p>
+    </figure>
+
+    <div class="media-content">
+      <form
+        v-model="valid"
+        ref="form"
+        accept-charset="UTF-8"
+        method="POST"
+        lazy-validation
+      >
+
+        <div class="field">
+          <p class="control">
+            <b-input
+              v-model="body"
+              :rules="bodyRules"
+              label="Body"
+              name="comment[body]"
+              type="textarea"
+              placeholder="Add a comment..."
+              required
+            />
+          </p>
         </div>
 
-        <v-form
-          v-model="valid"
-          ref="form"
-          accept-charset="UTF-8"
-          method="POST"
-          lazy-validation
-        >
+        <div class="field">
+          <p class="control">
+            <button
+              class="button field is-primary"
+              :disabled="!valid"
+              @click="addComment"
+            >
+              <b-icon icon="pencil"></b-icon>
+              <span>Submit</span>
+            </button>
 
-          <v-textarea
-            v-model="body"
-            :rules="bodyRules"
-            label="Body"
-            name="comment[body]"
-            required
-          />
-
-          <v-btn
-            :disabled="!valid"
-            @click="addComment"
-          >
-            submit
-          </v-btn>
-
-          <v-btn
-            @click="clear"
-          >
-            clear
-          </v-btn>
-        </v-form>
-      </v-card>
-    </v-flex>
-  </v-layout>
+            <button
+              class="button field is-info"
+              @click="clear"
+            >
+              <b-icon icon="eraser"></b-icon>
+              <span>Clear</span>
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+  </article>
 </template>
 
 <script>
@@ -94,7 +108,9 @@ export default {
       this.$refs.form.reset()
     },
 
-    async addComment() {
+    async addComment(e) {
+      e.preventDefault();
+
       await this.$apollo.mutate({
         mutation: AddCommentMutation,
         variables: {
@@ -124,6 +140,6 @@ export default {
 
 <style scoped>
 .comment-form {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 </style>
