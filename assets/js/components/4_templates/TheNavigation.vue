@@ -4,14 +4,26 @@
       <a class="navbar-item" href="/">
         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
       </a>
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarExampleTransparentExample">
+      <a
+        role="button"
+        class="navbar-burger burger"
+        :class="{ 'is-active': isActive }"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarExampleTransparentExample"
+        @click="toggleMenu()"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
 
-    <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div
+      id="navbarExampleTransparentExample"
+      class="navbar-menu"
+      :class="{ 'is-active': isActive }"
+    >
       <div class="navbar-end">
         <a
           class="navbar-item"
@@ -93,7 +105,7 @@ export default {
 
   data () {
     return {
-      drawer: null,
+      isActive: false,
     }
   },
 
@@ -111,6 +123,9 @@ export default {
       console.log(this.$refs.deleteSession);
       this.$refs.deleteSession.$refs.form.submit()
     },
+    toggleMenu () {
+      this.isActive = !this.isActive;
+    }
   }
 }
 </script>
