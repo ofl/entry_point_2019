@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import TheNavigation from '../templates/TheNavigation.vue';
-import TheFooter from '../templates/TheFooter.vue';
-import AppContent from '../templates/contents/ArticleEditContent.vue';
+import TheNavigation from '../4_templates/TheNavigation.vue';
+import TheFooter from '../4_templates/TheFooter.vue';
+import AppContent from '../4_templates/contents/ArticleEditContent.vue';
 
 export default {
-  name: 'ArticleEdit',
+  name: 'ArticleNew',
 
   components: {
     'TheNavigation': TheNavigation,
@@ -22,7 +22,7 @@ export default {
 
   data () {
     return {
-      toolbarTitle: 'Edit Article',
+      toolbarTitle: 'New Article',
       article: gon.article,
       currentUser: gon.currentUser,
     }

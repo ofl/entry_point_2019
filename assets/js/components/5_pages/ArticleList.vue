@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import TheNavigation from '../templates/TheNavigation.vue';
-import TheFooter from '../templates/TheFooter.vue';
-import AppContent from '../templates/contents/ArticleListContent.vue';
+import TheNavigation from '../4_templates/TheNavigation.vue';
+import TheFooter from '../4_templates/TheFooter.vue';
+import AppContent from '../4_templates/contents/ArticleListContent.vue';
 
 export default {
   name: 'ArticleList',

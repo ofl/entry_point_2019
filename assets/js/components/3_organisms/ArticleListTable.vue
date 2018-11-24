@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ArticleListItem from '../molecules/ArticleListItem.vue';
+import ArticleListItem from '../2_molecules/ArticleListItem.vue';
 
 export default {
   name: 'ArticleListTable',

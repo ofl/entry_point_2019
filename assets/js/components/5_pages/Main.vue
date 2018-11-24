@@ -1,18 +1,18 @@
 <template>
   <div id="inspire" v-cloak>
     <TheNavigation :currentUser="currentUser" />
-    <AppContent :article="article" />
+    <AppContent />
     <TheFooter />
   </div>
 </template>
 
 <script>
-import TheNavigation from '../templates/TheNavigation.vue';
-import TheFooter from '../templates/TheFooter.vue';
-import AppContent from '../templates/contents/ArticleEditContent.vue';
+import TheNavigation from '../4_templates/TheNavigation.vue';
+import TheFooter from '../4_templates/TheFooter.vue';
+import AppContent from '../4_templates/contents/Main.vue';
 
 export default {
-  name: 'ArticleNew',
+  name: 'Main',
 
   components: {
     'TheNavigation': TheNavigation,
@@ -22,8 +22,6 @@ export default {
 
   data () {
     return {
-      toolbarTitle: 'New Article',
-      article: gon.article,
       currentUser: gon.currentUser,
     }
   },

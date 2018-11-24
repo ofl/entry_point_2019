@@ -13,11 +13,11 @@ const apolloProvider = new VueApollo({
 Vue.use(VueApollo)
 
 const componentsList = {
-  'main-component': require('./components/pages/Main.vue'),
-  'article-list-component': require('./components/pages/ArticleList.vue'),
-  'article-detail-component': require('./components/pages/ArticleDetail.vue'),
-  'article-edit-component': require('./components/pages/ArticleEdit.vue'),
-  'article-new-component': require('./components/pages/ArticleNew.vue'),
+  'main-component': require('./components/5_pages/Main.vue'),
+  'article-list-component': require('./components/5_pages/ArticleList.vue'),
+  'article-detail-component': require('./components/5_pages/ArticleDetail.vue'),
+  'article-edit-component': require('./components/5_pages/ArticleEdit.vue'),
+  'article-new-component': require('./components/5_pages/ArticleNew.vue'),
 }
 
 let vms = []
