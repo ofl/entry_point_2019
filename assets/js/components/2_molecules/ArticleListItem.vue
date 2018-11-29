@@ -8,7 +8,9 @@
     <div class="media">
       <div class="media-left">
         <p class="image is-32x32">
-          <img src="http://bulma.io/images/placeholders/128x128.png">
+          <img
+            :src="avatarUrl"
+          >
         </p>
       </div>
 
@@ -22,7 +24,7 @@
       </div>
 
       <div class="media-right">
-        <span class="has-text-grey-light"><i class="fa fa-comments"></i> 1</span>
+        <span class="has-text-grey-light"><i class="fa fa-comments"></i> {{ article.comments_count }}</span>
       </div>
     </div>
   </article>
@@ -42,7 +44,13 @@ export default {
     onClickItem (id) {
       location.href = `/vue_articles/${id}`;
     },
-  }
+  },
+
+  computed: {
+    avatarUrl () {
+      return (this.article.user.avatar != '') ? this.article.user.avatar : "http://bulma.io/images/placeholders/128x128.png";
+    },
+  },
 }
 </script>
 

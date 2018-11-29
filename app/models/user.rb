@@ -13,6 +13,6 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   def as_json(options)
-    super(only: [:id, :name])
+    super(only: [:id, :name, :avatar])
   end
 end
