@@ -13,11 +13,10 @@
     <%= stylesheet_bundle_tag 'app' %>
     <%= javascript_bundle_tag 'app' %>
 
-    <%= Gon::Base.render_data %>
-
-    <script>
+    <%= include_gon nonce: content_security_policy_nonce %>
+    <%= javascript_tag nonce: true do -%>
       gon.flashJson = <%= raw Hash[flash.map{|k,v| [k,ERB::Util.h(v)] }].to_json %>;
-    </script>
+    <% end %>
   </head>
 
   <body>
