@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2018_10_06_093612) do
     t.bigint "user_id"
     t.string "title"
     t.text "body"
+    t.integer "comments_count", default: 0, null: false
+    t.integer "likes_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_articles_on_user_id"
@@ -44,8 +46,9 @@ ActiveRecord::Schema.define(version: 2018_10_06_093612) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
+    t.string "name", limit: 50, null: false
+    t.string "email", limit: 100, null: false
+    t.string "avatar", limit: 100
     t.string "crypted_password", null: false
     t.string "salt", null: false
     t.datetime "created_at", null: false

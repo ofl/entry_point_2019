@@ -10,19 +10,19 @@ class VueArticlesController < ApplicationController
   # GET /vue_articles/1
   def show
     article = Article.find(params[:id])
-    gon.article = article.as_json(include: { user: { only: [:id, :name] }, comments: { include: { user: { only: [:id, :name] } } } })
+    gon.article = article.as_json(include: { user: { only: user_attributes }, comments: { include: { user: { only: user_attributes } } } })
   end
 
   # GET /vue_articles/new
   def new
     article = current_user.articles.build
-    gon.article = article.as_json(include: { user: { only: [:id, :name] } })
+    gon.article = article.as_json(include: { user: { only: user_attributes } })
   end
 
   # GET /vue_articles/1/edit
   def edit
     article = current_user.articles.find(params[:id])
-    gon.article = article.as_json(include: { user: { only: [:id, :name] } })
+    gon.article = article.as_json(include: { user: { only: user_attributes } })
   end
 
   # POST /vue_articles
@@ -32,7 +32,7 @@ class VueArticlesController < ApplicationController
     if article.save
       redirect_to(vue_article_path(article), notice: 'Article was successfully created.')
     else
-      gon.article = article.as_json(include: { user: { only: [:id, :name] } })
+      gon.article = article.as_json(include: { user: { only: user_attributes } })
       render :new
     end
   end
@@ -43,7 +43,7 @@ class VueArticlesController < ApplicationController
     if article.update(article_params)
       redirect_to(vue_article_path(article), notice: 'Article was successfully updated.')
     else
-      gon.article = article.as_json(include: { user: { only: [:id, :name] } })
+      gon.article = article.as_json(include: { user: { only: user_attributes } })
       render :edit
     end
   end
@@ -56,8 +56,12 @@ class VueArticlesController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def article_params
-      params.require(:article).permit(:title, :body)
-    end
+
+  def article_params
+    params.require(:article).permit(:title, :body)
+  end
+
+  def user_attributes
+    %i(id name avatar)
+  end
 end

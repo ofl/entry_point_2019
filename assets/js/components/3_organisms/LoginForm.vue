@@ -7,17 +7,6 @@
     method="POST"
     lazy-validation
   >
-    <input
-      type="hidden"
-      name="utf8"
-      value="✓"
-    >
-    <input
-      type="hidden"
-      name="authenticity_token"
-      :value="csrfToken"
-    >
-
     <b-field>
       <b-input
         v-model="user.email"
@@ -26,8 +15,7 @@
         size="is-large"
         name="email"
         type="email"
-        placeholder="Email ..."
-        maxlength="30"
+        placeholder="Your Email"
         required
         autofocused
       />
@@ -40,8 +28,7 @@
         size="is-large"
         name="password"
         type="password"
-        placeholder="Password ..."
-        maxlength="30"
+        placeholder="Your Password"
         required
       />
     </b-field>
@@ -56,9 +43,18 @@
       </label>
     </b-field>
 
-    <button
-      class="button is-block is-info is-large is-fullwidth"
+    <input
+      type="hidden"
+      name="utf8"
+      value="✓"
     >
+    <input
+      type="hidden"
+      name="authenticity_token"
+      :value="csrfToken"
+    >
+
+    <button class="button is-block is-info is-large is-fullwidth">
       Login
     </button>
   </form>
