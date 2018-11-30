@@ -25,29 +25,58 @@
         <time datetime="article.created_at">{{ article.created_at }}</time>
       </div>
     </div>
-    <footer
-      v-if=isOwner
-      class="card-footer"
-    >
+    <footer class="card-footer">
       <a
-        @click="onClickEditBtn()"
+        @click.stop.prevent="onClickLikeBtn()"
         href="#"
         class="card-footer-item"
       >
-        Edit
+        <span class="has-text-grey-light">
+          <b-icon
+            pack="fa"
+            icon="heart"
+            :type="likedType"
+          >
+          </b-icon>
+           {{ likesCount }}
+        </span>
       </a>
-      <a
-        @click="onClickDeleteBtn()"
-        href="#"
-        class="card-footer-item"
-      >
-        Delete
-      </a>
+
+      <template v-if="isOwner">
+        <a
+          @click.stop.prevent="onClickEditBtn()"
+          href="#"
+          class="card-footer-item"
+        >
+          Edit
+        </a>
+        <a
+          @click.stop.prevent="onClickDeleteBtn()"
+          href="#"
+          class="card-footer-item"
+        >
+          Delete
+        </a>
+      </template>
     </footer>
   </div>
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
+const ToggleLikeMutation = gql`
+  mutation articleToggleLike($id:ID!) {
+    articleToggleLike(input: {id:$id}) {
+      article {
+        id
+        likesCount
+        likedByMe
+      }
+    }
+  }
+`;
+
 export default {
   name: 'ArticleDetailCard',
 
@@ -60,10 +89,30 @@ export default {
     }
   },
 
-  computed: {
-    isOwner () {
-      return this.article.user_id == this.currentUser.id;
+  data () {
+    return {
+      likesCount: 0,
+      likedByMe: false,
     }
+  },
+
+  computed: {
+    isLoggedIn () {
+      return !!this.currentUser
+    },
+    isOwner () {
+      if (!this.isLoggedIn) {
+        return false;
+      }
+      return this.article.user_id == this.currentUser.id;
+    },
+    likedType () {
+      return this.likedByMe ? 'is-primary' : null;
+    }
+  },
+
+  mounted () {
+    this.updateLikeStatus(this.article.likes_count, this.article.liked_by_me);
   },
 
   methods: {
@@ -73,6 +122,34 @@ export default {
     onClickDeleteBtn () {
       location.pathname = `/vue_articles/${this.article.id}/edit`;
     },
+    onClickLikeBtn () {
+      if (!this.isLoggedIn) {
+        this.$dialog.alert('Please login!')
+        return;
+      }
+      this.toggleLike();
+    },
+
+    async toggleLike () {
+      await this.$apollo.mutate({
+        mutation: ToggleLikeMutation,
+        variables: {
+          id: this.article.id
+        },
+      }).then((data) => {
+        // Result
+        const article = data.data.articleToggleLike.article;
+        this.updateLikeStatus(article.likesCount, article.likedByMe);
+      }).catch((error) => {
+        // Error
+        console.error(error);
+      })
+    },
+
+    updateLikeStatus(likesCount, likedByMe) {
+      this.likesCount = likesCount;
+      this.likedByMe = likedByMe;
+    }
   }
 }
 </script>
