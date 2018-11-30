@@ -40,7 +40,10 @@ unless Article.exists?
     end
 
     rand(3).times do
-      create(:like, user: users.sample, article: article)
+      user = users.sample
+      next if article.liked_by?(user)
+
+      create(:like, user: user, article: article)
     end
   end
 end
