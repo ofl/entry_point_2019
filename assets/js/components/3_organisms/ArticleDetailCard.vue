@@ -25,24 +25,31 @@
         <time datetime="article.created_at">{{ article.created_at }}</time>
       </div>
     </div>
-    <footer
-      v-if=isOwner
-      class="card-footer"
-    >
+    <footer class="card-footer">
       <a
-        @click="onClickEditBtn()"
+        @click.stop.prevent="onClickLikeBtn()"
         href="#"
         class="card-footer-item"
       >
-        Edit
+        <span class="has-text-grey-light"><i class="fa fa-heart"></i> {{ article.likes_count }}</span>
       </a>
-      <a
-        @click="onClickDeleteBtn()"
-        href="#"
-        class="card-footer-item"
-      >
-        Delete
-      </a>
+
+      <template v-if="isOwner">
+        <a
+          @click.stop.prevent="onClickEditBtn()"
+          href="#"
+          class="card-footer-item"
+        >
+          Edit
+        </a>
+        <a
+          @click.stop.prevent="onClickDeleteBtn()"
+          href="#"
+          class="card-footer-item"
+        >
+          Delete
+        </a>
+      </template>
     </footer>
   </div>
 </template>
@@ -61,7 +68,13 @@ export default {
   },
 
   computed: {
+    isLoggedIn () {
+      return !!this.currentUser
+    },
     isOwner () {
+      if (!this.isLoggedIn) {
+        return false;
+      }
       return this.article.user_id == this.currentUser.id;
     }
   },
@@ -72,6 +85,13 @@ export default {
     },
     onClickDeleteBtn () {
       location.pathname = `/vue_articles/${this.article.id}/edit`;
+    },
+    onClickLikeBtn () {
+      if (!this.isLoggedIn) {
+        this.$dialog.alert('Please login!')
+        return;
+      }
+      console.log(88888888);
     },
   }
 }
