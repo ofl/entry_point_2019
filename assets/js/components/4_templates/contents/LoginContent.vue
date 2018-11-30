@@ -77,9 +77,6 @@ html,body {
 input {
   font-weight: 300;
 }
-p {
-  font-weight: 700;
-}
 p.subtitle {
   padding-top: 1rem;
 }
