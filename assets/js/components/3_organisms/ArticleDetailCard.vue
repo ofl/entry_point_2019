@@ -31,7 +31,15 @@
         href="#"
         class="card-footer-item"
       >
-        <span class="has-text-grey-light"><i class="fa fa-heart"></i> {{ article.likes_count }}</span>
+        <span class="has-text-grey-light">
+          <b-icon
+            pack="fa"
+            icon="heart"
+            :type="likedType"
+          >
+          </b-icon>
+           {{ likesCount }}
+        </span>
       </a>
 
       <template v-if="isOwner">
@@ -55,6 +63,20 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
+const ToggleLikeMutation = gql`
+  mutation articleToggleLike($id:ID!) {
+    articleToggleLike(input: {id:$id}) {
+      article {
+        id
+        likesCount
+        likedByMe
+      }
+    }
+  }
+`;
+
 export default {
   name: 'ArticleDetailCard',
 
@@ -67,6 +89,13 @@ export default {
     }
   },
 
+  data () {
+    return {
+      likesCount: 0,
+      likedByMe: false,
+    }
+  },
+
   computed: {
     isLoggedIn () {
       return !!this.currentUser
@@ -76,7 +105,14 @@ export default {
         return false;
       }
       return this.article.user_id == this.currentUser.id;
+    },
+    likedType () {
+      return this.likedByMe ? 'is-primary' : null;
     }
+  },
+
+  mounted () {
+    this.updateLikeStatus(this.article.likes_count, this.article.liked_by_me);
   },
 
   methods: {
@@ -91,8 +127,29 @@ export default {
         this.$dialog.alert('Please login!')
         return;
       }
-      console.log(88888888);
+      this.toggleLike();
     },
+
+    async toggleLike () {
+      await this.$apollo.mutate({
+        mutation: ToggleLikeMutation,
+        variables: {
+          id: this.article.id
+        },
+      }).then((data) => {
+        // Result
+        const article = data.data.articleToggleLike.article;
+        this.updateLikeStatus(article.likesCount, article.likedByMe);
+      }).catch((error) => {
+        // Error
+        console.error(error);
+      })
+    },
+
+    updateLikeStatus(likesCount, likedByMe) {
+      this.likesCount = likesCount;
+      this.likedByMe = likedByMe;
+    }
   }
 }
 </script>
