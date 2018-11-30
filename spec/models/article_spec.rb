@@ -9,14 +9,14 @@ RSpec.describe Article, type: :model do
     let(:user) { create(:user) }
 
     context 'ユーザーのLikeが存在しない場合' do
-       it 'Likeが作成されること' do
-         expect { subject }.to change(Like, :count).by(1)
-       end
+      it 'Likeが作成されること' do
+        expect { subject }.to change(Like, :count).by(1)
+      end
 
-       it '#liked_by_meがtrueになること' do
-         subject
-         expect(article.liked_by_me).to be_truthy
-       end
+      it '#liked_by_meがtrueになること' do
+        subject
+        expect(article.liked_by_me).to be_truthy
+      end
     end
 
     context 'ユーザーのLikeが存在する場合' do
@@ -24,14 +24,14 @@ RSpec.describe Article, type: :model do
         create(:like, user: user, article: article)
       end
 
-       it 'Likeが削除されること' do
-         expect { subject }.to change(Like, :count).by(-1)
-       end
+      it 'Likeが削除されること' do
+        expect { subject }.to change(Like, :count).by(-1)
+      end
 
-       it '#liked_by_meがfalseになること' do
-         subject
-         expect(article.liked_by_me).to be_falsey
-       end
+      it '#liked_by_meがfalseになること' do
+        subject
+        expect(article.liked_by_me).to be_falsey
+      end
     end
   end
 end
