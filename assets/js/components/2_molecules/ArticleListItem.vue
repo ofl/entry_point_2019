@@ -1,9 +1,13 @@
 <template>
   <article
     class="post"
-    @click="onClickItem(article.id)"
   >
-    <h4>{{ article.title }}</h4>
+    <a
+      href="#"
+      @click="onClickItem(article.id)"
+    >
+      <h4>{{ article.title }}</h4>
+    </a>
 
     <div class="media">
       <div class="media-left">
@@ -25,6 +29,7 @@
 
       <div class="media-right">
         <span class="has-text-grey-light"><i class="fa fa-comments"></i> {{ article.comments_count }}</span>
+        <span class="has-text-grey-light"><i class="fa fa-heart"></i> {{ article.likes_count }}</span>
       </div>
     </div>
   </article>
