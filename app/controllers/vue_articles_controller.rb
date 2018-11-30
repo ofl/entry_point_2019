@@ -10,6 +10,8 @@ class VueArticlesController < ApplicationController
   # GET /vue_articles/1
   def show
     article = Article.find(params[:id])
+    article.liked_by?(current_user) if logged_in?
+
     gon.article = article.as_json(include: { user: { only: user_attributes }, comments: { include: { user: { only: user_attributes } } } })
   end
 
