@@ -15,6 +15,18 @@ mix.setPublicPath('public')
     .js('assets/js/app.js', 'js')
     .sass('assets/sass/app.scss', 'css');
 
+mix.webpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.(graphql|gql)$/,
+          exclude: /node_modules/,
+          loader: 'graphql-tag/loader',
+        },
+      ]
+    }
+});
+
 if (mix.inProduction()) {
     mix.version();
 } else {
