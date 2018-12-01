@@ -56,6 +56,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import ArticleDetailQuery from '../../gqls/article.gql';
 
 const HelloQuery = gql`
   query CurrentUser{
@@ -120,9 +121,13 @@ export default {
             body: this.body,
           },
         },
+        update: (store, { data: { createComment } }) => {
+          const data = store.readQuery({ query: ArticleDetailQuery, variables: {id: this.articleId} });
+          data.article.comments.push(createComment.comment);
+
+          store.writeQuery({ query: ArticleDetailQuery, variables: {id: this.articleId}, data });
+        }
       }).then((data) => {
-        // Result
-        console.log(data)
         this.clear();
       }).catch((error) => {
         // Error
