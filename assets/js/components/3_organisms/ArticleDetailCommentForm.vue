@@ -74,6 +74,7 @@ const AddCommentMutation = gql`
         user {
           id
           name
+          avatar
         }
       }
     }

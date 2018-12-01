@@ -2,7 +2,9 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-48x48">
-        <img src="https://bulma.io/images/placeholders/96x96.png">
+        <img
+          :src="avatarUrl"
+        >
       </p>
     </figure>
     <div class="media-content">
@@ -27,6 +29,12 @@ export default {
     comment: {
       type: Object
     }
+  },
+
+  computed: {
+    avatarUrl () {
+      return (this.comment.user.avatar != '') ? this.comment.user.avatar : "http://bulma.io/images/placeholders/128x128.png";
+    },
   },
 }
 </script>
