@@ -58,14 +58,6 @@
 import gql from 'graphql-tag';
 import ArticleDetailQuery from '../../gqls/article.gql';
 
-const HelloQuery = gql`
-  query CurrentUser{
-    currentUser {
-      id
-      name
-    }
-  }
-`;
 const AddCommentMutation = gql`
   mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
     createComment(input: {articleId:$articleId,attributes: $attributes}) {
@@ -133,12 +125,6 @@ export default {
         // Error
         console.error(error)
       })
-    }
-  },
-
-  apollo: {
-    currentUser: {
-      query: HelloQuery,
     }
   },
 }
