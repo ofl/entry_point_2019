@@ -20,7 +20,8 @@ export default {
 
   props: {
     comments: {
-      type: Array
+      type: Array,
+      default: []
     },
     currentUser: {
       type: Object

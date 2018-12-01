@@ -5,7 +5,7 @@ EntryPoint2019
 
 Overview
 
-Rails + GraphQL + Atomic Design
+Rails + GraphQL + Apollo Client + Atomic Design
 
 ## Description
 
@@ -22,9 +22,9 @@ Rails + GraphQL + Atomic Design
 
 ### JavaScript
 
++   [Apollo GraphQL](https://www.apollographql.com/)
 +   [Vue.js](https://jp.vuejs.org/index.html)
 +   [Buefy](https://buefy.github.io/)
-+   [Apollo GraphQL](https://www.apollographql.com/)
 +   [laravel-mix](https://github.com/JeffreyWay/laravel-mix)
 
 ### CSS

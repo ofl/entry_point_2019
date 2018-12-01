@@ -2,7 +2,7 @@
   <div>
     <TheNavigation :currentUser="currentUser" />
     <AppContent
-      :article="article"
+      :articleId="article.id"
       :currentUser="currentUser"
       :flashes="flashes"
     />
@@ -13,7 +13,8 @@
 <script>
 import TheNavigation from '../4_templates/TheNavigation.vue';
 import TheFooter from '../4_templates/TheFooter.vue';
-import AppContent from '../4_templates/contents/ArticleDetailContent.vue';
+// import AppContent from '../4_templates/contents/ArticleDetailContent.vue';
+import AppContent from '../4_templates/contents/GqlArticleDetailContent.vue';
 
 export default {
   name: 'ArticleDetail',
