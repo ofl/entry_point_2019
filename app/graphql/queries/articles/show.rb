@@ -7,6 +7,8 @@ class Queries::Articles::Show < GraphQL::Schema::Resolver
   argument :id, ID, required: true
 
   def resolve(id:)
-    Article.find_by(id: id)
+    article = Article.find_by(id: id)
+    article.liked_by?(context[:current_user])
+    article
   end
 end
