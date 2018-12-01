@@ -12,6 +12,7 @@
         :currentUser="currentUser"
       />
       <ArticleDetailCommentForm
+        v-if="isLoggedIn"
         :currentUser="currentUser"
         :articleId="articleId"
       />
@@ -65,6 +66,12 @@ export default {
         likedByMe: false
       },
     }
+  },
+
+  computed: {
+    isLoggedIn () {
+      return !!this.currentUser
+    },
   },
 
   apollo: {
