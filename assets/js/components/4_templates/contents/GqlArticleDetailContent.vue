@@ -12,6 +12,7 @@
         :currentUser="currentUser"
       />
       <ArticleDetailCommentForm
+        v-if="isLoggedIn"
         :currentUser="currentUser"
         :articleId="articleId"
       />
@@ -24,32 +25,7 @@ import ArticleDetailCard from '../../3_organisms/GqlArticleDetailCard.vue';
 import ArticleDetailComments from '../../3_organisms/ArticleDetailComments.vue';
 import ArticleDetailCommentForm from '../../3_organisms/ArticleDetailCommentForm.vue';
 import TheFlashes from '../../3_organisms/TheFlashes.vue';
-import gql from 'graphql-tag';
-
-const ArticleDetailQuery = gql`
-  query Article($id: ID!){
-    article(id: $id) {
-      id
-      title
-      body
-      user {
-        id
-        name
-      }
-      comments {
-        id
-        body
-        user {
-          id
-          name
-        }
-      }
-      commentsCount
-      likesCount
-      likedByMe
-    }
-  }
-`;
+import ArticleDetailQuery from '../../../gqls/article.gql';
 
 export default {
   name: 'GqlArticleDetailContent',
@@ -90,6 +66,12 @@ export default {
         likedByMe: false
       },
     }
+  },
+
+  computed: {
+    isLoggedIn () {
+      return !!this.currentUser
+    },
   },
 
   apollo: {
