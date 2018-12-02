@@ -12,6 +12,11 @@ services:
       - .:/app
       - bundle-volume:/usr/local/bundle
       - .ash_history:/root/.ash_history
+      - /app/vendor
+      - /app/tmp
+      - /app/log
+      - /app/.git
+      - /app/node_modules
     depends_on:
       - postgres
     environment:
@@ -50,3 +55,4 @@ volumes:
   postgresql-data:
     driver: local
   bundle-volume:
+    driver: local
