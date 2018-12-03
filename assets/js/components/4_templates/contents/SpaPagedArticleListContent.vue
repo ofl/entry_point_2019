@@ -15,7 +15,7 @@
         <button
           v-if="showMoreEnabled"
           class="button field is-info"
-          @click="onClickNewBtn()"
+          @click="showMore"
         >
           <b-icon icon="more"></b-icon>
           <span>Show More</span>
@@ -64,15 +64,6 @@ export default {
     }
   },
 
-  methods: {
-    onClickNewBtn () {
-      location.href = '/vue_articles/new';
-    },
-    articleKey(id) {
-      return `article-${id}`;
-    },
-  },
-
   apollo: {
     pagedArticles: {
       query: PAGED_ARTICLE_INDEX_QUERY,
@@ -81,6 +72,44 @@ export default {
         pageSize,
       },
     }
+  },
+
+  methods: {
+    onClickNewBtn () {
+      location.href = '/vue_articles/new';
+    },
+    articleKey(id) {
+      return `article-${id}`;
+    },
+
+    // https://akryum.github.io/vue-apollo/guide/apollo/pagination.html
+    showMore() {
+      this.page ++
+      // Fetch more data and transform the original result
+      this.$apollo.queries.pagedArticles.fetchMore({
+        // New variables
+        variables: {
+          page: this.page,
+          pageSize,
+        },
+        // Transform the previous result with new data
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const newArticles = fetchMoreResult.pagedArticles.articles
+          const hasMore = fetchMoreResult.pagedArticles.hasMore
+
+          this.showMoreEnabled = hasMore
+
+          return {
+            pagedArticles: {
+              __typename: previousResult.pagedArticles.__typename,
+              // Merging the tag list
+              articles: [...previousResult.pagedArticles.articles, ...newArticles],
+              hasMore,
+            },
+          }
+        },
+      })
+    },
   },
 }
 </script>
