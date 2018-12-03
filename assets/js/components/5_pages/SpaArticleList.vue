@@ -12,7 +12,7 @@
 <script>
 import TheNavigation from '../4_templates/TheNavigation.vue';
 import TheFooter from '../4_templates/TheFooter.vue';
-import AppContent from '../4_templates/contents/SpaArticleListContent.vue';
+import AppContent from '../4_templates/contents/SpaPagedArticleListContent.vue';
 
 export default {
   name: 'SpaArticleList',
