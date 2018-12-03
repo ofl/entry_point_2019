@@ -1,0 +1,17 @@
+query PagedArticles($page: Int, $pageSize: Int) {
+  pagedArticles(page: $page, pageSize:$pageSize) {
+    articles {
+      id
+      title
+      user {
+        id
+        name
+        avatar
+      }
+      commentsCount
+      likesCount
+      createdAt
+    }
+    hasMore
+  }
+}
