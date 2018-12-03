@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'counter_culture', '~> 2.0'
 gem 'graphql'
 gem 'gon'
+gem 'kaminari'
 gem 'sorcery'
 
 group :development, :test do
