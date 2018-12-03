@@ -51,4 +51,7 @@ public/css/
 public/js/
 public/mix-manifest.json
 yarn-error.log
+
+# Ignore console history
 .ash_history
+.pry_history
