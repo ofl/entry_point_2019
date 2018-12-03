@@ -12,6 +12,7 @@ services:
       - .:/app
       - bundle-volume:/usr/local/bundle
       - .ash_history:/root/.ash_history
+      - .pry_history:/root/.local/share/pry/pry_history
       - /app/vendor
       - /app/tmp
       - /app/log
