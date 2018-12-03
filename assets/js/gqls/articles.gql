@@ -1,0 +1,14 @@
+query Articles {
+  articles {
+    id
+    title
+    user {
+      id
+      name
+      avatar
+    }
+    commentsCount
+    likesCount
+    createdAt
+  }
+}

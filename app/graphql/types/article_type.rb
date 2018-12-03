@@ -9,4 +9,5 @@ class Types::ArticleType < Types::BaseObject
   field :commentsCount, Integer, null: false, description: 'コメント数'
   field :likesCount, Integer, null: false, description: 'いいね数'
   field :likedByMe, Boolean, null: false, description: '閲覧者がいいねしたかどうか'
+  field :created_at, GraphQL::Types::ISO8601DateTime, null: false, description: '作成日時'
 end

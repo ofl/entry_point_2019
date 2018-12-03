@@ -15,6 +15,7 @@ Vue.use(VueApollo)
 const componentsList = {
   'main-component': require('./components/5_pages/Main.vue'),
   'login-component': require('./components/5_pages/Login.vue'),
+  'spa-article-list-component': require('./components/5_pages/SpaArticleList.vue'),
   'article-list-component': require('./components/5_pages/ArticleList.vue'),
   'article-detail-component': require('./components/5_pages/ArticleDetail.vue'),
   'article-edit-component': require('./components/5_pages/ArticleEdit.vue'),

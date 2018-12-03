@@ -56,7 +56,7 @@
 
 <script>
 import gql from 'graphql-tag';
-import ArticleDetailQuery from '../../gqls/article.gql';
+import ARTICLE_DETAIL_QUERY from '../../gqls/article.gql';
 
 const AddCommentMutation = gql`
   mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
@@ -114,10 +114,10 @@ export default {
           },
         },
         update: (store, { data: { createComment } }) => {
-          const data = store.readQuery({ query: ArticleDetailQuery, variables: {id: this.articleId} });
+          const data = store.readQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId} });
           data.article.comments.push(createComment.comment);
 
-          store.writeQuery({ query: ArticleDetailQuery, variables: {id: this.articleId}, data });
+          store.writeQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId}, data });
         }
       }).then((data) => {
         this.clear();
