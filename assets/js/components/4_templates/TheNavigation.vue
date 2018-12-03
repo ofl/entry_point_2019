@@ -35,26 +35,46 @@
           </span>
           <span>Home</span>
         </a>
-        <a
-          class="navbar-item"
-          href="#"
-          @click.stop.prevent="onClickMenu('/vue_articles')"
-        >
-          <span class="icon">
-            <i class="fas fa-file-alt"></i>
-          </span>
-          <span>Vue Articles</span>
-        </a>
-        <a
-          class="navbar-item"
-          href="#"
-          @click.stop.prevent="onClickMenu('/articles')"
-        >
-          <span class="icon">
-            <i class="fas fa-file-alt"></i>
-          </span>
-          <span>Articles</span>
-        </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Articles
+          </a>
+
+          <div class="navbar-dropdown">
+            <a
+              class="navbar-item"
+              href="/spa_articles"
+              @click.stop.prevent="onClickMenu('/spa_articles')"
+            >
+              <span class="icon">
+                <i class="fas fa-file-alt"></i>
+              </span>
+              <span>SPA Articles</span>
+            </a>
+            <a
+              class="navbar-item"
+              href="/vue_articles"
+              @click.stop.prevent="onClickMenu('/vue_articles')"
+            >
+              <span class="icon">
+                <i class="fas fa-file-alt"></i>
+              </span>
+              <span>Vue Articles</span>
+            </a>
+            <a
+              class="navbar-item"
+              href="/articles"
+              @click.stop.prevent="onClickMenu('/articles')"
+            >
+              <span class="icon">
+                <i class="fas fa-file-alt"></i>
+              </span>
+              <span>Articles</span>
+            </a>
+          </div>
+        </div>
+
         <a
           v-if=!isLoggedIn
           class="navbar-item"

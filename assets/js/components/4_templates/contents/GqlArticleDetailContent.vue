@@ -25,7 +25,7 @@ import ArticleDetailCard from '../../3_organisms/GqlArticleDetailCard.vue';
 import ArticleDetailComments from '../../3_organisms/ArticleDetailComments.vue';
 import ArticleDetailCommentForm from '../../3_organisms/ArticleDetailCommentForm.vue';
 import TheFlashes from '../../3_organisms/TheFlashes.vue';
-import ArticleDetailQuery from '../../../gqls/article.gql';
+import ARTICLE_DETAIL_QUERY from '../../../gqls/article.gql';
 
 export default {
   name: 'GqlArticleDetailContent',
@@ -76,7 +76,7 @@ export default {
 
   apollo: {
     article: {
-      query: ArticleDetailQuery,
+      query: ARTICLE_DETAIL_QUERY,
       variables() {
         return {
           id: this.articleId,
