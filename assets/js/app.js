@@ -2,7 +2,9 @@ import Vue from 'vue'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
 import Buefy from 'buefy'
+import router from './router';
 
+Vue.use(VueApollo)
 Vue.use(Buefy)
 
 const apolloProvider = new VueApollo({
@@ -10,12 +12,10 @@ const apolloProvider = new VueApollo({
     uri: 'http://localhost:3000/graphql'
   })
 })
-Vue.use(VueApollo)
 
 const componentsList = {
   'main-component': require('./components/5_pages/Main.vue'),
   'login-component': require('./components/5_pages/Login.vue'),
-  'spa-article-list-component': require('./components/5_pages/SpaArticleList.vue'),
   'article-list-component': require('./components/5_pages/ArticleList.vue'),
   'article-detail-component': require('./components/5_pages/ArticleDetail.vue'),
   'article-edit-component': require('./components/5_pages/ArticleEdit.vue'),
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const vm = new Vue({
     el: '#app',
     apolloProvider,
+    router,
   });
   vms.push(vm)
 })
