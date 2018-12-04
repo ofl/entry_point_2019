@@ -2,12 +2,11 @@
   <article
     class="post"
   >
-    <a
-      href="#"
-      @click="onClickItem(article.id)"
+    <router-link
+      :to="{ name: 'SpaArticle', params: { id: article.id }}"
     >
       <h4>{{ article.title }}</h4>
-    </a>
+    </router-link>
 
     <div class="media">
       <div class="media-left">
@@ -43,12 +42,6 @@ export default {
     article: {
       type: Object
     }
-  },
-
-  methods: {
-    onClickItem (id) {
-      location.href = `/vue_articles/${id}`;
-    },
   },
 
   computed: {

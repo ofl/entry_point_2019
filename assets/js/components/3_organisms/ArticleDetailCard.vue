@@ -14,7 +14,7 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">{{ article.user.name }}</p>
+          <p class="title is-4">{{ article.title }}</p>
           <p class="subtitle is-6">{{ article.user.name }}</p>
         </div>
       </div>
