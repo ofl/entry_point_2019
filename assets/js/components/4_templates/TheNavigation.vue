@@ -42,16 +42,15 @@
           </a>
 
           <div class="navbar-dropdown">
-            <a
+            <router-link
+              to="/spa_articles"
               class="navbar-item"
-              href="/spa_articles"
-              @click.stop.prevent="onClickMenu('/spa_articles')"
             >
               <span class="icon">
                 <i class="fas fa-file-alt"></i>
               </span>
               <span>SPA Articles</span>
-            </a>
+            </router-link>
             <a
               class="navbar-item"
               href="/vue_articles"
