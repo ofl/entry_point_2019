@@ -43,13 +43,22 @@
 
           <div class="navbar-dropdown">
             <router-link
+              to="/inline_gql_articles"
+              class="navbar-item"
+            >
+              <span class="icon">
+                <i class="fas fa-file-alt"></i>
+              </span>
+              <span>Articles(Inline+GQL)</span>
+            </router-link>
+            <router-link
               to="/spa_articles"
               class="navbar-item"
             >
               <span class="icon">
                 <i class="fas fa-file-alt"></i>
               </span>
-              <span>SPA Articles</span>
+              <span>Articles(GQL)</span>
             </router-link>
             <a
               class="navbar-item"
@@ -59,7 +68,7 @@
               <span class="icon">
                 <i class="fas fa-file-alt"></i>
               </span>
-              <span>Vue Articles</span>
+              <span>Articles(Inline)</span>
             </a>
             <a
               class="navbar-item"
@@ -69,7 +78,7 @@
               <span class="icon">
                 <i class="fas fa-file-alt"></i>
               </span>
-              <span>Articles</span>
+              <span>Articles(Rails)</span>
             </a>
           </div>
         </div>

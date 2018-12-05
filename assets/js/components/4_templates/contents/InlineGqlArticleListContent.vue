@@ -26,7 +26,7 @@ import TheFlashes from '../../3_organisms/TheFlashes.vue';
 import ARTICLE_INDEX_QUERY from '../../../gqls/articles.gql';
 
 export default {
-  name: 'SpaArticleListContent',
+  name: 'InlineGqlArticleListContent',
 
   components: {
     'ArticleListTable': ArticleListTable,
