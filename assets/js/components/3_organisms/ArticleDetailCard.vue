@@ -22,7 +22,7 @@
       <div class="content">
         {{ article.body }}
         <br>
-        <time datetime="article.created_at">{{ article.created_at }}</time>
+        <time datetime="article.createdAt">{{ article.createdAt }}</time>
       </div>
     </div>
     <footer class="card-footer">
@@ -104,7 +104,7 @@ export default {
       if (!this.isLoggedIn) {
         return false;
       }
-      return this.article.user_id == this.currentUser.id;
+      return parseInt(this.article.user.id, 10) == this.currentUser.id;
     },
     likedType () {
       return this.likedByMe ? 'is-primary' : null;

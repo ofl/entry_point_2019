@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe VueArticlesController, type: :controller do
+  include_context :gon
+
   let(:user) { FactoryBot.create(:user) }
 
   let(:valid_attributes) {
@@ -15,9 +17,29 @@ RSpec.describe VueArticlesController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      Article.create! valid_attributes.merge(user: user).merge(user: user)
+      Article.create! valid_attributes.merge(user: user)
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
+    end
+
+    it 'gonifies as expected' do
+      article = Article.create! valid_attributes.merge(user: user)
+      get :index, params: {}, session: valid_session
+
+      expect(gon['articles'][0]).to eq(
+        {
+          commentsCount: 0,
+          createdAt: article.created_at.xmlschema,
+          id: article.id,
+          likesCount: 0,
+          title: article.title,
+          user: {
+            avatar: '',
+            id: user.id,
+            name: user.name
+          }.stringify_keys
+        }.stringify_keys
+      )
     end
   end
 
@@ -26,6 +48,29 @@ RSpec.describe VueArticlesController, type: :controller do
       article = Article.create! valid_attributes.merge(user: user)
       get :show, params: { id: article.to_param }, session: valid_session
       expect(response).to be_successful
+    end
+
+    it 'gonifies as expected' do
+      article = Article.create! valid_attributes.merge(user: user)
+      get :show, params: { id: article.to_param }, session: valid_session
+
+      expect(gon['article']).to eq(
+        {
+          body: article.body,
+          comments: [],
+          commentsCount: 0,
+          createdAt: article.created_at.xmlschema,
+          id: article.id,
+          likedByMe: false,
+          likesCount: 0,
+          title: article.title,
+          user: {
+            avatar: '',
+            id: user.id,
+            name: user.name
+          }.stringify_keys
+        }.stringify_keys
+      )
     end
   end
 
