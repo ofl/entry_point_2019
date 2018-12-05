@@ -39,7 +39,7 @@ export default {
 
   props: {
     articleId: {
-      type: String,
+      type: Number,
       required: true
     },
     currentUser: {

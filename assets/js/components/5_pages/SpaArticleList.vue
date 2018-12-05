@@ -2,6 +2,7 @@
   <div>
     <TheNavigation :currentUser="currentUser" />
     <AppContent
+      :currentUser="currentUser"
       :articles="articles"
       :flashes="flashes"
     />
@@ -13,6 +14,7 @@
 import TheNavigation from '../4_templates/TheNavigation.vue';
 import TheFooter from '../4_templates/TheFooter.vue';
 import AppContent from '../4_templates/contents/SpaPagedArticleListContent.vue';
+import CURRENT_USER_QUERY from '../../gqls/currentUser.gql';
 
 export default {
   name: 'SpaArticleList',
@@ -29,6 +31,12 @@ export default {
       articles: [],
       currentUser: null,
       flashes: {},
+    }
+  },
+
+  apollo: {
+    currentUser: {
+      query: CURRENT_USER_QUERY,
     }
   },
 };
