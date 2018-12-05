@@ -21,15 +21,15 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <a href="#">{{ article.user.name }}</a>{{ article.created_at }} &nbsp;
+            <a href="#">{{ article.user.name }}</a>{{ article.createdAt }} &nbsp;
             <span class="tag">Question</span>
           </p>
         </div>
       </div>
 
       <div class="media-right">
-        <span class="has-text-grey-light"><i class="fa fa-comments"></i> {{ article.comments_count }}</span>
-        <span class="has-text-grey-light"><i class="fa fa-heart"></i> {{ article.likes_count }}</span>
+        <span class="has-text-grey-light"><i class="fa fa-comments"></i> {{ article.commentsCount }}</span>
+        <span class="has-text-grey-light"><i class="fa fa-heart"></i> {{ article.likesCount }}</span>
       </div>
     </div>
   </article>

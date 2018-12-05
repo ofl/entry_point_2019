@@ -97,7 +97,7 @@ export default {
       if (!this.isLoggedIn) {
         return false;
       }
-      return this.article.userId == this.currentUser.id;
+      return parseInt(this.article.user.id, 10) == this.currentUser.id;
     },
     likedType () {
       return this.article.likedByMe ? 'is-primary' : null;

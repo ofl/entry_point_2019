@@ -14,7 +14,7 @@
           <br>
           {{ comment.body }}
           <br>
-          <small><a>Like</a> · <a>Reply</a>{{ comment.created_at }}</small>
+          <small><a>Like</a> · <a>Reply</a>{{ comment.createdAt }}</small>
         </p>
       </div>
     </div>
