@@ -26,7 +26,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  def as_json(options)
-    super(only: [:id, :name, :avatar])
+  def to_builder
+    Jbuilder.new do |user|
+      user.(self, :id, :name, :avatar)
+    end
   end
 end
