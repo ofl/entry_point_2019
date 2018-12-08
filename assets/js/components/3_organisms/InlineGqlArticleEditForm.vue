@@ -1,28 +1,11 @@
 <template>
   <form
     v-model="valid"
-    :action="requestPath"
     ref="form"
     accept-charset="UTF-8"
     method="POST"
     lazy-validation
   >
-    <input
-      type="hidden"
-      name="utf8"
-      value="✓"
-    >
-    <input
-      type="hidden"
-      name="authenticity_token"
-      :value="csrfToken"
-    >
-    <input
-      type="hidden"
-      name="_method"
-      :value="requestMethod"
-    />
-
     <b-field label="Title">
       <b-input
         v-model="article.title"
@@ -50,7 +33,7 @@
         <button
           class="button field is-primary"
           :disabled="!valid"
-          @click.stop.prevent="editArticle()"
+          @click.stop.prevent="editArticle"
         >
           <b-icon icon="pencil"></b-icon>
           <span>Submit</span>
@@ -68,7 +51,7 @@
           class="button field is-info"
           @click.stop.prevent="back"
         >
-          <b-icon icon="back"></b-icon>
+          <b-icon icon="backspace"></b-icon>
           <span>Back</span>
         </button>
       </p>
@@ -106,18 +89,9 @@ export default {
   },
 
   computed: {
-    csrfToken () {
-      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    },
-    requestPath () {
-      return this.isUpdate ? `/vue_articles/${this.article.id}` : '/vue_articles';
-    },
-    requestMethod () {
-      return this.isUpdate ? 'put' : 'post';
-    },
     isUpdate () {
       return !!this.article.id;
-    },
+    }
   },
 
   methods: {
@@ -129,7 +103,7 @@ export default {
       this.$router.go(-1)
     },
 
-    async editArticle(e) {
+    async editArticle() {
       await this.$apollo.mutate({
         mutation: UPDATE_ARTICLE_MUTATION,
         variables: {
