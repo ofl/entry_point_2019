@@ -33,7 +33,7 @@
         <button
           class="button field is-primary"
           :disabled="!valid"
-          @click.stop.prevent="editArticle"
+          @click.stop.prevent="onClickSubmitBtn"
         >
           <b-icon icon="pencil"></b-icon>
           <span>Submit</span>
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import CREATE_ARTICLE_MUTATION from '../../gqls/createArticle.gql';
 import UPDATE_ARTICLE_MUTATION from '../../gqls/updateArticle.gql';
 
 export default {
@@ -103,6 +104,32 @@ export default {
       this.$router.go(-1)
     },
 
+    onClickSubmitBtn () {
+      if (this.isUpdate) {
+        this.editArticle();
+      } else {
+        this.newArticle();
+      }
+    },
+
+    async newArticle() {
+      await this.$apollo.mutate({
+        mutation: CREATE_ARTICLE_MUTATION,
+        variables: {
+          attributes: {
+            title: this.article.title,
+            body: this.article.body,
+          },
+        },
+      }).then((data) => {
+        console.log(data)
+        this.$router.push({ name: 'InlineGqlArticle', params: { id: data.data.createArticle.article.id }})
+      }).catch((error) => {
+        // Error
+        console.error(error)
+      })
+    },
+
     async editArticle() {
       await this.$apollo.mutate({
         mutation: UPDATE_ARTICLE_MUTATION,
@@ -120,7 +147,7 @@ export default {
         // Error
         console.error(error)
       })
-    }
+    },
   },
 }
 </script>

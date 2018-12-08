@@ -1,0 +1,9 @@
+mutation CreateArticle($attributes: ArticleAttributes!) {
+  createArticle(input: { attributes: $attributes }) {
+    article {
+      id
+      title
+      body
+    }
+  }
+}

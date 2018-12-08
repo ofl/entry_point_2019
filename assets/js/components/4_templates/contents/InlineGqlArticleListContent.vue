@@ -7,14 +7,17 @@
         :articles="articles"
       />
 
-      <div class="new-button">
-        <button
+      <div
+        class="new-button"
+        v-if="currentUser"
+      >
+        <router-link
           class="button field is-info"
-          @click="onClickNewBtn()"
+          :to="{ name: 'InlineGqlArticleNew' }"
         >
           <b-icon icon="pencil"></b-icon>
           <span>New</span>
-        </button>
+        </router-link>
       </div>
     </div>
   </section class="section">
@@ -34,6 +37,9 @@ export default {
   },
 
   props: {
+    currentUser: {
+      type: Object
+    },
     flashes: {
       type: Object
     }
