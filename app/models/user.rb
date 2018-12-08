@@ -28,7 +28,10 @@ class User < ApplicationRecord
 
   def to_builder
     Jbuilder.new do |user|
-      user.(self, :id, :name, :avatar)
+      user.id id
+      user.name name
+      user.avatar avatar
+      user.__typename 'User'
     end
   end
 end

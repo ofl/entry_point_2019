@@ -8,7 +8,14 @@ class ApplicationController < ActionController::Base
   end
 
   def render(*args, &block)
-    gon.currentUser = current_user
+    if current_user
+      gon.currentUser = {
+        id: current_user.id,
+        name: current_user.name,
+        avatar: current_user.avatar,
+        __typename: 'currentUser'
+      }
+    end
 
     super
   end
