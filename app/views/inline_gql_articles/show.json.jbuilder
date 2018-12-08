@@ -1,4 +1,5 @@
 json.article do
+  json.__typename 'Article'
   json.id @article.id
   json.title @article.title
   json.body @article.body
@@ -10,8 +11,9 @@ json.article do
   json.user @article.user.to_builder
 
   json.comments @article.comments do |comment|
+    json.__typename 'Comment'
     json.id comment.id
-    json.title comment.body
+    json.body comment.body
 
     json.user comment.user.to_builder
   end
