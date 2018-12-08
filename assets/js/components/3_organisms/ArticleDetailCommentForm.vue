@@ -34,7 +34,7 @@
             <button
               class="button field is-primary"
               :disabled="!valid"
-              @click="addComment"
+              @click.stop.prevent="addComment"
             >
               <b-icon icon="pencil"></b-icon>
               <span>Submit</span>
@@ -103,8 +103,6 @@ export default {
     },
 
     async addComment(e) {
-      e.preventDefault();
-
       await this.$apollo.mutate({
         mutation: AddCommentMutation,
         variables: {

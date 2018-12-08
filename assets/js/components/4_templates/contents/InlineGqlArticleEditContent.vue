@@ -3,39 +3,24 @@
     <TheFlashes :flashes="flashes" />
 
     <div class="container">
-      <ArticleDetailCard
+      <ArticleEditForm
         v-if="article"
         :article="article"
-        :currentUser="currentUser"
-      />
-      <ArticleDetailComments
-        v-if="article"
-        :comments="article.comments"
-        :currentUser="currentUser"
-      />
-      <ArticleDetailCommentForm
-        v-if="isLoggedIn"
-        :currentUser="currentUser"
-        :articleId="articleId"
       />
     </div>
   </section>
 </template>
 
 <script>
-import ArticleDetailCard from '../../3_organisms/InlineGqlArticleDetailCard.vue';
-import ArticleDetailComments from '../../3_organisms/ArticleDetailComments.vue';
-import ArticleDetailCommentForm from '../../3_organisms/ArticleDetailCommentForm.vue';
+import ArticleEditForm from '../../3_organisms/InlineGqlArticleEditForm.vue';
 import TheFlashes from '../../3_organisms/TheFlashes.vue';
-import ARTICLE_DETAIL_QUERY from '../../../gqls/article.gql';
+import ARTICLE_EDIT_QUERY from '../../../gqls/articleEdit.gql';
 
 export default {
-  name: 'InlineGqlArticleDetailContent',
+  name: 'InlineGqlArticleEditContent',
 
   components: {
-    'ArticleDetailCard': ArticleDetailCard,
-    'ArticleDetailComments': ArticleDetailComments,
-    'ArticleDetailCommentForm': ArticleDetailCommentForm,
+    'ArticleEditForm': ArticleEditForm,
     'TheFlashes': TheFlashes,
   },
 
@@ -69,7 +54,7 @@ export default {
 
   apollo: {
     article: {
-      query: ARTICLE_DETAIL_QUERY,
+      query: ARTICLE_EDIT_QUERY,
       variables() {
         return {
           id: this.articleId,
@@ -83,10 +68,6 @@ export default {
 
   mounted () {
     if (this.hasInlineData) {
-      this.$apollo.provider.defaultClient.writeQuery({
-        query: ARTICLE_DETAIL_QUERY,
-        data: { article: gon.article }
-      });
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.article = null;
     }

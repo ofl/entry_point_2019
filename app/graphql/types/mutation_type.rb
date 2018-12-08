@@ -1,5 +1,6 @@
 module Types
   class MutationType < Types::BaseObject
+    field :update_article, mutation: Mutations::Articles::Update
     field :create_comment, mutation: Mutations::Comments::Create
     field :update_comment, mutation: Mutations::Comments::Update
     field :destroy_comment, mutation: Mutations::Comments::Destroy
