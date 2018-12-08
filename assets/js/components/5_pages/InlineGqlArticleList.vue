@@ -3,7 +3,6 @@
     <TheNavigation :currentUser="currentUser" />
     <AppContent
       :currentUser="currentUser"
-      :articles="articles"
       :flashes="flashes"
     />
     <TheFooter />
@@ -27,31 +26,32 @@ export default {
 
   data () {
     return {
-      toolbarTitle: 'Spa Articles',
-      articles: [],
-      currentUser: null,
-      flashes: {},
+      toolbarTitle: 'Inline+GQL Articles',
+      currentUser: gon.currentUser,
+      flashes: gon.flashJson,
     }
+  },
+
+  computed: {
+    hasInlineData () {
+      return !!gon.currentUser;
+    },
   },
 
   apollo: {
     currentUser: {
       query: CURRENT_USER_QUERY,
       skip() {
-        return !!gon.currentUser;
+        return this.hasInlineData;
       },
     }
   },
 
   mounted () {
-    if (!!gon.currentUser) {
-      this.currentUser = gon.currentUser;
-
+    if (this.hasInlineData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: CURRENT_USER_QUERY,
-        data: {
-          currentUser: Object.assign(gon.currentUser, { __typename: 'currentUser' }),
-        },
+        data: { currentUser: gon.currentUser }
       });
     }
   },
