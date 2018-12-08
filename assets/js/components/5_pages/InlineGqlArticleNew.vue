@@ -2,7 +2,6 @@
   <div>
     <TheNavigation :currentUser="currentUser" />
     <AppContent
-      :articleId="articleId"
       :currentUser="currentUser"
       :flashes="flashes"
     />
@@ -13,11 +12,11 @@
 <script>
 import TheNavigation from '../4_templates/TheNavigation.vue';
 import TheFooter from '../4_templates/TheFooter.vue';
-import AppContent from '../4_templates/contents/InlineGqlArticleEditContent.vue';
+import AppContent from '../4_templates/contents/InlineGqlArticleNewContent.vue';
 import CURRENT_USER_QUERY from '../../gqls/currentUser.gql';
 
 export default {
-  name: 'ArticleEdit',
+  name: 'ArticleNew',
 
   components: {
     'TheNavigation': TheNavigation,
@@ -27,16 +26,10 @@ export default {
 
   data () {
     return {
-      toolbarTitle: 'Edit Article',
+      toolbarTitle: 'New Article',
       currentUser: gon.currentUser,
       flashes: gon.flashes,
     }
-  },
-
-  computed: {
-    articleId () {
-      return parseInt(this.$route.params.id, 10);
-    },
   },
 
   apollo: {
