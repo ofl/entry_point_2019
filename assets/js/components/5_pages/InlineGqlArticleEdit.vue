@@ -13,11 +13,11 @@
 <script>
 import TheNavigation from '../4_templates/TheNavigation.vue';
 import TheFooter from '../4_templates/TheFooter.vue';
-import AppContent from '../4_templates/contents/InlineGqlArticleDetailContent.vue';
+import AppContent from '../4_templates/contents/InlineGqlArticleEditContent.vue';
 import CURRENT_USER_QUERY from '../../gqls/currentUser.gql';
 
 export default {
-  name: 'InlineGqlArticleDetail',
+  name: 'ArticleEdit',
 
   components: {
     'TheNavigation': TheNavigation,
@@ -33,10 +33,16 @@ export default {
 
   data () {
     return {
-      toolbarTitle: 'Article',
+      toolbarTitle: 'Edit Article',
       currentUser: gon.currentUser,
-      flashes: {},
+      flashes: gon.flashes,
     }
+  },
+
+  computed: {
+    articleId () {
+      return parseInt(this.$route.params.id, 10);
+    },
   },
 
   apollo: {

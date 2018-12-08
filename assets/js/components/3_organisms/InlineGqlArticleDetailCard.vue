@@ -43,13 +43,12 @@
       </a>
 
       <template v-if="isOwner">
-        <a
-          @click.stop.prevent="onClickEditBtn()"
-          href="#"
+        <router-link
+          :to="{ name: 'InlineGqlArticleEdit', params: { id: article.id }}"
           class="card-footer-item"
         >
           Edit
-        </a>
+        </router-link>
         <a
           @click.stop.prevent="onClickDeleteBtn()"
           href="#"

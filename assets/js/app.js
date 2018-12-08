@@ -31,7 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const componentName = `${el.dataset.vue}-component`
-  Vue.component(componentName, componentsList[componentName])
+  if (componentsList[componentName]) {
+    Vue.component(componentName, componentsList[componentName])
+  }
 
   const vm = new Vue({
     el: '#app',
