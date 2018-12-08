@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ArticleListTable from '../../3_organisms/SpaArticleListTable.vue';
+import ArticleListTable from '../../3_organisms/InlineGqlArticleListTable.vue';
 import TheFlashes from '../../3_organisms/TheFlashes.vue';
 import ARTICLE_INDEX_QUERY from '../../../gqls/articles.gql';
 
