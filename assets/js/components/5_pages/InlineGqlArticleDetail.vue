@@ -2,6 +2,7 @@
   <div>
     <TheNavigation :currentUser="currentUser" />
     <AppContent
+      :articleId="articleId"
       :currentUser="currentUser"
       :flashes="flashes"
     />
@@ -12,11 +13,11 @@
 <script>
 import TheNavigation from '../4_templates/TheNavigation.vue';
 import TheFooter from '../4_templates/TheFooter.vue';
-import AppContent from '../4_templates/contents/InlineGqlArticleListContent.vue';
+import AppContent from '../4_templates/contents/InlineGqlArticleDetailContent.vue';
 import CURRENT_USER_QUERY from '../../gqls/currentUser.gql';
 
 export default {
-  name: 'InlineGqlArticleList',
+  name: 'SpaArticleDetail',
 
   components: {
     'TheNavigation': TheNavigation,
@@ -24,18 +25,18 @@ export default {
     'TheFooter': TheFooter
   },
 
-  data () {
-    return {
-      toolbarTitle: 'Inline+GQL Articles',
-      currentUser: gon.currentUser,
-      flashes: gon.flashJson,
-    }
+  computed: {
+    articleId () {
+      return parseInt(this.$route.params.id, 10);
+    },
   },
 
-  computed: {
-    hasInlineData () {
-      return !!gon.currentUser;
-    },
+  data () {
+    return {
+      toolbarTitle: 'Article',
+      currentUser: null,
+      flashes: {},
+    }
   },
 
   apollo: {
