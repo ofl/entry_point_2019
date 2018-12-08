@@ -50,7 +50,7 @@
         <button
           class="button field is-primary"
           :disabled="!valid"
-          @click="submit"
+          @click.stop.prevent="editArticle()"
         >
           <b-icon icon="pencil"></b-icon>
           <span>Submit</span>
@@ -63,18 +63,29 @@
           <b-icon icon="eraser"></b-icon>
           <span>Clear</span>
         </button>
+
+        <button
+          class="button field is-info"
+          @click.stop.prevent="back"
+        >
+          <b-icon icon="back"></b-icon>
+          <span>Back</span>
+        </button>
       </p>
     </b-field>
   </form>
 </template>
 
 <script>
+import UPDATE_ARTICLE_MUTATION from '../../gqls/updateArticle.gql';
+
 export default {
   name: 'InlineGqlArticleEditForm',
 
   props: {
     article: {
-      type: Object
+      type: Object,
+      required: true
     }
   },
 
@@ -82,13 +93,11 @@ export default {
     return {
       valid: true,
 
-      title: '',
       titleRules: [
         v => !!v || 'Title is required',
         v => (v && v.length <= 100) || 'Title must be less than 100 characters'
       ],
 
-      body: '',
       bodyRules: [
         v => !!v || 'Body is required',
         v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
@@ -112,14 +121,32 @@ export default {
   },
 
   methods: {
-    submit () {
-      if (this.$refs.form.validate()) {
-        this.$refs.form.$el.submit();
-      }
-    },
     clear () {
       this.$refs.form.reset()
     },
+
+    back () {
+      this.$router.go(-1)
+    },
+
+    async editArticle(e) {
+      await this.$apollo.mutate({
+        mutation: UPDATE_ARTICLE_MUTATION,
+        variables: {
+          id: this.article.id,
+          attributes: {
+            title: this.article.title,
+            body: this.article.body,
+          },
+        },
+      }).then((data) => {
+        console.log(data)
+        this.$router.push({ name: 'InlineGqlArticle', params: { id: this.article.id }})
+      }).catch((error) => {
+        // Error
+        console.error(error)
+      })
+    }
   },
 }
 </script>
