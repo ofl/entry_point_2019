@@ -63,6 +63,8 @@
 
 <script>
 import gql from 'graphql-tag';
+import DESTROY_ARTICLE_MUTATION from '../../gqls/destroyArticle.gql';
+import ARTICLE_INDEX_QUERY from '../../gqls/articles.gql';
 
 const ToggleLikeMutation = gql`
   mutation articleToggleLike($id:ID!) {
@@ -104,11 +106,11 @@ export default {
   },
 
   methods: {
-    onClickEditBtn () {
-      location.pathname = `/vue_articles/${this.article.id}/edit`;
-    },
     onClickDeleteBtn () {
-      location.pathname = `/vue_articles/${this.article.id}/edit`;
+      this.$dialog.confirm({
+        message: 'Are you sure?',
+        onConfirm: () => this.destroyArticle()
+      })
     },
     onClickLikeBtn () {
       if (!this.isLoggedIn) {
@@ -128,6 +130,28 @@ export default {
         // Result
         const article = data.data.articleToggleLike.article;
         // this.updateLikeStatus(article.likesCount, article.likedByMe);
+      }).catch((error) => {
+        // Error
+        console.error(error);
+      })
+    },
+
+    async destroyArticle () {
+      await this.$apollo.mutate({
+        mutation: DESTROY_ARTICLE_MUTATION,
+        variables: {
+          id: this.article.id
+        },
+        update: (store, { data: { destroyArticle } }) => {
+          const data = store.readQuery({ query: ARTICLE_INDEX_QUERY });
+          const destroydArticleId = parseInt(destroyArticle.article.id, 10)
+          data.articles = data.articles.filter(article => parseInt(article.id, 10) !== destroydArticleId);
+
+          store.writeQuery({ query: ARTICLE_INDEX_QUERY, data });
+        }
+      }).then((data) => {
+        // 一覧にリダイレクトする
+        // this.$router.push({ path: '/inline_gql_articles' })
       }).catch((error) => {
         // Error
         console.error(error);
