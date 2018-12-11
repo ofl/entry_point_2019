@@ -1,0 +1,7 @@
+mutation DestroyArticle($id: ID!) {
+  destroyArticle(input: { id: $id }) {
+    article {
+      id
+    }
+  }
+}

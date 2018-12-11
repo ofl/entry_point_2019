@@ -34,6 +34,7 @@ RSpec.describe VueArticlesController, type: :controller do
           likesCount: 0,
           title: article.title,
           user: {
+            __typename: 'User',
             avatar: '',
             id: user.id,
             name: user.name
@@ -65,6 +66,7 @@ RSpec.describe VueArticlesController, type: :controller do
           likesCount: 0,
           title: article.title,
           user: {
+            __typename: 'User',
             avatar: '',
             id: user.id,
             name: user.name
