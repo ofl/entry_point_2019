@@ -55,6 +55,12 @@ $ docker-compose up -d
 $ docker-compose run --rm yarn run watch
 ```
 
+### Add npm package
+
+```
+$ docker-compose run --rm yarn add xxx
+```
+
 ### Update gem
 
 ```

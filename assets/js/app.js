@@ -2,10 +2,13 @@ import Vue from 'vue'
 import ApolloClient from 'apollo-boost'
 import VueApollo from 'vue-apollo'
 import Buefy from 'buefy'
+import VeeValidate from 'vee-validate'
+
 import router from './router';
 
 Vue.use(VueApollo)
 Vue.use(Buefy)
+Vue.use(VeeValidate, { events: ''})
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({

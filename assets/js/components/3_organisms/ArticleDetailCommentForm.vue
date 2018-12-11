@@ -17,15 +17,20 @@
 
         <div class="field">
           <p class="control">
-            <b-input
-              v-model="body"
-              :rules="bodyRules"
+            <b-field
               label="Body"
-              name="comment[body]"
-              type="textarea"
-              placeholder="Add a comment..."
-              required
-            />
+              :type="{'is-danger': errors.has('body')}"
+              :message="errors.first('body')"
+            >
+              <b-input
+                v-model="body"
+                label="Body"
+                name="body"
+                type="textarea"
+                placeholder="Add a comment..."
+                v-validate="'required'"
+              />
+            </b-field>
           </p>
         </div>
 
@@ -34,7 +39,7 @@
             <button
               class="button field is-primary"
               :disabled="!valid"
-              @click.stop.prevent="addComment"
+              @click.stop.prevent="handleSubmit"
             >
               <b-icon icon="pencil"></b-icon>
               <span>Submit</span>
@@ -42,7 +47,7 @@
 
             <button
               class="button field is-info"
-              @click="clear"
+              @click.stop.prevent="clear"
             >
               <b-icon icon="eraser"></b-icon>
               <span>Clear</span>
@@ -57,22 +62,7 @@
 <script>
 import gql from 'graphql-tag';
 import ARTICLE_DETAIL_QUERY from '../../gqls/article.gql';
-
-const AddCommentMutation = gql`
-  mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
-    createComment(input: {articleId:$articleId,attributes: $attributes}) {
-      comment {
-        id
-        body
-        user {
-          id
-          name
-          avatar
-        }
-      }
-    }
-  }
-`;
+import ADD_COMMENT_MUTATION from '../../gqls/addComment.gql';
 
 export default {
   name: 'ArticleDetailCommentForm',
@@ -86,25 +76,41 @@ export default {
   data () {
     return {
       valid: true,
-
       body: '',
-      bodyRules: [
-        v => !!v || 'Body is required',
-        v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
-      ],
-
       currentUser: null,
     }
   },
 
   methods: {
     clear () {
+      this.body = ''
       this.$refs.form.reset()
     },
 
-    async addComment(e) {
+    handleSubmit () {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.addComment();
+          return;
+        }
+
+        this.$toast.open({
+          message: 'Form is not valid! Please check the fields.',
+          type: 'is-danger',
+          position: 'is-bottom'
+        })
+      });
+    },
+
+    handleServerValidationErrors (serverErrors) {
+      serverErrors.forEach(error => {
+        this.errors.add({ field: error.path[1], msg: error.message });
+      })
+    },
+
+    async addComment() {
       await this.$apollo.mutate({
-        mutation: AddCommentMutation,
+        mutation: ADD_COMMENT_MUTATION,
         variables: {
           articleId: this.articleId,
           attributes: {
@@ -112,15 +118,20 @@ export default {
           },
         },
         update: (store, { data: { createComment } }) => {
+          if (createComment.errors.length > 0) {
+            this.handleServerValidationErrors(createComment.errors);
+            return;
+          }
+
           const data = store.readQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId} });
           data.article.comments.push(createComment.comment);
 
           store.writeQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId}, data });
+          this.clear();
         }
       }).then((data) => {
-        this.clear();
+        console.log(data);
       }).catch((error) => {
-        // Error
         console.error(error)
       })
     }
