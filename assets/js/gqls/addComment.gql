@@ -1,0 +1,17 @@
+mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
+  createComment(input: {articleId:$articleId,attributes: $attributes}) {
+    comment {
+      id
+      body
+      user {
+        id
+        name
+        avatar
+      }
+    },
+    errors {
+      path
+      message
+    }
+  }
+}
