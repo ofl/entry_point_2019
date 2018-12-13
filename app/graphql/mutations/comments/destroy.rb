@@ -18,6 +18,6 @@ class Mutations::Comments::Destroy < GraphQL::Schema::RelayClassicMutation
 
     comment.destroy
 
-    { comment: nil, errors: [] }
+    { comment: comment, errors: [] }
   end
 end
