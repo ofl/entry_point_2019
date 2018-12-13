@@ -4,6 +4,10 @@ mutation UpdateArticle($id: ID!, $attributes: ArticleAttributes!) {
       id
       title
       body
+    },
+    errors {
+      path
+      message
     }
   }
 }

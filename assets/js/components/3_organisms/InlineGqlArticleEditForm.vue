@@ -39,7 +39,7 @@
         <button
           class="button field is-primary"
           :disabled="!valid"
-          @click.stop.prevent="onClickSubmitBtn"
+          @click.stop.prevent="handleClickSubmitBtn"
         >
           <b-icon icon="pencil"></b-icon>
           <span>Submit</span>
@@ -82,6 +82,12 @@ export default {
   data () {
     return {
       valid: true,
+
+      article: {
+        id: null,
+        title: '',
+        body: '',
+      }
     }
   },
 
@@ -93,6 +99,8 @@ export default {
 
   methods: {
     clear () {
+      this.article.title = ''
+      this.article.body = ''
       this.$refs.form.reset()
     },
 
@@ -100,12 +108,18 @@ export default {
       this.$router.go(-1)
     },
 
-    onClickSubmitBtn () {
-      if (this.isUpdate) {
-        this.editArticle();
-      } else {
-        this.newArticle();
-      }
+    handleClickSubmitBtn () {
+      this.$validator.validateAll().then((result) => {
+        if (!result) {
+          return
+        }
+
+        if (this.isUpdate) {
+          this.editArticle();
+        } else {
+          this.newArticle();
+        }
+      });
     },
 
     handleServerValidationErrors (serverErrors) {
@@ -124,14 +138,13 @@ export default {
           },
         },
         update: (store, { data: { createArticle: { article, errors } } }) => {
-          this.errors.clear();
           if (errors.length > 0) {
             this.handleServerValidationErrors(errors);
             return;
           }
 
           this.$toast.open({
-            message: 'Successfully created aericle.',
+            message: 'Successfully created article.',
             type: 'is-success'
           })
 
@@ -155,9 +168,21 @@ export default {
             body: this.article.body,
           },
         },
+        update: (store, { data: { updateArticle: { article, errors } } }) => {
+          if (errors.length > 0) {
+            this.handleServerValidationErrors(errors);
+            return;
+          }
+
+          this.$toast.open({
+            message: 'Successfully update article.',
+            type: 'is-success'
+          })
+
+          this.$router.push({ name: 'InlineGqlArticle', params: { id: article.id }})
+        }
       }).then((data) => {
         console.log(data)
-        this.$router.push({ name: 'InlineGqlArticle', params: { id: this.article.id }})
       }).catch((error) => {
         // Error
         console.error(error)
