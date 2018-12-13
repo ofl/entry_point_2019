@@ -6,25 +6,31 @@
     method="POST"
     lazy-validation
   >
-    <b-field label="Title">
+    <b-field
+      label="Title"
+      :type="{'is-danger': errors.has('title')}"
+      :message="errors.first('title')"
+    >
       <b-input
         v-model="article.title"
-        :rules="titleRules"
         :counter="100"
-        name="article[title]"
+        name="title"
         placeholder="Title ..."
-        required
+        v-validate="'required'"
       />
     </b-field>
 
-    <b-field label="Body">
+    <b-field
+      label="Body"
+      :type="{'is-danger': errors.has('body')}"
+      :message="errors.first('body')"
+    >
       <b-input
         v-model="article.body"
-        :rules="bodyRules"
-        name="article[body]"
+        name="body"
         type="textarea"
         placeholder="Body ..."
-        required
+        v-validate="'required'"
       />
     </b-field>
 
@@ -33,7 +39,7 @@
         <button
           class="button field is-primary"
           :disabled="!valid"
-          @click.stop.prevent="onClickSubmitBtn"
+          @click.stop.prevent="handleClickSubmitBtn"
         >
           <b-icon icon="pencil"></b-icon>
           <span>Submit</span>
@@ -77,15 +83,11 @@ export default {
     return {
       valid: true,
 
-      titleRules: [
-        v => !!v || 'Title is required',
-        v => (v && v.length <= 100) || 'Title must be less than 100 characters'
-      ],
-
-      bodyRules: [
-        v => !!v || 'Body is required',
-        v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
-      ],
+      article: {
+        id: null,
+        title: '',
+        body: '',
+      }
     }
   },
 
@@ -97,6 +99,8 @@ export default {
 
   methods: {
     clear () {
+      this.article.title = ''
+      this.article.body = ''
       this.$refs.form.reset()
     },
 
@@ -104,12 +108,24 @@ export default {
       this.$router.go(-1)
     },
 
-    onClickSubmitBtn () {
-      if (this.isUpdate) {
-        this.editArticle();
-      } else {
-        this.newArticle();
-      }
+    handleClickSubmitBtn () {
+      this.$validator.validateAll().then((result) => {
+        if (!result) {
+          return
+        }
+
+        if (this.isUpdate) {
+          this.editArticle();
+        } else {
+          this.newArticle();
+        }
+      });
+    },
+
+    handleServerValidationErrors (serverErrors) {
+      serverErrors.forEach(error => {
+        this.errors.add({ field: error.path[1], msg: error.message });
+      })
     },
 
     async newArticle() {
@@ -121,9 +137,21 @@ export default {
             body: this.article.body,
           },
         },
+        update: (store, { data: { createArticle: { article, errors } } }) => {
+          if (errors.length > 0) {
+            this.handleServerValidationErrors(errors);
+            return;
+          }
+
+          this.$toast.open({
+            message: 'Successfully created article.',
+            type: 'is-success'
+          })
+
+          this.$router.push({ name: 'InlineGqlArticle', params: { id: article.id }})
+        }
       }).then((data) => {
         console.log(data)
-        this.$router.push({ name: 'InlineGqlArticle', params: { id: data.data.createArticle.article.id }})
       }).catch((error) => {
         // Error
         console.error(error)
@@ -140,9 +168,21 @@ export default {
             body: this.article.body,
           },
         },
+        update: (store, { data: { updateArticle: { article, errors } } }) => {
+          if (errors.length > 0) {
+            this.handleServerValidationErrors(errors);
+            return;
+          }
+
+          this.$toast.open({
+            message: 'Successfully update article.',
+            type: 'is-success'
+          })
+
+          this.$router.push({ name: 'InlineGqlArticle', params: { id: article.id }})
+        }
       }).then((data) => {
         console.log(data)
-        this.$router.push({ name: 'InlineGqlArticle', params: { id: this.article.id }})
       }).catch((error) => {
         // Error
         console.error(error)
