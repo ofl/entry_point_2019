@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
 import ARTICLE_DETAIL_QUERY from '../../gqls/article.gql';
 import ADD_COMMENT_MUTATION from '../../gqls/addComment.gql';
 

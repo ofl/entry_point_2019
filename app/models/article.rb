@@ -28,7 +28,8 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  validates :title, :body, presence: true
+  validates :title, presence: true, length: { minimum: 5 }
+  validates :body, presence: true, length: { minimum: 10 }
 
   def liked_by?(user)
     self.liked_by_me = likes.by_user(user).exists?
