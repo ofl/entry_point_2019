@@ -1,5 +1,5 @@
 mutation DestroyComment($id: ID!) {
-  destroyComment(input:  { id: $id }) {
+  destroyComment(input: { id: $id }) {
     comment {
       id
     }

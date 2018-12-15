@@ -4,7 +4,7 @@ mutation CreateArticle($attributes: ArticleAttributes!) {
       id
       title
       body
-    },
+    }
     errors {
       path
       message
