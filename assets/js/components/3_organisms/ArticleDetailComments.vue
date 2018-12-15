@@ -1,5 +1,6 @@
 <template>
-  <div id="comments" class="comment-list-card">
+  <div id="comments"
+class="comment-list-card">
     <ArticleComment
       v-for="(comment, index) in comments"
       :key="commentKey(comment.id)"
@@ -9,13 +10,13 @@
 </template>
 
 <script>
-import ArticleComment from '../2_molecules/ArticleComment.vue';
+import ArticleComment from "../2_molecules/ArticleComment.vue";
 
 export default {
-  name: 'ArticleDetailComments',
+  name: "ArticleDetailComments",
 
   components: {
-    'ArticleComment': ArticleComment,
+    ArticleComment: ArticleComment
   },
 
   props: {
@@ -31,9 +32,9 @@ export default {
   methods: {
     commentKey(id) {
       return `comment-${id}`;
-    },
+    }
   }
-}
+};
 </script>
 
 <style scoped>

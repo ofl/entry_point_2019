@@ -1,54 +1,54 @@
-import Vue from 'vue'
-import ApolloClient from 'apollo-boost'
-import VueApollo from 'vue-apollo'
-import Buefy from 'buefy'
-import VeeValidate from 'vee-validate'
+import Vue from "vue";
+import ApolloClient from "apollo-boost";
+import VueApollo from "vue-apollo";
+import Buefy from "buefy";
+import VeeValidate from "vee-validate";
 
-import router from './router';
+import router from "./router";
 
-Vue.use(VueApollo)
-Vue.use(Buefy)
-Vue.use(VeeValidate, { events: ''})
+Vue.use(VueApollo);
+Vue.use(Buefy);
+Vue.use(VeeValidate, { events: "" });
 
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
-    uri: 'http://localhost:3000/graphql'
+    uri: "http://localhost:3000/graphql"
   })
-})
+});
 
 const componentsList = {
-  'main-component': require('./components/5_pages/Main.vue'),
-  'login-component': require('./components/5_pages/Login.vue'),
-  'article-list-component': require('./components/5_pages/ArticleList.vue'),
-  'article-detail-component': require('./components/5_pages/ArticleDetail.vue'),
-  'article-edit-component': require('./components/5_pages/ArticleEdit.vue'),
-  'article-new-component': require('./components/5_pages/ArticleNew.vue'),
-}
+  "main-component": require("./components/5_pages/Main.vue"),
+  "login-component": require("./components/5_pages/Login.vue"),
+  "article-list-component": require("./components/5_pages/ArticleList.vue"),
+  "article-detail-component": require("./components/5_pages/ArticleDetail.vue"),
+  "article-edit-component": require("./components/5_pages/ArticleEdit.vue"),
+  "article-new-component": require("./components/5_pages/ArticleNew.vue")
+};
 
-let vms = []
+let vms = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-  const el = document.querySelector('#app')
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.querySelector("#app");
   if (!el) {
     return;
   }
 
-  const componentName = `${el.dataset.vue}-component`
+  const componentName = `${el.dataset.vue}-component`;
   if (componentsList[componentName]) {
-    Vue.component(componentName, componentsList[componentName])
+    Vue.component(componentName, componentsList[componentName]);
   }
 
   const vm = new Vue({
-    el: '#app',
+    el: "#app",
     apolloProvider,
-    router,
+    router
   });
-  vms.push(vm)
-})
+  vms.push(vm);
+});
 
-document.addEventListener('beforeunload', () => {
+document.addEventListener("beforeunload", () => {
   vms.forEach(vm => {
-    vm.$destroy()
-  })
-  vms = []
-})
+    vm.$destroy();
+  });
+  vms = [];
+});

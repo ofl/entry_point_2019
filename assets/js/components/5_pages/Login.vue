@@ -1,27 +1,23 @@
 <template>
-  <div>
-    <AppContent
-      :user="user"
-      :flashes="flashes"
-    />
-  </div>
+  <div><AppContent :user="user"
+:flashes="flashes" /></div>
 </template>
 
 <script>
-import AppContent from '../4_templates/contents/LoginContent.vue';
+import AppContent from "../4_templates/contents/LoginContent.vue";
 
 export default {
-  name: 'Login',
+  name: "Login",
 
   components: {
-    'AppContent': AppContent,
+    AppContent: AppContent
   },
 
-  data () {
+  data() {
     return {
       user: gon.user,
-      flashes: gon.flashJson,
-    }
-  },
+      flashes: gon.flashJson
+    };
+  }
 };
 </script>

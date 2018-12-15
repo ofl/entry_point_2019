@@ -2,7 +2,10 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        <img
+          src="https://bulma.io/images/placeholders/1280x960.png"
+          alt="Placeholder image"
+        />
       </figure>
     </div>
 
@@ -10,7 +13,10 @@
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            <img
+              src="https://bulma.io/images/placeholders/96x96.png"
+              alt="Placeholder image"
+            />
           </figure>
         </div>
         <div class="media-content">
@@ -20,39 +26,35 @@
       </div>
 
       <div class="content">
-        {{ article.body }}
-        <br>
-        <time datetime="article.createdAt">{{ article.createdAt }}</time>
+        {{ article.body }} <br >
+        <time datetime="article.createdAt"> {{ article.createdAt }} </time>
       </div>
     </div>
     <footer class="card-footer">
       <a
-        @click.stop.prevent="onClickLikeBtn()"
         href="#"
         class="card-footer-item"
+        @click.stop.prevent="onClickLikeBtn()"
       >
         <span class="has-text-grey-light">
-          <b-icon
-            pack="fa"
-            icon="heart"
-            :type="likedType"
-          >
-          </b-icon>
-           {{ article.likesCount }}
+          <BIcon pack="fa"
+icon="heart" :type="likedType"
+/>
+          {{ article.likesCount }}
         </span>
       </a>
 
       <template v-if="isOwner">
-        <router-link
-          :to="{ name: 'InlineGqlArticleEdit', params: { id: article.id }}"
+        <RouterLink
+          :to="{ name: 'InlineGqlArticleEdit', params: { id: article.id } }"
           class="card-footer-item"
         >
           Edit
-        </router-link>
+        </RouterLink>
         <a
-          @click.stop.prevent="onClickDeleteBtn()"
           href="#"
           class="card-footer-item"
+          @click.stop.prevent="onClickDeleteBtn()"
         >
           Delete
         </a>
@@ -62,13 +64,13 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
-import DESTROY_ARTICLE_MUTATION from '../../gqls/destroyArticle.gql';
-import ARTICLE_INDEX_QUERY from '../../gqls/articles.gql';
+import gql from "graphql-tag";
+import DESTROY_ARTICLE_MUTATION from "../../gqls/destroyArticle.gql";
+import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 
 const ToggleLikeMutation = gql`
-  mutation articleToggleLike($id:ID!) {
-    articleToggleLike(input: {id:$id}) {
+  mutation articleToggleLike($id: ID!) {
+    articleToggleLike(input: { id: $id }) {
       article {
         id
         likesCount
@@ -79,7 +81,7 @@ const ToggleLikeMutation = gql`
 `;
 
 export default {
-  name: 'InlineGqlArticleDetailCard',
+  name: "InlineGqlArticleDetailCard",
 
   props: {
     article: {
@@ -91,72 +93,80 @@ export default {
   },
 
   computed: {
-    isLoggedIn () {
-      return !!this.currentUser
+    isLoggedIn() {
+      return !!this.currentUser;
     },
-    isOwner () {
+    isOwner() {
       if (!this.isLoggedIn) {
         return false;
       }
       return parseInt(this.article.user.id, 10) == this.currentUser.id;
     },
-    likedType () {
-      return this.article.likedByMe ? 'is-primary' : null;
+    likedType() {
+      return this.article.likedByMe ? "is-primary" : null;
     }
   },
 
   methods: {
-    onClickDeleteBtn () {
+    onClickDeleteBtn() {
       this.$dialog.confirm({
-        message: 'Are you sure?',
+        message: "Are you sure?",
         onConfirm: () => this.destroyArticle()
-      })
+      });
     },
-    onClickLikeBtn () {
+    onClickLikeBtn() {
       if (!this.isLoggedIn) {
-        this.$dialog.alert('Please login!')
+        this.$dialog.alert("Please login!");
         return;
       }
       this.toggleLike();
     },
 
-    async toggleLike () {
-      await this.$apollo.mutate({
-        mutation: ToggleLikeMutation,
-        variables: {
-          id: this.article.id
-        },
-      }).then((data) => {
-        // Result
-        const article = data.data.articleToggleLike.article;
-        // this.updateLikeStatus(article.likesCount, article.likedByMe);
-      }).catch((error) => {
-        // Error
-        console.error(error);
-      })
+    async toggleLike() {
+      await this.$apollo
+        .mutate({
+          mutation: ToggleLikeMutation,
+          variables: {
+            id: this.article.id
+          }
+        })
+        .then(data => {
+          // Result
+          const article = data.data.articleToggleLike.article;
+          // this.updateLikeStatus(article.likesCount, article.likedByMe);
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
     },
 
-    async destroyArticle () {
-      await this.$apollo.mutate({
-        mutation: DESTROY_ARTICLE_MUTATION,
-        variables: {
-          id: this.article.id
-        },
-        update: (store, { data: { destroyArticle } }) => {
-          const data = store.readQuery({ query: ARTICLE_INDEX_QUERY });
-          const destroydArticleId = parseInt(destroyArticle.article.id, 10)
-          data.articles = data.articles.filter(article => parseInt(article.id, 10) !== destroydArticleId);
+    async destroyArticle() {
+      await this.$apollo
+        .mutate({
+          mutation: DESTROY_ARTICLE_MUTATION,
+          variables: {
+            id: this.article.id
+          },
+          update: (store, { data: { destroyArticle } }) => {
+            const data = store.readQuery({ query: ARTICLE_INDEX_QUERY });
+            const destroydArticleId = parseInt(destroyArticle.article.id, 10);
+            data.articles = data.articles.filter(
+              article => parseInt(article.id, 10) !== destroydArticleId
+            );
 
-          store.writeQuery({ query: ARTICLE_INDEX_QUERY, data });
-        }
-      }).then((data) => {
-        // 一覧にリダイレクトする
-        // this.$router.push({ path: '/inline_gql_articles' })
-      }).catch((error) => {
-        // Error
-        console.error(error);
-      })
-    },
+            store.writeQuery({ query: ARTICLE_INDEX_QUERY, data });
+          }
+        })
+        .then(data => {
+          // 一覧にリダイレクトする
+          // this.$router.push({ path: '/inline_gql_articles' })
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
+    }
   }
-}
+};
 </script>

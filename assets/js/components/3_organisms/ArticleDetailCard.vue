@@ -2,7 +2,10 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        <img
+          src="https://bulma.io/images/placeholders/1280x960.png"
+          alt="Placeholder image"
+        />
       </figure>
     </div>
 
@@ -10,7 +13,10 @@
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            <img
+              src="https://bulma.io/images/placeholders/96x96.png"
+              alt="Placeholder image"
+            />
           </figure>
         </div>
         <div class="media-content">
@@ -20,40 +26,36 @@
       </div>
 
       <div class="content">
-        {{ article.body }}
-        <br>
-        <time datetime="article.createdAt">{{ article.createdAt }}</time>
+        {{ article.body }} <br >
+        <time datetime="article.createdAt"> {{ article.createdAt }} </time>
       </div>
     </div>
     <footer class="card-footer">
       <a
-        @click.stop.prevent="onClickLikeBtn()"
         href="#"
         class="card-footer-item"
+        @click.stop.prevent="onClickLikeBtn()"
       >
         <span class="has-text-grey-light">
-          <b-icon
-            pack="fa"
-            icon="heart"
-            :type="likedType"
-          >
-          </b-icon>
-           {{ likesCount }}
+          <BIcon pack="fa"
+icon="heart" :type="likedType"
+/>
+          {{ likesCount }}
         </span>
       </a>
 
       <template v-if="isOwner">
         <a
-          @click.stop.prevent="onClickEditBtn()"
           href="#"
           class="card-footer-item"
+          @click.stop.prevent="onClickEditBtn()"
         >
           Edit
         </a>
         <a
-          @click.stop.prevent="onClickDeleteBtn()"
           href="#"
           class="card-footer-item"
+          @click.stop.prevent="onClickDeleteBtn()"
         >
           Delete
         </a>
@@ -63,11 +65,11 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 const ToggleLikeMutation = gql`
-  mutation articleToggleLike($id:ID!) {
-    articleToggleLike(input: {id:$id}) {
+  mutation articleToggleLike($id: ID!) {
+    articleToggleLike(input: { id: $id }) {
       article {
         id
         likesCount
@@ -78,7 +80,7 @@ const ToggleLikeMutation = gql`
 `;
 
 export default {
-  name: 'ArticleDetailCard',
+  name: "ArticleDetailCard",
 
   props: {
     article: {
@@ -89,61 +91,64 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       likesCount: 0,
-      likedByMe: false,
-    }
+      likedByMe: false
+    };
   },
 
   computed: {
-    isLoggedIn () {
-      return !!this.currentUser
+    isLoggedIn() {
+      return !!this.currentUser;
     },
-    isOwner () {
+    isOwner() {
       if (!this.isLoggedIn) {
         return false;
       }
       return parseInt(this.article.user.id, 10) == this.currentUser.id;
     },
-    likedType () {
-      return this.likedByMe ? 'is-primary' : null;
+    likedType() {
+      return this.likedByMe ? "is-primary" : null;
     }
   },
 
-  mounted () {
+  mounted() {
     this.updateLikeStatus(this.article.likes_count, this.article.liked_by_me);
   },
 
   methods: {
-    onClickEditBtn () {
+    onClickEditBtn() {
       location.pathname = `/vue_articles/${this.article.id}/edit`;
     },
-    onClickDeleteBtn () {
+    onClickDeleteBtn() {
       location.pathname = `/vue_articles/${this.article.id}/edit`;
     },
-    onClickLikeBtn () {
+    onClickLikeBtn() {
       if (!this.isLoggedIn) {
-        this.$dialog.alert('Please login!')
+        this.$dialog.alert("Please login!");
         return;
       }
       this.toggleLike();
     },
 
-    async toggleLike () {
-      await this.$apollo.mutate({
-        mutation: ToggleLikeMutation,
-        variables: {
-          id: this.article.id
-        },
-      }).then((data) => {
-        // Result
-        const article = data.data.articleToggleLike.article;
-        this.updateLikeStatus(article.likesCount, article.likedByMe);
-      }).catch((error) => {
-        // Error
-        console.error(error);
-      })
+    async toggleLike() {
+      await this.$apollo
+        .mutate({
+          mutation: ToggleLikeMutation,
+          variables: {
+            id: this.article.id
+          }
+        })
+        .then(data => {
+          // Result
+          const article = data.data.articleToggleLike.article;
+          this.updateLikeStatus(article.likesCount, article.likedByMe);
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
     },
 
     updateLikeStatus(likesCount, likedByMe) {
@@ -151,5 +156,5 @@ export default {
       this.likedByMe = likedByMe;
     }
   }
-}
+};
 </script>

@@ -1,30 +1,29 @@
 <template>
-  <transition-group
-    tag="div"
-    id="comments"
-    class="comment-list-card"
-  >
+  <TransitionGroup
+id="comments" tag="div"
+class="comment-list-card"
+>
     <ArticleComment
       v-for="(comment, index) in comments"
       :key="commentKey(comment.id)"
       :comment="comment"
-      :currentUser="currentUser"
+      :current-user="currentUser"
       @delete-comment="deleteComment"
     />
-  </transition-group>
+  </TransitionGroup>
 </template>
 
 <script>
-import ArticleComment from '../2_molecules/InlineGqlArticleComment.vue';
+import ArticleComment from "../2_molecules/InlineGqlArticleComment.vue";
 
-import ARTICLE_DETAIL_QUERY from '../../gqls/article.gql';
-import DELETE_COMMENT_MUTATION from '../../gqls/destroyComment.gql';
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
+import DELETE_COMMENT_MUTATION from "../../gqls/destroyComment.gql";
 
 export default {
-  name: 'InlineGqlArticleDetailComments',
+  name: "InlineGqlArticleDetailComments",
 
   components: {
-    'ArticleComment': ArticleComment,
+    ArticleComment: ArticleComment
   },
 
   props: {
@@ -49,29 +48,48 @@ export default {
     },
 
     async deleteComment(id) {
-      await this.$apollo.mutate({
-        mutation: DELETE_COMMENT_MUTATION,
-        variables: {
-          id: id,
-        },
-        update: (store, { data: { destroyComment: { comment, article, errors } } }) => {
-          const data = store.readQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId} });
+      await this.$apollo
+        .mutate({
+          mutation: DELETE_COMMENT_MUTATION,
+          variables: {
+            id: id
+          },
+          update: (
+            store,
+            {
+              data: {
+                destroyComment: { comment, article, errors }
+              }
+            }
+          ) => {
+            const data = store.readQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId }
+            });
 
-          const destroyedCommentId = parseInt(comment.id, 10)
-          data.article.comments = data.article.comments.filter(cmnt => parseInt(cmnt.id, 10) !== destroyedCommentId);
-          data.article.commentsCount = article.commentsCount
+            const destroyedCommentId = parseInt(comment.id, 10);
+            data.article.comments = data.article.comments.filter(
+              cmnt => parseInt(cmnt.id, 10) !== destroyedCommentId
+            );
+            data.article.commentsCount = article.commentsCount;
 
-          store.writeQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId}, data });
-        }
-      }).then((data) => {
-        console.log(data)
-      }).catch((error) => {
-        // Error
-        console.error(error)
-      })
-    },
+            store.writeQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId },
+              data
+            });
+          }
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
+    }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -84,14 +102,15 @@ export default {
 }
 
 .v-enter-active {
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
 .v-leave-active {
-  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.v-enter, .v-leave-to {
+.v-enter,
+.v-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }

@@ -1,30 +1,21 @@
 <template>
   <form
+    ref="form"
     v-model="valid"
     :action="requestPath"
-    ref="form"
     accept-charset="UTF-8"
     method="POST"
     lazy-validation
   >
     <input
-      type="hidden"
-      name="utf8"
-      value="✓"
-    >
+type="hidden" name="utf8" value="✓" />
     <input
-      type="hidden"
-      name="authenticity_token"
-      :value="csrfToken"
-    >
+type="hidden" name="authenticity_token" :value="csrfToken" />
     <input
-      type="hidden"
-      name="_method"
-      :value="requestMethod"
-    />
+type="hidden" name="_method" :value="requestMethod" />
 
-    <b-field label="Title">
-      <b-input
+    <BField label="Title">
+      <BInput
         v-model="article.title"
         :rules="titleRules"
         :counter="100"
@@ -32,10 +23,10 @@
         placeholder="Title ..."
         required
       />
-    </b-field>
+    </BField>
 
-    <b-field label="Body">
-      <b-input
+    <BField label="Body">
+      <BInput
         v-model="article.body"
         :rules="bodyRules"
         name="article[body]"
@@ -43,34 +34,31 @@
         placeholder="Body ..."
         required
       />
-    </b-field>
+    </BField>
 
-    <b-field>
+    <BField>
       <p class="control">
         <button
           class="button field is-primary"
           :disabled="!valid"
           @click="submit"
         >
-          <b-icon icon="pencil"></b-icon>
+          <BIcon icon="pencil" />
           <span>Submit</span>
         </button>
 
-        <button
-          class="button field is-info"
-          @click="clear"
-        >
-          <b-icon icon="eraser"></b-icon>
+        <button class="button field is-info" @click="clear">
+          <BIcon icon="eraser" />
           <span>Clear</span>
         </button>
       </p>
-    </b-field>
+    </BField>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'ArticleEditForm',
+  name: "ArticleEditForm",
 
   props: {
     article: {
@@ -78,48 +66,52 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       valid: true,
 
-      title: '',
+      title: "",
       titleRules: [
-        v => !!v || 'Title is required',
-        v => (v && v.length <= 100) || 'Title must be less than 100 characters'
+        v => !!v || "Title is required",
+        v => (v && v.length <= 100) || "Title must be less than 100 characters"
       ],
 
-      body: '',
+      body: "",
       bodyRules: [
-        v => !!v || 'Body is required',
-        v => (v && v.length <= 1000) || 'Body must be less than 1000 characters'
-      ],
-    }
+        v => !!v || "Body is required",
+        v => (v && v.length <= 1000) || "Body must be less than 1000 characters"
+      ]
+    };
   },
 
   computed: {
-    csrfToken () {
-      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    csrfToken() {
+      return document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
     },
-    requestPath () {
-      return this.isUpdate ? `/vue_articles/${this.article.id}` : '/vue_articles';
+    requestPath() {
+      return this.isUpdate
+        ? `/vue_articles/${this.article.id}`
+        : "/vue_articles";
     },
-    requestMethod () {
-      return this.isUpdate ? 'put' : 'post';
+    requestMethod() {
+      return this.isUpdate ? "put" : "post";
     },
-    isUpdate () {
+    isUpdate() {
       return !!this.article.id;
-    },
+    }
   },
 
   methods: {
-    submit () {
+    submit() {
       if (this.$refs.form.validate()) {
         this.$refs.form.$el.submit();
       }
     },
-    clear () {
-      this.$refs.form.reset()
-    },
-  },
-}
+    clear() {
+      this.$refs.form.reset();
+    }
+  }
+};
 </script>

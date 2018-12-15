@@ -1,8 +1,17 @@
 <template>
-  <nav class="navbar is-link is-fixed-top" role="navigation" aria-label="main navigation">
+  <nav
+    class="navbar is-link is-fixed-top"
+    role="navigation"
+    aria-label="main navigation"
+  >
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      <a class="navbar-item"
+href="/">
+        <img
+          src="https://bulma.io/images/bulma-logo.png"
+          width="112"
+          height="28"
+        />
       </a>
       <a
         role="button"
@@ -13,9 +22,8 @@
         data-target="navbarExampleTransparentExample"
         @click="toggleMenu()"
       >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span aria-hidden="true" /> <span aria-hidden="true" />
+        <span aria-hidden="true" />
       </a>
     </div>
 
@@ -25,49 +33,34 @@
       :class="{ 'is-active': isActive }"
     >
       <div class="navbar-end">
-        <a
-          class="navbar-item"
-          href="#"
-          @click.stop.prevent="onClickMenu('/')"
-        >
-          <span class="icon">
-            <i class="fas fa-home"></i>
-          </span>
+        <a class="navbar-item"
+href="#" @click.stop.prevent="onClickMenu('/')">
+          <span class="icon"> <i class="fas fa-home" />
+</span>
           <span>Home</span>
         </a>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Articles
-          </a>
+          <a class="navbar-link"> Articles </a>
 
           <div class="navbar-dropdown">
-            <router-link
-              to="/inline_gql_articles"
-              class="navbar-item"
-            >
+            <RouterLink to="/inline_gql_articles" class="navbar-item">
               <span class="icon">
-                <i class="fas fa-file-alt"></i>
-              </span>
+<i class="fas fa-file-alt" /> </span>
               <span>Articles(Inline+GQL)</span>
-            </router-link>
-            <router-link
-              to="/spa_articles"
-              class="navbar-item"
-            >
+            </RouterLink>
+            <RouterLink to="/spa_articles" class="navbar-item">
               <span class="icon">
-                <i class="fas fa-file-alt"></i>
-              </span>
+<i class="fas fa-file-alt" /> </span>
               <span>Articles(GQL)</span>
-            </router-link>
+            </RouterLink>
             <a
               class="navbar-item"
               href="/vue_articles"
               @click.stop.prevent="onClickMenu('/vue_articles')"
             >
-              <span class="icon">
-                <i class="fas fa-file-alt"></i>
-              </span>
+              <span class="icon"> <i class="fas fa-file-alt" />
+</span>
               <span>Articles(Inline)</span>
             </a>
             <a
@@ -75,54 +68,48 @@
               href="/articles"
               @click.stop.prevent="onClickMenu('/articles')"
             >
-              <span class="icon">
-                <i class="fas fa-file-alt"></i>
-              </span>
+              <span class="icon"> <i class="fas fa-file-alt" />
+</span>
               <span>Articles(Rails)</span>
             </a>
           </div>
         </div>
 
         <a
-          v-if=!isLoggedIn
+          v-if="!isLoggedIn"
           class="navbar-item"
           href="#"
           @click.stop.prevent="onClickMenu('/login')"
         >
-          <span class="icon">
-            <i class="fas fa-sign-in-alt"></i>
-          </span>
+          <span class="icon"> <i class="fas fa-sign-in-alt" />
+</span>
           <span>Login</span>
         </a>
         <a
-          v-if=isLoggedIn
+          v-if="isLoggedIn"
           class="navbar-item"
           href="#"
           @click.stop.prevent="confirmLogout()"
         >
-          <span class="icon">
-            <i class="fas fa-sign-out-alt"></i>
-          </span>
+          <span class="icon"> <i class="fas fa-sign-out-alt" />
+</span>
           <span>Logout</span>
         </a>
 
-        <DeleteForm
-          requestPath="/logout"
-          ref="deleteSession"
-        />
+        <DeleteForm ref="deleteSession" request-path="/logout" />
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import DeleteForm from '../2_molecules/DeleteForm.vue';
+import DeleteForm from "../2_molecules/DeleteForm.vue";
 
 export default {
-  name: 'TheNavigation',
+  name: "TheNavigation",
 
   components: {
-    'DeleteForm': DeleteForm,
+    DeleteForm: DeleteForm
   },
 
   props: {
@@ -131,34 +118,34 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      isActive: false,
-    }
+      isActive: false
+    };
   },
 
   computed: {
-    isLoggedIn () {
-      return !!this.currentUser
+    isLoggedIn() {
+      return !!this.currentUser;
     }
   },
 
   methods: {
-    onClickMenu (path) {
+    onClickMenu(path) {
       location.href = path;
     },
-    toggleMenu () {
+    toggleMenu() {
       this.isActive = !this.isActive;
     },
-    confirmLogout () {
+    confirmLogout() {
       this.$dialog.confirm({
-        message: 'Are you sure?',
+        message: "Are you sure?",
         onConfirm: () => this.logout()
-      })
+      });
     },
-    logout () {
-      this.$refs.deleteSession.$refs.form.submit()
-    },
+    logout() {
+      this.$refs.deleteSession.$refs.form.submit();
+    }
   }
-}
+};
 </script>

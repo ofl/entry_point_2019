@@ -1,76 +1,70 @@
 <template>
   <form
-    v-model="valid"
     ref="form"
+    v-model="valid"
     accept-charset="UTF-8"
     method="POST"
     lazy-validation
   >
-    <b-field
+    <BField
       label="Title"
-      :type="{'is-danger': errors.has('title')}"
+      :type="{ 'is-danger': errors.has('title') }"
       :message="errors.first('title')"
     >
-      <b-input
+      <BInput
         v-model="article.title"
+        v-validate="'required'"
         :counter="100"
         name="title"
         placeholder="Title ..."
-        v-validate="'required'"
       />
-    </b-field>
+    </BField>
 
-    <b-field
+    <BField
       label="Body"
-      :type="{'is-danger': errors.has('body')}"
+      :type="{ 'is-danger': errors.has('body') }"
       :message="errors.first('body')"
     >
-      <b-input
+      <BInput
         v-model="article.body"
+        v-validate="'required'"
         name="body"
         type="textarea"
         placeholder="Body ..."
-        v-validate="'required'"
       />
-    </b-field>
+    </BField>
 
-    <b-field>
+    <BField>
       <p class="control">
         <button
           class="button field is-primary"
           :disabled="!valid"
           @click.stop.prevent="handleClickSubmitBtn"
         >
-          <b-icon icon="pencil"></b-icon>
+          <BIcon icon="pencil" />
           <span>Submit</span>
         </button>
 
-        <button
-          class="button field is-info"
-          @click="clear"
-        >
-          <b-icon icon="eraser"></b-icon>
+        <button class="button field is-info" @click="clear">
+          <BIcon icon="eraser" />
           <span>Clear</span>
         </button>
 
-        <button
-          class="button field is-info"
-          @click.stop.prevent="back"
-        >
-          <b-icon icon="backspace"></b-icon>
+        <button class="button field is-info" @click.stop.prevent="back">
+          <BIcon icon="backspace" />
           <span>Back</span>
         </button>
       </p>
-    </b-field>
+    </BField>
   </form>
 </template>
 
 <script>
-import CREATE_ARTICLE_MUTATION from '../../gqls/createArticle.gql';
-import UPDATE_ARTICLE_MUTATION from '../../gqls/updateArticle.gql';
+import CREATE_ARTICLE_MUTATION from "../../gqls/createArticle.gql";
+import UPDATE_ARTICLE_MUTATION from "../../gqls/updateArticle.gql";
 
 export default {
-  name: 'InlineGqlArticleEditForm',
+  name: "InlineGqlArticleEditForm",
 
   props: {
     article: {
@@ -79,39 +73,39 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       valid: true,
 
       article: {
         id: null,
-        title: '',
-        body: '',
+        title: "",
+        body: ""
       }
-    }
+    };
   },
 
   computed: {
-    isUpdate () {
+    isUpdate() {
       return !!this.article.id;
     }
   },
 
   methods: {
-    clear () {
-      this.article.title = ''
-      this.article.body = ''
-      this.$refs.form.reset()
+    clear() {
+      this.article.title = "";
+      this.article.body = "";
+      this.$refs.form.reset();
     },
 
-    back () {
-      this.$router.go(-1)
+    back() {
+      this.$router.go(-1);
     },
 
-    handleClickSubmitBtn () {
-      this.$validator.validateAll().then((result) => {
+    handleClickSubmitBtn() {
+      this.$validator.validateAll().then(result => {
         if (!result) {
-          return
+          return;
         }
 
         if (this.isUpdate) {
@@ -122,72 +116,98 @@ export default {
       });
     },
 
-    handleServerValidationErrors (serverErrors) {
+    handleServerValidationErrors(serverErrors) {
       serverErrors.forEach(error => {
         this.errors.add({ field: error.path[1], msg: error.message });
-      })
+      });
     },
 
     async newArticle() {
-      await this.$apollo.mutate({
-        mutation: CREATE_ARTICLE_MUTATION,
-        variables: {
-          attributes: {
-            title: this.article.title,
-            body: this.article.body,
+      await this.$apollo
+        .mutate({
+          mutation: CREATE_ARTICLE_MUTATION,
+          variables: {
+            attributes: {
+              title: this.article.title,
+              body: this.article.body
+            }
           },
-        },
-        update: (store, { data: { createArticle: { article, errors } } }) => {
-          if (errors.length > 0) {
-            this.handleServerValidationErrors(errors);
-            return;
+          update: (
+            store,
+            {
+              data: {
+                createArticle: { article, errors }
+              }
+            }
+          ) => {
+            if (errors.length > 0) {
+              this.handleServerValidationErrors(errors);
+              return;
+            }
+
+            this.$toast.open({
+              message: "Successfully created article.",
+              type: "is-success"
+            });
+
+            this.$router.push({
+              name: "InlineGqlArticle",
+              params: { id: article.id }
+            });
           }
-
-          this.$toast.open({
-            message: 'Successfully created article.',
-            type: 'is-success'
-          })
-
-          this.$router.push({ name: 'InlineGqlArticle', params: { id: article.id }})
-        }
-      }).then((data) => {
-        console.log(data)
-      }).catch((error) => {
-        // Error
-        console.error(error)
-      })
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
     },
 
     async editArticle() {
-      await this.$apollo.mutate({
-        mutation: UPDATE_ARTICLE_MUTATION,
-        variables: {
-          id: this.article.id,
-          attributes: {
-            title: this.article.title,
-            body: this.article.body,
+      await this.$apollo
+        .mutate({
+          mutation: UPDATE_ARTICLE_MUTATION,
+          variables: {
+            id: this.article.id,
+            attributes: {
+              title: this.article.title,
+              body: this.article.body
+            }
           },
-        },
-        update: (store, { data: { updateArticle: { article, errors } } }) => {
-          if (errors.length > 0) {
-            this.handleServerValidationErrors(errors);
-            return;
+          update: (
+            store,
+            {
+              data: {
+                updateArticle: { article, errors }
+              }
+            }
+          ) => {
+            if (errors.length > 0) {
+              this.handleServerValidationErrors(errors);
+              return;
+            }
+
+            this.$toast.open({
+              message: "Successfully update article.",
+              type: "is-success"
+            });
+
+            this.$router.push({
+              name: "InlineGqlArticle",
+              params: { id: article.id }
+            });
           }
-
-          this.$toast.open({
-            message: 'Successfully update article.',
-            type: 'is-success'
-          })
-
-          this.$router.push({ name: 'InlineGqlArticle', params: { id: article.id }})
-        }
-      }).then((data) => {
-        console.log(data)
-      }).catch((error) => {
-        // Error
-        console.error(error)
-      })
-    },
-  },
-}
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
+    }
+  }
+};
 </script>

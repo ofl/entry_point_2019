@@ -3,36 +3,34 @@
     <TheFlashes :flashes="flashes" />
 
     <div class="container">
-      <ArticleDetailCard
-        :article="article"
-        :currentUser="currentUser"
-      />
+      <ArticleDetailCard :article="article"
+:currentUser="currentUser" />
       <ArticleDetailComments
         :comments="article.comments"
-        :currentUser="currentUser"
+        :current-user="currentUser"
       />
       <ArticleDetailCommentForm
-        :currentUser="currentUser"
-        :articleId="article.id"
+        :current-user="currentUser"
+        :article-id="article.id"
       />
     </div>
   </section>
 </template>
 
 <script>
-import ArticleDetailCard from '../../3_organisms/ArticleDetailCard.vue';
-import ArticleDetailComments from '../../3_organisms/ArticleDetailComments.vue';
-import ArticleDetailCommentForm from '../../3_organisms/ArticleDetailCommentForm.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
+import ArticleDetailCard from "../../3_organisms/ArticleDetailCard.vue";
+import ArticleDetailComments from "../../3_organisms/ArticleDetailComments.vue";
+import ArticleDetailCommentForm from "../../3_organisms/ArticleDetailCommentForm.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
 
 export default {
-  name: 'ArticleDetailContent',
+  name: "ArticleDetailContent",
 
   components: {
-    'ArticleDetailCard': ArticleDetailCard,
-    'ArticleDetailComments': ArticleDetailComments,
-    'ArticleDetailCommentForm': ArticleDetailCommentForm,
-    'TheFlashes': TheFlashes,
+    ArticleDetailCard: ArticleDetailCard,
+    ArticleDetailComments: ArticleDetailComments,
+    ArticleDetailCommentForm: ArticleDetailCommentForm,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -46,5 +44,5 @@ export default {
       type: Object
     }
   }
-}
+};
 </script>

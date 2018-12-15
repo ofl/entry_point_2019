@@ -6,38 +6,38 @@
       <ArticleDetailCard
         v-if="article"
         :article="article"
-        :currentUser="currentUser"
+        :current-user="currentUser"
       />
       <ArticleDetailComments
         v-if="article"
         :comments="article.comments"
-        :currentUser="currentUser"
-        :articleId="articleId"
+        :current-user="currentUser"
+        :article-id="articleId"
       />
       <ArticleDetailCommentForm
         v-if="isLoggedIn"
-        :currentUser="currentUser"
-        :articleId="articleId"
+        :current-user="currentUser"
+        :article-id="articleId"
       />
     </div>
   </section>
 </template>
 
 <script>
-import ArticleDetailCard from '../../3_organisms/InlineGqlArticleDetailCard.vue';
-import ArticleDetailComments from '../../3_organisms/InlineGqlArticleDetailComments.vue';
-import ArticleDetailCommentForm from '../../3_organisms/ArticleDetailCommentForm.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
-import ARTICLE_DETAIL_QUERY from '../../../gqls/article.gql';
+import ArticleDetailCard from "../../3_organisms/InlineGqlArticleDetailCard.vue";
+import ArticleDetailComments from "../../3_organisms/InlineGqlArticleDetailComments.vue";
+import ArticleDetailCommentForm from "../../3_organisms/ArticleDetailCommentForm.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import ARTICLE_DETAIL_QUERY from "../../../gqls/article.gql";
 
 export default {
-  name: 'InlineGqlArticleDetailContent',
+  name: "InlineGqlArticleDetailContent",
 
   components: {
-    'ArticleDetailCard': ArticleDetailCard,
-    'ArticleDetailComments': ArticleDetailComments,
-    'ArticleDetailCommentForm': ArticleDetailCommentForm,
-    'TheFlashes': TheFlashes,
+    ArticleDetailCard: ArticleDetailCard,
+    ArticleDetailComments: ArticleDetailComments,
+    ArticleDetailCommentForm: ArticleDetailCommentForm,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -53,19 +53,19 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      article: gon.article,
-    }
+      article: gon.article
+    };
   },
 
   computed: {
-    isLoggedIn () {
-      return !!this.currentUser
+    isLoggedIn() {
+      return !!this.currentUser;
     },
-    hasInlineData () {
+    hasInlineData() {
       return !!gon.article;
-    },
+    }
   },
 
   apollo: {
@@ -73,16 +73,16 @@ export default {
       query: ARTICLE_DETAIL_QUERY,
       variables() {
         return {
-          id: this.articleId,
-        }
+          id: this.articleId
+        };
       },
       skip() {
         return this.hasInlineData;
-      },
+      }
     }
   },
 
-  mounted () {
+  mounted() {
     if (this.hasInlineData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: ARTICLE_DETAIL_QUERY,
@@ -92,6 +92,6 @@ export default {
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.article = null;
     }
-  },
-}
+  }
+};
 </script>

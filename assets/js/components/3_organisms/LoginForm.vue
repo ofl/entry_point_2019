@@ -1,14 +1,14 @@
 <template>
   <form
+    ref="form"
     v-model="valid"
     action="/login"
-    ref="form"
     accept-charset="UTF-8"
     method="POST"
     lazy-validation
   >
-    <b-field>
-      <b-input
+    <BField>
+      <BInput
         v-model="user.email"
         :rules="emailRules"
         :counter="100"
@@ -19,10 +19,10 @@
         required
         autofocused
       />
-    </b-field>
+    </BField>
 
-    <b-field>
-      <b-input
+    <BField>
+      <BInput
         v-model="user.password"
         :rules="passwordRules"
         size="is-large"
@@ -31,38 +31,28 @@
         placeholder="Your Password"
         required
       />
-    </b-field>
+    </BField>
 
-    <b-field>
+    <BField>
       <label class="checkbox">
-        <input
-          type="checkbox"
-          name="remember_me"
-        >
-        Remember Me
+        <input type="checkbox"
+name="remember_me"
+/> Remember Me
       </label>
-    </b-field>
+    </BField>
 
     <input
-      type="hidden"
-      name="utf8"
-      value="✓"
-    >
+type="hidden" name="utf8" value="✓" />
     <input
-      type="hidden"
-      name="authenticity_token"
-      :value="csrfToken"
-    >
+type="hidden" name="authenticity_token" :value="csrfToken" />
 
-    <button class="button is-block is-info is-large is-fullwidth">
-      Login
-    </button>
+    <button class="button is-block is-info is-large is-fullwidth">Login</button>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'LoginForm',
+  name: "LoginForm",
 
   props: {
     user: {
@@ -70,39 +60,42 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       valid: true,
 
-      email: '',
+      email: "",
       emailRules: [
-        v => !!v || 'Email is required',
-        v => (v && v.length <= 100) || 'Email must be less than 100 characters'
+        v => !!v || "Email is required",
+        v => (v && v.length <= 100) || "Email must be less than 100 characters"
       ],
 
-      password: '',
+      password: "",
       passwordRules: [
-        v => !!v || 'Password is required',
-        v => (v && v.length <= 100) || 'Password must be less than 100 characters'
-      ],
-    }
+        v => !!v || "Password is required",
+        v =>
+          (v && v.length <= 100) || "Password must be less than 100 characters"
+      ]
+    };
   },
 
   computed: {
-    csrfToken () {
-      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    },
+    csrfToken() {
+      return document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+    }
   },
 
   methods: {
-    submit () {
+    submit() {
       if (this.$refs.form.validate()) {
         this.$refs.form.$el.submit();
       }
     },
-    clear () {
-      this.$refs.form.reset()
-    },
-  },
-}
+    clear() {
+      this.$refs.form.reset();
+    }
+  }
+};
 </script>

@@ -3,24 +3,22 @@
     <TheFlashes :flashes="flashes" />
 
     <div class="container">
-      <ArticleNewForm
-        v-if="article"
-        :article="article"
-      />
+      <ArticleNewForm v-if="article"
+:article="article" />
     </div>
   </section>
 </template>
 
 <script>
-import ArticleNewForm from '../../3_organisms/InlineGqlArticleEditForm.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
+import ArticleNewForm from "../../3_organisms/InlineGqlArticleEditForm.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
 
 export default {
-  name: 'InlineGqlArticleNewContent',
+  name: "InlineGqlArticleNewContent",
 
   components: {
-    'ArticleNewForm': ArticleNewForm,
-    'TheFlashes': TheFlashes,
+    ArticleNewForm: ArticleNewForm,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -32,31 +30,31 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      article: gon.article,
-    }
+      article: gon.article
+    };
   },
 
   computed: {
-    isLoggedIn () {
-      return !!this.currentUser
+    isLoggedIn() {
+      return !!this.currentUser;
     },
-    hasInlineData () {
+    hasInlineData() {
       return !!gon.article;
-    },
+    }
   },
 
-  mounted () {
+  mounted() {
     if (this.hasInlineData) {
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.article = null;
     } else {
       this.article = {
-        title: '',
-        body: '',
-      }
+        title: "",
+        body: ""
+      };
     }
-  },
-}
+  }
+};
 </script>

@@ -2,35 +2,34 @@
   <article class="media comment-form">
     <figure class="media-left">
       <p class="image is-64x64">
-        <img src="https://bulma.io/images/placeholders/128x128.png">
+        <img src="https://bulma.io/images/placeholders/128x128.png" >
       </p>
     </figure>
 
     <div class="media-content">
       <form
-        v-model="valid"
         ref="form"
+        v-model="valid"
         accept-charset="UTF-8"
         method="POST"
         lazy-validation
       >
-
         <div class="field">
           <p class="control">
-            <b-field
+            <BField
               label="Body"
-              :type="{'is-danger': errors.has('body')}"
+              :type="{ 'is-danger': errors.has('body') }"
               :message="errors.first('body')"
             >
-              <b-input
+              <BInput
                 v-model="body"
+                v-validate="'required'"
                 label="Body"
                 name="body"
                 type="textarea"
                 placeholder="Add a comment..."
-                v-validate="'required'"
               />
-            </b-field>
+            </BField>
           </p>
         </div>
 
@@ -41,15 +40,13 @@
               :disabled="!valid"
               @click.stop.prevent="handleSubmit"
             >
-              <b-icon icon="pencil"></b-icon>
+              <BIcon icon="pencil" />
               <span>Submit</span>
             </button>
 
-            <button
-              class="button field is-info"
-              @click.stop.prevent="clear"
-            >
-              <b-icon icon="eraser"></b-icon>
+            <button class="button field is-info"
+@click.stop.prevent="clear">
+              <BIcon icon="eraser" />
               <span>Clear</span>
             </button>
           </p>
@@ -60,11 +57,11 @@
 </template>
 
 <script>
-import ARTICLE_DETAIL_QUERY from '../../gqls/article.gql';
-import ADD_COMMENT_MUTATION from '../../gqls/addComment.gql';
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
+import ADD_COMMENT_MUTATION from "../../gqls/addComment.gql";
 
 export default {
-  name: 'ArticleDetailCommentForm',
+  name: "ArticleDetailCommentForm",
 
   props: {
     articleId: {
@@ -72,71 +69,81 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       valid: true,
-      body: '',
-      currentUser: null,
-    }
+      body: "",
+      currentUser: null
+    };
   },
 
   methods: {
-    clear () {
-      this.body = ''
-      this.$refs.form.reset()
+    clear() {
+      this.body = "";
+      this.$refs.form.reset();
     },
 
-    handleSubmit () {
-      this.$validator.validateAll().then((result) => {
+    handleSubmit() {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.addComment();
           return;
         }
 
         this.$toast.open({
-          message: 'Form is not valid! Please check the fields.',
-          type: 'is-danger',
-          position: 'is-bottom'
-        })
+          message: "Form is not valid! Please check the fields.",
+          type: "is-danger",
+          position: "is-bottom"
+        });
       });
     },
 
-    handleServerValidationErrors (serverErrors) {
+    handleServerValidationErrors(serverErrors) {
       serverErrors.forEach(error => {
         this.errors.add({ field: error.path[1], msg: error.message });
-      })
+      });
     },
 
     async addComment() {
-      await this.$apollo.mutate({
-        mutation: ADD_COMMENT_MUTATION,
-        variables: {
-          articleId: this.articleId,
-          attributes: {
-            body: this.body,
+      await this.$apollo
+        .mutate({
+          mutation: ADD_COMMENT_MUTATION,
+          variables: {
+            articleId: this.articleId,
+            attributes: {
+              body: this.body
+            }
           },
-        },
-        update: (store, { data: { createComment } }) => {
-          if (createComment.errors.length > 0) {
-            this.handleServerValidationErrors(createComment.errors);
-            return;
+          update: (store, { data: { createComment } }) => {
+            if (createComment.errors.length > 0) {
+              this.handleServerValidationErrors(createComment.errors);
+              return;
+            }
+
+            const data = store.readQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId }
+            });
+            data.article.comments.push(createComment.comment);
+            data.article.commentsCount = createComment.article.commentsCount;
+
+            store.writeQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId },
+              data
+            });
+            this.clear();
           }
-
-          const data = store.readQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId} });
-          data.article.comments.push(createComment.comment);
-          data.article.commentsCount = createComment.article.commentsCount;
-
-          store.writeQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId}, data });
-          this.clear();
-        }
-      }).then((data) => {
-        console.log(data);
-      }).catch((error) => {
-        console.error(error)
-      })
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
-  },
-}
+  }
+};
 </script>
 
 <style scoped>
