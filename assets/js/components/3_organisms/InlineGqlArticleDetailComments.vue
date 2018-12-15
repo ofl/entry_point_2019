@@ -1,8 +1,6 @@
 <template>
-  <TransitionGroup
-id="comments" tag="div"
-class="comment-list-card"
->
+  <TransitionGroup id="comments"
+tag="div" class="comment-list-card">
     <ArticleComment
       v-for="(comment, index) in comments"
       :key="commentKey(comment.id)"

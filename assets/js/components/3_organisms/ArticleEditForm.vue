@@ -47,7 +47,8 @@ type="hidden" name="_method" :value="requestMethod" />
           <span>Submit</span>
         </button>
 
-        <button class="button field is-info" @click="clear">
+        <button class="button field is-info"
+@click="clear">
           <BIcon icon="eraser" />
           <span>Clear</span>
         </button>

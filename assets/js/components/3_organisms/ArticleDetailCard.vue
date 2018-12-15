@@ -38,8 +38,7 @@
       >
         <span class="has-text-grey-light">
           <BIcon pack="fa"
-icon="heart" :type="likedType"
-/>
+icon="heart" :type="likedType" />
           {{ likesCount }}
         </span>
       </a>

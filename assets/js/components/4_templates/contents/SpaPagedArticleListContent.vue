@@ -3,7 +3,8 @@
     <TheFlashes :flashes="flashes" />
 
     <div class="container">
-      <div v-if="pagedArticles" class="box content">
+      <div v-if="pagedArticles"
+class="box content">
         <ArticleListItem
           v-for="(article, index) in pagedArticles.articles"
           :key="articleKey(article.id)"

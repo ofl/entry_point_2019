@@ -35,9 +35,8 @@
 
     <BField>
       <label class="checkbox">
-        <input type="checkbox"
-name="remember_me"
-/> Remember Me
+        <input
+type="checkbox" name="remember_me" /> Remember Me
       </label>
     </BField>
 

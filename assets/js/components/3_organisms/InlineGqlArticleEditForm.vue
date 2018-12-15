@@ -45,12 +45,14 @@
           <span>Submit</span>
         </button>
 
-        <button class="button field is-info" @click="clear">
+        <button class="button field is-info"
+@click="clear">
           <BIcon icon="eraser" />
           <span>Clear</span>
         </button>
 
-        <button class="button field is-info" @click.stop.prevent="back">
+        <button class="button field is-info"
+@click.stop.prevent="back">
           <BIcon icon="backspace" />
           <span>Back</span>
         </button>

@@ -5,7 +5,8 @@
     <div class="container">
       <ArticleListTable :articles="articles" />
 
-      <div v-if="currentUser" class="new-button">
+      <div v-if="currentUser"
+class="new-button">
         <RouterLink
           class="button field is-info"
           :to="{ name: 'InlineGqlArticleNew' }"

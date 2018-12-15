@@ -20,12 +20,10 @@
       </div>
 
       <div class="media-right">
-        <span class="has-text-grey-light"
->
+        <span class="has-text-grey-light">
           <i class="fa fa-comments" /> {{ article.commentsCount }}
         </span>
-        <span class="has-text-grey-light"
->
+        <span class="has-text-grey-light">
           <i class="fa fa-heart" /> {{ article.likesCount }}
         </span>
       </div>
