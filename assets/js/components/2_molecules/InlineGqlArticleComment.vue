@@ -16,11 +16,11 @@
           <br>
           <small>
             <a
+              v-if="isOwner(comment.user.id)"
               @click.stop.prevent="handleClickDelete(comment.id)"
             >
-              Delete
+              Delete ·
             </a>
-             ·
             <a>Reply</a>
             {{ comment.createdAt }}
           </small>
@@ -37,6 +37,10 @@ export default {
   props: {
     comment: {
       type: Object
+    },
+
+    currentUser: {
+      type: Object
     }
   },
 
@@ -44,11 +48,22 @@ export default {
     avatarUrl () {
       return (this.comment.user.avatar != '') ? this.comment.user.avatar : "http://bulma.io/images/placeholders/128x128.png";
     },
+
+    isLoggedIn () {
+      return !!this.currentUser
+    }
   },
 
   methods: {
     handleClickDelete(id) {
       this.$emit('delete-comment', id)
+    },
+
+    isOwner (id) {
+      if (!this.isLoggedIn) {
+        return false;
+      }
+      return parseInt(id, 10) == this.currentUser.id;
     },
   }
 }

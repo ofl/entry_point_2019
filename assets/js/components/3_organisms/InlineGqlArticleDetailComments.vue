@@ -4,6 +4,7 @@
       v-for="(comment, index) in comments"
       :key="commentKey(comment.id)"
       :comment="comment"
+      :currentUser="currentUser"
       @delete-comment="deleteComment"
     />
   </div>
