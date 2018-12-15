@@ -85,6 +85,7 @@ export default {
     if (this.hasInlineData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: ARTICLE_DETAIL_QUERY,
+        variables: { id: this.articleId },
         data: { article: gon.article }
       });
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
