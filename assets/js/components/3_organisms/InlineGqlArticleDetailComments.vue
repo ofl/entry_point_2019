@@ -1,5 +1,9 @@
 <template>
-  <div id="comments" class="comment-list-card">
+  <transition-group
+    tag="div"
+    id="comments"
+    class="comment-list-card"
+  >
     <ArticleComment
       v-for="(comment, index) in comments"
       :key="commentKey(comment.id)"
@@ -7,7 +11,7 @@
       :currentUser="currentUser"
       @delete-comment="deleteComment"
     />
-  </div>
+  </transition-group>
 </template>
 
 <script>
@@ -73,5 +77,22 @@ export default {
 <style scoped>
 .comment-list-card {
   margin-top: 50px;
+}
+
+.flex {
+  display: flex;
+}
+
+.v-enter-active {
+  transition: all .4s ease;
+}
+
+.v-leave-active {
+  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.v-enter, .v-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>
