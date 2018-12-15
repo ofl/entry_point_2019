@@ -1,18 +1,15 @@
 <template>
   <div>
-    <b-notification
-      :type="alertType"
-      :active.sync="isActive"
-      auto-close
-    >
+    <BNotification :type="alertType"
+:active.sync="isActive" auto-close>
       {{ flashValue }}
-    </b-notification>
+    </BNotification>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AppFlash',
+  name: "AppFlash",
 
   props: {
     flashKey: {
@@ -23,28 +20,28 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       isActive: true
-    }
+    };
   },
 
   computed: {
-    alertType () {
+    alertType() {
       switch (this.flashKey) {
-        case 'notice':
-          return 'is-info';
+        case "notice":
+          return "is-info";
           break;
-        case 'alert':
-          return 'is-warning';
+        case "alert":
+          return "is-warning";
           break;
-        case 'error':
-          return 'is-danger';
+        case "error":
+          return "is-danger";
           break;
         default:
           return `is-${this.flashKey}`;
       }
-    },
+    }
   }
-}
+};
 </script>

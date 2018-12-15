@@ -1,8 +1,8 @@
 <template>
   <div>
-    <TheNavigation :currentUser="currentUser" />
+    <TheNavigation :current-user="currentUser" />
     <AppContent
-      :currentUser="currentUser"
+      :current-user="currentUser"
       :articles="articles"
       :flashes="flashes"
     />
@@ -11,33 +11,33 @@
 </template>
 
 <script>
-import TheNavigation from '../4_templates/TheNavigation.vue';
-import TheFooter from '../4_templates/TheFooter.vue';
-import AppContent from '../4_templates/contents/SpaPagedArticleListContent.vue';
-import CURRENT_USER_QUERY from '../../gqls/currentUser.gql';
+import TheNavigation from "../4_templates/TheNavigation.vue";
+import TheFooter from "../4_templates/TheFooter.vue";
+import AppContent from "../4_templates/contents/SpaPagedArticleListContent.vue";
+import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
-  name: 'SpaArticleList',
+  name: "SpaArticleList",
 
   components: {
-    'TheNavigation': TheNavigation,
-    'AppContent': AppContent,
-    'TheFooter': TheFooter
+    TheNavigation: TheNavigation,
+    AppContent: AppContent,
+    TheFooter: TheFooter
   },
 
-  data () {
+  data() {
     return {
-      toolbarTitle: 'Spa Articles',
+      toolbarTitle: "Spa Articles",
       articles: [],
       currentUser: null,
-      flashes: {},
-    }
+      flashes: {}
+    };
   },
 
   apollo: {
     currentUser: {
-      query: CURRENT_USER_QUERY,
+      query: CURRENT_USER_QUERY
     }
-  },
+  }
 };
 </script>

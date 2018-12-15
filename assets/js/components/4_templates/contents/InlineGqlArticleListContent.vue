@@ -3,37 +3,33 @@
     <TheFlashes :flashes="flashes" />
 
     <div class="container">
-      <ArticleListTable
-        :articles="articles"
-      />
+      <ArticleListTable :articles="articles" />
 
-      <div
-        class="new-button"
-        v-if="currentUser"
-      >
-        <router-link
+      <div v-if="currentUser"
+class="new-button">
+        <RouterLink
           class="button field is-info"
           :to="{ name: 'InlineGqlArticleNew' }"
         >
-          <b-icon icon="pencil"></b-icon>
+          <BIcon icon="pencil" />
           <span>New</span>
-        </router-link>
+        </RouterLink>
       </div>
     </div>
-  </section class="section">
+  </section>
 </template>
 
 <script>
-import ArticleListTable from '../../3_organisms/InlineGqlArticleListTable.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
-import ARTICLE_INDEX_QUERY from '../../../gqls/articles.gql';
+import ArticleListTable from "../../3_organisms/InlineGqlArticleListTable.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import ARTICLE_INDEX_QUERY from "../../../gqls/articles.gql";
 
 export default {
-  name: 'InlineGqlArticleListContent',
+  name: "InlineGqlArticleListContent",
 
   components: {
-    'ArticleListTable': ArticleListTable,
-    'TheFlashes': TheFlashes,
+    ArticleListTable: ArticleListTable,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -45,16 +41,16 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      articles: gon.articles,
-    }
+      articles: gon.articles
+    };
   },
 
   computed: {
-    hasInlineData () {
+    hasInlineData() {
       return !!gon.articles && gon.articles.length > 0;
-    },
+    }
   },
 
   apollo: {
@@ -62,11 +58,11 @@ export default {
       query: ARTICLE_INDEX_QUERY,
       skip() {
         return this.hasInlineData;
-      },
+      }
     }
   },
 
-  mounted () {
+  mounted() {
     if (this.hasInlineData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: ARTICLE_INDEX_QUERY,
@@ -76,9 +72,9 @@ export default {
   },
 
   methods: {
-    onClickNewBtn () {
-      location.href = '/vue_articles/new';
-    },
-  },
-}
+    onClickNewBtn() {
+      location.href = "/vue_articles/new";
+    }
+  }
+};
 </script>

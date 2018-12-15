@@ -1,5 +1,5 @@
 query PagedArticles($page: Int, $pageSize: Int) {
-  pagedArticles(page: $page, pageSize:$pageSize) {
+  pagedArticles(page: $page, pageSize: $pageSize) {
     articles {
       id
       title

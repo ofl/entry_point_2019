@@ -1,4 +1,4 @@
-query ArticleEdit($id: ID!){
+query ArticleEdit($id: ID!) {
   article(id: $id) {
     id
     title

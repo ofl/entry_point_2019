@@ -1,9 +1,9 @@
 <template>
   <div>
-    <TheNavigation :currentUser="currentUser" />
+    <TheNavigation :current-user="currentUser" />
     <AppContent
-      :articleId="articleId"
-      :currentUser="currentUser"
+      :article-id="articleId"
+      :current-user="currentUser"
       :flashes="flashes"
     />
     <TheFooter />
@@ -11,31 +11,31 @@
 </template>
 
 <script>
-import TheNavigation from '../4_templates/TheNavigation.vue';
-import TheFooter from '../4_templates/TheFooter.vue';
-import AppContent from '../4_templates/contents/InlineGqlArticleDetailContent.vue';
-import CURRENT_USER_QUERY from '../../gqls/currentUser.gql';
+import TheNavigation from "../4_templates/TheNavigation.vue";
+import TheFooter from "../4_templates/TheFooter.vue";
+import AppContent from "../4_templates/contents/InlineGqlArticleDetailContent.vue";
+import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
-  name: 'InlineGqlArticleDetail',
+  name: "InlineGqlArticleDetail",
 
   components: {
-    'TheNavigation': TheNavigation,
-    'AppContent': AppContent,
-    'TheFooter': TheFooter
+    TheNavigation: TheNavigation,
+    AppContent: AppContent,
+    TheFooter: TheFooter
+  },
+
+  data() {
+    return {
+      toolbarTitle: "Article",
+      currentUser: gon.currentUser,
+      flashes: {}
+    };
   },
 
   computed: {
-    articleId () {
+    articleId() {
       return parseInt(this.$route.params.id, 10);
-    },
-  },
-
-  data () {
-    return {
-      toolbarTitle: 'Article',
-      currentUser: gon.currentUser,
-      flashes: {},
     }
   },
 
@@ -44,17 +44,17 @@ export default {
       query: CURRENT_USER_QUERY,
       skip() {
         return this.hasInlineData;
-      },
+      }
     }
   },
 
-  mounted () {
+  mounted() {
     if (this.hasInlineData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: CURRENT_USER_QUERY,
         data: { currentUser: gon.currentUser }
       });
     }
-  },
+  }
 };
 </script>

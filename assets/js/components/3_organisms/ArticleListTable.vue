@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import ArticleListItem from '../2_molecules/ArticleListItem.vue';
+import ArticleListItem from "../2_molecules/ArticleListItem.vue";
 
 export default {
-  name: 'ArticleListTable',
+  name: "ArticleListTable",
 
   components: {
-    'ArticleListItem': ArticleListItem,
+    ArticleListItem: ArticleListItem
   },
 
   props: {
@@ -27,7 +27,7 @@ export default {
   methods: {
     articleKey(id) {
       return `article-${id}`;
-    },
+    }
   }
-}
+};
 </script>

@@ -3,25 +3,23 @@
     <TheFlashes :flashes="flashes" />
 
     <div class="container">
-      <ArticleEditForm
-        v-if="article"
-        :article="article"
-      />
+      <ArticleEditForm v-if="article"
+:article="article" />
     </div>
   </section>
 </template>
 
 <script>
-import ArticleEditForm from '../../3_organisms/InlineGqlArticleEditForm.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
-import ARTICLE_EDIT_QUERY from '../../../gqls/articleEdit.gql';
+import ArticleEditForm from "../../3_organisms/InlineGqlArticleEditForm.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import ARTICLE_EDIT_QUERY from "../../../gqls/articleEdit.gql";
 
 export default {
-  name: 'InlineGqlArticleEditContent',
+  name: "InlineGqlArticleEditContent",
 
   components: {
-    'ArticleEditForm': ArticleEditForm,
-    'TheFlashes': TheFlashes,
+    ArticleEditForm: ArticleEditForm,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -37,19 +35,19 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
-      article: gon.article,
-    }
+      article: gon.article
+    };
   },
 
   computed: {
-    isLoggedIn () {
-      return !!this.currentUser
+    isLoggedIn() {
+      return !!this.currentUser;
     },
-    hasInlineData () {
+    hasInlineData() {
       return !!gon.article;
-    },
+    }
   },
 
   apollo: {
@@ -57,20 +55,20 @@ export default {
       query: ARTICLE_EDIT_QUERY,
       variables() {
         return {
-          id: this.articleId,
-        }
+          id: this.articleId
+        };
       },
       skip() {
         return this.hasInlineData;
-      },
+      }
     }
   },
 
-  mounted () {
+  mounted() {
     if (this.hasInlineData) {
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.article = null;
     }
-  },
-}
+  }
+};
 </script>

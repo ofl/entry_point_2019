@@ -4,13 +4,10 @@
 
     <div class="container">
       <div class="hero-body">
-        <div class="container">Hello! I am
-          <h1 class="title is-1">
-            Towerofl
-          </h1>
-          <h2 class="subtitle is-3">
-            Full Stack Web Developer
-          </h2>
+        <div class="container">
+          Hello! I am
+          <h1 class="title is-1">Towerofl</h1>
+          <h2 class="subtitle is-3">Full Stack Web Developer</h2>
         </div>
       </div>
     </div>
@@ -18,13 +15,13 @@
 </template>
 
 <script>
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
 
 export default {
-  name: 'Main',
+  name: "Main",
 
   components: {
-    'TheFlashes': TheFlashes,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -32,7 +29,7 @@ export default {
       type: Object
     }
   }
-}
+};
 </script>
 
 <style scoped="">

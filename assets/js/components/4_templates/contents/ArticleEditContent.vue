@@ -2,22 +2,20 @@
   <section class="section main-contents">
     <TheFlashes :flashes="flashes" />
 
-    <div class="container">
-      <ArticleEditForm :article="article"></ArticleEditForm>
-    </div>
+    <div class="container"><ArticleEditForm :article="article" /></div>
   </section>
 </template>
 
 <script>
-import ArticleEditForm from '../../3_organisms/ArticleEditForm.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
+import ArticleEditForm from "../../3_organisms/ArticleEditForm.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
 
 export default {
-  name: 'ArticleEditContent',
+  name: "ArticleEditContent",
 
   components: {
-    'ArticleEditForm': ArticleEditForm,
-    'TheFlashes': TheFlashes,
+    ArticleEditForm: ArticleEditForm,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -28,5 +26,5 @@ export default {
       type: Object
     }
   }
-}
+};
 </script>

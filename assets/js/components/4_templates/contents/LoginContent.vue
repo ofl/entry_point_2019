@@ -9,14 +9,14 @@
           <p class="subtitle has-text-grey">Please login to proceed.</p>
           <div class="box">
             <figure class="avatar">
-              <img src="https://placehold.it/128x128">
+              <img src="https://placehold.it/128x128" >
             </figure>
             <LoginForm :user="user" />
           </div>
           <p class="has-text-grey">
-            <a href="../">Sign Up</a> &nbsp;·&nbsp;
-            <a href="../">Forgot Password</a> &nbsp;·&nbsp;
-            <a href="../">Need Help?</a>
+            <a href="../"> Sign Up </a> &nbsp;·&nbsp;
+            <a href="../"> Forgot Password </a> &nbsp;·&nbsp;
+            <a href="../"> Need Help? </a>
           </p>
         </div>
       </div>
@@ -25,15 +25,15 @@
 </template>
 
 <script>
-import LoginForm from '../../3_organisms/LoginForm.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
+import LoginForm from "../../3_organisms/LoginForm.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
 
 export default {
-  name: 'LoginContent',
+  name: "LoginContent",
 
   components: {
-    'LoginForm': LoginForm,
-    'TheFlashes': TheFlashes,
+    LoginForm: LoginForm,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -44,19 +44,21 @@ export default {
       type: Object
     }
   }
-}
+};
 </script>
 
 <style scoped>
-html,body {
-  font-family: 'Open Sans', serif;
+html,
+body {
+  font-family: "Open Sans", serif;
   font-size: 14px;
   font-weight: 300;
 }
 .hero.is-success {
-  background: #F2F6FA;
+  background: #f2f6fa;
 }
-.hero .nav, .hero.is-success .nav {
+.hero .nav,
+.hero.is-success .nav {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -71,8 +73,9 @@ html,body {
   padding: 5px;
   background: #fff;
   border-radius: 50%;
-  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1),
+    0 0 0 1px rgba(10, 10, 10, 0.1);
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
 input {
   font-weight: 300;

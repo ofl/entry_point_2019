@@ -1,5 +1,5 @@
-mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
-  createComment(input: {articleId:$articleId,attributes: $attributes}) {
+mutation CreateComment($articleId: ID!, $attributes: CommentAttributes!) {
+  createComment(input: { articleId: $articleId, attributes: $attributes }) {
     comment {
       id
       body
@@ -8,7 +8,7 @@ mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
         name
         avatar
       }
-    },
+    }
     article {
       id
       commentsCount

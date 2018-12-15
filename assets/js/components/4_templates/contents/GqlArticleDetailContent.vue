@@ -3,38 +3,36 @@
     <TheFlashes :flashes="flashes" />
 
     <div class="container">
-      <ArticleDetailCard
-        :article="article"
-        :currentUser="currentUser"
-      />
+      <ArticleDetailCard :article="article"
+:currentUser="currentUser" />
       <ArticleDetailComments
         :comments="article.comments"
-        :currentUser="currentUser"
+        :current-user="currentUser"
       />
       <ArticleDetailCommentForm
         v-if="isLoggedIn"
-        :currentUser="currentUser"
-        :articleId="articleId"
+        :current-user="currentUser"
+        :article-id="articleId"
       />
     </div>
   </section>
 </template>
 
 <script>
-import ArticleDetailCard from '../../3_organisms/GqlArticleDetailCard.vue';
-import ArticleDetailComments from '../../3_organisms/ArticleDetailComments.vue';
-import ArticleDetailCommentForm from '../../3_organisms/ArticleDetailCommentForm.vue';
-import TheFlashes from '../../3_organisms/TheFlashes.vue';
-import ARTICLE_DETAIL_QUERY from '../../../gqls/article.gql';
+import ArticleDetailCard from "../../3_organisms/GqlArticleDetailCard.vue";
+import ArticleDetailComments from "../../3_organisms/ArticleDetailComments.vue";
+import ArticleDetailCommentForm from "../../3_organisms/ArticleDetailCommentForm.vue";
+import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import ARTICLE_DETAIL_QUERY from "../../../gqls/article.gql";
 
 export default {
-  name: 'GqlArticleDetailContent',
+  name: "GqlArticleDetailContent",
 
   components: {
-    'ArticleDetailCard': ArticleDetailCard,
-    'ArticleDetailComments': ArticleDetailComments,
-    'ArticleDetailCommentForm': ArticleDetailCommentForm,
-    'TheFlashes': TheFlashes,
+    ArticleDetailCard: ArticleDetailCard,
+    ArticleDetailComments: ArticleDetailComments,
+    ArticleDetailCommentForm: ArticleDetailCommentForm,
+    TheFlashes: TheFlashes
   },
 
   props: {
@@ -50,28 +48,28 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       article: {
         id: 0,
-        title: '',
-        body: '',
+        title: "",
+        body: "",
         user: {
-          id: '',
-          name: '',
+          id: "",
+          name: ""
         },
         comments: [],
         commentsCount: 0,
         likesCount: 0,
         likedByMe: false
-      },
-    }
+      }
+    };
   },
 
   computed: {
-    isLoggedIn () {
-      return !!this.currentUser
-    },
+    isLoggedIn() {
+      return !!this.currentUser;
+    }
   },
 
   apollo: {
@@ -79,10 +77,10 @@ export default {
       query: ARTICLE_DETAIL_QUERY,
       variables() {
         return {
-          id: this.articleId,
-        }
-      },
+          id: this.articleId
+        };
+      }
     }
-  },
-}
+  }
+};
 </script>

@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import ArticleListItem from '../2_molecules/InlineGqlArticleListItem.vue';
+import ArticleListItem from "../2_molecules/InlineGqlArticleListItem.vue";
 
 export default {
-  name: 'InlineGqlListTable',
+  name: "InlineGqlListTable",
 
   components: {
-    'ArticleListItem': ArticleListItem,
+    ArticleListItem: ArticleListItem
   },
 
   props: {
@@ -27,7 +27,7 @@ export default {
   methods: {
     articleKey(id) {
       return `article-${id}`;
-    },
+    }
   }
-}
+};
 </script>
