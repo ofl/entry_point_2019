@@ -13,10 +13,7 @@ RSpec.describe 'Mutations::Comments::Destroy' do # rubocop:disable RSpec/Describ
       mutation DestroyComment($variables:destroyCommentInput!) {
         destroyComment(input: $variables) {
           comment {
-            body
-            user {
-              name
-            }
+            id
           }
           errors {
             path
@@ -45,7 +42,9 @@ RSpec.describe 'Mutations::Comments::Destroy' do # rubocop:disable RSpec/Describ
       let(:expected_value) do
         {
           destroyComment: {
-            comment: nil,
+            comment: {
+              id: comment.id.to_s
+            },
             errors: []
           }
         }.deep_stringify_keys

@@ -12,6 +12,7 @@
         v-if="article"
         :comments="article.comments"
         :currentUser="currentUser"
+        :articleId="articleId"
       />
       <ArticleDetailCommentForm
         v-if="isLoggedIn"
@@ -24,7 +25,7 @@
 
 <script>
 import ArticleDetailCard from '../../3_organisms/InlineGqlArticleDetailCard.vue';
-import ArticleDetailComments from '../../3_organisms/ArticleDetailComments.vue';
+import ArticleDetailComments from '../../3_organisms/InlineGqlArticleDetailComments.vue';
 import ArticleDetailCommentForm from '../../3_organisms/ArticleDetailCommentForm.vue';
 import TheFlashes from '../../3_organisms/TheFlashes.vue';
 import ARTICLE_DETAIL_QUERY from '../../../gqls/article.gql';
@@ -85,6 +86,7 @@ export default {
     if (this.hasInlineData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: ARTICLE_DETAIL_QUERY,
+        variables: { id: this.articleId },
         data: { article: gon.article }
       });
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。

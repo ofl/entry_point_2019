@@ -124,6 +124,7 @@ export default {
 
           const data = store.readQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId} });
           data.article.comments.push(createComment.comment);
+          data.article.commentsCount = createComment.article.commentsCount;
 
           store.writeQuery({ query: ARTICLE_DETAIL_QUERY, variables: {id: this.articleId}, data });
           this.clear();

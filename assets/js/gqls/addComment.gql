@@ -9,6 +9,10 @@ mutation CreateComment($articleId:ID!, $attributes:CommentAttributes!) {
         avatar
       }
     },
+    article {
+      id
+      commentsCount
+    }
     errors {
       path
       message

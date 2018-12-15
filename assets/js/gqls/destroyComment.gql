@@ -1,0 +1,15 @@
+mutation DestroyComment($id: ID!) {
+  destroyComment(input:  { id: $id }) {
+    comment {
+      id
+    }
+    article {
+      id
+      commentsCount
+    }
+    errors {
+      path
+      message
+    }
+  }
+}

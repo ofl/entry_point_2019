@@ -16,6 +16,9 @@ RSpec.describe 'Mutations::Comments::Create' do # rubocop:disable RSpec/Describe
               name
             }
           }
+          article {
+            commentsCount
+          }
           errors {
             path
             message
@@ -51,6 +54,9 @@ RSpec.describe 'Mutations::Comments::Create' do # rubocop:disable RSpec/Describe
               user: {
                 name: user.name
               }
+            },
+            article: {
+              commentsCount: 1,
             },
             errors: []
           }
@@ -94,6 +100,7 @@ RSpec.describe 'Mutations::Comments::Create' do # rubocop:disable RSpec/Describe
         {
           createComment: {
             comment: nil,
+            article: nil,
             errors: [error]
           }
         }.deep_stringify_keys
