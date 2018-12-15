@@ -7,6 +7,7 @@ class Mutations::Comments::Destroy < GraphQL::Schema::RelayClassicMutation
   argument :id, ID, description: 'コメントID', required: true
 
   field :comment, Types::CommentType, null: true
+  field :article, Types::ArticleType, null: true
   field :errors, [Types::UserError], null: false
 
   def resolve(id:)
@@ -18,6 +19,6 @@ class Mutations::Comments::Destroy < GraphQL::Schema::RelayClassicMutation
 
     comment.destroy
 
-    { comment: comment, errors: [] }
+    { comment: comment, article: comment.article, errors: [] }
   end
 end
