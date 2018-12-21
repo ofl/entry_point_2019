@@ -4,7 +4,6 @@
     :action="requestPath"
     accept-charset="UTF-8"
     method="POST"
-    lazy-validation
   >
     <input
 type="hidden" name="authenticity_token" :value="csrfToken" />
@@ -21,12 +20,6 @@ export default {
     requestPath: {
       type: String
     }
-  },
-
-  data() {
-    return {
-      valid: false
-    };
   },
 
   computed: {
