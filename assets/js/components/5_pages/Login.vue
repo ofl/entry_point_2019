@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import AppContent from "../4_templates/contents/LoginContent.vue";
+import AppContent from "../4_templates/LoginContent.vue";
 
 export default {
   name: "Login",

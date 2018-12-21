@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import TheNavigation from "../4_templates/TheNavigation.vue";
-import TheFooter from "../4_templates/TheFooter.vue";
-import AppContent from "../4_templates/contents/InlineGqlArticleEditContent.vue";
+import TheNavigation from "../3_organisms/TheNavigation.vue";
+import TheFooter from "../3_organisms/TheFooter.vue";
+import AppContent from "../4_templates/InlineGqlArticleEditContent.vue";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {

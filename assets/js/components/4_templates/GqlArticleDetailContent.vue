@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import ArticleDetailCard from "../../3_organisms/GqlArticleDetailCard.vue";
-import ArticleDetailComments from "../../3_organisms/ArticleDetailComments.vue";
-import ArticleDetailCommentForm from "../../3_organisms/ArticleDetailCommentForm.vue";
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
-import ARTICLE_DETAIL_QUERY from "../../../gqls/article.gql";
+import ArticleDetailCard from "../3_organisms/GqlArticleDetailCard.vue";
+import ArticleDetailComments from "../3_organisms/ArticleDetailComments.vue";
+import ArticleDetailCommentForm from "../3_organisms/ArticleDetailCommentForm.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 
 export default {
   name: "GqlArticleDetailContent",

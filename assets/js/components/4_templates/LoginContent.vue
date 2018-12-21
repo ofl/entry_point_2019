@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import LoginForm from "../../3_organisms/LoginForm.vue";
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import LoginForm from "../3_organisms/LoginForm.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
 
 export default {
   name: "LoginContent",

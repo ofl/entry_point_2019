@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import TheNavigation from "../4_templates/TheNavigation.vue";
-import TheFooter from "../4_templates/TheFooter.vue";
-// import AppContent from '../4_templates/contents/ArticleDetailContent.vue';
-import AppContent from "../4_templates/contents/GqlArticleDetailContent.vue";
+import TheNavigation from "../3_organisms/TheNavigation.vue";
+import TheFooter from "../3_organisms/TheFooter.vue";
+// import AppContent from '../4_templates/ArticleDetailContent.vue';
+import AppContent from "../4_templates/GqlArticleDetailContent.vue";
 
 export default {
   name: "ArticleDetail",

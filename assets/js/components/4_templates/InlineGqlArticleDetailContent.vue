@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import ArticleDetailCard from "../../3_organisms/InlineGqlArticleDetailCard.vue";
-import ArticleDetailComments from "../../3_organisms/InlineGqlArticleDetailComments.vue";
-import ArticleDetailCommentForm from "../../3_organisms/ArticleDetailCommentForm.vue";
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
-import ARTICLE_DETAIL_QUERY from "../../../gqls/article.gql";
+import ArticleDetailCard from "../3_organisms/InlineGqlArticleDetailCard.vue";
+import ArticleDetailComments from "../3_organisms/InlineGqlArticleDetailComments.vue";
+import ArticleDetailCommentForm from "../3_organisms/ArticleDetailCommentForm.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 
 export default {
   name: "InlineGqlArticleDetailContent",

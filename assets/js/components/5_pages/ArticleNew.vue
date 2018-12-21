@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import TheNavigation from "../4_templates/TheNavigation.vue";
-import TheFooter from "../4_templates/TheFooter.vue";
-import AppContent from "../4_templates/contents/ArticleEditContent.vue";
+import TheNavigation from "../3_organisms/TheNavigation.vue";
+import TheFooter from "../3_organisms/TheFooter.vue";
+import AppContent from "../4_templates/ArticleEditContent.vue";
 
 export default {
   name: "ArticleNew",

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
 
 export default {
   name: "Main",

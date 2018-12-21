@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import ArticleNewForm from "../../3_organisms/InlineGqlArticleEditForm.vue";
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import ArticleNewForm from "../3_organisms/InlineGqlArticleEditForm.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
 
 export default {
   name: "InlineGqlArticleNewContent",

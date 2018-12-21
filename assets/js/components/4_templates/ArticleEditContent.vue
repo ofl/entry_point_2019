@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import ArticleEditForm from "../../3_organisms/ArticleEditForm.vue";
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import ArticleEditForm from "../3_organisms/ArticleEditForm.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
 
 export default {
   name: "ArticleEditContent",

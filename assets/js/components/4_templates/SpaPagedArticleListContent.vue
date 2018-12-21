@@ -33,10 +33,10 @@ class="box content">
 </template>
 
 <script>
-import ArticleListTable from "../../3_organisms/SpaArticleListTable.vue";
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
-import ArticleListItem from "../../2_molecules/SpaArticleListItem.vue";
-import PAGED_ARTICLE_INDEX_QUERY from "../../../gqls/pagedArticles.gql";
+import ArticleListTable from "../3_organisms/SpaArticleListTable.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
+import ArticleListItem from "../2_molecules/SpaArticleListItem.vue";
+import PAGED_ARTICLE_INDEX_QUERY from "../../gqls/pagedArticles.gql";
 
 const pageSize = 10;
 

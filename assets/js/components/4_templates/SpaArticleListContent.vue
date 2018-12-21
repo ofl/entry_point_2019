@@ -17,11 +17,12 @@
 </template>
 
 <script>
-import ArticleListTable from "../../3_organisms/ArticleListTable.vue";
-import TheFlashes from "../../3_organisms/TheFlashes.vue";
+import ArticleListTable from "../3_organisms/SpaArticleListTable.vue";
+import TheFlashes from "../3_organisms/TheFlashes.vue";
+import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 
 export default {
-  name: "ArticleListContent",
+  name: "SpaArticleListContent",
 
   components: {
     ArticleListTable: ArticleListTable,
@@ -29,17 +30,26 @@ export default {
   },
 
   props: {
-    articles: {
-      type: Array
-    },
     flashes: {
       type: Object
     }
   },
 
+  data() {
+    return {
+      articles: []
+    };
+  },
+
   methods: {
     onClickNewBtn() {
       location.href = "/vue_articles/new";
+    }
+  },
+
+  apollo: {
+    articles: {
+      query: ARTICLE_INDEX_QUERY
     }
   }
 };
