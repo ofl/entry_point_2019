@@ -1,0 +1,24 @@
+<template>
+  <div class="container">
+    <div class="hero-body">
+      <div class="container">
+        Hello! I am
+        <h1 class="title is-1">Towerofl</h1>
+        <h2 class="subtitle is-3">Full Stack Web Developer</h2>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "MainContent"
+};
+</script>
+
+<style scoped="main">
+.has-same-height .card {
+  height: 320px;
+  overflow: hidden;
+}
+</style>
