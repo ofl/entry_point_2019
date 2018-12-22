@@ -48,7 +48,7 @@ class="navbar-item">
               <span class="icon"> <i class="fas fa-file-alt" /> </span>
               <span>Articles(Inline+GQL)</span>
             </RouterLink>
-            <RouterLink to="/spa_articles"
+            <RouterLink to="/gql_articles"
 class="navbar-item">
               <span class="icon"> <i class="fas fa-file-alt" /> </span>
               <span>Articles(GQL)</span>

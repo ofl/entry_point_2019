@@ -1,21 +1,21 @@
 <template>
   <GeneralTemplate :current-user="currentUser"
 :flashes="flashes">
-    <SpaPagedArticleListContent :articles="articles" />
+    <GqlPagedArticleListContent :articles="articles" />
   </GeneralTemplate>
 </template>
 
 <script>
 import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
-import SpaPagedArticleListContent from "../3_organisms/SpaPagedArticleListContent.vue";
+import GqlPagedArticleListContent from "../3_organisms/GqlPagedArticleListContent.vue";
 
 import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
-  name: "SpaArticleList",
+  name: "GqlArticleList",
 
-  components: { GeneralTemplate, SpaPagedArticleListContent },
+  components: { GeneralTemplate, GqlPagedArticleListContent },
 
   data() {
     return {

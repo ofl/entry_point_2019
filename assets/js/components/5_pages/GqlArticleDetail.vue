@@ -17,7 +17,7 @@ import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
-  name: "SpaArticleDetail",
+  name: "GqlArticleDetail",
 
   components: { GeneralTemplate, GqlArticleDetailContent },
 

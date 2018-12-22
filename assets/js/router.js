@@ -25,13 +25,13 @@ const routes = [
     name: "InlineGqlArticle"
   },
   {
-    path: "/spa_articles",
-    component: require("./components/5_pages/SpaArticleList.vue")
+    path: "/gql_articles",
+    component: require("./components/5_pages/GqlArticleList.vue")
   },
   {
-    path: "/spa_articles/:id",
-    component: require("./components/5_pages/SpaArticleDetail.vue"),
-    name: "SpaArticle"
+    path: "/gql_articles/:id",
+    component: require("./components/5_pages/GqlArticleDetail.vue"),
+    name: "GqlArticle"
   }
 ];
 

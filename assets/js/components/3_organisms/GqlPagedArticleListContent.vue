@@ -29,14 +29,14 @@ class="box content">
 </template>
 
 <script>
-import ArticleListItem from "../2_molecules/SpaArticleListItem.vue";
+import ArticleListItem from "../2_molecules/GqlArticleListItem.vue";
 
 import PAGED_ARTICLE_INDEX_QUERY from "../../gqls/pagedArticles.gql";
 
 const pageSize = 10;
 
 export default {
-  name: "SpaPagedArticleListContent",
+  name: "GqlPagedArticleListContent",
 
   components: { ArticleListItem },
 

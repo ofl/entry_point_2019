@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import ArticleListTable from "../3_organisms/SpaArticleListTable.vue";
+import ArticleListTable from "../3_organisms/GqlArticleListTable.vue";
 
 export default {
-  name: "SpaArticleListContent",
+  name: "GqlArticleListContent",
 
   components: { ArticleListTable },
 

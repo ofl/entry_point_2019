@@ -1,6 +1,6 @@
 <template>
   <article class="post">
-    <RouterLink :to="{ name: 'SpaArticle', params: { id: article.id } }">
+    <RouterLink :to="{ name: 'GqlArticle', params: { id: article.id } }">
       <h4>{{ article.title }}</h4>
     </RouterLink>
 
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: "SpaArticleListItem",
+  name: "GqlArticleListItem",
 
   props: {
     article: {

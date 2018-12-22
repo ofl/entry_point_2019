@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import ArticleListItem from "../2_molecules/SpaArticleListItem.vue";
+import ArticleListItem from "../2_molecules/GqlArticleListItem.vue";
 
 export default {
-  name: "SpaArticleListTable",
+  name: "GqlArticleListTable",
 
   components: { ArticleListItem },
 
