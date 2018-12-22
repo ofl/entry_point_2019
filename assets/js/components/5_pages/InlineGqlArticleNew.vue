@@ -1,20 +1,20 @@
 <template>
   <GeneralTemplate :current-user="currentUser"
 :flashes="flashes">
-    <InlineGqlArticleNewContent :current-user="currentUser" />
+    <InlineGqlArticleEditForm />
   </GeneralTemplate>
 </template>
 
 <script>
 import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
-import InlineGqlArticleNewContent from "../3_organisms/InlineGqlArticleNewContent.vue";
+import InlineGqlArticleEditForm from "../3_organisms/InlineGqlArticleEditForm.vue";
 
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
   name: "ArticleNew",
 
-  components: { GeneralTemplate, InlineGqlArticleNewContent },
+  components: { GeneralTemplate, InlineGqlArticleEditForm },
 
   data() {
     return {

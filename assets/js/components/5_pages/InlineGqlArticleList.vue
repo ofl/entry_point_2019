@@ -12,6 +12,7 @@
 import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
 import InlineGqlArticleListContent from "../3_organisms/InlineGqlArticleListContent.vue";
 
+import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
@@ -29,8 +30,11 @@ export default {
   },
 
   computed: {
-    hasInlineData() {
+    hasInlineUserData() {
       return !!gon.currentUser;
+    },
+    hasInlineArticlesData() {
+      return !!gon.articles;
     }
   },
 
@@ -38,16 +42,31 @@ export default {
     currentUser: {
       query: CURRENT_USER_QUERY,
       skip() {
-        return this.hasInlineData;
+        return this.hasInlineUserData;
+      }
+    },
+    articles: {
+      query: ARTICLE_INDEX_QUERY,
+      skip() {
+        return this.hasInlineArticlesData;
       }
     }
   },
 
   mounted() {
-    if (this.hasInlineData) {
+    // Gonからデータを取得した場合、Apollo client キャッシュへの書き込む
+
+    if (this.hasInlineUserData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: CURRENT_USER_QUERY,
         data: { currentUser: gon.currentUser }
+      });
+    }
+
+    if (this.hasInlineArticlesData) {
+      this.$apollo.provider.defaultClient.writeQuery({
+        query: ARTICLE_INDEX_QUERY,
+        data: { articles: gon.articles }
       });
     }
   }

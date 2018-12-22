@@ -3,7 +3,7 @@
 :flashes="flashes">
     <GqlArticleDetailContent
       :article="article"
-      :articleId="articleId"
+      :article-id="articleId"
       :current-user="currentUser"
     />
   </GeneralTemplate>

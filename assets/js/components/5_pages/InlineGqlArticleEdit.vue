@@ -1,28 +1,27 @@
 <template>
   <GeneralTemplate :current-user="currentUser"
 :flashes="flashes">
-    <InlineGqlArticleEditContent
-      :current-user="currentUser"
-      :article-id="articleId"
-    />
+    <InlineGqlArticleEditForm :article="article" />
   </GeneralTemplate>
 </template>
 
 <script>
 import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
-import InlineGqlArticleEditContent from "../3_organisms/InlineGqlArticleEditContent.vue";
+import InlineGqlArticleEditForm from "../3_organisms/InlineGqlArticleEditForm.vue";
 
+import ARTICLE_EDIT_QUERY from "../../gqls/articleEdit.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
   name: "ArticleEdit",
 
-  components: { GeneralTemplate, InlineGqlArticleEditContent },
+  components: { GeneralTemplate, InlineGqlArticleEditForm },
 
   data() {
     return {
       toolbarTitle: "Edit Article",
       currentUser: gon.currentUser,
+      article: gon.article,
       flashes: gon.flashes
     };
   },
@@ -30,6 +29,12 @@ export default {
   computed: {
     articleId() {
       return parseInt(this.$route.params.id, 10);
+    },
+    hasInlineUserData() {
+      return !!gon.currentUser;
+    },
+    hasInlineArticleData() {
+      return !!gon.article;
     }
   },
 
@@ -37,17 +42,32 @@ export default {
     currentUser: {
       query: CURRENT_USER_QUERY,
       skip() {
-        return this.hasInlineData;
+        return this.hasInlineUserData;
+      }
+    },
+    article: {
+      query: ARTICLE_EDIT_QUERY,
+      variables() {
+        return {
+          id: this.articleId
+        };
+      },
+      skip() {
+        return this.hasInlineArticleData;
       }
     }
   },
 
   mounted() {
-    if (this.hasInlineData) {
+    if (this.hasInlineUserData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: CURRENT_USER_QUERY,
         data: { currentUser: gon.currentUser }
       });
+    }
+    if (this.hasInlineArticleData) {
+      // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
+      gon.article = null;
     }
   }
 };

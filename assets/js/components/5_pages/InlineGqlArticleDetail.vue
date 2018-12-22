@@ -13,6 +13,7 @@
 import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
 import InlineGqlArticleDetailContent from "../3_organisms/InlineGqlArticleDetailContent.vue";
 
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
@@ -32,6 +33,12 @@ export default {
   computed: {
     articleId() {
       return parseInt(this.$route.params.id, 10);
+    },
+    hasInlineUserData() {
+      return !!gon.currentUser;
+    },
+    hasInlineArticleData() {
+      return !!gon.article;
     }
   },
 
@@ -39,17 +46,40 @@ export default {
     currentUser: {
       query: CURRENT_USER_QUERY,
       skip() {
-        return this.hasInlineData;
+        return this.hasInlineUserData;
+      }
+    },
+    article: {
+      query: ARTICLE_DETAIL_QUERY,
+      variables() {
+        return {
+          id: this.articleId
+        };
+      },
+      skip() {
+        return this.hasInlineArticleData;
       }
     }
   },
 
   mounted() {
-    if (this.hasInlineData) {
+    // Gonからデータを取得した場合、Apollo client キャッシュへの書き込む
+
+    if (this.hasInlineUserData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: CURRENT_USER_QUERY,
         data: { currentUser: gon.currentUser }
       });
+    }
+
+    if (this.hasInlineArticleData) {
+      this.$apollo.provider.defaultClient.writeQuery({
+        query: ARTICLE_DETAIL_QUERY,
+        variables: { id: this.articleId },
+        data: { article: gon.article }
+      });
+      // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
+      gon.article = null;
     }
   }
 };

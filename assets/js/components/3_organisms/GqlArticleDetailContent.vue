@@ -44,7 +44,7 @@ export default {
           commentsCount: 0,
           likesCount: 0,
           likedByMe: false
-        }
+        };
       }
     },
     articleId: {

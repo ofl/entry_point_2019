@@ -71,19 +71,19 @@ export default {
   props: {
     article: {
       type: Object,
-      required: true
+      default() {
+        return {
+          id: 0,
+          title: "",
+          body: ""
+        };
+      }
     }
   },
 
   data() {
     return {
-      valid: true,
-
-      article: {
-        id: null,
-        title: "",
-        body: ""
-      }
+      valid: true
     };
   },
 
