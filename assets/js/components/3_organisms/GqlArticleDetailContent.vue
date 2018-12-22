@@ -19,8 +19,6 @@ import ArticleDetailCard from "../3_organisms/GqlArticleDetailCard.vue";
 import ArticleDetailComments from "../3_organisms/ArticleDetailComments.vue";
 import ArticleDetailCommentForm from "../3_organisms/ArticleDetailCommentForm.vue";
 
-import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
-
 export default {
   name: "GqlArticleDetailContent",
 
@@ -31,47 +29,35 @@ export default {
   },
 
   props: {
+    article: {
+      type: Object,
+      default() {
+        return {
+          id: 0,
+          title: "",
+          body: "",
+          user: {
+            id: "",
+            name: ""
+          },
+          comments: [],
+          commentsCount: 0,
+          likesCount: 0,
+          likedByMe: false
+        }
+      }
+    },
     articleId: {
-      type: Number,
-      required: true
+      type: Number
     },
     currentUser: {
       type: Object
     }
   },
 
-  data() {
-    return {
-      article: {
-        id: 0,
-        title: "",
-        body: "",
-        user: {
-          id: "",
-          name: ""
-        },
-        comments: [],
-        commentsCount: 0,
-        likesCount: 0,
-        likedByMe: false
-      }
-    };
-  },
-
   computed: {
     isLoggedIn() {
       return !!this.currentUser;
-    }
-  },
-
-  apollo: {
-    article: {
-      query: ARTICLE_DETAIL_QUERY,
-      variables() {
-        return {
-          id: this.articleId
-        };
-      }
     }
   }
 };

@@ -9,6 +9,7 @@
 import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
 import SpaPagedArticleListContent from "../3_organisms/SpaPagedArticleListContent.vue";
 
+import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
@@ -28,6 +29,9 @@ export default {
   apollo: {
     currentUser: {
       query: CURRENT_USER_QUERY
+    },
+    articles: {
+      query: ARTICLE_INDEX_QUERY
     }
   }
 };

@@ -2,7 +2,8 @@
   <GeneralTemplate :current-user="currentUser"
 :flashes="flashes">
     <GqlArticleDetailContent
-      :article-id="articleId"
+      :article="article"
+      :articleId="articleId"
       :current-user="currentUser"
     />
   </GeneralTemplate>
@@ -12,6 +13,7 @@
 import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
 import GqlArticleDetailContent from "../3_organisms/GqlArticleDetailContent.vue";
 
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
@@ -37,6 +39,14 @@ export default {
   apollo: {
     currentUser: {
       query: CURRENT_USER_QUERY
+    },
+    article: {
+      query: ARTICLE_DETAIL_QUERY,
+      variables() {
+        return {
+          id: this.articleId
+        };
+      }
     }
   }
 };

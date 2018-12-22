@@ -15,34 +15,20 @@
 <script>
 import ArticleListTable from "../3_organisms/SpaArticleListTable.vue";
 
-import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
-
 export default {
   name: "SpaArticleListContent",
 
   components: { ArticleListTable },
 
   props: {
-    flashes: {
-      type: Object
+    articles: {
+      type: Array
     }
-  },
-
-  data() {
-    return {
-      articles: []
-    };
   },
 
   methods: {
     onClickNewBtn() {
       location.href = "/vue_articles/new";
-    }
-  },
-
-  apollo: {
-    articles: {
-      query: ARTICLE_INDEX_QUERY
     }
   }
 };
