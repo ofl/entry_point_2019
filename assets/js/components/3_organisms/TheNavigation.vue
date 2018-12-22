@@ -104,9 +104,7 @@ import DeleteForm from "../2_molecules/DeleteForm.vue";
 export default {
   name: "TheNavigation",
 
-  components: {
-    DeleteForm: DeleteForm
-  },
+  components: { DeleteForm },
 
   props: {
     currentUser: {

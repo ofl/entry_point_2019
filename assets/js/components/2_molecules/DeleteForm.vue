@@ -1,10 +1,6 @@
 <template>
-  <form
-    ref="form"
-    :action="requestPath"
-    accept-charset="UTF-8"
-    method="POST"
-  >
+  <form ref="form"
+:action="requestPath" accept-charset="UTF-8" method="POST">
     <input
 type="hidden" name="authenticity_token" :value="csrfToken" />
     <input

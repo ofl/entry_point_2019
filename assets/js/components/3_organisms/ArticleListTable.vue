@@ -14,9 +14,7 @@ import ArticleListItem from "../2_molecules/ArticleListItem.vue";
 export default {
   name: "ArticleListTable",
 
-  components: {
-    ArticleListItem: ArticleListItem
-  },
+  components: { ArticleListItem },
 
   props: {
     articles: {

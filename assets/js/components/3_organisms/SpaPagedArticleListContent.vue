@@ -1,41 +1,36 @@
 <template>
-  <section class="section main-contents">
-    <TheFlashes :flashes="flashes" />
-
-    <div class="container">
-      <div v-if="pagedArticles"
+  <div class="container">
+    <div v-if="pagedArticles"
 class="box content">
-        <ArticleListItem
-          v-for="(article, index) in pagedArticles.articles"
-          :key="articleKey(article.id)"
-          :article="article"
-        />
-      </div>
-
-      <div class="new-button">
-        <button
-          v-if="showMoreEnabled"
-          class="button field is-info"
-          @click="showMore"
-        >
-          <BIcon icon="more" />
-          <span>Show More</span>
-        </button>
-
-        <button class="button field is-info"
-@click="onClickNewBtn()">
-          <BIcon icon="pencil" />
-          <span>New</span>
-        </button>
-      </div>
+      <ArticleListItem
+        v-for="(article, index) in pagedArticles.articles"
+        :key="articleKey(article.id)"
+        :article="article"
+      />
     </div>
-  </section>
+
+    <div class="new-button">
+      <button
+        v-if="showMoreEnabled"
+        class="button field is-info"
+        @click="showMore"
+      >
+        <BIcon icon="more" />
+        <span>Show More</span>
+      </button>
+
+      <button class="button field is-info"
+@click="onClickNewBtn()">
+        <BIcon icon="pencil" />
+        <span>New</span>
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
-import ArticleListTable from "../3_organisms/SpaArticleListTable.vue";
-import TheFlashes from "../3_organisms/TheFlashes.vue";
 import ArticleListItem from "../2_molecules/SpaArticleListItem.vue";
+
 import PAGED_ARTICLE_INDEX_QUERY from "../../gqls/pagedArticles.gql";
 
 const pageSize = 10;
@@ -43,11 +38,7 @@ const pageSize = 10;
 export default {
   name: "SpaPagedArticleListContent",
 
-  components: {
-    ArticleListTable: ArticleListTable,
-    ArticleListItem: ArticleListItem,
-    TheFlashes: TheFlashes
-  },
+  components: { ArticleListItem },
 
   props: {
     flashes: {

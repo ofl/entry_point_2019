@@ -1,29 +1,23 @@
 <template>
-  <div>
-    <TheNavigation :current-user="currentUser" />
-    <AppContent
-      :article-id="articleId"
+  <GeneralTemplate :current-user="currentUser"
+:flashes="flashes">
+    <InlineGqlArticleEditContent
       :current-user="currentUser"
-      :flashes="flashes"
+      :article-id="articleId"
     />
-    <TheFooter />
-  </div>
+  </GeneralTemplate>
 </template>
 
 <script>
-import TheNavigation from "../3_organisms/TheNavigation.vue";
-import TheFooter from "../3_organisms/TheFooter.vue";
-import AppContent from "../4_templates/InlineGqlArticleEditContent.vue";
+import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
+import InlineGqlArticleEditContent from "../3_organisms/InlineGqlArticleEditContent.vue";
+
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
   name: "ArticleEdit",
 
-  components: {
-    TheNavigation: TheNavigation,
-    AppContent: AppContent,
-    TheFooter: TheFooter
-  },
+  components: { GeneralTemplate, InlineGqlArticleEditContent },
 
   data() {
     return {

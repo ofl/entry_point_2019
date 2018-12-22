@@ -14,9 +14,7 @@ import ArticleListItem from "../2_molecules/SpaArticleListItem.vue";
 export default {
   name: "SpaArticleListTable",
 
-  components: {
-    ArticleListItem: ArticleListItem
-  },
+  components: { ArticleListItem },
 
   props: {
     articles: {

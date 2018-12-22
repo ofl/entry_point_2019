@@ -1,25 +1,18 @@
 <template>
-  <div>
-    <TheNavigation :current-user="currentUser" />
-    <AppContent :articles="articles"
-:flashes="flashes" />
-    <TheFooter />
-  </div>
+  <GeneralTemplate :current-user="currentUser"
+:flashes="flashes">
+    <ArticleListContent :articles="articles" />
+  </GeneralTemplate>
 </template>
 
 <script>
-import TheNavigation from "../3_organisms/TheNavigation.vue";
-import TheFooter from "../3_organisms/TheFooter.vue";
-import AppContent from "../4_templates/ArticleListContent.vue";
+import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
+import ArticleListContent from "../3_organisms/ArticleListContent.vue";
 
 export default {
   name: "ArticleList",
 
-  components: {
-    TheNavigation: TheNavigation,
-    AppContent: AppContent,
-    TheFooter: TheFooter
-  },
+  components: { GeneralTemplate, ArticleListContent },
 
   data() {
     return {

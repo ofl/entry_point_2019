@@ -15,9 +15,7 @@ import ArticleComment from "../2_molecules/ArticleComment.vue";
 export default {
   name: "ArticleDetailComments",
 
-  components: {
-    ArticleComment: ArticleComment
-  },
+  components: { ArticleComment },
 
   props: {
     comments: {

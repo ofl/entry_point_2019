@@ -1,16 +1,19 @@
 <template>
-  <div><AppContent :user="user"
-:flashes="flashes" /></div>
+  <HeaderlessTemplate :flashes="flashes">
+    <LoginContent :user="user" />
+  </HeaderlessTemplate>
 </template>
 
 <script>
-import AppContent from "../4_templates/LoginContent.vue";
+import HeaderlessTemplate from "../4_templates/HeaderlessTemplate.vue";
+import LoginContent from "../3_organisms/LoginContent.vue";
 
 export default {
   name: "Login",
 
   components: {
-    AppContent: AppContent
+    HeaderlessTemplate,
+    LoginContent
   },
 
   data() {

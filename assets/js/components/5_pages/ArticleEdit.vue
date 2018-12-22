@@ -1,30 +1,26 @@
 <template>
-  <div>
-    <TheNavigation :current-user="currentUser" />
-    <AppContent :article="article" />
-    <TheFooter />
-  </div>
+  <GeneralTemplate :current-user="currentUser"
+:flashes="flashes">
+    <ArticleEditContent :article="article"
+:current-user="currentUser" />
+  </GeneralTemplate>
 </template>
 
 <script>
-import TheNavigation from "../3_organisms/TheNavigation.vue";
-import TheFooter from "../3_organisms/TheFooter.vue";
-import AppContent from "../4_templates/ArticleEditContent.vue";
+import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
+import ArticleEditContent from "../3_organisms/ArticleEditContent.vue";
 
 export default {
   name: "ArticleEdit",
 
-  components: {
-    TheNavigation: TheNavigation,
-    AppContent: AppContent,
-    TheFooter: TheFooter
-  },
+  components: { GeneralTemplate, ArticleEditContent },
 
   data() {
     return {
       toolbarTitle: "Edit Article",
       article: gon.article,
-      currentUser: gon.currentUser
+      currentUser: gon.currentUser,
+      flashes: gon.flashJson
     };
   }
 };

@@ -1,42 +1,32 @@
 <template>
-  <section class="section main-contents">
-    <TheFlashes :flashes="flashes" />
+  <div class="container">
+    <ArticleListTable :articles="articles" />
 
-    <div class="container">
-      <ArticleListTable :articles="articles" />
-
-      <div v-if="currentUser"
+    <div v-if="currentUser"
 class="new-button">
-        <RouterLink
-          class="button field is-info"
-          :to="{ name: 'InlineGqlArticleNew' }"
-        >
-          <BIcon icon="pencil" />
-          <span>New</span>
-        </RouterLink>
-      </div>
+      <RouterLink
+        class="button field is-info"
+        :to="{ name: 'InlineGqlArticleNew' }"
+      >
+        <BIcon icon="pencil" />
+        <span>New</span>
+      </RouterLink>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import ArticleListTable from "../3_organisms/InlineGqlArticleListTable.vue";
-import TheFlashes from "../3_organisms/TheFlashes.vue";
+
 import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 
 export default {
   name: "InlineGqlArticleListContent",
 
-  components: {
-    ArticleListTable: ArticleListTable,
-    TheFlashes: TheFlashes
-  },
+  components: { ArticleListTable: ArticleListTable },
 
   props: {
     currentUser: {
-      type: Object
-    },
-    flashes: {
       type: Object
     }
   },

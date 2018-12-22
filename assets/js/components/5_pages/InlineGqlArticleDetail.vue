@@ -1,34 +1,30 @@
 <template>
-  <div>
-    <TheNavigation :current-user="currentUser" />
-    <AppContent
+  <GeneralTemplate :current-user="currentUser"
+:flashes="flashes">
+    <InlineGqlArticleDetailContent
+      :article="article"
       :article-id="articleId"
       :current-user="currentUser"
-      :flashes="flashes"
     />
-    <TheFooter />
-  </div>
+  </GeneralTemplate>
 </template>
 
 <script>
-import TheNavigation from "../3_organisms/TheNavigation.vue";
-import TheFooter from "../3_organisms/TheFooter.vue";
-import AppContent from "../4_templates/InlineGqlArticleDetailContent.vue";
+import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
+import InlineGqlArticleDetailContent from "../3_organisms/InlineGqlArticleDetailContent.vue";
+
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
   name: "InlineGqlArticleDetail",
 
-  components: {
-    TheNavigation: TheNavigation,
-    AppContent: AppContent,
-    TheFooter: TheFooter
-  },
+  components: { GeneralTemplate, InlineGqlArticleDetailContent },
 
   data() {
     return {
       toolbarTitle: "Article",
       currentUser: gon.currentUser,
+      article: gon.article,
       flashes: {}
     };
   },

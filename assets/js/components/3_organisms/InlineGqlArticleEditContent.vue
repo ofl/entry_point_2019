@@ -1,26 +1,19 @@
 <template>
-  <section class="section main-contents">
-    <TheFlashes :flashes="flashes" />
-
-    <div class="container">
-      <ArticleEditForm v-if="article"
+  <div class="container">
+    <ArticleEditForm v-if="article"
 :article="article" />
-    </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import ArticleEditForm from "../3_organisms/InlineGqlArticleEditForm.vue";
-import TheFlashes from "../3_organisms/TheFlashes.vue";
+
 import ARTICLE_EDIT_QUERY from "../../gqls/articleEdit.gql";
 
 export default {
   name: "InlineGqlArticleEditContent",
 
-  components: {
-    ArticleEditForm: ArticleEditForm,
-    TheFlashes: TheFlashes
-  },
+  components: { ArticleEditForm },
 
   props: {
     articleId: {
@@ -28,9 +21,6 @@ export default {
       required: true
     },
     currentUser: {
-      type: Object
-    },
-    flashes: {
       type: Object
     }
   },

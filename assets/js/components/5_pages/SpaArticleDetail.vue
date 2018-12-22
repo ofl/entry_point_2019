@@ -1,30 +1,23 @@
 <template>
-  <div>
-    <TheNavigation :current-user="currentUser" />
-    <AppContent
+  <GeneralTemplate :current-user="currentUser"
+:flashes="flashes">
+    <GqlArticleDetailContent
       :article-id="articleId"
       :current-user="currentUser"
-      :flashes="flashes"
     />
-    <TheFooter />
-  </div>
+  </GeneralTemplate>
 </template>
 
 <script>
-import TheNavigation from "../3_organisms/TheNavigation.vue";
-import TheFooter from "../3_organisms/TheFooter.vue";
-// import AppContent from '../4_templates/ArticleDetailContent.vue';
-import AppContent from "../4_templates/GqlArticleDetailContent.vue";
+import GeneralTemplate from "../4_templates/GeneralTemplate.vue";
+import GqlArticleDetailContent from "../3_organisms/GqlArticleDetailContent.vue";
+
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
   name: "SpaArticleDetail",
 
-  components: {
-    TheNavigation: TheNavigation,
-    AppContent: AppContent,
-    TheFooter: TheFooter
-  },
+  components: { GeneralTemplate, GqlArticleDetailContent },
 
   data() {
     return {

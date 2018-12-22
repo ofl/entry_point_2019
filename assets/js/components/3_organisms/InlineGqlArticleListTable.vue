@@ -14,9 +14,7 @@ import ArticleListItem from "../2_molecules/InlineGqlArticleListItem.vue";
 export default {
   name: "InlineGqlListTable",
 
-  components: {
-    ArticleListItem: ArticleListItem
-  },
+  components: { ArticleListItem },
 
   props: {
     articles: {

@@ -1,38 +1,33 @@
 <template>
-  <section class="section main-contents">
-    <TheFlashes :flashes="flashes" />
-
-    <div class="container">
-      <ArticleDetailCard :article="article"
+  <div class="container">
+    <ArticleDetailCard :article="article"
 :currentUser="currentUser" />
-      <ArticleDetailComments
-        :comments="article.comments"
-        :current-user="currentUser"
-      />
-      <ArticleDetailCommentForm
-        v-if="isLoggedIn"
-        :current-user="currentUser"
-        :article-id="articleId"
-      />
-    </div>
-  </section>
+    <ArticleDetailComments
+      :comments="article.comments"
+      :current-user="currentUser"
+    />
+    <ArticleDetailCommentForm
+      v-if="isLoggedIn"
+      :current-user="currentUser"
+      :article-id="articleId"
+    />
+  </div>
 </template>
 
 <script>
 import ArticleDetailCard from "../3_organisms/GqlArticleDetailCard.vue";
 import ArticleDetailComments from "../3_organisms/ArticleDetailComments.vue";
 import ArticleDetailCommentForm from "../3_organisms/ArticleDetailCommentForm.vue";
-import TheFlashes from "../3_organisms/TheFlashes.vue";
+
 import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 
 export default {
   name: "GqlArticleDetailContent",
 
   components: {
-    ArticleDetailCard: ArticleDetailCard,
-    ArticleDetailComments: ArticleDetailComments,
-    ArticleDetailCommentForm: ArticleDetailCommentForm,
-    TheFlashes: TheFlashes
+    ArticleDetailCard,
+    ArticleDetailComments,
+    ArticleDetailCommentForm
   },
 
   props: {
@@ -41,9 +36,6 @@ export default {
       required: true
     },
     currentUser: {
-      type: Object
-    },
-    flashes: {
       type: Object
     }
   },
