@@ -64,19 +64,7 @@ icon="heart" :type="likedType" />
 </template>
 
 <script>
-import gql from "graphql-tag";
-
-const ToggleLikeMutation = gql`
-  mutation articleToggleLike($id: ID!) {
-    articleToggleLike(input: { id: $id }) {
-      article {
-        id
-        likesCount
-        likedByMe
-      }
-    }
-  }
-`;
+import TOGGLE_LIKE_MUTATION from "../../gqls/toggleLike.gql";
 
 export default {
   name: "ArticleDetailCard",
@@ -105,7 +93,7 @@ export default {
       if (!this.isLoggedIn) {
         return false;
       }
-      return parseInt(this.article.user.id, 10) == this.currentUser.id;
+      return this.article.user.id == this.currentUser.id;
     },
     likedType() {
       return this.likedByMe ? "is-primary" : null;
@@ -134,7 +122,7 @@ export default {
     async toggleLike() {
       await this.$apollo
         .mutate({
-          mutation: ToggleLikeMutation,
+          mutation: TOGGLE_LIKE_MUTATION,
           variables: {
             id: this.article.id
           }

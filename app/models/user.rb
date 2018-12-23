@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   def to_builder
     Jbuilder.new do |user|
-      user.id id
+      user.id id.to_s
       user.name name
       user.avatar avatar
       user.__typename 'User'

@@ -26,7 +26,7 @@ export default {
 
   props: {
     articleId: {
-      type: Number,
+      type: String,
       required: true
     },
 
@@ -65,9 +65,9 @@ export default {
               variables: { id: this.articleId }
             });
 
-            const destroyedCommentId = parseInt(comment.id, 10);
+            const destroyedCommentId = comment.id;
             data.article.comments = data.article.comments.filter(
-              cmnt => parseInt(cmnt.id, 10) !== destroyedCommentId
+              cmnt => cmnt.id !== destroyedCommentId
             );
             data.article.commentsCount = article.commentsCount;
 

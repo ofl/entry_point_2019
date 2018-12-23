@@ -1,6 +1,6 @@
 json.article do
   json.__typename 'Article'
-  json.id @article.id
+  json.id @article.id.to_s
   json.title @article.title
   json.body @article.body
   json.createdAt @article.created_at.xmlschema

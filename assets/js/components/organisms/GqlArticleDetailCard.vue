@@ -39,7 +39,7 @@
         <span class="has-text-grey-light">
           <BIcon pack="fa"
 icon="heart" :type="likedType" />
-          {{ article.likesCount }}
+          {{ likesCount }}
         </span>
       </a>
 
@@ -64,19 +64,7 @@ icon="heart" :type="likedType" />
 </template>
 
 <script>
-import gql from "graphql-tag";
-
-const ToggleLikeMutation = gql`
-  mutation articleToggleLike($id: ID!) {
-    articleToggleLike(input: { id: $id }) {
-      article {
-        id
-        likesCount
-        likedByMe
-      }
-    }
-  }
-`;
+import TOGGLE_LIKE_MUTATION from "../../gqls/toggleLike.gql";
 
 export default {
   name: "GqlArticleDetailCard",
@@ -90,6 +78,13 @@ export default {
     }
   },
 
+  data() {
+    return {
+      likesCount: this.article.likesCount,
+      likedByMe: this.article.likedByMe
+    };
+  },
+
   computed: {
     isLoggedIn() {
       return !!this.currentUser;
@@ -98,10 +93,10 @@ export default {
       if (!this.isLoggedIn) {
         return false;
       }
-      return parseInt(this.article.user.id, 10) == this.currentUser.id;
+      return this.article.user.id == this.currentUser.id;
     },
     likedType() {
-      return this.article.likedByMe ? "is-primary" : null;
+      return this.likedByMe ? "is-primary" : null;
     }
   },
 
@@ -123,20 +118,29 @@ export default {
     async toggleLike() {
       await this.$apollo
         .mutate({
-          mutation: ToggleLikeMutation,
+          mutation: TOGGLE_LIKE_MUTATION,
           variables: {
             id: this.article.id
+          },
+          update: (store, { data: { articleToggleLike } }) => {
+            const likesCount = articleToggleLike.article.likesCount;
+            const likedByMe = articleToggleLike.article.likedByMe;
+
+            this.updateLikeStatus(likesCount, likedByMe);
           }
         })
         .then(data => {
           // Result
-          const article = data.data.articleToggleLike.article;
-          // this.updateLikeStatus(article.likesCount, article.likedByMe);
         })
         .catch(error => {
           // Error
           console.error(error);
         });
+    },
+
+    updateLikeStatus(likesCount, likedByMe) {
+      this.likesCount = likesCount;
+      this.likedByMe = likedByMe;
     }
   }
 };

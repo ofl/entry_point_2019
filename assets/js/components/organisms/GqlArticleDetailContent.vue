@@ -48,7 +48,8 @@ export default {
       }
     },
     articleId: {
-      type: Number
+      type: String,
+      required: true
     },
     currentUser: {
       type: Object
