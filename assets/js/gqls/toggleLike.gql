@@ -1,0 +1,9 @@
+mutation articleToggleLike($id: ID!) {
+  articleToggleLike(input: { id: $id }) {
+    article {
+      id
+      likesCount
+      likedByMe
+    }
+  }
+}

@@ -39,7 +39,7 @@
         <span class="has-text-grey-light">
           <BIcon pack="fa"
 icon="heart" :type="likedType" />
-          {{ article.likesCount }}
+          {{ likesCount }}
         </span>
       </a>
 
@@ -63,32 +63,29 @@ icon="heart" :type="likedType" />
 </template>
 
 <script>
-import gql from "graphql-tag";
 import DESTROY_ARTICLE_MUTATION from "../../gqls/destroyArticle.gql";
 import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
-
-const ToggleLikeMutation = gql`
-  mutation articleToggleLike($id: ID!) {
-    articleToggleLike(input: { id: $id }) {
-      article {
-        id
-        likesCount
-        likedByMe
-      }
-    }
-  }
-`;
+import TOGGLE_LIKE_MUTATION from "../../gqls/toggleLike.gql";
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 
 export default {
   name: "InlineGqlArticleDetailCard",
 
   props: {
     article: {
-      type: Object
+      type: Object,
+      required: true
     },
     currentUser: {
       type: Object
     }
+  },
+
+  data() {
+    return {
+      likesCount: this.article.likesCount,
+      likedByMe: this.article.likedByMe
+    };
   },
 
   computed: {
@@ -99,10 +96,10 @@ export default {
       if (!this.isLoggedIn) {
         return false;
       }
-      return parseInt(this.article.user.id, 10) == this.currentUser.id;
+      return this.article.user.id == this.currentUser.id;
     },
     likedType() {
-      return this.article.likedByMe ? "is-primary" : null;
+      return this.likedByMe ? "is-primary" : null;
     },
     articleId() {
       return this.article.id;
@@ -127,15 +124,34 @@ export default {
     async toggleLike() {
       await this.$apollo
         .mutate({
-          mutation: ToggleLikeMutation,
+          mutation: TOGGLE_LIKE_MUTATION,
           variables: {
-            id: this.article.id
+            id: this.articleId
+          },
+          update: (store, { data: { articleToggleLike } }) => {
+            const likesCount = articleToggleLike.article.likesCount;
+            const likedByMe = articleToggleLike.article.likedByMe;
+
+            this.updateLikeStatus(likesCount, likedByMe);
+
+            const data = store.readQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId }
+            });
+
+            data.article.likedByMe = likedByMe;
+            data.article.likesCount = likesCount;
+
+            store.writeQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: data.article.id },
+              data
+            });
           }
         })
         .then(data => {
           // Result
           const article = data.data.articleToggleLike.article;
-          // this.updateLikeStatus(article.likesCount, article.likedByMe);
         })
         .catch(error => {
           // Error
@@ -168,6 +184,11 @@ export default {
           // Error
           console.error(error);
         });
+    },
+
+    updateLikeStatus(likesCount, likedByMe) {
+      this.likesCount = likesCount;
+      this.likedByMe = likedByMe;
     }
   }
 };

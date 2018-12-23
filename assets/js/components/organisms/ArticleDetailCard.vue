@@ -64,19 +64,7 @@ icon="heart" :type="likedType" />
 </template>
 
 <script>
-import gql from "graphql-tag";
-
-const ToggleLikeMutation = gql`
-  mutation articleToggleLike($id: ID!) {
-    articleToggleLike(input: { id: $id }) {
-      article {
-        id
-        likesCount
-        likedByMe
-      }
-    }
-  }
-`;
+import TOGGLE_LIKE_MUTATION from "../../gqls/toggleLike.gql";
 
 export default {
   name: "ArticleDetailCard",
@@ -134,7 +122,7 @@ export default {
     async toggleLike() {
       await this.$apollo
         .mutate({
-          mutation: ToggleLikeMutation,
+          mutation: TOGGLE_LIKE_MUTATION,
           variables: {
             id: this.article.id
           }
