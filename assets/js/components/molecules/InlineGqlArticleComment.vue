@@ -59,7 +59,7 @@ export default {
       if (!this.isLoggedIn) {
         return false;
       }
-      return parseInt(id, 10) == this.currentUser.id;
+      return id == this.currentUser.id;
     }
   }
 };

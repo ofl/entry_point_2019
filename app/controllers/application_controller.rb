@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def render(*args, &block)
     if current_user
       gon.currentUser = {
-        id: current_user.id,
+        id: current_user.id.to_s,
         name: current_user.name,
         avatar: current_user.avatar,
         __typename: 'currentUser'

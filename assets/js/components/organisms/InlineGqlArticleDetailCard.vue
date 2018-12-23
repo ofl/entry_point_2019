@@ -152,9 +152,9 @@ export default {
           },
           update: (store, { data: { destroyArticle } }) => {
             const data = store.readQuery({ query: ARTICLE_INDEX_QUERY });
-            const destroydArticleId = parseInt(destroyArticle.article.id, 10);
+            const destroydArticleId = destroyArticle.article.id;
             data.articles = data.articles.filter(
-              article => parseInt(article.id, 10) !== destroydArticleId
+              article => article.id !== destroydArticleId
             );
 
             store.writeQuery({ query: ARTICLE_INDEX_QUERY, data });

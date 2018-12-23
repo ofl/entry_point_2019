@@ -1,5 +1,5 @@
 json.articles @articles do |article|
-  json.id article.id
+  json.id article.id.to_s
   json.title article.title
   json.createdAt article.created_at.xmlschema
   json.likesCount article.likes_count

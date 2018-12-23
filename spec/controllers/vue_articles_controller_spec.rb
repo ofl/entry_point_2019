@@ -30,13 +30,13 @@ RSpec.describe VueArticlesController, type: :controller do
         {
           commentsCount: 0,
           createdAt: article.created_at.xmlschema,
-          id: article.id,
+          id: article.id.to_s,
           likesCount: 0,
           title: article.title,
           user: {
             __typename: 'User',
             avatar: '',
-            id: user.id,
+            id: user.id.to_s,
             name: user.name
           }.stringify_keys
         }.stringify_keys
@@ -61,14 +61,14 @@ RSpec.describe VueArticlesController, type: :controller do
           comments: [],
           commentsCount: 0,
           createdAt: article.created_at.xmlschema,
-          id: article.id,
+          id: article.id.to_s,
           likedByMe: false,
           likesCount: 0,
           title: article.title,
           user: {
             __typename: 'User',
             avatar: '',
-            id: user.id,
+            id: user.id.to_s,
             name: user.name
           }.stringify_keys
         }.stringify_keys

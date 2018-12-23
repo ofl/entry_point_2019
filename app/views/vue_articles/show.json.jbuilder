@@ -1,5 +1,5 @@
 json.article do
-  json.id @article.id
+  json.id @article.id.to_s
   json.title @article.title
   json.body @article.body
   json.createdAt @article.created_at.xmlschema
@@ -10,7 +10,7 @@ json.article do
   json.user @article.user.to_builder
 
   json.comments @article.comments do |comment|
-    json.id comment.id
+    json.id comment.id.to_s
     json.title comment.body
 
     json.user comment.user.to_builder
