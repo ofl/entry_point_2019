@@ -103,6 +103,9 @@ export default {
     },
     likedType() {
       return this.article.likedByMe ? "is-primary" : null;
+    },
+    articleId() {
+      return this.article.id;
     }
   },
 
@@ -145,7 +148,7 @@ export default {
         .mutate({
           mutation: DESTROY_ARTICLE_MUTATION,
           variables: {
-            id: this.article.id
+            id: this.articleId
           },
           update: (store, { data: { destroyArticle } }) => {
             const data = store.readQuery({ query: ARTICLE_INDEX_QUERY });

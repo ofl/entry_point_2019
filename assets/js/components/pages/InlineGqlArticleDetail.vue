@@ -32,7 +32,7 @@ export default {
 
   computed: {
     articleId() {
-      return parseInt(this.$route.params.id, 10);
+      return this.$route.params.id;
     },
     hasInlineUserData() {
       return !!gon.currentUser;
