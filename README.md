@@ -5,7 +5,7 @@ EntryPoint2019
 
 Overview
 
-Rails + GraphQL + Apollo Client + Atomic Design
+Rails + Vue.js + GraphQL + Apollo Client + Atomic Design
 
 ## Description
 
