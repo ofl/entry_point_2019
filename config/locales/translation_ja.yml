@@ -1,0 +1,34 @@
+ja:
+  activerecord:
+    models:
+      article: 記事  #g
+      comment: コメント  #g
+      like: 好き  #g
+      user: ユーザー  #g
+
+    attributes:
+      article:
+        body: 体  #g
+        comments: コメント  #g
+        likes: 好き  #g
+        title: タイトル  #g
+        user: :activerecord.models.user  #g
+
+      comment:
+        article: :activerecord.models.article  #g
+        body: 体  #g
+        user: :activerecord.models.user  #g
+
+      like:
+        article: :activerecord.models.article  #g
+        user: :activerecord.models.user  #g
+
+      user:
+        articles: 記事  #g
+        avatar: アバター  #g
+        comments: コメント  #g
+        crypted_password: 暗号化パスワード  #g
+        email: Eメール  #g
+        likes: 好き  #g
+        name: 名  #g
+        salt: 塩  #g
