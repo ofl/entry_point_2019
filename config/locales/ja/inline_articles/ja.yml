@@ -1,0 +1,8 @@
+ja:
+  inline_articles:
+    index:
+      title: 記事一覧(Inline)
+    edit:
+      title: 記事の修正(Inline)
+    new:
+      title: 記事の作成(Inline)

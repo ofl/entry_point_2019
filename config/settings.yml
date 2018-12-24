@@ -1,0 +1,9 @@
+site:
+  name: EP2019
+  page_title: Home
+  description: Rails + Vue.js + GraphQL + Apollo Client + Atomic Design
+  page_keywords: 'Rails,Vue.js,GraphQL,Apollo Client,Atomic Design'
+  meta:
+    ogp:
+      type: website
+      image_path: ogp_1200x630.png

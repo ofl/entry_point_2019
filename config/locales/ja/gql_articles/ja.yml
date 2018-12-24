@@ -1,0 +1,8 @@
+ja:
+  gql_articles:
+    index:
+      title: 記事一覧(Gql)
+    edit:
+      title: 記事の修正(Gql)
+    new:
+      title: 記事の作成(Gql)
