@@ -98,6 +98,9 @@ GEM
     graphql (1.8.11)
     i18n (1.3.0)
       concurrent-ruby (~> 1.0)
+    i18n_generators (2.2.0)
+      activerecord (>= 3.0.0)
+      railties (>= 3.0.0)
     jaro_winkler (1.5.1)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
@@ -280,6 +283,7 @@ DEPENDENCIES
   faker
   gon
   graphql
+  i18n_generators
   jbuilder (~> 2.5)
   kaminari
   license_finder
