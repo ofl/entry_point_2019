@@ -46,6 +46,7 @@ group :development do
   gem 'brakeman'
   gem 'bullet'
   gem 'bundler-audit'
+  gem 'i18n_generators'
   gem 'license_finder'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'

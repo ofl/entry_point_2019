@@ -1,0 +1,34 @@
+en:
+  activerecord:
+    models:
+      article: Article  #g
+      comment: Comment  #g
+      like: Like  #g
+      user: User  #g
+
+    attributes:
+      article:
+        body: Body  #g
+        comments: Comments  #g
+        likes: Likes  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+
+      comment:
+        article: :activerecord.models.article  #g
+        body: Body  #g
+        user: :activerecord.models.user  #g
+
+      like:
+        article: :activerecord.models.article  #g
+        user: :activerecord.models.user  #g
+
+      user:
+        articles: Articles  #g
+        avatar: Avatar  #g
+        comments: Comments  #g
+        crypted_password: Crypted password  #g
+        email: Email  #g
+        likes: Likes  #g
+        name: Name  #g
+        salt: Salt  #g
