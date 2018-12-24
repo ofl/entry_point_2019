@@ -81,7 +81,7 @@ RSpec.describe 'Mutations::Articles::Create' do # rubocop:disable RSpec/Describe
 
       let(:error) do
         {
-          message: "can't be blank",
+          message: 'を入力してください',
           path: ['attributes', 'body'],
         }
       end
