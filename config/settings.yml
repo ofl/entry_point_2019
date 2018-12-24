@@ -1,5 +1,5 @@
 site:
-  name: Entry Point 2019
+  name: EP2019
   page_title: Home
   description: Rails + Vue.js + GraphQL + Apollo Client + Atomic Design
   page_keywords: 'Rails,Vue.js,GraphQL,Apollo Client,Atomic Design'

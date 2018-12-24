@@ -1,4 +1,8 @@
 ja:
   articles:
     index:
-      title: 記事一覧
+      title: 記事一覧(Rails view)
+    edit:
+      title: 記事の修正(Rails view)
+    new:
+      title: 記事の作成(Rails view)

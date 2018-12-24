@@ -1,0 +1,8 @@
+ja:
+  inline_gql_articles:
+    index:
+      title: 記事一覧(Inline+GQL)
+    edit:
+      title: 記事の修正(Inline+GQL)
+    new:
+      title: 記事の作成(Inline+GQL)
