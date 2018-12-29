@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+let mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,25 +11,41 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.setPublicPath('public')
-    .js('assets/js/app.js', 'js')
-    .sass('assets/sass/app.scss', 'css');
-
 mix.webpackConfig({
-    module: {
-      rules: [
-        {
-          test: /\.(graphql|gql)$/,
-          exclude: /node_modules/,
-          loader: 'graphql-tag/loader',
-        },
-      ]
-    }
+  module: {
+    rules: [
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: "graphql-tag/loader"
+      }
+    ]
+  }
 });
 
+mix.extend(
+  "i18n",
+  new class {
+    webpackRules() {
+      return [
+        {
+          resourceQuery: /blockType=i18n/,
+          type: "javascript/auto",
+          loader: "@kazupon/vue-i18n-loader"
+        }
+      ];
+    }
+  }()
+);
+
+mix
+  .setPublicPath("public")
+  .i18n()
+  .js("assets/js/app.js", "js")
+  .sass("assets/sass/app.scss", "css");
+
 if (mix.inProduction()) {
-    mix.version();
+  mix.version();
 } else {
-    mix.sourceMaps()
-        .webpackConfig({devtool: 'source-map'});
+  mix.sourceMaps().webpackConfig({ devtool: "source-map" });
 }
