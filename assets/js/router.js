@@ -1,36 +1,44 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import Main from "./components/pages/Main.vue";
+import InlineGqlArticleList from "./components/pages/InlineGqlArticleList.vue";
+import InlineGqlArticleNew from "./components/pages/InlineGqlArticleNew.vue";
+import InlineGqlArticleEdit from "./components/pages/InlineGqlArticleEdit.vue";
+import InlineGqlArticleDetail from "./components/pages/InlineGqlArticleDetail.vue";
+import GqlArticleList from "./components/pages/GqlArticleList.vue";
+import GqlArticleDetail from "./components/pages/GqlArticleDetail.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", component: require("./components/pages/Main.vue") },
+  { path: "/", component: Main },
   {
     path: "/inline_gql_articles",
-    component: require("./components/pages/InlineGqlArticleList.vue")
+    component: InlineGqlArticleList
   },
   {
     path: "/inline_gql_articles/new",
-    component: require("./components/pages/InlineGqlArticleNew.vue"),
+    component: InlineGqlArticleNew,
     name: "InlineGqlArticleNew"
   },
   {
     path: "/inline_gql_articles/:id/edit",
-    component: require("./components/pages/InlineGqlArticleEdit.vue"),
+    component: InlineGqlArticleEdit,
     name: "InlineGqlArticleEdit"
   },
   {
     path: "/inline_gql_articles/:id",
-    component: require("./components/pages/InlineGqlArticleDetail.vue"),
+    component: InlineGqlArticleDetail,
     name: "InlineGqlArticle"
   },
   {
     path: "/gql_articles",
-    component: require("./components/pages/GqlArticleList.vue")
+    component: GqlArticleList
   },
   {
     path: "/gql_articles/:id",
-    component: require("./components/pages/GqlArticleDetail.vue"),
+    component: GqlArticleDetail,
     name: "GqlArticle"
   }
 ];
