@@ -18,6 +18,7 @@ services:
       - /app/log
       - /app/.git
       - /app/node_modules
+      - yarn-cache:/usr/local/share/.cache/yarn/v2
     depends_on:
       - postgres
     environment:
@@ -56,4 +57,6 @@ volumes:
   postgresql-data:
     driver: local
   bundle-volume:
+    driver: local
+  yarn-cache:
     driver: local
