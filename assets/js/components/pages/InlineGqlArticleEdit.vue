@@ -1,3 +1,5 @@
+<i18n src="../../i18n/articleEdit.json" />
+
 <template>
   <GeneralTemplate :current-user="currentUser"
 :flashes="flashes">
@@ -12,10 +14,14 @@ import InlineGqlArticleEditForm from "../organisms/InlineGqlArticleEditForm.vue"
 import ARTICLE_EDIT_QUERY from "../../gqls/articleEdit.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
+import SetTitleMixin from "../../utils/setTitle";
+
 export default {
   name: "ArticleEdit",
 
   components: { GeneralTemplate, InlineGqlArticleEditForm },
+
+  mixins: [SetTitleMixin],
 
   data() {
     return {

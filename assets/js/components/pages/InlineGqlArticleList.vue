@@ -1,3 +1,5 @@
+<i18n src="../../i18n/articleList.json" />
+
 <template>
   <GeneralTemplate :current-user="currentUser"
 :flashes="flashes">
@@ -15,10 +17,14 @@ import InlineGqlArticleListContent from "../organisms/InlineGqlArticleListConten
 import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
+import SetTitleMixin from "../../utils/setTitle";
+
 export default {
   name: "InlineGqlArticleList",
 
   components: { GeneralTemplate, InlineGqlArticleListContent },
+
+  mixins: [SetTitleMixin],
 
   data() {
     return {
