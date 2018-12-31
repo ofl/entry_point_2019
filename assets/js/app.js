@@ -3,6 +3,7 @@ import ApolloClient from "apollo-boost";
 import VueApollo from "vue-apollo";
 import Buefy from "buefy";
 import VeeValidate from "vee-validate";
+import VueI18n from "vue-i18n";
 
 // VueRouterを使用しないコンポーネント(検証用)
 import LoginComponent from "./components/pages/Login.vue";
@@ -16,6 +17,7 @@ import router from "./router";
 Vue.use(VueApollo);
 Vue.use(Buefy);
 Vue.use(VeeValidate, { events: "" });
+Vue.use(VueI18n);
 
 const uri =
   process.env.NODE_ENV === "production"
@@ -36,6 +38,10 @@ const componentsList = {
 
 let vms = [];
 
+const i18n = new VueI18n({
+  locale: "ja"
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.querySelector("#app");
   if (!el) {
@@ -50,7 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const vm = new Vue({
     el: "#app",
     apolloProvider,
-    router
+    router,
+    i18n
   });
   vms.push(vm);
 });
