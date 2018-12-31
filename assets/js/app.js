@@ -10,10 +10,13 @@ Vue.use(VueApollo);
 Vue.use(Buefy);
 Vue.use(VeeValidate, { events: "" });
 
+const uri =
+  process.env.NODE_ENV === "production"
+    ? "/graphql"
+    : "http://localhost:3000/graphql";
+
 const apolloProvider = new VueApollo({
-  defaultClient: new ApolloClient({
-    uri: "http://localhost:3000/graphql"
-  })
+  defaultClient: new ApolloClient({ uri: uri })
 });
 
 const componentsList = {
