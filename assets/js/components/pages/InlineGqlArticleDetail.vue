@@ -16,6 +16,8 @@ import InlineGqlArticleDetailContent from "../organisms/InlineGqlArticleDetailCo
 import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
+import SetTitleMixin from "../../utils/setTitle";
+
 export default {
   name: "InlineGqlArticleDetail",
 
@@ -39,6 +41,12 @@ export default {
     },
     hasInlineArticleData() {
       return !!gon.article;
+    }
+  },
+
+  watch: {
+    article: function (val) {
+      document.title = `${val.title} | EP2019`;
     }
   },
 

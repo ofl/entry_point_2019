@@ -1,8 +1,10 @@
 {
   "en": {
+    "title": "Home",
     "hello": "Hello! I am!"
   },
   "ja": {
+    "title": "ホーム",
     "hello": "こんにちは！ 私は"
   }
 }
