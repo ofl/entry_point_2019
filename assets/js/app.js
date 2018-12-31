@@ -4,6 +4,13 @@ import VueApollo from "vue-apollo";
 import Buefy from "buefy";
 import VeeValidate from "vee-validate";
 
+// VueRouterを使用しないコンポーネント(検証用)
+import LoginComponent from "./components/pages/Login.vue";
+import ArticleListComponent from "./components/pages/ArticleList.vue";
+import ArticleDetailComponent from "./components/pages/ArticleDetail.vue";
+import ArticleEditComponent from "./components/pages/ArticleEdit.vue";
+import ArticleNewComponent from "./components/pages/ArticleNew.vue";
+
 import router from "./router";
 
 Vue.use(VueApollo);
@@ -20,12 +27,11 @@ const apolloProvider = new VueApollo({
 });
 
 const componentsList = {
-  "main-component": require("./components/pages/Main.vue"),
-  "login-component": require("./components/pages/Login.vue"),
-  "article-list-component": require("./components/pages/ArticleList.vue"),
-  "article-detail-component": require("./components/pages/ArticleDetail.vue"),
-  "article-edit-component": require("./components/pages/ArticleEdit.vue"),
-  "article-new-component": require("./components/pages/ArticleNew.vue")
+  "login-component": LoginComponent,
+  "article-list-component": ArticleListComponent,
+  "article-detail-component": ArticleDetailComponent,
+  "article-edit-component": ArticleEditComponent,
+  "article-new-component": ArticleNewComponent
 };
 
 let vms = [];
