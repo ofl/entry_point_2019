@@ -16,9 +16,9 @@ import SetTitleMixin from "../../utils/setTitle";
 export default {
   name: "Main",
 
-  mixins: [SetTitleMixin],
-
   components: { GeneralTemplate, MainContent },
+
+  mixins: [SetTitleMixin],
 
   data() {
     return {

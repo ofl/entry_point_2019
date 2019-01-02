@@ -45,7 +45,7 @@ export default {
   },
 
   watch: {
-    article: function (val) {
+    article: function(val) {
       document.title = `${val.title} | EP2019`;
     }
   },
