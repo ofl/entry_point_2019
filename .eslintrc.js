@@ -9,6 +9,9 @@ module.exports = {
     "plugin:prettier/recommended"
   ],
   "globals": {
-    "process": true
+    "process": true,
+    "describe": true,
+    "test": true,
+    "expect": true
   },
 };
