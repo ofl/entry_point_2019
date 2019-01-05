@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@jagi/jest-transform-graphql": "^1.0.2",
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@vue/test-utils": "^1.0.0-beta.28",
     "babel-core": "^7.0.0-bridge.0",
@@ -56,7 +57,8 @@
     ],
     "transform": {
       ".*\\.(vue)$": "vue-jest",
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      "\\.(gql|graphql)$": "@jagi/jest-transform-graphql"
     }
   }
 }
