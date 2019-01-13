@@ -5,7 +5,7 @@
     <div class="hero-body">
       <div class="container">
         {{ $t("hello") }}
-        <h1 class="title is-1">Towerofl</h1>
+        <h1 class="title is-1">{{ userName }}</h1>
         <h2 class="subtitle is-3">Full Stack Web Developer</h2>
       </div>
     </div>
@@ -14,7 +14,19 @@
 
 <script>
 export default {
-  name: "MainContent"
+  name: "MainContent",
+
+  props: {
+    currentUser: {
+      type: Object
+    }
+  },
+
+  computed: {
+    userName() {
+      return !!this.currentUser ? this.currentUser.name : "Guest";
+    }
+  }
 };
 </script>
 
