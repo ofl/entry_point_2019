@@ -1,26 +1,32 @@
 import { shallowMount, RouterLinkStub } from "@vue/test-utils";
 import InlineGqlArticleListItem from "../InlineGqlArticleListItem.vue";
+import { fakeArticle } from "../../../test/fake-data";
 
 describe("InlineGqlArticleListItem", () => {
   test("is a Vue instance", () => {
-    const article = {
-      id: "1",
-      title: "Hello",
-      body: "World",
-      createdAt: "2019-01-01",
-      commentsCount: 1,
-      likesCount: 1,
-      user: {
-        id: "1",
-        name: "Jhon",
-        avatar: "https://foo.com/br.png"
-      }
-    };
-
     const wrapper = shallowMount(InlineGqlArticleListItem, {
-      propsData: { article },
+      propsData: { article: fakeArticle },
       stubs: { RouterLink: RouterLinkStub }
     });
+
     expect(wrapper.isVueInstance()).toBeTruthy();
+  });
+
+  test("renders an article", () => {
+    const wrapper = shallowMount(InlineGqlArticleListItem, {
+      propsData: { article: fakeArticle },
+      stubs: { RouterLink: RouterLinkStub }
+    });
+
+    expect(wrapper.find("h4").text()).toBe(fakeArticle.title);
+  });
+
+  test("avatarUrl is article author avata url", () => {
+    const wrapper = shallowMount(InlineGqlArticleListItem, {
+      propsData: { article: fakeArticle },
+      stubs: { RouterLink: RouterLinkStub }
+    });
+
+    expect(wrapper.vm.avatarUrl).toBe(fakeArticle.user.avatar);
   });
 });
