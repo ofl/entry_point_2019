@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InlineGqlArticleListItem renders an article 1`] = `
+<article
+  class="post"
+>
+  <a>
+    <h4>
+      Hello
+    </h4>
+  </a>
+   
+  <div
+    class="media"
+  >
+    <div
+      class="media-left"
+    >
+      <p
+        class="image is-32x32"
+      >
+        <img
+          src="https://foo.com/br.png"
+        />
+      </p>
+    </div>
+     
+    <div
+      class="media-content"
+    >
+      <div
+        class="content"
+      >
+        <p>
+          <a
+            href="#"
+          >
+             Jhon 
+          </a>
+          2019-01-01   
+          <span
+            class="tag"
+          >
+             Question 
+          </span>
+        </p>
+      </div>
+    </div>
+     
+    <div
+      class="media-right"
+    >
+      <span
+        class="has-text-grey-light"
+      >
+        <i
+          class="fa fa-comments"
+        />
+         1
+        
+      </span>
+       
+      <span
+        class="has-text-grey-light"
+      >
+        <i
+          class="fa fa-heart"
+        />
+         1
+        
+      </span>
+    </div>
+  </div>
+</article>
+`;

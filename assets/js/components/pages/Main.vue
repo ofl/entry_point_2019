@@ -3,7 +3,7 @@
 <template>
   <GeneralTemplate :current-user="currentUser"
 :flashes="flashes">
-    <MainContent />
+    <MainContent :current-user="currentUser" />
   </GeneralTemplate>
 </template>
 
@@ -22,8 +22,8 @@ export default {
 
   data() {
     return {
-      currentUser: gon.currentUser,
-      flashes: gon.flashJson
+      currentUser: this.$rails.currentUser,
+      flashes: this.$rails.flashJson
     };
   }
 };

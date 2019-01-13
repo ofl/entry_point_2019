@@ -19,6 +19,8 @@ Vue.use(Buefy);
 Vue.use(VeeValidate, { events: "" });
 Vue.use(VueI18n);
 
+Vue.prototype.$rails = window.gon;
+
 const uri =
   process.env.NODE_ENV === "production"
     ? "/graphql"
