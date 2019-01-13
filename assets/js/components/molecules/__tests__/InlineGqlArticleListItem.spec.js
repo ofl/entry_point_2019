@@ -21,7 +21,16 @@ describe("InlineGqlArticleListItem", () => {
     expect(wrapper.find("h4").text()).toBe(fakeArticle.title);
   });
 
-  test("avatarUrl is article author avata url", () => {
+  test("renders an article", () => {
+    const wrapper = shallowMount(InlineGqlArticleListItem, {
+      propsData: { article: fakeArticle },
+      stubs: { RouterLink: RouterLinkStub }
+    });
+
+    expect(wrapper.element).toMatchSnapshot();
+  });
+
+  test("avatarUrl is article author avatar url", () => {
     const wrapper = shallowMount(InlineGqlArticleListItem, {
       propsData: { article: fakeArticle },
       stubs: { RouterLink: RouterLinkStub }
