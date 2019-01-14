@@ -47,6 +47,7 @@ services:
     ports:
       - '3007:3007'
       - '3008:3008'
+      - '9001:9001' # storybook
     volumes:
       - .:/app
       - ./node_modules:/app/node_modules
