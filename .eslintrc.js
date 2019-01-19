@@ -14,6 +14,7 @@ module.exports = {
     "test": true,
     "expect": true,
     "beforeEach": true,
-    "jest": true
+    "jest": true,
+    "module": true
   },
 };
