@@ -5,7 +5,7 @@ EntryPoint2019
 
 Overview
 
-Rails + Vue.js + GraphQL + Apollo Client + Atomic Design
+Rails + Vue.js + GraphQL + Apollo Client + Atomic Design + Storybook
 
 ## Description
 
@@ -26,6 +26,7 @@ Rails + Vue.js + GraphQL + Apollo Client + Atomic Design
 +   [Vue.js](https://jp.vuejs.org/index.html)
 +   [Buefy](https://buefy.github.io/)
 +   [laravel-mix](https://github.com/JeffreyWay/laravel-mix)
++   [Storybook](https://storybook.js.org/)
 
 ### CSS
 
@@ -53,6 +54,18 @@ $ docker-compose up -d
 
 # run watch
 $ docker-compose run --rm yarn run watch
+```
+
+### Javascript Test(Jest)
+
+```
+$ docker-compose run --rm yarn run test
+```
+
+### Storybook
+
+```
+$ docker-compose run --rm --service-ports yarn run storybook
 ```
 
 ### Add npm package
