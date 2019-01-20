@@ -8,5 +8,7 @@ module Types
     field :create_comment, mutation: Mutations::Comments::Create
     field :update_comment, mutation: Mutations::Comments::Update
     field :destroy_comment, mutation: Mutations::Comments::Destroy
+
+    field :create_account, mutation: Mutations::Account::Create
   end
 end
