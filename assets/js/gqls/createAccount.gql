@@ -1,0 +1,12 @@
+mutation CreateAccount($attributes: AccountAttributes!) {
+  createAccount(input: { attributes: $attributes }) {
+    account {
+      id
+      name
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
