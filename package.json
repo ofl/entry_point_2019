@@ -16,6 +16,7 @@
   "dependencies": {
     "apollo-boost": "^0.1.23",
     "buefy": "^0.7.1",
+    "bulma-steps-component": "^0.5.3",
     "cross-env": "^5.2",
     "graphql": "^14.0.2",
     "resolve-url-loader": "^3.0.0",
