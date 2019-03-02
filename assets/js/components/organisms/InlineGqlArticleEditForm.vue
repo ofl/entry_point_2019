@@ -111,9 +111,9 @@ export default {
         }
 
         if (this.isUpdate) {
-          this.editArticle();
+          this.updateArticle();
         } else {
-          this.newArticle();
+          this.createArticle();
         }
       });
     },
@@ -124,7 +124,7 @@ export default {
       });
     },
 
-    async newArticle() {
+    async createArticle() {
       await this.$apollo
         .mutate({
           mutation: CREATE_ARTICLE_MUTATION,
@@ -167,7 +167,7 @@ export default {
         });
     },
 
-    async editArticle() {
+    async updateArticle() {
       await this.$apollo
         .mutate({
           mutation: UPDATE_ARTICLE_MUTATION,

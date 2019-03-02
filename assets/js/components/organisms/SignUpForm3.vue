@@ -27,9 +27,9 @@
       />
     </BField>
 
-    <p v-if="!errors.has('email')">
+    <BField v-if="!errors.has('email')">
       {{ user.email }}
-    </p>
+    </BField>
     <BField
       v-show="errors.has('email')"
       :type="{ 'is-danger': errors.has('email') }"
@@ -47,9 +47,9 @@
       />
     </BField>
 
-    <p v-if="!errors.has('password')">
+    <BField v-if="!errors.has('password')">
       **********
-    </p>
+    </BField>
     <BField
       v-show="errors.has('password')"
       :type="{ 'is-danger': errors.has('password') }"
@@ -66,9 +66,9 @@
       />
     </BField>
 
-    <p v-if="!errors.has('passwordConfirmation')">
+    <BField v-if="!errors.has('passwordConfirmation')">
       **********
-    </p>
+    </BField>
     <BField
       v-show="errors.has('passwordConfirmation')"
       :type="{ 'is-danger': errors.has('passwordConfirmation') }"
@@ -85,18 +85,23 @@
       />
     </BField>
 
-    <button
-      class="button is-block is-info is-large is-fullwidth"
-      @click.stop.prevent="handleClickSubmit"
-    >
-      Submit
-    </button>
-    <button
-      class="button is-block is-light is-large is-fullwidth"
-      @click.stop.prevent="handleClickBack"
-    >
-      Back
-    </button>
+    <BField>
+      <button
+        class="button is-block is-info is-large is-fullwidth"
+        @click.stop.prevent="handleClickSubmit"
+      >
+        Submit
+      </button>
+    </BField>
+
+    <BField>
+      <button
+        class="button is-block is-light is-large is-fullwidth"
+        @click.stop.prevent="handleClickBack"
+      >
+        Back
+      </button>
+    </BField>
   </form>
 </template>
 

@@ -52,19 +52,23 @@
       />
     </BField>
 
-    <button
-      class="button is-block is-info is-large is-fullwidth"
-      @click.stop.prevent="handleClickNext"
-    >
-      Next
-    </button>
+    <BField>
+      <button
+        class="button is-block is-info is-large is-fullwidth"
+        @click.stop.prevent="handleClickNext"
+      >
+        Next
+      </button>
+    </BField>
 
-    <button
-      class="button is-block is-light is-large is-fullwidth"
-      @click.stop.prevent="handleClickBack"
-    >
-      Back
-    </button>
+    <BField>
+      <button
+        class="button is-block is-light is-large is-fullwidth"
+        @click.stop.prevent="handleClickBack"
+      >
+        Back
+      </button>
+    </BField>
   </form>
 </template>
 

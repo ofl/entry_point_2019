@@ -11,7 +11,7 @@
           <LoginForm :user="user" />
         </div>
         <p class="has-text-grey">
-          <a href="../"> Sign Up </a> &nbsp;·&nbsp;
+          <a href="./sign_up"> Sign Up </a> &nbsp;·&nbsp;
           <a href="../"> Forgot Password </a> &nbsp;·&nbsp;
           <a href="../"> Need Help? </a>
         </p>
