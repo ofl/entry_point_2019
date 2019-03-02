@@ -1,9 +1,12 @@
 <template>
   <div class="hero-body">
     <div class="container has-text-centered">
+      <SignUpSteps :step="step" />
+
       <div class="column is-4 is-offset-4">
         <h3 class="title has-text-grey">Sign Up</h3>
         <p class="subtitle has-text-grey">Please sign up.</p>
+
         <div class="box">
           <figure class="avatar">
             <img src="https://placehold.it/128x128" >
@@ -47,11 +50,12 @@ import SignUpForm1 from "../organisms/SignUpForm1.vue";
 import SignUpForm2 from "../organisms/SignUpForm2.vue";
 import SignUpForm3 from "../organisms/SignUpForm3.vue";
 import SignUpForm4 from "../organisms/SignUpForm4.vue";
+import SignUpSteps from "../organisms/SignUpSteps.vue";
 
 export default {
   name: "SignUpContent",
 
-  components: { SignUpForm1, SignUpForm2, SignUpForm3, SignUpForm4 },
+  components: { SignUpForm1, SignUpForm2, SignUpForm3, SignUpForm4, SignUpSteps },
 
   data() {
     return {
