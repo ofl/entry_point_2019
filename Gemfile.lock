@@ -129,7 +129,7 @@ GEM
       multi_json
       request_store (>= 1.0)
     graphql (1.9.3)
-    i18n (1.5.3)
+    i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     i18n_generators (2.2.0)
       activerecord (>= 3.0.0)
