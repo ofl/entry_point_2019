@@ -13,7 +13,7 @@ query Article($id: ID!) {
       user {
         id
         name
-        avatar
+        avatarUrl
       }
     }
     commentsCount

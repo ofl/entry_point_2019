@@ -31,7 +31,7 @@ class User < ApplicationRecord
     Jbuilder.new do |user|
       user.id id.to_s
       user.name name
-      user.avatar avatar
+      user.avatarUrl avatar_url
       user.__typename 'User'
     end
   end
