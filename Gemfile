@@ -31,6 +31,7 @@ gem 'graphql'
 gem 'gon'
 gem 'kaminari'
 gem 'meta-tags'
+gem 'shrine', "~> 2.0"
 gem 'sorcery'
 
 group :development, :test do
