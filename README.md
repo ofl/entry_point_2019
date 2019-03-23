@@ -56,6 +56,12 @@ $ docker-compose up -d
 $ docker-compose run --rm yarn run watch
 ```
 
+### Javascript Lint
+
+```
+$ docker-compose run --rm yarn run lint
+```
+
 ### Javascript Test(Jest)
 
 ```

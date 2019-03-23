@@ -10,5 +10,6 @@ module Types
     field :destroy_comment, mutation: Mutations::Comments::Destroy
 
     field :create_account, mutation: Mutations::Account::Create
+    field :update_profile, mutation: Mutations::Profile::Update
   end
 end

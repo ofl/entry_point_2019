@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
       gon.currentUser = {
         id: current_user.id.to_s,
         name: current_user.name,
+        email: current_user.email,
         avatar: current_user.avatar,
         __typename: 'currentUser'
       }
