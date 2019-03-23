@@ -89,7 +89,7 @@ class="navbar-item">
           <a class="navbar-link"> {{ currentUser.name }} </a>
 
           <div class="navbar-dropdown">
-            <RouterLink to="/edit_profile"
+            <RouterLink to="/profile/edit"
 class="navbar-item">
               <span class="icon"> <i class="fas fa-file-alt" /> </span>
               <span>Edit Profile</span>

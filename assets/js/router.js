@@ -49,7 +49,7 @@ const routes = [
     name: "SignUp"
   },
   {
-    path: "/edit_profile",
+    path: "/profile/edit",
     component: EditProfile,
     name: "EditProfile"
   }
