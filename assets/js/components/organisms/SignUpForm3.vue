@@ -7,9 +7,7 @@
     method="POST"
     lazy-validation
   >
-    <p v-if="!errors.has('name')">
-      {{ user.name }}
-    </p>
+    <p v-if="!errors.has('name')">{{ user.name }}</p>
     <BField
       v-show="errors.has('name')"
       :type="{ 'is-danger': errors.has('name') }"
@@ -27,9 +25,7 @@
       />
     </BField>
 
-    <BField v-if="!errors.has('email')">
-      {{ user.email }}
-    </BField>
+    <BField v-if="!errors.has('email')"> {{ user.email }} </BField>
     <BField
       v-show="errors.has('email')"
       :type="{ 'is-danger': errors.has('email') }"
@@ -47,61 +43,61 @@
       />
     </BField>
 
-    <BField v-if="!errors.has('password')">
-      **********
-    </BField>
+    <BField v-if="!errors.has('password')"> ********** </BField>
     <BField
       v-show="errors.has('password')"
       :type="{ 'is-danger': errors.has('password') }"
       :message="errors.first('password')"
     >
       <BInput
+        ref="password"
         v-model="user.password"
         v-validate="'required'"
         size="is-large"
         name="password"
         type="password"
-        ref="password"
         placeholder="Your Password"
       />
     </BField>
 
-    <BField v-if="!errors.has('passwordConfirmation')">
-      **********
-    </BField>
+    <BField v-if="!errors.has('passwordConfirmation')"> ********** </BField>
     <BField
       v-show="errors.has('passwordConfirmation')"
       :type="{ 'is-danger': errors.has('passwordConfirmation') }"
       :message="errors.first('passwordConfirmation')"
     >
       <BInput
+        ref="passwordConfirmation"
         v-model="user.passwordConfirmation"
         v-validate="'required'"
         size="is-large"
         name="passwordConfirmation"
         type="password"
-        ref="passwordConfirmation"
         placeholder="Your Password"
       />
     </BField>
 
     <BField>
       <input
-        class="is-checkradio"
         id="exampleCheckbox"
+        v-model="isAgreed"
+        class="is-checkradio"
         type="checkbox"
         name="exampleCheckbox"
-        v-model="isAgreed"
-    >
-      <label for="exampleCheckbox" id="agree-label">
-        I agree to the xxxx <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy_policy" target="_blank">Privacy Policy</a>.
+      />
+      <label id="agree-label" for="exampleCheckbox">
+        I agree to the xxxx
+        <a
+href="/terms" target="_blank"> Terms of Service </a> and
+        <a
+href="/privacy_policy" target="_blank"> Privacy Policy </a>.
       </label>
     </BField>
 
     <BField>
       <button
         class="button is-block is-info is-large is-fullwidth"
-        v-bind:disabled="!isAgreed"
+        :disabled="!isAgreed"
         @click.stop.prevent="handleClickSubmit"
       >
         Submit
@@ -121,7 +117,7 @@
 
 <script>
 import CREATE_ARTICLE_MUTATION from "../../gqls/createAccount.gql";
-import 'bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css'
+import "bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio.min.css";
 
 export default {
   name: "SignUpForm",
@@ -135,7 +131,7 @@ export default {
   data() {
     return {
       valid: true,
-      isAgreed: false,
+      isAgreed: false
     };
   },
 
@@ -215,8 +211,16 @@ export default {
   color: #0000ff;
   text-decoration: underline;
 }
-#agree-label > a:link { color: #0000ff; }
-#agree-label > a:visited { color: #000080; }
-#agree-label > a:hover { color: #ff0000; }
-#agree-label > a:active { color: #ff8000; }
+#agree-label > a:link {
+  color: #0000ff;
+}
+#agree-label > a:visited {
+  color: #000080;
+}
+#agree-label > a:hover {
+  color: #ff0000;
+}
+#agree-label > a:active {
+  color: #ff8000;
+}
 </style>

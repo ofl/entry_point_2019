@@ -1,9 +1,9 @@
 class ProfilesController < ApplicationController
-  # GET /users/1
+  # GET /profile
   def show
   end
 
-  # GET /users/1/edit
+  # GET /profile/edit
   def edit
   end
 end

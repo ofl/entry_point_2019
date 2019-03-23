@@ -82,10 +82,7 @@ class="navbar-item">
           <span>Login</span>
         </a>
 
-        <div
-          class="navbar-item has-dropdown is-hoverable"
-          v-if="isLoggedIn"
-        >
+        <div v-if="isLoggedIn" class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link"> {{ currentUser.name }} </a>
 
           <div class="navbar-dropdown">
@@ -104,7 +101,8 @@ class="navbar-item">
               <span>Logout</span>
             </a>
 
-            <DeleteForm ref="deleteSession" request-path="/logout" />
+            <DeleteForm ref="deleteSession"
+request-path="/logout" />
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <GeneralTemplate >
+  <GeneralTemplate>
     <EditProfileContent :current-user="currentUser" />
   </GeneralTemplate>
 </template>
@@ -35,7 +35,7 @@ export default {
       skip() {
         return this.hasInlineUserData;
       }
-    },
+    }
   },
 
   mounted() {

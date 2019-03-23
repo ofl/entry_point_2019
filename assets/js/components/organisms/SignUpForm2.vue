@@ -28,12 +28,12 @@
       :message="errors.first('password')"
     >
       <BInput
+        ref="password"
         v-model="user.password"
         v-validate="'required'"
         size="is-large"
         name="password"
         type="password"
-        ref="password"
         placeholder="Your Password"
       />
     </BField>

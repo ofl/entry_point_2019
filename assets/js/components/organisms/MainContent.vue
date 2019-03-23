@@ -24,7 +24,7 @@ export default {
 
   computed: {
     userName() {
-      return !!this.currentUser ? this.currentUser.name : "Guest";
+      return this.currentUser ? this.currentUser.name : "Guest";
     }
   }
 };

@@ -31,15 +31,10 @@
             @next="next"
             @back="back"
           />
-          <SignUpForm4
-            v-if="step === 4"
-            :user="user"
-            :step="step"
-          />
+          <SignUpForm4 v-if="step === 4"
+:user="user" :step="step" />
         </div>
-        <p class="has-text-grey">
-          <a href="./login"> Login </a> &nbsp;·&nbsp;
-        </p>
+        <p class="has-text-grey"><a href="./login"> Login </a> &nbsp;·&nbsp;</p>
       </div>
     </div>
   </div>
@@ -55,7 +50,13 @@ import SignUpSteps from "../organisms/SignUpSteps.vue";
 export default {
   name: "SignUpContent",
 
-  components: { SignUpForm1, SignUpForm2, SignUpForm3, SignUpForm4, SignUpSteps },
+  components: {
+    SignUpForm1,
+    SignUpForm2,
+    SignUpForm3,
+    SignUpForm4,
+    SignUpSteps
+  },
 
   data() {
     return {
@@ -69,9 +70,7 @@ export default {
   },
 
   methods: {
-    submit() {
-
-    },
+    submit() {},
     next() {
       this.step++;
     },
