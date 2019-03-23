@@ -18,6 +18,9 @@ FactoryBot.define do
     sequence(:email) { |n| "user_#{n}@example.com" }
     password { 'password' }
     password_confirmation { 'password' }
-    avatar { '' }
+
+    trait :with_avatar do
+      avatar { File.open(Rails.root.join('spec', 'fixtures', 'files', 'youngman_31.png')) }
+    end
   end
 end
