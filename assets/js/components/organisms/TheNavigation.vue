@@ -81,18 +81,32 @@ class="navbar-item">
           <span class="icon"> <i class="fas fa-sign-in-alt" /> </span>
           <span>Login</span>
         </a>
-        <a
-          v-if="isLoggedIn"
-          class="navbar-item"
-          href="#"
-          @click.stop.prevent="confirmLogout()"
-        >
-          <span class="icon"> <i class="fas fa-sign-out-alt" /> </span>
-          <span>Logout</span>
-        </a>
 
-        <DeleteForm ref="deleteSession"
-request-path="/logout" />
+        <div
+          class="navbar-item has-dropdown is-hoverable"
+          v-if="isLoggedIn"
+        >
+          <a class="navbar-link"> {{ currentUser.name }} </a>
+
+          <div class="navbar-dropdown">
+            <RouterLink to="/edit_profile"
+class="navbar-item">
+              <span class="icon"> <i class="fas fa-file-alt" /> </span>
+              <span>Edit Profile</span>
+            </RouterLink>
+
+            <a
+              class="navbar-item"
+              href="#"
+              @click.stop.prevent="confirmLogout()"
+            >
+              <span class="icon"> <i class="fas fa-sign-out-alt" /> </span>
+              <span>Logout</span>
+            </a>
+
+            <DeleteForm ref="deleteSession" request-path="/logout" />
+          </div>
+        </div>
       </div>
     </div>
   </nav>

@@ -9,6 +9,7 @@ import InlineGqlArticleDetail from "./components/pages/InlineGqlArticleDetail.vu
 import GqlArticleList from "./components/pages/GqlArticleList.vue";
 import GqlArticleDetail from "./components/pages/GqlArticleDetail.vue";
 import SignUp from "./components/pages/SignUp.vue";
+import EditProfile from "./components/pages/EditProfile.vue";
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,11 @@ const routes = [
     path: "/sign_up",
     component: SignUp,
     name: "SignUp"
+  },
+  {
+    path: "/edit_profile",
+    component: EditProfile,
+    name: "EditProfile"
   }
 ];
 
