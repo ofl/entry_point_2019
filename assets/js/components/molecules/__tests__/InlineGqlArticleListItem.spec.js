@@ -36,6 +36,6 @@ describe("InlineGqlArticleListItem", () => {
       stubs: { RouterLink: RouterLinkStub }
     });
 
-    expect(wrapper.vm.avatarUrl).toBe(fakeArticle.user.avatar);
+    expect(wrapper.vm.avatarUrl).toBe(fakeArticle.user.avatarUrl);
   });
 });

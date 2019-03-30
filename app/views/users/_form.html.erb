@@ -31,6 +31,12 @@
      <%= f.password_field :password_confirmation %>
   </div>
 
+  <div class="field">
+     <%= f.label :avatar %><br />
+     <%= f.hidden_field :avatar, type: :hidden, value: @user.cached_avatar_data %>
+     <%= f.file_field :avatar, type: :file %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
         id: current_user.id.to_s,
         name: current_user.name,
         email: current_user.email,
-        avatar: current_user.avatar,
+        avatarUrl: current_user.avatar_url,
         __typename: 'currentUser'
       }
     end

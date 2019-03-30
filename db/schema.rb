@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_06_093612) do
+ActiveRecord::Schema.define(version: 2019_03_23_072410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,11 +49,11 @@ ActiveRecord::Schema.define(version: 2018_10_06_093612) do
   create_table "users", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.string "email", limit: 100, null: false
-    t.string "avatar", limit: 100
     t.string "crypted_password", null: false
     t.string "salt", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar_data", comment: "アバター画像情報"
   end
 
   add_foreign_key "articles", "users"

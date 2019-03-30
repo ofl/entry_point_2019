@@ -6,7 +6,7 @@ mutation CreateComment($articleId: ID!, $attributes: CommentAttributes!) {
       user {
         id
         name
-        avatar
+        avatarUrl
       }
     }
     article {

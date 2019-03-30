@@ -5,7 +5,7 @@ query Articles {
     user {
       id
       name
-      avatar
+      avatarUrl
     }
     commentsCount
     likesCount

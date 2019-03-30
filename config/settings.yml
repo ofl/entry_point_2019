@@ -7,3 +7,12 @@ site:
     ogp:
       type: website
       image_path: ogp_1200x630.png
+uploaders:
+  default: &default
+    max_size: 2 # MB
+    allowed_mime_types:
+      - image/png
+      - image/jpeg
+      - image/gif
+  avatar:
+    <<: *default

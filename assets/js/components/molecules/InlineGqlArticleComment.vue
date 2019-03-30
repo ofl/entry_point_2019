@@ -40,8 +40,8 @@ export default {
 
   computed: {
     avatarUrl() {
-      return this.comment.user.avatar != ""
-        ? this.comment.user.avatar
+      return this.comment.user.avatarUrl != ""
+        ? this.comment.user.avatarUrl
         : "http://bulma.io/images/placeholders/128x128.png";
     },
 

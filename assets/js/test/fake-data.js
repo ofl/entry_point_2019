@@ -8,12 +8,12 @@ export const fakeArticle = {
   user: {
     id: "1",
     name: "Jhon",
-    avatar: "https://example.com/avatar.png"
+    avatarUrl: "https://example.com/avatar.png"
   }
 };
 
 export const fakeUser = {
   id: "1",
   name: "Jhon",
-  avatar: "https://example.com/avatar.png"
+  avatarUrl: "https://example.com/avatar.png"
 };
