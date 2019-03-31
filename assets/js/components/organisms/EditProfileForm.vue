@@ -33,6 +33,17 @@
       />
     </BField>
 
+    <BField
+      label="Avatar"
+      :type="{ 'is-danger': errors.has('avatar') }"
+      :message="errors.first('avatar')"
+    >
+      <input
+        type="file"
+        @change="handleFileChange"
+      />
+    </BField>
+
     <BField>
       <p class="control">
         <button
@@ -83,6 +94,7 @@ export default {
     clear() {
       this.profile.name = "";
       this.profile.email = "";
+      this.profile.avatar = "";
       this.$refs.form.reset();
     },
 
@@ -106,6 +118,10 @@ export default {
       });
     },
 
+    handleFileChange(e) {
+      this.profile.avatar = e.target.files[0];
+    },
+
     async updateProfile() {
       await this.$apollo
         .mutate({
@@ -114,7 +130,8 @@ export default {
             id: this.profile.id,
             attributes: {
               name: this.profile.name,
-              email: this.profile.email
+              email: this.profile.email,
+              avatar: this.profile.avatar
             }
           },
           update: (

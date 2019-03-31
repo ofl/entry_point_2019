@@ -4,6 +4,7 @@ mutation UpdateProfile($id: ID!, $attributes: ProfileAttributes!) {
       id
       name
       email
+      avatarUrl
     }
     errors {
       path
