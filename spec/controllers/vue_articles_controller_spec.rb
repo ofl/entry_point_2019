@@ -35,7 +35,7 @@ RSpec.describe VueArticlesController, type: :controller do
           title: article.title,
           user: {
             __typename: 'User',
-            avatar: '',
+            avatarUrl: nil,
             id: user.id.to_s,
             name: user.name
           }.stringify_keys
@@ -67,7 +67,7 @@ RSpec.describe VueArticlesController, type: :controller do
           title: article.title,
           user: {
             __typename: 'User',
-            avatar: '',
+            avatarUrl: nil,
             id: user.id.to_s,
             name: user.name
           }.stringify_keys

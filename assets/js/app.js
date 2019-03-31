@@ -1,9 +1,12 @@
 import Vue from "vue";
-import ApolloClient from "apollo-boost";
 import VueApollo from "vue-apollo";
 import Buefy from "buefy";
 import VeeValidate from "vee-validate";
 import VueI18n from "vue-i18n";
+
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { createUploadLink } from "apollo-upload-client";
 
 // VueRouterを使用しないコンポーネント(検証用)
 import LoginComponent from "./components/pages/Login.vue";
@@ -26,8 +29,13 @@ const uri =
     ? "/graphql"
     : "http://localhost:3000/graphql";
 
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: createUploadLink({ uri: uri })
+});
+
 const apolloProvider = new VueApollo({
-  defaultClient: new ApolloClient({ uri: uri })
+  defaultClient: client
 });
 
 const componentsList = {
