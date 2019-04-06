@@ -14,9 +14,10 @@
               v-if="isOwner(comment.user.id)"
               @click.stop.prevent="handleClickDelete(comment.id)"
             >
-              Delete ·
+              Delete
             </a>
-            <a>Reply</a> {{ comment.createdAt }}
+            <a>Edit</a>
+            {{ comment.createdAt }}
           </small>
         </p>
       </div>
@@ -36,6 +37,12 @@ export default {
     currentUser: {
       type: Object
     }
+  },
+
+  data() {
+    return {
+      isEditing: false
+    };
   },
 
   computed: {
