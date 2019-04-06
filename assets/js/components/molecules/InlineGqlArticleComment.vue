@@ -8,17 +8,28 @@
       <div class="content">
         <p>
           <strong>{{ comment.user.name }}</strong> <br >
-          {{ comment.body }} <br >
-          <small>
-            <a
-              v-if="isOwner(comment.user.id)"
-              @click.stop.prevent="handleClickDelete(comment.id)"
-            >
-              Delete
+          <template v-if="isEditing">
+            <a @click.stop.prevent="handleClickUpdate(comment.id)">
+              Update
             </a>
-            <a>Edit</a>
-            {{ comment.createdAt }}
-          </small>
+            <a @click.stop.prevent="handleClickCancel">
+              Cancel
+            </a>
+          </template>
+          <template v-else>
+            {{ comment.body }} <br >
+            <small>
+              <template v-if="isOwner(comment.user.id)">
+                <a @click.stop.prevent="handleClickDelete(comment.id)">
+                  Delete
+                </a>
+                <a @click.stop.prevent="handleClickEdit">
+                  Edit
+                </a>
+              </template>
+              {{ comment.createdAt }}
+            </small>
+          </template>
         </p>
       </div>
     </div>
@@ -60,6 +71,18 @@ export default {
   methods: {
     handleClickDelete(id) {
       this.$emit("delete-comment", id);
+    },
+
+    handleClickUpdate(id) {
+      this.$emit("delete-comment", id);
+    },
+
+    handleClickEdit() {
+      this.isEditing = true;
+    },
+
+    handleClickCancel() {
+      this.isEditing = false;
     },
 
     isOwner(id) {
