@@ -4,8 +4,9 @@ import Buefy from "buefy";
 import VeeValidate from "vee-validate";
 import VueI18n from "vue-i18n";
 
-import ApolloClient from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+// apollo-upload-clientを利用するためApolloBoostをmigration(https://www.apollographql.com/docs/react/advanced/boost-migration)
+import { ApolloClient, InMemoryCache, ApolloLink } from "apollo-boost";
+import { withClientState } from "apollo-link-state";
 import { createUploadLink } from "apollo-upload-client";
 
 // VueRouterを使用しないコンポーネント(検証用)
@@ -29,9 +30,18 @@ const uri =
     ? "/graphql"
     : "http://localhost:3000/graphql";
 
+const cache = new InMemoryCache();
+
+const stateLink = withClientState({
+  cache,
+  resolvers: {}
+});
+const httpLink = createUploadLink({ uri: uri });
+const link = ApolloLink.from([stateLink, httpLink]);
+
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: createUploadLink({ uri: uri })
+  link,
+  cache: new InMemoryCache()
 });
 
 const apolloProvider = new VueApollo({
