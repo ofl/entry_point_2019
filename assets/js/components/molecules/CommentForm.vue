@@ -27,22 +27,20 @@
       </div>
 
       <div class="field">
-        <p class="control">
-          <button
-            class="button field is-primary"
-            :disabled="!valid"
-            @click.stop.prevent="handleSubmit"
-          >
-            <BIcon icon="pencil" />
-            <span>{{ submitButtonTitle }}</span>
-          </button>
+        <button
+          class="button field is-primary"
+          :disabled="!valid"
+          @click.stop.prevent="handleSubmit"
+        >
+          <BIcon icon="pencil" />
+          <span>{{ submitButtonTitle }}</span>
+        </button>
 
-          <button class="button field is-info"
+        <button class="button field is-info"
 @click.stop.prevent="clear">
-            <BIcon icon="eraser" />
-            <span>Clear</span>
-          </button>
-        </p>
+          <BIcon icon="eraser" />
+          <span>Clear</span>
+        </button>
       </div>
     </form>
   </div>

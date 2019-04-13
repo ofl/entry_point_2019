@@ -5,6 +5,7 @@ tag="div" class="comment-list-card">
       v-for="(comment, index) in comments"
       :key="commentKey(comment.id)"
       :comment="comment"
+      :articleId="articleId"
       :current-user="currentUser"
       @delete-comment="deleteComment"
     />

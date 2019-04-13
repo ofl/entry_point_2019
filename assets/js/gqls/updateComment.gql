@@ -1,0 +1,12 @@
+mutation UpdateComment($id: ID!, $attributes: CommentAttributes!) {
+  updateComment(input: { id: $id, attributes: $attributes }) {
+    comment {
+      id
+      body
+    }
+    errors {
+      path
+      message
+    }
+  }
+}

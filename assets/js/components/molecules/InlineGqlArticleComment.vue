@@ -9,9 +9,11 @@
         <p>
           <strong>{{ comment.user.name }}</strong> <br >
           <template v-if="isEditing">
-            <a @click.stop.prevent="handleClickUpdate(comment.id)">
-              Update
-            </a>
+            <CommentForm
+              :comment="comment"
+              :serverErrors="serverErrors"
+              @mutateComment="updateComment"
+            />
             <a @click.stop.prevent="handleClickCancel">
               Cancel
             </a>
@@ -37,8 +39,15 @@
 </template>
 
 <script>
+import CommentForm from "../molecules/CommentForm.vue";
+
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
+import UPDATE_COMMENT_MUTATION from "../../gqls/updateComment.gql";
+
 export default {
   name: "InlineGqlArticleComment",
+
+  components: { CommentForm },
 
   props: {
     comment: {
@@ -47,12 +56,18 @@ export default {
 
     currentUser: {
       type: Object
+    },
+
+    articleId: {
+      type: String,
+      required: true
     }
   },
 
   data() {
     return {
-      isEditing: false
+      isEditing: false,
+      serverErrors: []
     };
   },
 
@@ -90,6 +105,49 @@ export default {
         return false;
       }
       return id == this.currentUser.id;
+    },
+
+    async updateComment(body) {
+      await this.$apollo
+        .mutate({
+          mutation: UPDATE_COMMENT_MUTATION,
+          variables: {
+            id: this.comment.id,
+            attributes: {
+              body: body
+            }
+          },
+          update: (store, { data: { updateComment } }) => {
+            if (updateComment.errors.length > 0) {
+              this.serverErrors = updateComment.errors;
+              return;
+            }
+
+            const data = store.readQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId }
+            });
+            data.article.comments.forEach(comment => {
+              if (comment.id == updateComment.comment.id) {
+                comment.body = updateComment.comment.body;
+              }
+            });
+
+            store.writeQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId },
+              data
+            });
+
+            this.isEditing = false;
+          }
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 };
