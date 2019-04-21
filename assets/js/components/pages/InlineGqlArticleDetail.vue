@@ -5,6 +5,8 @@
       :article="article"
       :article-id="articleId"
       :current-user="currentUser"
+      :need-force-update="needForceUpdate"
+      @reloadArticle="reloadArticle"
     />
   </GeneralTemplate>
 </template>
@@ -28,7 +30,8 @@ export default {
       toolbarTitle: "Article",
       currentUser: gon.currentUser,
       article: gon.article,
-      flashes: {}
+      flashes: {},
+      needForceUpdate: !!gon.article,
     };
   },
 
@@ -60,12 +63,13 @@ export default {
     article: {
       query: ARTICLE_DETAIL_QUERY,
       variables() {
+        // variables: { id: this.articleId }ではthisが参照できないため
         return {
           id: this.articleId
         };
       },
       skip() {
-        return this.hasInlineArticleData;
+        return this.needForceUpdate;
       }
     }
   },
@@ -79,8 +83,7 @@ export default {
         data: { currentUser: gon.currentUser }
       });
     }
-
-    if (this.hasInlineArticleData) {
+    if (this.needForceUpdate) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: ARTICLE_DETAIL_QUERY,
         variables: { id: this.articleId },
@@ -88,6 +91,16 @@ export default {
       });
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.article = null;
+    }
+  },
+
+  methods: {
+    reloadArticle() {
+      const { article } = this.$apollo.provider.defaultClient.readQuery({
+        query: ARTICLE_DETAIL_QUERY,
+        variables: { id: this.articleId },
+      });
+      this.article = article;
     }
   }
 };
