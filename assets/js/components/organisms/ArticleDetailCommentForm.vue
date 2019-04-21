@@ -29,6 +29,10 @@ export default {
     articleId: {
       type: String,
       required: true
+    },
+    needForceUpdate: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -70,6 +74,10 @@ export default {
               data
             });
             this.comment = { body: "" };
+
+            if (this.needForceUpdate) {
+              this.$emit("reloadArticle");
+            }
           }
         })
         .then(data => {

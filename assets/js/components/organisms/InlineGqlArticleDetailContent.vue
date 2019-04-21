@@ -10,11 +10,15 @@
       :comments="article.comments"
       :current-user="currentUser"
       :article-id="articleId"
+      :need-force-update="needForceUpdate"
+      @reloadArticle="reloadArticle"
     />
     <ArticleDetailCommentForm
       v-if="isLoggedIn"
       :current-user="currentUser"
       :article-id="articleId"
+      :need-force-update="needForceUpdate"
+      @reloadArticle="reloadArticle"
     />
   </div>
 </template>
@@ -58,12 +62,22 @@ export default {
     },
     currentUser: {
       type: Object
+    },
+    needForceUpdate: {
+      type: Boolean,
+      default: false
     }
   },
 
   computed: {
     isLoggedIn() {
       return !!this.currentUser;
+    }
+  },
+
+  methods: {
+    reloadArticle() {
+      this.$emit("reloadArticle");
     }
   }
 };

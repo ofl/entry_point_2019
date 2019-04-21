@@ -61,6 +61,11 @@ export default {
     articleId: {
       type: String,
       required: true
+    },
+
+    needForceUpdate: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -140,6 +145,10 @@ export default {
             });
 
             this.isEditing = false;
+
+            if (this.needForceUpdate) {
+              this.$emit("reloadArticle");
+            }
           }
         })
         .then(data => {

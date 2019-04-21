@@ -7,6 +7,8 @@ tag="div" class="comment-list-card">
       :comment="comment"
       :articleId="articleId"
       :current-user="currentUser"
+      :need-force-update="needForceUpdate"
+      @reloadArticle="reloadArticle"
       @delete-comment="deleteComment"
     />
   </TransitionGroup>
@@ -31,6 +33,11 @@ export default {
       required: true
     },
 
+    needForceUpdate: {
+      type: Boolean,
+      default: false
+    },
+
     comments: {
       type: Array,
       default: []
@@ -44,6 +51,10 @@ export default {
   methods: {
     commentKey(id) {
       return `comment-${id}`;
+    },
+
+    reloadArticle() {
+      this.$emit("reloadArticle");
     },
 
     async deleteComment(id) {
