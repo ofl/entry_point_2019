@@ -8,16 +8,30 @@
       <div class="content">
         <p>
           <strong>{{ comment.user.name }}</strong> <br >
-          {{ comment.body }} <br >
-          <small>
-            <a
-              v-if="isOwner(comment.user.id)"
-              @click.stop.prevent="handleClickDelete(comment.id)"
-            >
-              Delete ·
+          <template v-if="isEditing">
+            <CommentForm
+              :comment="comment"
+              :serverErrors="serverErrors"
+              @mutateComment="updateComment"
+            />
+            <a @click.stop.prevent="handleClickCancel">
+              Cancel
             </a>
-            <a>Reply</a> {{ comment.createdAt }}
-          </small>
+          </template>
+          <template v-else>
+            {{ comment.body }} <br >
+            <small>
+              <template v-if="isOwner(comment.user.id)">
+                <a @click.stop.prevent="handleClickDelete(comment.id)">
+                  Delete
+                </a>
+                <a @click.stop.prevent="handleClickEdit">
+                  Edit
+                </a>
+              </template>
+              {{ comment.createdAt }}
+            </small>
+          </template>
         </p>
       </div>
     </div>
@@ -25,8 +39,15 @@
 </template>
 
 <script>
+import CommentForm from "../molecules/CommentForm.vue";
+
+import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
+import UPDATE_COMMENT_MUTATION from "../../gqls/updateComment.gql";
+
 export default {
   name: "InlineGqlArticleComment",
+
+  components: { CommentForm },
 
   props: {
     comment: {
@@ -35,7 +56,19 @@ export default {
 
     currentUser: {
       type: Object
+    },
+
+    articleId: {
+      type: String,
+      required: true
     }
+  },
+
+  data() {
+    return {
+      isEditing: false,
+      serverErrors: []
+    };
   },
 
   computed: {
@@ -55,11 +88,66 @@ export default {
       this.$emit("delete-comment", id);
     },
 
+    handleClickUpdate(id) {
+      this.$emit("delete-comment", id);
+    },
+
+    handleClickEdit() {
+      this.isEditing = true;
+    },
+
+    handleClickCancel() {
+      this.isEditing = false;
+    },
+
     isOwner(id) {
       if (!this.isLoggedIn) {
         return false;
       }
       return id == this.currentUser.id;
+    },
+
+    async updateComment(body) {
+      await this.$apollo
+        .mutate({
+          mutation: UPDATE_COMMENT_MUTATION,
+          variables: {
+            id: this.comment.id,
+            attributes: {
+              body: body
+            }
+          },
+          update: (store, { data: { updateComment } }) => {
+            if (updateComment.errors.length > 0) {
+              this.serverErrors = updateComment.errors;
+              return;
+            }
+
+            const data = store.readQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId }
+            });
+            data.article.comments.forEach(comment => {
+              if (comment.id == updateComment.comment.id) {
+                comment.body = updateComment.comment.body;
+              }
+            });
+
+            store.writeQuery({
+              query: ARTICLE_DETAIL_QUERY,
+              variables: { id: this.articleId },
+              data
+            });
+
+            this.isEditing = false;
+          }
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 };

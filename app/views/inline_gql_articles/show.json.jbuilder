@@ -14,6 +14,7 @@ json.article do
     json.__typename 'Comment'
     json.id comment.id
     json.body comment.body
+    json.createdAt comment.created_at.xmlschema
 
     json.user comment.user.to_builder
   end

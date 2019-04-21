@@ -8,8 +8,12 @@
       <div class="content">
         <p>
           <strong>{{ comment.user.name }}</strong> <br >
-          {{ comment.body }} <br >
-          <small><a>Like</a> · <a>Reply</a>{{ comment.createdAt }}</small>
+          <template v-if="isEditing">
+          </template>
+          <template v-else>
+            {{ comment.body }} <br >
+            <small><a>Edit</a> · <a>Delete</a>{{ comment.createdAt }}</small>
+          </template>
         </p>
       </div>
     </div>
@@ -24,6 +28,12 @@ export default {
     comment: {
       type: Object
     }
+  },
+
+  data() {
+    return {
+      isEditing: false
+    };
   },
 
   computed: {

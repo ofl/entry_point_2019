@@ -6,62 +6,24 @@
       </p>
     </figure>
 
-    <div class="media-content">
-      <form
-        ref="form"
-        v-model="valid"
-        accept-charset="UTF-8"
-        method="POST"
-        lazy-validation
-      >
-        <div class="field">
-          <p class="control">
-            <BField
-              label="Body"
-              :type="{ 'is-danger': errors.has('body') }"
-              :message="errors.first('body')"
-            >
-              <BInput
-                v-model="body"
-                v-validate="'required'"
-                label="Body"
-                name="body"
-                type="textarea"
-                placeholder="Add a comment..."
-              />
-            </BField>
-          </p>
-        </div>
-
-        <div class="field">
-          <p class="control">
-            <button
-              class="button field is-primary"
-              :disabled="!valid"
-              @click.stop.prevent="handleSubmit"
-            >
-              <BIcon icon="pencil" />
-              <span>Submit</span>
-            </button>
-
-            <button class="button field is-info"
-@click.stop.prevent="clear">
-              <BIcon icon="eraser" />
-              <span>Clear</span>
-            </button>
-          </p>
-        </div>
-      </form>
-    </div>
+    <CommentForm
+      :comment="comment"
+      :serverErrors="serverErrors"
+      @mutateComment="addComment"
+    />
   </article>
 </template>
 
 <script>
+import CommentForm from "../molecules/CommentForm.vue";
+
 import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 import ADD_COMMENT_MUTATION from "../../gqls/addComment.gql";
 
 export default {
   name: "ArticleDetailCommentForm",
+
+  components: { CommentForm },
 
   props: {
     articleId: {
@@ -72,52 +34,26 @@ export default {
 
   data() {
     return {
-      valid: true,
-      body: "",
-      currentUser: null
+      currentUser: null,
+      comment: { body: "" },
+      serverErrors: []
     };
   },
 
   methods: {
-    clear() {
-      this.body = "";
-      this.$refs.form.reset();
-    },
-
-    handleSubmit() {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          this.addComment();
-          return;
-        }
-
-        this.$toast.open({
-          message: "Form is not valid! Please check the fields.",
-          type: "is-danger",
-          position: "is-bottom"
-        });
-      });
-    },
-
-    handleServerValidationErrors(serverErrors) {
-      serverErrors.forEach(error => {
-        this.errors.add({ field: error.path[1], msg: error.message });
-      });
-    },
-
-    async addComment() {
+    async addComment(body) {
       await this.$apollo
         .mutate({
           mutation: ADD_COMMENT_MUTATION,
           variables: {
             articleId: this.articleId,
             attributes: {
-              body: this.body
+              body: body
             }
           },
           update: (store, { data: { createComment } }) => {
             if (createComment.errors.length > 0) {
-              this.handleServerValidationErrors(createComment.errors);
+              this.serverErrors = createComment.errors;
               return;
             }
 
@@ -133,7 +69,7 @@ export default {
               variables: { id: this.articleId },
               data
             });
-            this.clear();
+            this.comment = { body: "" };
           }
         })
         .then(data => {
