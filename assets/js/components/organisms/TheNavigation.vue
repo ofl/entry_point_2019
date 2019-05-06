@@ -140,17 +140,25 @@ export default {
     onClickMenu(path) {
       location.href = path;
     },
+
     toggleMenu() {
       this.isActive = !this.isActive;
     },
+
     confirmLogout() {
       this.$dialog.confirm({
         message: "Are you sure?",
         onConfirm: () => this.logout()
       });
     },
+
     logout() {
+      this.deleteApolloCacheData();
       this.$refs.deleteSession.$refs.form.submit();
+    },
+
+    deleteApolloCacheData() {
+      this.$apollo.provider.defaultClient.resetStore();
     }
   }
 };
