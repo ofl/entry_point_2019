@@ -1,7 +1,6 @@
 <template>
-  <GeneralTemplate :current-user="currentUser"
-:flashes="flashes">
-    <GqlPagedArticleListContent :articles="articles" />
+  <GeneralTemplate :current-user="currentUser" :flashes="flashes">
+    <GqlPagedArticleListContent :articles="articles"/>
   </GeneralTemplate>
 </template>
 

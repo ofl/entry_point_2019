@@ -1,5 +1,7 @@
 <template>
-  <div class="container"><ArticleEditForm :article="article" /></div>
+  <div class="container">
+    <ArticleEditForm :article="article"/>
+  </div>
 </template>
 
 <script>

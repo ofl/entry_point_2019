@@ -1,7 +1,7 @@
 <template>
   <div class="hero-body">
     <div class="container has-text-centered">
-      <SignUpSteps :step="step" />
+      <SignUpSteps :step="step"/>
 
       <div class="column is-4 is-offset-4">
         <h3 class="title has-text-grey">Sign Up</h3>
@@ -9,32 +9,16 @@
 
         <div class="box">
           <figure class="avatar">
-            <img src="https://placehold.it/128x128" >
+            <img src="https://placehold.it/128x128">
           </figure>
-          <SignUpForm1
-            v-if="step === 1"
-            :user="user"
-            :step="step"
-            @next="next"
-          />
-          <SignUpForm2
-            v-if="step === 2"
-            :user="user"
-            :step="step"
-            @next="next"
-            @back="back"
-          />
-          <SignUpForm3
-            v-if="step === 3"
-            :user="user"
-            :step="step"
-            @next="next"
-            @back="back"
-          />
-          <SignUpForm4 v-if="step === 4"
-:user="user" :step="step" />
+          <SignUpForm1 v-if="step === 1" :user="user" :step="step" @next="next"/>
+          <SignUpForm2 v-if="step === 2" :user="user" :step="step" @next="next" @back="back"/>
+          <SignUpForm3 v-if="step === 3" :user="user" :step="step" @next="next" @back="back"/>
+          <SignUpForm4 v-if="step === 4" :user="user" :step="step"/>
         </div>
-        <p class="has-text-grey"><a href="./login"> Login </a> &nbsp;·&nbsp;</p>
+        <p class="has-text-grey">
+          <a href="./login">Login</a> &nbsp;·&nbsp;
+        </p>
       </div>
     </div>
   </div>

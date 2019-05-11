@@ -1,10 +1,6 @@
 <template>
   <div class="box content">
-    <ArticleListItem
-      v-for="(article, index) in articles"
-      :key="articleKey(article.id)"
-      :article="article"
-    />
+    <ArticleListItem v-for="article in articles" :key="articleKey(article.id)" :article="article"/>
   </div>
 </template>
 

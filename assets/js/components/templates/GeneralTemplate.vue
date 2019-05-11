@@ -1,14 +1,14 @@
 <template>
   <div>
-    <TheNavigation :current-user="currentUser" />
+    <TheNavigation :current-user="currentUser"/>
 
     <section class="section main-contents">
-      <TheFlashes :flashes="flashes" />
+      <TheFlashes :flashes="flashes"/>
 
-      <slot />
+      <slot/>
     </section>
 
-    <TheFooter />
+    <TheFooter/>
   </div>
 </template>
 

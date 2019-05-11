@@ -1,11 +1,6 @@
 <template>
   <div>
-    <AppFlash
-      v-for="(value, key) in flashes"
-      :key="key"
-      :flash-key="key"
-      :flash-value="value"
-    />
+    <AppFlash v-for="(value, key) in flashes" :key="key" :flash-key="key" :flash-value="value"/>
   </div>
 </template>
 

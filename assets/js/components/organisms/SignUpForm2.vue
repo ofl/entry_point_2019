@@ -1,16 +1,6 @@
 <template>
-  <form
-    ref="form"
-    v-model="valid"
-    action="/login"
-    accept-charset="UTF-8"
-    method="POST"
-    lazy-validation
-  >
-    <BField
-      :type="{ 'is-danger': errors.has('email') }"
-      :message="errors.first('email')"
-    >
+  <form ref="form" action="/login" accept-charset="UTF-8" method="POST" lazy-validation>
+    <BField :type="{ 'is-danger': errors.has('email') }" :message="errors.first('email')">
       <BInput
         v-model="user.email"
         v-validate="'required|email'"
@@ -23,10 +13,7 @@
       />
     </BField>
 
-    <BField
-      :type="{ 'is-danger': errors.has('password') }"
-      :message="errors.first('password')"
-    >
+    <BField :type="{ 'is-danger': errors.has('password') }" :message="errors.first('password')">
       <BInput
         ref="password"
         v-model="user.password"
@@ -56,18 +43,14 @@
       <button
         class="button is-block is-info is-large is-fullwidth"
         @click.stop.prevent="handleClickNext"
-      >
-        Next
-      </button>
+      >Next</button>
     </BField>
 
     <BField>
       <button
         class="button is-block is-light is-large is-fullwidth"
         @click.stop.prevent="handleClickBack"
-      >
-        Back
-      </button>
+      >Back</button>
     </BField>
   </form>
 </template>

@@ -1,10 +1,7 @@
 <template>
-  <form ref="form"
-:action="requestPath" accept-charset="UTF-8" method="POST">
-    <input
-type="hidden" name="authenticity_token" :value="csrfToken" />
-    <input
-type="hidden" name="_method" value="delete" />
+  <form ref="form" :action="requestPath" accept-charset="UTF-8" method="POST">
+    <input type="hidden" name="authenticity_token" :value="csrfToken">
+    <input type="hidden" name="_method" value="delete">
   </form>
 </template>
 

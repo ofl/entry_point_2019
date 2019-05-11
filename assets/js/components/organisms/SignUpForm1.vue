@@ -1,16 +1,6 @@
 <template>
-  <form
-    ref="form"
-    v-model="valid"
-    action="/login"
-    accept-charset="UTF-8"
-    method="POST"
-    lazy-validation
-  >
-    <BField
-      :type="{ 'is-danger': errors.has('name') }"
-      :message="errors.first('name')"
-    >
+  <form ref="form" action="/login" accept-charset="UTF-8" method="POST" lazy-validation>
+    <BField :type="{ 'is-danger': errors.has('name') }" :message="errors.first('name')">
       <BInput
         v-model="user.name"
         v-validate="'required'"
@@ -27,9 +17,7 @@
       <button
         class="button is-block is-info is-large is-fullwidth"
         @click.stop.prevent="handleClickNext"
-      >
-        Next
-      </button>
+      >Next</button>
     </BField>
   </form>
 </template>

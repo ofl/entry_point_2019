@@ -1,11 +1,5 @@
 <template>
-  <form
-    ref="form"
-    v-model="valid"
-    accept-charset="UTF-8"
-    method="POST"
-    lazy-validation
-  >
+  <form ref="form" accept-charset="UTF-8" method="POST" lazy-validation>
     <BField
       label="Name"
       :type="{ 'is-danger': errors.has('name') }"
@@ -25,12 +19,7 @@
       :type="{ 'is-danger': errors.has('email') }"
       :message="errors.first('email')"
     >
-      <BInput
-        v-model="profile.email"
-        v-validate="'required'"
-        name="email"
-        placeholder="Email ..."
-      />
+      <BInput v-model="profile.email" v-validate="'required'" name="email" placeholder="Email ..."/>
     </BField>
 
     <BField
@@ -38,10 +27,7 @@
       :type="{ 'is-danger': errors.has('avatar') }"
       :message="errors.first('avatar')"
     >
-      <input
-        type="file"
-        @change="handleFileChange"
-      />
+      <input type="file" @change="handleFileChange">
     </BField>
 
     <BField>
@@ -51,19 +37,17 @@
           :disabled="!valid"
           @click.stop.prevent="handleClickSubmitBtn"
         >
-          <BIcon icon="pencil" />
+          <BIcon icon="pencil"/>
           <span>Submit</span>
         </button>
 
-        <button class="button field is-info"
-@click="clear">
-          <BIcon icon="eraser" />
+        <button class="button field is-info" @click="clear">
+          <BIcon icon="eraser"/>
           <span>Clear</span>
         </button>
 
-        <button class="button field is-info"
-@click.stop.prevent="back">
-          <BIcon icon="backspace" />
+        <button class="button field is-info" @click.stop.prevent="back">
+          <BIcon icon="backspace"/>
           <span>Back</span>
         </button>
       </p>

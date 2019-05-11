@@ -1,18 +1,8 @@
 <template>
-  <form
-    ref="form"
-    v-model="valid"
-    :action="requestPath"
-    accept-charset="UTF-8"
-    method="POST"
-    lazy-validation
-  >
-    <input
-type="hidden" name="utf8" value="✓" />
-    <input
-type="hidden" name="authenticity_token" :value="csrfToken" />
-    <input
-type="hidden" name="_method" :value="requestMethod" />
+  <form ref="form" :action="requestPath" accept-charset="UTF-8" method="POST" lazy-validation>
+    <input type="hidden" name="utf8" value="✓">
+    <input type="hidden" name="authenticity_token" :value="csrfToken">
+    <input type="hidden" name="_method" :value="requestMethod">
 
     <BField label="Title">
       <BInput
@@ -38,18 +28,13 @@ type="hidden" name="_method" :value="requestMethod" />
 
     <BField>
       <p class="control">
-        <button
-          class="button field is-primary"
-          :disabled="!valid"
-          @click="submit"
-        >
-          <BIcon icon="pencil" />
+        <button class="button field is-primary" :disabled="!valid" @click="submit">
+          <BIcon icon="pencil"/>
           <span>Submit</span>
         </button>
 
-        <button class="button field is-info"
-@click="clear">
-          <BIcon icon="eraser" />
+        <button class="button field is-info" @click="clear">
+          <BIcon icon="eraser"/>
           <span>Clear</span>
         </button>
       </p>

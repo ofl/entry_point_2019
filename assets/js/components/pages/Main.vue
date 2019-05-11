@@ -1,9 +1,8 @@
 <i18n src="../../i18n/main.json" />
 
 <template>
-  <GeneralTemplate :current-user="currentUser"
-:flashes="flashes">
-    <MainContent :current-user="currentUser" />
+  <GeneralTemplate :current-user="currentUser" :flashes="flashes">
+    <MainContent :current-user="currentUser"/>
   </GeneralTemplate>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
-  <GeneralTemplate :current-user="currentUser"
-:flashes="flashes">
+  <GeneralTemplate :current-user="currentUser" :flashes="flashes">
     <GqlArticleDetailContent
       :article="article"
       :article-id="articleId"

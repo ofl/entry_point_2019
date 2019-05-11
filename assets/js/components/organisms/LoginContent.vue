@@ -6,14 +6,14 @@
         <p class="subtitle has-text-grey">Please login to proceed.</p>
         <div class="box">
           <figure class="avatar">
-            <img src="https://placehold.it/128x128" >
+            <img src="https://placehold.it/128x128">
           </figure>
-          <LoginForm :user="user" />
+          <LoginForm :user="user"/>
         </div>
         <p class="has-text-grey">
-          <a href="./sign_up"> Sign Up </a> &nbsp;·&nbsp;
-          <a href="../"> Forgot Password </a> &nbsp;·&nbsp;
-          <a href="../"> Need Help? </a>
+          <a href="./sign_up">Sign Up</a> &nbsp;·&nbsp;
+          <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+          <a href="../">Need Help?</a>
         </p>
       </div>
     </div>

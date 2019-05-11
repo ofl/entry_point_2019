@@ -1,33 +1,30 @@
 <template>
   <article class="media">
     <figure class="media-left">
-      <p class="image is-48x48"><img :src="avatarUrl" />
-</p>
+      <p class="image is-48x48">
+        <img :src="avatarUrl">
+      </p>
     </figure>
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>{{ comment.user.name }}</strong> <br >
+          <strong>{{ comment.user.name }}</strong>
+          <br>
           <template v-if="isEditing">
             <CommentForm
               :comment="comment"
               :serverErrors="serverErrors"
               @mutateComment="updateComment"
             />
-            <a @click.stop.prevent="handleClickCancel">
-              Cancel
-            </a>
+            <a @click.stop.prevent="handleClickCancel">Cancel</a>
           </template>
           <template v-else>
-            {{ comment.body }} <br >
+            {{ comment.body }}
+            <br>
             <small>
               <template v-if="isOwner(comment.user.id)">
-                <a @click.stop.prevent="handleClickDelete(comment.id)">
-                  Delete
-                </a>
-                <a @click.stop.prevent="handleClickEdit">
-                  Edit
-                </a>
+                <a @click.stop.prevent="handleClickDelete(comment.id)">Delete</a>
+                <a @click.stop.prevent="handleClickEdit">Edit</a>
               </template>
               {{ comment.createdAt }}
             </small>

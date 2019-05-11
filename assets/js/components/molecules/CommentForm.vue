@@ -1,6 +1,6 @@
 <template>
   <div class="media-content">
-    <form ref="form" v-model="valid" accept-charset="UTF-8" method="POST" lazy-validation>
+    <form ref="form" accept-charset="UTF-8" method="POST" lazy-validation>
       <div class="field">
         <p class="control">
           <BField

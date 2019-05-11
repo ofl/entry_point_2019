@@ -1,12 +1,5 @@
 <template>
-  <form
-    ref="form"
-    v-model="valid"
-    action="/login"
-    accept-charset="UTF-8"
-    method="POST"
-    lazy-validation
-  >
+  <form ref="form" action="/login" accept-charset="UTF-8" method="POST" lazy-validation>
     <p v-if="!errors.has('name')">{{ user.name }}</p>
     <BField
       v-show="errors.has('name')"
@@ -25,7 +18,7 @@
       />
     </BField>
 
-    <BField v-if="!errors.has('email')"> {{ user.email }} </BField>
+    <BField v-if="!errors.has('email')">{{ user.email }}</BField>
     <BField
       v-show="errors.has('email')"
       :type="{ 'is-danger': errors.has('email') }"
@@ -43,7 +36,7 @@
       />
     </BField>
 
-    <BField v-if="!errors.has('password')"> ********** </BField>
+    <BField v-if="!errors.has('password')">**********</BField>
     <BField
       v-show="errors.has('password')"
       :type="{ 'is-danger': errors.has('password') }"
@@ -60,7 +53,7 @@
       />
     </BField>
 
-    <BField v-if="!errors.has('passwordConfirmation')"> ********** </BField>
+    <BField v-if="!errors.has('passwordConfirmation')">**********</BField>
     <BField
       v-show="errors.has('passwordConfirmation')"
       :type="{ 'is-danger': errors.has('passwordConfirmation') }"
@@ -84,13 +77,11 @@
         class="is-checkradio"
         type="checkbox"
         name="exampleCheckbox"
-      />
+      >
       <label id="agree-label" for="exampleCheckbox">
         I agree to the xxxx
-        <a
-href="/terms" target="_blank"> Terms of Service </a> and
-        <a
-href="/privacy_policy" target="_blank"> Privacy Policy </a>.
+        <a href="/terms" target="_blank">Terms of Service</a> and
+        <a href="/privacy_policy" target="_blank">Privacy Policy</a>.
       </label>
     </BField>
 
@@ -99,18 +90,14 @@ href="/privacy_policy" target="_blank"> Privacy Policy </a>.
         class="button is-block is-info is-large is-fullwidth"
         :disabled="!isAgreed"
         @click.stop.prevent="handleClickSubmit"
-      >
-        Submit
-      </button>
+      >Submit</button>
     </BField>
 
     <BField>
       <button
         class="button is-block is-light is-large is-fullwidth"
         @click.stop.prevent="handleClickBack"
-      >
-        Back
-      </button>
+      >Back</button>
     </BField>
   </form>
 </template>
