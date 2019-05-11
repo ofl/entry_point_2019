@@ -2,15 +2,11 @@
   <article class="media comment-form">
     <figure class="media-left">
       <p class="image is-64x64">
-        <img src="https://bulma.io/images/placeholders/128x128.png" >
+        <img :src="avatarUrl">
       </p>
     </figure>
 
-    <CommentForm
-      :comment="comment"
-      :serverErrors="serverErrors"
-      @mutateComment="addComment"
-    />
+    <CommentForm :comment="comment" :serverErrors="serverErrors" @mutateComment="addComment"/>
   </article>
 </template>
 
@@ -26,6 +22,9 @@ export default {
   components: { CommentForm },
 
   props: {
+    currentUser: {
+      type: Object
+    },
     articleId: {
       type: String,
       required: true
@@ -36,9 +35,16 @@ export default {
     }
   },
 
+  computed: {
+    avatarUrl() {
+      return this.currentUser.avatarUrl != ""
+        ? this.currentUser.avatarUrl
+        : "../images/300x300.png";
+    }
+  },
+
   data() {
     return {
-      currentUser: null,
       comment: { body: "" },
       serverErrors: []
     };

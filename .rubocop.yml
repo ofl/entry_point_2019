@@ -1,6 +1,7 @@
 # inherit_from: rubocop-todo.yml
-require: rubocop-rspec
-require: rubocop-performance
+require:
+  - rubocop-rspec
+  - rubocop-performance
 
 AllCops:
   TargetRubyVersion: 2.5
@@ -8,26 +9,26 @@ AllCops:
   # to ignore them, so only the ones explicitly set in this file are enabled.
   DisabledByDefault: true
   Exclude:
-    - '**/templates/**/*'
-    - '**/vendor/**/*'
-    - 'actionpack/lib/action_dispatch/journey/parser.rb'
-    - 'bin/bundle'
-    - 'bin/rubocop'
-    - 'bin/update'
-    - 'bin/setup'
-    - 'bin/spring'
-    - 'bin/rspec'
-    - 'bin/yarn'
-    - 'db/schema.rb'
-    - 'node_modules/**/*'
-    - 'public/css/**/*'
-    - 'public/js/**/*'
-    - 'vendor/**/*'
-    - 'railties/test/fixtures/tmp/**/*'
+    - "**/templates/**/*"
+    - "**/vendor/**/*"
+    - "actionpack/lib/action_dispatch/journey/parser.rb"
+    - "bin/bundle"
+    - "bin/rubocop"
+    - "bin/update"
+    - "bin/setup"
+    - "bin/spring"
+    - "bin/rspec"
+    - "bin/yarn"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "public/css/**/*"
+    - "public/js/**/*"
+    - "vendor/**/*"
+    - "railties/test/fixtures/tmp/**/*"
 
 Performance:
   Exclude:
-    - '**/test/**/*'
+    - "**/test/**/*"
 
 Rails:
   Enabled: true
@@ -35,12 +36,12 @@ Rails:
 # Prefer assert_not over assert !
 Rails/AssertNot:
   Include:
-    - '**/test/**/*'
+    - "**/test/**/*"
 
 # Prefer assert_not_x over refute_x
 Rails/RefuteMethods:
   Include:
-    - '**/test/**/*'
+    - "**/test/**/*"
 
 # Prefer &&/|| over and/or.
 Style/AndOr:
@@ -124,10 +125,10 @@ Layout/SpaceAroundOperators:
   Enabled: true
 
 Layout/SpaceBeforeComma:
-    Enabled: true
+  Enabled: true
 
 Layout/SpaceBeforeFirstArg:
-    Enabled: true
+  Enabled: true
 
 Style/DefWithParentheses:
   Enabled: true
@@ -159,12 +160,12 @@ Layout/SpaceInsideParens:
 Style/StringLiterals:
   Enabled: true
   Exclude:
-    - 'Gemfile'
-    - 'Guardfile'
-    - 'config/environments/production.rb'
-    - 'config/puma.rb'
-    - 'config/application.rb'
-    - 'spec/rails_helper.rb'
+    - "Gemfile"
+    - "Guardfile"
+    - "config/environments/production.rb"
+    - "config/puma.rb"
+    - "config/application.rb"
+    - "spec/rails_helper.rb"
 
 # Detect hard tabs, no hard tabs.
 Layout/Tab:
@@ -178,7 +179,7 @@ Layout/TrailingBlankLines:
 Layout/TrailingWhitespace:
   Enabled: true
   Exclude:
-    - 'config/initializers/sorcery.rb'
+    - "config/initializers/sorcery.rb"
 
 # Use quotes for string literals when they are enough.
 Style/UnneededPercentQ:
