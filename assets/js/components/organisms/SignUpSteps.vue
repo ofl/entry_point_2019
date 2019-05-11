@@ -9,7 +9,9 @@
       }"
     >
       <div class="step-marker">1</div>
-      <div class="step-details"><p class="step-title">Name</p></div>
+      <div class="step-details">
+        <p class="step-title">Name</p>
+      </div>
     </div>
     <div
       class="step-item"
@@ -20,7 +22,9 @@
       }"
     >
       <div class="step-marker">2</div>
-      <div class="step-details"><p class="step-title">Email/Password</p></div>
+      <div class="step-details">
+        <p class="step-title">Email/Password</p>
+      </div>
     </div>
     <div
       class="step-item"
@@ -31,7 +35,9 @@
       }"
     >
       <div class="step-marker">3</div>
-      <div class="step-details"><p class="step-title">Confirmation</p></div>
+      <div class="step-details">
+        <p class="step-title">Confirmation</p>
+      </div>
     </div>
     <div
       class="step-item"
@@ -42,7 +48,9 @@
       }"
     >
       <div class="step-marker">4</div>
-      <div class="step-details"><p class="step-title">Done</p></div>
+      <div class="step-details">
+        <p class="step-title">Done</p>
+      </div>
     </div>
   </div>
 </template>

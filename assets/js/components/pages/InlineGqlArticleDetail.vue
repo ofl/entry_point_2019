@@ -1,6 +1,5 @@
 <template>
-  <GeneralTemplate :current-user="currentUser"
-:flashes="flashes">
+  <GeneralTemplate :current-user="currentUser" :flashes="flashes">
     <InlineGqlArticleDetailContent
       :article="article"
       :article-id="articleId"
@@ -31,7 +30,7 @@ export default {
       currentUser: gon.currentUser,
       article: gon.article,
       flashes: {},
-      needForceUpdate: !!gon.article,
+      needForceUpdate: !!gon.article
     };
   },
 
@@ -98,7 +97,7 @@ export default {
     reloadArticle() {
       const { article } = this.$apollo.provider.defaultClient.readQuery({
         query: ARTICLE_DETAIL_QUERY,
-        variables: { id: this.articleId },
+        variables: { id: this.articleId }
       });
       this.article = article;
     }

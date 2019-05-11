@@ -1,6 +1,6 @@
 <template>
   <GeneralTemplate>
-    <EditProfileContent :current-user="currentUser" />
+    <EditProfileContent :current-user="currentUser"/>
   </GeneralTemplate>
 </template>
 

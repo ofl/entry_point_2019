@@ -1,10 +1,6 @@
 <template>
   <div class="container">
-    <ArticleDetailCard
-      v-if="article"
-      :article="article"
-      :current-user="currentUser"
-    />
+    <ArticleDetailCard v-if="article" :article="article" :current-user="currentUser"/>
     <ArticleDetailComments
       v-if="article"
       :comments="article.comments"

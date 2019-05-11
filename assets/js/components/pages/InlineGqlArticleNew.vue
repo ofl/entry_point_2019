@@ -1,9 +1,8 @@
 <i18n src="../../i18n/articleNew.json" />
 
 <template>
-  <GeneralTemplate :current-user="currentUser"
-:flashes="flashes">
-    <InlineGqlArticleEditForm />
+  <GeneralTemplate :current-user="currentUser" :flashes="flashes">
+    <InlineGqlArticleEditForm/>
   </GeneralTemplate>
 </template>
 

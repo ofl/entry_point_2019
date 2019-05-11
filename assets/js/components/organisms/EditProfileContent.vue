@@ -1,5 +1,7 @@
 <template>
-  <div class="container"><EditProfileForm :profile="currentUser" /></div>
+  <div class="container">
+    <EditProfileForm :profile="currentUser"/>
+  </div>
 </template>
 
 <script>

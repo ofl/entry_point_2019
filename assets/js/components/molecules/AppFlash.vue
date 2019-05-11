@@ -1,9 +1,6 @@
 <template>
   <div>
-    <BNotification :type="alertType"
-:active.sync="isActive" auto-close>
-      {{ flashValue }}
-    </BNotification>
+    <BNotification :type="alertType" :active.sync="isActive" auto-close>{{ flashValue }}</BNotification>
   </div>
 </template>
 

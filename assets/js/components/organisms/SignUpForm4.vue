@@ -1,5 +1,7 @@
 <template>
-  <div><p>登録完了しました。</p></div>
+  <div>
+    <p>登録完了しました。</p>
+  </div>
 </template>
 
 <script>

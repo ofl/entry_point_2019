@@ -1,31 +1,34 @@
 <template>
   <article class="post">
-    <a href="#"
-@click="onClickItem(article.id)">
+    <a href="#" @click="onClickItem(article.id)">
       <h4>{{ article.title }}</h4>
     </a>
 
     <div class="media">
       <div class="media-left">
-        <p class="image is-32x32"><img :src="avatarUrl" />
-</p>
+        <p class="image is-32x32">
+          <img :src="avatarUrl">
+        </p>
       </div>
 
       <div class="media-content">
         <div class="content">
           <p>
-            <a href="#"> {{ article.user.name }} </a
-            >{{ article.createdAt }} &nbsp; <span class="tag"> Question </span>
+            <a href="#">{{ article.user.name }}</a>
+            {{ article.createdAt }} &nbsp;
+            <span class="tag">Question</span>
           </p>
         </div>
       </div>
 
       <div class="media-right">
         <span class="has-text-grey-light">
-          <i class="fa fa-comments" /> {{ article.commentsCount }}
+          <i class="fa fa-comments"/>
+          {{ article.commentsCount }}
         </span>
         <span class="has-text-grey-light">
-          <i class="fa fa-heart" /> {{ article.likesCount }}
+          <i class="fa fa-heart"/>
+          {{ article.likesCount }}
         </span>
       </div>
     </div>

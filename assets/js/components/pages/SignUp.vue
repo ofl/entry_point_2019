@@ -1,6 +1,6 @@
 <template>
   <HeaderlessTemplate>
-    <SignUpContent :current-user="currentUser" />
+    <SignUpContent :current-user="currentUser"/>
   </HeaderlessTemplate>
 </template>
 

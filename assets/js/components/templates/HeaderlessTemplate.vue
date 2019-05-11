@@ -1,8 +1,8 @@
 <template>
   <section class="hero is-success is-fullheight">
-    <TheFlashes :flashes="flashes" />
+    <TheFlashes :flashes="flashes"/>
 
-    <slot />
+    <slot/>
   </section>
 </template>
 

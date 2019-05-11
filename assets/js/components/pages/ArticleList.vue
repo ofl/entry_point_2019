@@ -1,7 +1,6 @@
 <template>
-  <GeneralTemplate :current-user="currentUser"
-:flashes="flashes">
-    <ArticleListContent :articles="articles" />
+  <GeneralTemplate :current-user="currentUser" :flashes="flashes">
+    <ArticleListContent :articles="articles"/>
   </GeneralTemplate>
 </template>
 

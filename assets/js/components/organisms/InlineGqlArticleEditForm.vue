@@ -1,11 +1,5 @@
 <template>
-  <form
-    ref="form"
-    v-model="valid"
-    accept-charset="UTF-8"
-    method="POST"
-    lazy-validation
-  >
+  <form ref="form" accept-charset="UTF-8" method="POST" lazy-validation>
     <BField
       label="Title"
       :type="{ 'is-danger': errors.has('title') }"
@@ -41,19 +35,17 @@
           :disabled="!valid"
           @click.stop.prevent="handleClickSubmitBtn"
         >
-          <BIcon icon="pencil" />
+          <BIcon icon="pencil"/>
           <span>Submit</span>
         </button>
 
-        <button class="button field is-info"
-@click="clear">
-          <BIcon icon="eraser" />
+        <button class="button field is-info" @click="clear">
+          <BIcon icon="eraser"/>
           <span>Clear</span>
         </button>
 
-        <button class="button field is-info"
-@click.stop.prevent="back">
-          <BIcon icon="backspace" />
+        <button class="button field is-info" @click.stop.prevent="back">
+          <BIcon icon="backspace"/>
           <span>Back</span>
         </button>
       </p>

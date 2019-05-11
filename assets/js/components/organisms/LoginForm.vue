@@ -1,12 +1,5 @@
 <template>
-  <form
-    ref="form"
-    v-model="valid"
-    action="/login"
-    accept-charset="UTF-8"
-    method="POST"
-    lazy-validation
-  >
+  <form ref="form" action="/login" accept-charset="UTF-8" method="POST" lazy-validation>
     <BField>
       <BInput
         v-model="user.email"
@@ -35,15 +28,12 @@
 
     <BField>
       <label class="checkbox">
-        <input
-type="checkbox" name="remember_me" /> Remember Me
+        <input type="checkbox" name="remember_me"> Remember Me
       </label>
     </BField>
 
-    <input
-type="hidden" name="utf8" value="✓" />
-    <input
-type="hidden" name="authenticity_token" :value="csrfToken" />
+    <input type="hidden" name="utf8" value="✓">
+    <input type="hidden" name="authenticity_token" :value="csrfToken">
 
     <button class="button is-block is-info is-large is-fullwidth">Login</button>
   </form>

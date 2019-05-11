@@ -1,14 +1,10 @@
 <template>
   <div class="container">
-    <ArticleListTable :articles="articles" />
+    <ArticleListTable :articles="articles"/>
 
-    <div v-if="currentUser"
-class="new-button">
-      <RouterLink
-        class="button field is-info"
-        :to="{ name: 'InlineGqlArticleNew' }"
-      >
-        <BIcon icon="pencil" />
+    <div v-if="currentUser" class="new-button">
+      <RouterLink class="button field is-info" :to="{ name: 'InlineGqlArticleNew' }">
+        <BIcon icon="pencil"/>
         <span>New</span>
       </RouterLink>
     </div>

@@ -1,27 +1,21 @@
 <template>
   <div class="container">
-    <div v-if="pagedArticles"
-class="box content">
+    <div v-if="pagedArticles" class="box content">
       <ArticleListItem
-        v-for="(article, index) in pagedArticles.articles"
+        v-for="article in pagedArticles.articles"
         :key="articleKey(article.id)"
         :article="article"
       />
     </div>
 
     <div class="new-button">
-      <button
-        v-if="showMoreEnabled"
-        class="button field is-info"
-        @click="showMore"
-      >
-        <BIcon icon="more" />
+      <button v-if="showMoreEnabled" class="button field is-info" @click="showMore">
+        <BIcon icon="more"/>
         <span>Show More</span>
       </button>
 
-      <button class="button field is-info"
-@click="onClickNewBtn()">
-        <BIcon icon="pencil" />
+      <button class="button field is-info" @click="onClickNewBtn()">
+        <BIcon icon="pencil"/>
         <span>New</span>
       </button>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <HeaderlessTemplate :flashes="flashes">
-    <LoginContent :user="user" />
+    <LoginContent :user="user"/>
   </HeaderlessTemplate>
 </template>
 

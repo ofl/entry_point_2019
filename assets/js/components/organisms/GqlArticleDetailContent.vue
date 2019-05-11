@@ -1,11 +1,7 @@
 <template>
   <div class="container">
-    <ArticleDetailCard :article="article"
-:currentUser="currentUser" />
-    <ArticleDetailComments
-      :comments="article.comments"
-      :current-user="currentUser"
-    />
+    <ArticleDetailCard :article="article" :currentUser="currentUser"/>
+    <ArticleDetailComments :comments="article.comments" :current-user="currentUser"/>
     <ArticleDetailCommentForm
       v-if="isLoggedIn"
       :current-user="currentUser"

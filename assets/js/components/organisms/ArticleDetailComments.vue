@@ -1,11 +1,6 @@
 <template>
-  <div id="comments"
-class="comment-list-card">
-    <ArticleComment
-      v-for="(comment, index) in comments"
-      :key="commentKey(comment.id)"
-      :comment="comment"
-    />
+  <div id="comments" class="comment-list-card">
+    <ArticleComment v-for="comment in comments" :key="commentKey(comment.id)" :comment="comment"/>
   </div>
 </template>
 

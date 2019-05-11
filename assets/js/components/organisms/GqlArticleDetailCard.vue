@@ -2,10 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img
-          src="https://bulma.io/images/placeholders/1280x960.png"
-          alt="Placeholder image"
-        />
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
       </figure>
     </div>
 
@@ -13,10 +10,7 @@
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img
-              src="https://bulma.io/images/placeholders/96x96.png"
-              alt="Placeholder image"
-            />
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
           </figure>
         </div>
         <div class="media-content">
@@ -26,38 +20,22 @@
       </div>
 
       <div class="content">
-        {{ article.body }} <br >
-        <time datetime="article.createdAt"> {{ article.createdAt }} </time>
+        {{ article.body }}
+        <br>
+        <time datetime="article.createdAt">{{ article.createdAt }}</time>
       </div>
     </div>
     <footer class="card-footer">
-      <a
-        href="#"
-        class="card-footer-item"
-        @click.stop.prevent="onClickLikeBtn()"
-      >
+      <a href="#" class="card-footer-item" @click.stop.prevent="onClickLikeBtn()">
         <span class="has-text-grey-light">
-          <BIcon pack="fa"
-icon="heart" :type="likedType" />
+          <BIcon pack="fa" icon="heart" :type="likedType"/>
           {{ likesCount }}
         </span>
       </a>
 
       <template v-if="isOwner">
-        <a
-          href="#"
-          class="card-footer-item"
-          @click.stop.prevent="onClickEditBtn()"
-        >
-          Edit
-        </a>
-        <a
-          href="#"
-          class="card-footer-item"
-          @click.stop.prevent="onClickDeleteBtn()"
-        >
-          Delete
-        </a>
+        <a href="#" class="card-footer-item" @click.stop.prevent="onClickEditBtn()">Edit</a>
+        <a href="#" class="card-footer-item" @click.stop.prevent="onClickDeleteBtn()">Delete</a>
       </template>
     </footer>
   </div>
