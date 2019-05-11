@@ -1,12 +1,6 @@
 <template>
   <div class="media-content">
-    <form
-      ref="form"
-      v-model="valid"
-      accept-charset="UTF-8"
-      method="POST"
-      lazy-validation
-    >
+    <form ref="form" v-model="valid" accept-charset="UTF-8" method="POST" lazy-validation>
       <div class="field">
         <p class="control">
           <BField
@@ -32,13 +26,12 @@
           :disabled="!valid"
           @click.stop.prevent="handleSubmit"
         >
-          <BIcon icon="pencil" />
+          <BIcon icon="pencil"/>
           <span>{{ submitButtonTitle }}</span>
         </button>
 
-        <button class="button field is-info"
-@click.stop.prevent="clear">
-          <BIcon icon="eraser" />
+        <button class="button field is-info" @click.stop.prevent="clear">
+          <BIcon icon="eraser"/>
           <span>Clear</span>
         </button>
       </div>
@@ -101,7 +94,7 @@ export default {
       });
     },
     comment: {
-      handler: function (val, _) {
+      handler: function(val, _) {
         this.body = val.body;
       }
     }

@@ -14,8 +14,8 @@
         <div class="media-left">
           <figure class="image is-48x48">
             <img
-              src="https://bulma.io/images/placeholders/96x96.png"
-              alt="Placeholder image"
+              :src="avatarUrl"
+              alt="Avatar image"
             />
           </figure>
         </div>
@@ -103,6 +103,11 @@ export default {
     },
     articleId() {
       return this.article.id;
+    },
+    avatarUrl() {
+      return !!this.article.user.avatarUrl
+        ? this.article.user.avatarUrl
+        : "../images/300x300.png";
     }
   },
 
