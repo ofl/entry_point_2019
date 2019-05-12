@@ -15,7 +15,11 @@
         </div>
         <div class="media-content">
           <p class="title is-4">{{ article.title }}</p>
-          <p class="subtitle is-6">{{ article.user.name }}</p>
+          <p class="subtitle is-6">
+            <RouterLink
+              :to="{ name: 'User', params: { id: article.user.id } }"
+            >{{ article.user.name }}</RouterLink>
+          </p>
         </div>
       </div>
 
