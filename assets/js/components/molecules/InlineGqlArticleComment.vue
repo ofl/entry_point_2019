@@ -60,7 +60,7 @@ export default {
       required: true
     },
 
-    needForceUpdate: {
+    hasInlineArticleData: {
       type: Boolean,
       default: false
     }
@@ -143,7 +143,7 @@ export default {
 
             this.isEditing = false;
 
-            if (this.needForceUpdate) {
+            if (this.hasInlineArticleData) {
               this.$emit("reloadArticle");
             }
           }

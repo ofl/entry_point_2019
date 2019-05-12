@@ -6,7 +6,7 @@
       :comment="comment"
       :articleId="articleId"
       :current-user="currentUser"
-      :need-force-update="needForceUpdate"
+      :need-force-update="hasInlineArticleData"
       @reloadArticle="reloadArticle"
       @delete-comment="deleteComment"
     />
@@ -32,7 +32,7 @@ export default {
       required: true
     },
 
-    needForceUpdate: {
+    hasInlineArticleData: {
       type: Boolean,
       default: false
     },

@@ -16,7 +16,8 @@ export default {
 
   props: {
     user: {
-      type: Object
+      type: Object,
+      required: true
     },
     currentUser: {
       type: Object
