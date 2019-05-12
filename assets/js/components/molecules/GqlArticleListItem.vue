@@ -14,7 +14,9 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <a href="#">{{ article.user.name }}</a>
+            <RouterLink
+              :to="{ name: 'User', params: { id: article.user.id } }"
+            >{{ article.user.name }}</RouterLink>
             {{ article.createdAt }} &nbsp;
             <span class="tag">Question</span>
           </p>

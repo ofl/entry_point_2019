@@ -10,6 +10,7 @@ import GqlArticleList from "./components/pages/GqlArticleList.vue";
 import GqlArticleDetail from "./components/pages/GqlArticleDetail.vue";
 import SignUp from "./components/pages/SignUp.vue";
 import EditProfile from "./components/pages/EditProfile.vue";
+import User from "./components/pages/User.vue";
 
 Vue.use(VueRouter);
 
@@ -52,6 +53,11 @@ const routes = [
     path: "/profile/edit",
     component: EditProfile,
     name: "EditProfile"
+  },
+  {
+    path: "/users/:id",
+    component: User,
+    name: "User"
   }
 ];
 

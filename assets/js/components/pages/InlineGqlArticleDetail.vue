@@ -4,7 +4,7 @@
       :article="article"
       :article-id="articleId"
       :current-user="currentUser"
-      :need-force-update="needForceUpdate"
+      :need-force-update="hasInlineArticleData"
       @reloadArticle="reloadArticle"
     />
   </GeneralTemplate>
@@ -30,7 +30,7 @@ export default {
       currentUser: gon.currentUser,
       article: gon.article,
       flashes: {},
-      needForceUpdate: !!gon.article
+      hasInlineArticleData: !!gon.article
     };
   },
 
@@ -68,7 +68,7 @@ export default {
         };
       },
       skip() {
-        return this.needForceUpdate;
+        return this.hasInlineArticleData;
       }
     }
   },
@@ -82,7 +82,7 @@ export default {
         data: { currentUser: gon.currentUser }
       });
     }
-    if (this.needForceUpdate) {
+    if (this.hasInlineArticleData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: ARTICLE_DETAIL_QUERY,
         variables: { id: this.articleId },

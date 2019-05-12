@@ -6,14 +6,14 @@
       :comments="article.comments"
       :current-user="currentUser"
       :article-id="articleId"
-      :need-force-update="needForceUpdate"
+      :need-force-update="hasInlineArticleData"
       @reloadArticle="reloadArticle"
     />
     <ArticleDetailCommentForm
       v-if="isLoggedIn"
       :current-user="currentUser"
       :article-id="articleId"
-      :need-force-update="needForceUpdate"
+      :need-force-update="hasInlineArticleData"
       @reloadArticle="reloadArticle"
     />
   </div>
@@ -59,7 +59,7 @@ export default {
     currentUser: {
       type: Object
     },
-    needForceUpdate: {
+    hasInlineArticleData: {
       type: Boolean,
       default: false
     }

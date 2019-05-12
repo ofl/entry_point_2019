@@ -20,7 +20,7 @@ RSpec.describe 'Queries::Articles::Show' do # rubocop:disable RSpec/DescribeClas
   let(:operation_name) { 'Article' }
   let(:variables) { { id: id } }
 
-  context 'nameに該当する記事が存在する時' do
+  context 'IDに該当する記事が存在する時' do
     let(:id) { article.id }
     let(:expected_value) do
       {
@@ -37,7 +37,7 @@ RSpec.describe 'Queries::Articles::Show' do # rubocop:disable RSpec/DescribeClas
     end
   end
 
-  context 'nameに該当する記事が存在しない時' do
+  context 'IDに該当する記事が存在しない時' do
     let(:id) { 999_999 }
 
     let(:expected_value) do

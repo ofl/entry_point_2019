@@ -29,7 +29,7 @@ export default {
       type: String,
       required: true
     },
-    needForceUpdate: {
+    hasInlineArticleData: {
       type: Boolean,
       default: false
     }
@@ -81,7 +81,7 @@ export default {
             });
             this.comment = { body: "" };
 
-            if (this.needForceUpdate) {
+            if (this.hasInlineArticleData) {
               this.$emit("reloadArticle");
             }
           }

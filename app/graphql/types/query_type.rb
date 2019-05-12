@@ -6,5 +6,6 @@ module Types
     field :pagedArticles, resolver: Queries::Articles::PagedIndex
     field :article,      resolver: Queries::Articles::Show
     field :current_user, resolver: Queries::Users::CurrentUser
+    field :user,         resolver: Queries::Users::Show
   end
 end
