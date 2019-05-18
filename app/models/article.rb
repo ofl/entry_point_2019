@@ -31,6 +31,8 @@ class Article < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
+  scope :search, ->(keyword) { where('title LIKE ?', "%#{keyword}%").or(where('body LIKE ?', "%#{keyword}%")) }
+
   def liked_by?(user)
     self.liked_by_me = likes.by_user(user).exists?
   end
