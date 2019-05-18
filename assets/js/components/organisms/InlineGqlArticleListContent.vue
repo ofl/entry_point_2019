@@ -36,7 +36,7 @@ export default {
       location.href = "/vue_articles/new";
     },
     search(keyword) {
-      console.log(keyword);
+      this.$emit("search", keyword);
     }
   }
 };

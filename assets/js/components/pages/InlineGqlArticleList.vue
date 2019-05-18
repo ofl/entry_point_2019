@@ -1,12 +1,8 @@
 <i18n src="../../i18n/articleList.json" />
 
 <template>
-  <GeneralTemplate :current-user="currentUser"
-:flashes="flashes">
-    <InlineGqlArticleListContent
-      :articles="articles"
-      :current-user="currentUser"
-    />
+  <GeneralTemplate :current-user="currentUser" :flashes="flashes">
+    <InlineGqlArticleListContent :articles="articles" :current-user="currentUser" @search="search"/>
   </GeneralTemplate>
 </template>
 
@@ -16,6 +12,7 @@ import InlineGqlArticleListContent from "../organisms/InlineGqlArticleListConten
 
 import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
+import SEARCH_ARTICLES_QUERY from "../../gqls/searchArticles.gql";
 
 import SetTitleMixin from "../../utils/setTitle";
 
@@ -74,6 +71,25 @@ export default {
         query: ARTICLE_INDEX_QUERY,
         data: { articles: gon.articles }
       });
+    }
+  },
+
+  methods: {
+    async search(keyword) {
+      await this.$apollo
+        .query({
+          query: SEARCH_ARTICLES_QUERY,
+          variables: {
+            keyword: keyword
+          }
+        })
+        .then(data => {
+          this.articles = data.data.searchArticles;
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
     }
   }
 };

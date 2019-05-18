@@ -1,0 +1,14 @@
+query SearchArticles($keyword: String!) {
+  searchArticles(keyword: $keyword) {
+    id
+    title
+    user {
+      id
+      name
+      avatarUrl
+    }
+    commentsCount
+    likesCount
+    createdAt
+  }
+}
