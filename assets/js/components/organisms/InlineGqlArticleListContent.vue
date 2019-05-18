@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <SearchForm @search="search" class="search-form"/>
+
     <ArticleListTable :articles="articles"/>
 
     <div v-if="currentUser" class="new-button">
@@ -13,11 +15,12 @@
 
 <script>
 import ArticleListTable from "../organisms/InlineGqlArticleListTable.vue";
+import SearchForm from "../molecules/SearchForm.vue";
 
 export default {
   name: "InlineGqlArticleListContent",
 
-  components: { ArticleListTable: ArticleListTable },
+  components: { ArticleListTable: ArticleListTable, SearchForm },
 
   props: {
     currentUser: {
@@ -31,7 +34,16 @@ export default {
   methods: {
     onClickNewBtn() {
       location.href = "/vue_articles/new";
+    },
+    search(keyword) {
+      console.log(keyword);
     }
   }
 };
 </script>
+
+<style scoped>
+.search-form {
+  margin: 1rem 0 1rem 0;
+}
+</style>
