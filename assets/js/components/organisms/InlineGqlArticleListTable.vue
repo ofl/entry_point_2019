@@ -1,6 +1,8 @@
 <template>
   <div class="box content">
     <ArticleListItem v-for="article in articles" :key="articleKey(article.id)" :article="article"/>
+
+    <p v-if="noArticles">記事はありません</p>
   </div>
 </template>
 
@@ -15,6 +17,12 @@ export default {
   props: {
     articles: {
       type: Array
+    }
+  },
+
+  computed: {
+    noArticles() {
+      return !this.articles || this.articles.length == 0;
     }
   },
 
