@@ -4,6 +4,7 @@ module Types
 
     field :articles,     resolver: Queries::Articles::Index
     field :pagedArticles, resolver: Queries::Articles::PagedIndex
+    field :searchArticles, resolver: Queries::Articles::Search
     field :article,      resolver: Queries::Articles::Show
     field :current_user, resolver: Queries::Users::CurrentUser
     field :user,         resolver: Queries::Users::Show
