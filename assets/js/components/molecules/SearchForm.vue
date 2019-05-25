@@ -5,22 +5,13 @@
         <p class="control">
           <BField>
             <BInput
-              v-model="keyword"
+              v-model.lazy="keyword"
               v-validate="'required'"
               placeholder="Search..."
               type="search"
               icon="magnify"
               name="keyword"
             ></BInput>
-
-            <button
-              class="button field is-light search-button"
-              :disabled="!valid"
-              @click.stop.prevent="handleSubmit"
-            >
-              <BIcon icon="magnify"/>
-              <span>Search</span>
-            </button>
           </BField>
         </p>
       </div>
@@ -39,21 +30,14 @@ export default {
     };
   },
 
-  methods: {
-    handleSubmit() {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          this.$emit("search", this.keyword);
-          return;
-        }
-      });
+  watch: {
+    keyword: function(value) {
+      if (value.length > 0) {
+        this.$emit("search", value);
+      } else {
+        this.$emit("reset");
+      }
     }
   }
 };
 </script>
-
-<style scoped>
-.search-button {
-  margin: 0 0 0 1rem;
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SearchForm @search="search" class="search-form"/>
+    <SearchForm @search="search" @reset="reset" class="search-form"/>
 
     <ArticleListTable :articles="articles"/>
 
@@ -37,6 +37,9 @@ export default {
     },
     search(keyword) {
       this.$emit("search", keyword);
+    },
+    reset() {
+      this.$emit("reset");
     }
   }
 };

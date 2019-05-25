@@ -2,7 +2,12 @@
 
 <template>
   <GeneralTemplate :current-user="currentUser" :flashes="flashes">
-    <InlineGqlArticleListContent :articles="articles" :current-user="currentUser" @search="search"/>
+    <InlineGqlArticleListContent
+      :articles="articles"
+      :current-user="currentUser"
+      @search="search"
+      @reset="reset"
+    />
   </GeneralTemplate>
 </template>
 
@@ -85,6 +90,19 @@ export default {
         })
         .then(data => {
           this.articles = data.data.searchArticles;
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
+    },
+    async reset() {
+      await this.$apollo
+        .query({
+          query: ARTICLE_INDEX_QUERY
+        })
+        .then(data => {
+          this.articles = data.data.articles;
         })
         .catch(error => {
           // Error
