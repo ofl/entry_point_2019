@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   rails:
     env_file: .env
@@ -7,7 +7,7 @@ services:
       dockerfile: ./docker/rails/Dockerfile
     image: ${DEVELOPER_NAME}/${PROJECT_NAME}_rails:${APP_VERSION}
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
       - .:/app
       - bundle-volume:/usr/local/bundle
@@ -21,10 +21,12 @@ services:
       - yarn-cache:/usr/local/share/.cache/yarn/v2
     depends_on:
       - postgres
+      - redis
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecurepass
       POSTGRES_DB: app_development
+      REDIS_URL: redis://redis:6379
     command: bundle exec rails s -b 0.0.0.0 -p 3000
 
   postgres:
@@ -45,14 +47,22 @@ services:
     image: ${DEVELOPER_NAME}/${PROJECT_NAME}_yarn:${APP_VERSION}
     # command: yarn watch
     ports:
-      - '3007:3007'
-      - '3008:3008'
-      - '9001:9001' # storybook
+      - "3007:3007"
+      - "3008:3008"
+      - "9001:9001" # storybook
     volumes:
       - .:/app
       - ./node_modules:/app/node_modules
     depends_on:
       - rails
+
+  redis:
+    image: redis:4.0.14-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
 
 volumes:
   postgresql-data:
@@ -60,4 +70,6 @@ volumes:
   bundle-volume:
     driver: local
   yarn-cache:
+    driver: local
+  redis-data:
     driver: local
