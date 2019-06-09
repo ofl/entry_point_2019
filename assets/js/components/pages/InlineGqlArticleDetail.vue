@@ -40,9 +40,6 @@ export default {
     },
     hasInlineUserData() {
       return !!gon.currentUser;
-    },
-    hasInlineArticleData() {
-      return !!gon.article;
     }
   },
 
