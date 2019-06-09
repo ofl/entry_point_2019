@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Redis
+gem 'redis-rails'
+
 gem 'apollo_upload_server', '2.0.0.beta.3'
 gem 'config'
 gem 'counter_culture', '~> 2.0'
