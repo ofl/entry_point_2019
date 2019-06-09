@@ -1,5 +1,4 @@
-EntryPoint2019
-====
+# EntryPoint2019
 
 [![CircleCI](https://circleci.com/gh/ofl/entry_point_2019.svg?style=svg)](https://circleci.com/gh/ofl/entry_point_2019)
 
@@ -11,91 +10,102 @@ Rails + Vue.js + GraphQL + Apollo Client + Atomic Design + Storybook
 
 ## Demo
 
-+   [Demo](https://obscure-stream-55714.herokuapp.com/)
+- [Demo](https://obscure-stream-55714.herokuapp.com/)
 
 ## Requirement
 
 ### Ruby
 
-+   [GraphQL](http://graphql-ruby.org/)
-+   [sorcery](https://rubygems.org/gems/sorcery)
+- [GraphQL](http://graphql-ruby.org/)
+- [sorcery](https://rubygems.org/gems/sorcery)
 
 ### JavaScript
 
-+   [Apollo GraphQL](https://www.apollographql.com/)
-+   [Vue.js](https://jp.vuejs.org/index.html)
-+   [Buefy](https://buefy.github.io/)
-+   [laravel-mix](https://github.com/JeffreyWay/laravel-mix)
-+   [Storybook](https://storybook.js.org/)
+- [Apollo GraphQL](https://www.apollographql.com/)
+- [Vue.js](https://jp.vuejs.org/index.html)
+- [Buefy](https://buefy.github.io/)
+- [laravel-mix](https://github.com/JeffreyWay/laravel-mix)
+- [Storybook](https://storybook.js.org/)
 
 ### CSS
 
-+   [Bulma](https://bulma.io/)
+- [Bulma](https://bulma.io/)
 
 ### Service
 
-+   [Heroku](https://www.heroku.com/home)
-+   [CircleCI](https://circleci.com/)
+- [Heroku](https://www.heroku.com/home)
+- [CircleCI](https://circleci.com/)
 
 ## Install
 
-```
+```shell
 # bundle install
-$ docker-compose run --rm rails bundle install
+docker-compose run --rm rails bundle install
 
 # yarn install
-$ docker-compose run --rm yarn
+docker-compose run --rm yarn
 ```
 
 ## Usage
 
+```shell
+# Edit environment variables
+cp .env.sample .env
 ```
-$ docker-compose up -d
+
+```shell
+docker-compose up -d
 
 # run watch
-$ docker-compose run --rm yarn run watch
+docker-compose run --rm yarn run watch
 ```
 
 ### Javascript Lint
 
-```
-$ docker-compose run --rm yarn run lint
+```shell
+docker-compose run --rm yarn run lint
 ```
 
 ### Javascript Test(Jest)
 
-```
-$ docker-compose run --rm yarn run test
+```shell
+docker-compose run --rm yarn run test
 ```
 
 ### Storybook
 
-```
-$ docker-compose run --rm --service-ports yarn run storybook
+```shell
+docker-compose run --rm --service-ports yarn run storybook
 ```
 
 ### Add npm package
 
-```
-$ docker-compose run --rm yarn add xxx
+```shell
+docker-compose run --rm yarn add xxx
 ```
 
 ### Update gem
 
-```
-$ docker-compose run --rm rails bundle update
+```shell
+docker-compose run --rm rails bundle update
 ```
 
 ### Update package.json
 
-```
-$ ncu -u
+```shell
+ncu -u
 ```
 
 ### Update npm
 
+```shell
+docker-compose run --rm yarn upgrade
 ```
-$ docker-compose run --rm yarn upgrade
+
+### Force Push
+
+```shell
+git push heroku feature/234_send_grid:master --force
 ```
 
 ## Licence
