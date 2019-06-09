@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Redis
 gem 'redis-rails'
 
+gem 'aws-sdk-s3'
 gem 'apollo_upload_server', '2.0.0.beta.3'
 gem 'config'
 gem 'counter_culture', '~> 2.0'
