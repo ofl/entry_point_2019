@@ -4,9 +4,9 @@ json.article do
   json.title @article.title
   json.body @article.body
   json.createdAt @article.created_at.xmlschema
-  json.likesCount @article.likes_count
+  json.favoritesCount @article.favorites_count
   json.commentsCount @article.comments_count
-  json.likedByMe @article.liked_by?(current_user)
+  json.favoritedByMe @article.faved_by?(current_user)
 
   json.user @article.user.to_builder
 

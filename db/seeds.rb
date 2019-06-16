@@ -41,9 +41,9 @@ unless Article.exists?
 
     rand(3).times do
       user = users.sample
-      next if article.liked_by?(user)
+      next if article.faved_by?(user)
 
-      create(:like, user: user, article: article)
+      create(:favorite, user: user, article: article)
     end
   end
 end

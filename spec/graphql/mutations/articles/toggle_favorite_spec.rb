@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/DescribeClass
+RSpec.describe 'Mutations::Articles::ToggleFavorite' do # rubocop:disable RSpec/DescribeClass
   include GraphqlSpecHelper
 
   let!(:user) { create(:user) }
@@ -8,12 +8,12 @@ RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/Desc
 
   let(:query) do
     <<~QUERY
-      mutation ArticleToggleLike($variables:articleToggleLikeInput!) {
-        articleToggleLike(input: $variables) {
+      mutation ArticleToggleFavorite($variables:articleToggleFavoriteInput!) {
+        articleToggleFavorite(input: $variables) {
           article {
             id
-            likesCount
-            likedByMe
+            favoritesCount
+            favedByMe
           }
           errors {
             path
@@ -23,7 +23,7 @@ RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/Desc
       }
     QUERY
   end
-  let(:operation_name) { 'ArticleToggleLike' }
+  let(:operation_name) { 'ArticleToggleFavorite' }
   let(:variables) do
     {
       'variables': {
@@ -40,11 +40,11 @@ RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/Desc
     context '入力値が正しい場合' do
       let(:expected_value) do
         {
-          articleToggleLike: {
+          articleToggleFavorite: {
             article: {
               id: article.id.to_s,
-              likesCount: 1,
-              likedByMe: true
+              favoritesCount: 1,
+              favedByMe: true
             },
             errors: []
           }
@@ -55,8 +55,8 @@ RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/Desc
         expect(data).to eq expected_value
       end
 
-      it 'Likeが１件増えること' do
-        expect { subject }.to change(Like, :count).by(1)
+      it 'Favoriteが１件増えること' do
+        expect { subject }.to change(Favorite, :count).by(1)
       end
     end
 
@@ -66,7 +66,7 @@ RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/Desc
       let(:expected_value) do
         {
           message: "Couldn't find Article with 'id'=999999",
-          path: ['articleToggleLike'],
+          path: ['articleToggleFavorite'],
           locations: [{ line: 2, column: 3 }],
           extensions: { 'code' => 'Errors::NotFound' }
         }.deep_stringify_keys
@@ -76,8 +76,8 @@ RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/Desc
         expect(errors[0]).to eq expected_value
       end
 
-      it 'Likeが増えないこと' do
-        expect { subject }.not_to change(Like, :count)
+      it 'Favoriteが増えないこと' do
+        expect { subject }.not_to change(Favorite, :count)
       end
     end
   end
@@ -86,7 +86,7 @@ RSpec.describe 'Mutations::Articles::ToggleLike' do # rubocop:disable RSpec/Desc
     let(:expected_value) do
       {
         message: 'ログインが必要です',
-        path: ['articleToggleLike'],
+        path: ['articleToggleFavorite'],
         locations: [{ line: 2, column: 3 }],
         extensions: { 'code' => 'Errors::Unauthorized' }
       }.deep_stringify_keys

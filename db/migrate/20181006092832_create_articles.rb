@@ -5,7 +5,7 @@ class CreateArticles < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :body
       t.integer :comments_count, null: false, default: 0
-      t.integer :likes_count, null: false, default: 0
+      t.integer :favorites_count, null: false, default: 0
 
       t.timestamps
     end
