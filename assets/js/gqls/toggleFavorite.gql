@@ -1,0 +1,9 @@
+mutation articleToggleFavorite($id: ID!) {
+  articleToggleFavorite(input: { id: $id }) {
+    article {
+      id
+      favoritesCount
+      favedByMe
+    }
+  }
+}

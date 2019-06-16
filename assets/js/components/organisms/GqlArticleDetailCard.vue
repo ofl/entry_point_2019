@@ -26,10 +26,10 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item" @click.stop.prevent="onClickLikeBtn()">
+      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
         <span class="has-text-grey-light">
-          <BIcon pack="fa" icon="heart" :type="likedType"/>
-          {{ likesCount }}
+          <BIcon pack="fa" icon="heart" :type="favoriteType"/>
+          {{ favoritesCount }}
         </span>
       </a>
 
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import TOGGLE_LIKE_MUTATION from "../../gqls/toggleLike.gql";
+import TOGGLE_LIKE_MUTATION from "../../gqls/toggleFavorite.gql";
 
 export default {
   name: "GqlArticleDetailCard",
@@ -58,8 +58,8 @@ export default {
 
   data() {
     return {
-      likesCount: this.article.likesCount,
-      likedByMe: this.article.likedByMe
+      favoritesCount: this.article.favoritesCount,
+      favedByMe: this.article.favedByMe
     };
   },
 
@@ -73,8 +73,8 @@ export default {
       }
       return this.article.user.id == this.currentUser.id;
     },
-    likedType() {
-      return this.likedByMe ? "is-primary" : null;
+    favoriteType() {
+      return this.favedByMe ? "is-primary" : null;
     }
   },
 
@@ -85,26 +85,26 @@ export default {
     onClickDeleteBtn() {
       location.pathname = `/vue_articles/${this.article.id}/edit`;
     },
-    onClickLikeBtn() {
+    onClickFavoriteBtn() {
       if (!this.isLoggedIn) {
         this.$dialog.alert("Please login!");
         return;
       }
-      this.toggleLike();
+      this.toggleFavorite();
     },
 
-    async toggleLike() {
+    async toggleFavorite() {
       await this.$apollo
         .mutate({
           mutation: TOGGLE_LIKE_MUTATION,
           variables: {
             id: this.article.id
           },
-          update: (store, { data: { articleToggleLike } }) => {
-            const likesCount = articleToggleLike.article.likesCount;
-            const likedByMe = articleToggleLike.article.likedByMe;
+          update: (store, { data: { articleToggleFavorite } }) => {
+            const favoritesCount = articleToggleFavorite.article.favoritesCount;
+            const favedByMe = articleToggleFavorite.article.favedByMe;
 
-            this.updateLikeStatus(likesCount, likedByMe);
+            this.updateFavoriteStatus(favoritesCount, favedByMe);
           }
         })
         .then(data => {
@@ -116,9 +116,9 @@ export default {
         });
     },
 
-    updateLikeStatus(likesCount, likedByMe) {
-      this.likesCount = likesCount;
-      this.likedByMe = likedByMe;
+    updateFavoriteStatus(favoritesCount, favedByMe) {
+      this.favoritesCount = favoritesCount;
+      this.favedByMe = favedByMe;
     }
   }
 };
