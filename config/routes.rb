@@ -3,12 +3,13 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :users
+  resources :users, param: :username, only: [:show]
+  resource :profile, only: [:show, :edit]
+
   resources :articles
   resources :vue_articles
   resources :spa_articles, only: [:index, :show, :new, :edit]
   resources :inline_gql_articles, only: [:index, :show, :new, :edit]
-  resource :profile, only: [:show, :edit]
 
   get 'login', to: 'user_sessions#new', as: :login
   post 'login', to: 'user_sessions#create'
