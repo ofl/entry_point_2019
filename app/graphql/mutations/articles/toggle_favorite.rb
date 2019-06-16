@@ -1,5 +1,5 @@
-class Mutations::Articles::ToggleLike < GraphQL::Schema::RelayClassicMutation
-  graphql_name 'articleToggleLike'
+class Mutations::Articles::ToggleFavorite < GraphQL::Schema::RelayClassicMutation
+  graphql_name 'articleToggleFavorite'
   description 'いいねの登録/解除'
 
   null true
@@ -14,7 +14,7 @@ class Mutations::Articles::ToggleLike < GraphQL::Schema::RelayClassicMutation
     raise Errors::Unauthorized if current_user.nil?
 
     article = Article.find(id)
-    article.toggle_like(current_user)
+    article.toggle_favorite(current_user)
 
     { article: article, errors: [] }
   end

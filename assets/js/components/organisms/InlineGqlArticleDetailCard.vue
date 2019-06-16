@@ -30,10 +30,10 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item" @click.stop.prevent="onClickLikeBtn()">
+      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
         <span class="has-text-grey-light">
-          <BIcon pack="fa" icon="heart" :type="likedType"/>
-          {{ likesCount }}
+          <BIcon pack="fa" icon="heart" :type="favoriteType"/>
+          {{ favoritesCount }}
         </span>
       </a>
 
@@ -51,7 +51,7 @@
 <script>
 import DESTROY_ARTICLE_MUTATION from "../../gqls/destroyArticle.gql";
 import ARTICLE_INDEX_QUERY from "../../gqls/articles.gql";
-import TOGGLE_LIKE_MUTATION from "../../gqls/toggleLike.gql";
+import TOGGLE_LIKE_MUTATION from "../../gqls/toggleFavorite.gql";
 import ARTICLE_DETAIL_QUERY from "../../gqls/article.gql";
 
 export default {
@@ -69,8 +69,8 @@ export default {
 
   data() {
     return {
-      likesCount: this.article.likesCount,
-      likedByMe: this.article.likedByMe
+      favoritesCount: this.article.favoritesCount,
+      favedByMe: this.article.favedByMe
     };
   },
 
@@ -84,8 +84,8 @@ export default {
       }
       return this.article.user.id == this.currentUser.id;
     },
-    likedType() {
-      return this.likedByMe ? "is-primary" : null;
+    favoriteType() {
+      return this.favedByMe ? "is-primary" : null;
     },
     articleId() {
       return this.article.id;
@@ -104,34 +104,34 @@ export default {
         onConfirm: () => this.destroyArticle()
       });
     },
-    onClickLikeBtn() {
+    onClickFavoriteBtn() {
       if (!this.isLoggedIn) {
         this.$dialog.alert("Please login!");
         return;
       }
-      this.toggleLike();
+      this.toggleFavorite();
     },
 
-    async toggleLike() {
+    async toggleFavorite() {
       await this.$apollo
         .mutate({
           mutation: TOGGLE_LIKE_MUTATION,
           variables: {
             id: this.articleId
           },
-          update: (store, { data: { articleToggleLike } }) => {
-            const likesCount = articleToggleLike.article.likesCount;
-            const likedByMe = articleToggleLike.article.likedByMe;
+          update: (store, { data: { articleToggleFavorite } }) => {
+            const favoritesCount = articleToggleFavorite.article.favoritesCount;
+            const favedByMe = articleToggleFavorite.article.favedByMe;
 
-            this.updateLikeStatus(likesCount, likedByMe);
+            this.updateFavoriteStatus(favoritesCount, favedByMe);
 
             const data = store.readQuery({
               query: ARTICLE_DETAIL_QUERY,
               variables: { id: this.articleId }
             });
 
-            data.article.likedByMe = likedByMe;
-            data.article.likesCount = likesCount;
+            data.article.favedByMe = favedByMe;
+            data.article.favoritesCount = favoritesCount;
 
             store.writeQuery({
               query: ARTICLE_DETAIL_QUERY,
@@ -142,7 +142,7 @@ export default {
         })
         .then(data => {
           // Result
-          const article = data.data.articleToggleLike.article;
+          const article = data.data.articleToggleFavorite.article;
         })
         .catch(error => {
           // Error
@@ -177,9 +177,9 @@ export default {
         });
     },
 
-    updateLikeStatus(likesCount, likedByMe) {
-      this.likesCount = likesCount;
-      this.likedByMe = likedByMe;
+    updateFavoriteStatus(favoritesCount, favedByMe) {
+      this.favoritesCount = favoritesCount;
+      this.favedByMe = favedByMe;
     }
   }
 };

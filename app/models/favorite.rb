@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: likes
+# Table name: favorites
 #
 #  id         :bigint(8)        not null, primary key
 #  created_at :datetime         not null
@@ -10,9 +10,9 @@
 #
 # Indexes
 #
-#  index_likes_on_article_id              (article_id)
-#  index_likes_on_user_id                 (user_id)
-#  index_likes_on_user_id_and_article_id  (user_id,article_id) UNIQUE
+#  index_favorites_on_article_id              (article_id)
+#  index_favorites_on_user_id                 (user_id)
+#  index_favorites_on_user_id_and_article_id  (user_id,article_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-class Like < ApplicationRecord
+class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :article
   counter_culture :article

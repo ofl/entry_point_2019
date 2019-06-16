@@ -30,7 +30,7 @@
         </span>
         <span class="has-text-grey-light">
           <i class="fa fa-heart"/>
-          {{ article.likesCount }}
+          {{ article.favoritesCount }}
         </span>
       </div>
     </div>

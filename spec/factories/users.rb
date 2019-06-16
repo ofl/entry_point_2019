@@ -2,14 +2,14 @@
 #
 # Table name: users
 #
-#  id                    :bigint(8)        not null, primary key
+#  id                            :bigint(8)        not null, primary key
 #  avatar_data(アバター画像情報) :string
-#  crypted_password      :string           not null
-#  email                 :string(100)      not null
-#  name                  :string(50)       not null
-#  salt                  :string           not null
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
+#  crypted_password              :string           not null
+#  email                         :string(100)      not null
+#  name                          :string(50)       not null
+#  salt                          :string           not null
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
 #
 
 FactoryBot.define do

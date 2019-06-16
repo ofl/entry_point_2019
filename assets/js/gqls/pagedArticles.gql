@@ -9,7 +9,7 @@ query PagedArticles($page: Int, $pageSize: Int) {
         avatarUrl
       }
       commentsCount
-      likesCount
+      favoritesCount
       createdAt
     }
     hasMore

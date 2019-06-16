@@ -31,7 +31,7 @@ RSpec.describe VueArticlesController, type: :controller do
           commentsCount: 0,
           createdAt: article.created_at.xmlschema,
           id: article.id.to_s,
-          likesCount: 0,
+          favoritesCount: 0,
           title: article.title,
           user: {
             __typename: 'User',
@@ -62,8 +62,8 @@ RSpec.describe VueArticlesController, type: :controller do
           commentsCount: 0,
           createdAt: article.created_at.xmlschema,
           id: article.id.to_s,
-          likedByMe: false,
-          likesCount: 0,
+          favedByMe: false,
+          favoritesCount: 0,
           title: article.title,
           user: {
             __typename: 'User',

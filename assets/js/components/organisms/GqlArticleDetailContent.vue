@@ -38,8 +38,8 @@ export default {
           },
           comments: [],
           commentsCount: 0,
-          likesCount: 0,
-          likedByMe: false
+          favoritesCount: 0,
+          favedByMe: false
         };
       }
     },

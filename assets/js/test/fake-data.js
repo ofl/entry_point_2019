@@ -4,7 +4,7 @@ export const fakeArticle = {
   body: "World",
   createdAt: "2019-01-01",
   commentsCount: 1,
-  likesCount: 1,
+  favoritesCount: 1,
   user: {
     id: "1",
     name: "Jhon",

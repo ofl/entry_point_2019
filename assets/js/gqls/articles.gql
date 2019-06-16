@@ -8,7 +8,7 @@ query Articles {
       avatarUrl
     }
     commentsCount
-    likesCount
+    favoritesCount
     createdAt
   }
 }

@@ -8,7 +8,7 @@ class Queries::Articles::Show < GraphQL::Schema::Resolver
 
   def resolve(id:)
     article = Article.includes(comments: [:user]).find_by(id: id)
-    article.liked_by?(context[:current_user])
+    article.faved_by?(context[:current_user])
     article
   end
 end

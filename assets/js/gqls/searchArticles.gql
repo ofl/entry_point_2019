@@ -8,7 +8,7 @@ query SearchArticles($keyword: String!) {
       avatarUrl
     }
     commentsCount
-    likesCount
+    favoritesCount
     createdAt
   }
 }
