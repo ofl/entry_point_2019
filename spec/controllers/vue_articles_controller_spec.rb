@@ -62,7 +62,7 @@ RSpec.describe VueArticlesController, type: :controller do
           commentsCount: 0,
           createdAt: article.created_at.xmlschema,
           id: article.id.to_s,
-          favoritedByMe: false,
+          favedByMe: false,
           favoritesCount: 0,
           title: article.title,
           user: {

@@ -5,7 +5,7 @@ json.article do
   json.createdAt @article.created_at.xmlschema
   json.favoritesCount @article.favorites_count
   json.commentsCount @article.comments_count
-  json.favoritedByMe @article.faved_by?(current_user)
+  json.favedByMe @article.faved_by?(current_user)
 
   json.user @article.user.to_builder
 
