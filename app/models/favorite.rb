@@ -29,4 +29,6 @@ class Favorite < ApplicationRecord
   validates :user, presence: true, uniqueness: { scope: :article }
 
   scope :by_user, ->(user) { where(user: user) }
+
+  delegate :title, :created_at, :favorites_count, :comments_count, :user, to: :article, prefix: :article
 end

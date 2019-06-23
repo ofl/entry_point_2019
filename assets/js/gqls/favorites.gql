@@ -1,0 +1,14 @@
+query Favorites {
+  favorites {
+    id
+    title
+    user {
+      id
+      name
+      avatarUrl
+    }
+    commentsCount
+    favoritesCount
+    createdAt
+  }
+}
