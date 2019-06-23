@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :vue_articles
   resources :spa_articles, only: [:index, :show, :new, :edit]
   resources :inline_gql_articles, only: [:index, :show, :new, :edit]
+  resources :favorites, only: [:index]
 
   get 'login', to: 'user_sessions#new', as: :login
   post 'login', to: 'user_sessions#create'

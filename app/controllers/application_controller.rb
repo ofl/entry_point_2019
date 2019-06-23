@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :require_login
+  before_action :require_login, :check_format
 
   private
 
@@ -19,5 +19,13 @@ class ApplicationController < ActionController::Base
     end
 
     super
+  end
+
+  def check_format
+    return unless request.get?
+
+    return if params[:format].nil?
+
+    render nothing: true, status: 406 unless ['json', 'html'].include?(params[:format])
   end
 end
