@@ -90,6 +90,13 @@
               <span>Edit Profile</span>
             </RouterLink>
 
+            <RouterLink to="/favorites" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-heart"/>
+              </span>
+              <span>Favorites</span>
+            </RouterLink>
+
             <a class="navbar-item" href="#" @click.stop.prevent="confirmLogout()">
               <span class="icon">
                 <i class="fas fa-sign-out-alt"/>

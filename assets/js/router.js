@@ -6,6 +6,7 @@ import InlineGqlArticleList from "./components/pages/InlineGqlArticleList.vue";
 import InlineGqlArticleNew from "./components/pages/InlineGqlArticleNew.vue";
 import InlineGqlArticleEdit from "./components/pages/InlineGqlArticleEdit.vue";
 import InlineGqlArticleDetail from "./components/pages/InlineGqlArticleDetail.vue";
+import FavoriteList from "./components/pages/FavoriteList.vue";
 import GqlArticleList from "./components/pages/GqlArticleList.vue";
 import GqlArticleDetail from "./components/pages/GqlArticleDetail.vue";
 import SignUp from "./components/pages/SignUp.vue";
@@ -43,6 +44,10 @@ const routes = [
     path: "/gql_articles/:id",
     component: GqlArticleDetail,
     name: "GqlArticle"
+  },
+  {
+    path: "/favorites",
+    component: FavoriteList
   },
   {
     path: "/sign_up",
