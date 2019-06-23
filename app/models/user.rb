@@ -6,6 +6,8 @@
 #  avatar_data(アバター画像情報) :string
 #  crypted_password              :string           not null
 #  email                         :string(100)      not null
+#  follower_count                :integer
+#  following_count               :integer
 #  name                          :string(50)       not null
 #  salt                          :string           not null
 #  created_at                    :datetime         not null
@@ -26,6 +28,20 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  has_many :followings, through: :following_relationships
+
+  def following?(other_user)
+    following_relationships.where(following_id: other_user.id).exists?
+  end
+
+  def follow!(other_user)
+    following_relationships.create!(following_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    following_relationships.find_by(following_id: other_user.id).destroy
+  end
 
   def to_builder
     Jbuilder.new do |user|
