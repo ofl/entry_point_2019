@@ -4,9 +4,9 @@ class Queries::Users::Show < GraphQL::Schema::Resolver
 
   type Types::UserType, null: true
 
-  argument :id, ID, required: true
+  argument :name, String, required: true
 
-  def resolve(id:)
-    User.find_by(id: id)
+  def resolve(name:)
+    User.find_by(name: name)
   end
 end

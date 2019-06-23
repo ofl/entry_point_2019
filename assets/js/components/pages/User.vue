@@ -1,6 +1,6 @@
 <template>
   <GeneralTemplate :current-user="currentUser" :flashes="flashes">
-    <UserDetailContent v-if="user" :user="user" :user-id="userId" :current-user="currentUser"/>
+    <UserDetailContent v-if="user" :user="user" :user-name="name" :current-user="currentUser"/>
   </GeneralTemplate>
 </template>
 
@@ -27,8 +27,8 @@ export default {
   },
 
   computed: {
-    userId() {
-      return this.$route.params.id;
+    name() {
+      return this.$route.params.name;
     }
   },
 
@@ -40,7 +40,7 @@ export default {
       query: USER_DETAIL_QUERY,
       variables() {
         return {
-          id: this.userId
+          name: this.name
         };
       },
       skip() {
@@ -53,7 +53,7 @@ export default {
     if (this.hasInlineUserData) {
       this.$apollo.provider.defaultClient.writeQuery({
         query: USER_DETAIL_QUERY,
-        variables: { id: this.userId },
+        variables: { name: this.name },
         data: { user: gon.user }
       });
       // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。

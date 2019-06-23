@@ -60,7 +60,7 @@ const routes = [
     name: "EditProfile"
   },
   {
-    path: "/users/:id",
+    path: "/users/:name",
     component: User,
     name: "User"
   }

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :users, param: :username, only: [:show]
+  resources :users, param: :name, only: [:show]
   resource :profile, only: [:show, :edit]
 
   resources :articles
