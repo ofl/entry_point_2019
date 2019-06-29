@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
         name: current_user.name,
         email: current_user.email,
         avatarUrl: current_user.avatar_url,
+        followerCount: current_user.follower_count,
+        followingCount: current_user.following_count,
         __typename: 'currentUser'
       }
     end

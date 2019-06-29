@@ -48,6 +48,8 @@ class User < ApplicationRecord
       user.id id.to_s
       user.name name
       user.avatarUrl avatar_url
+      user.followerCount follower_count
+      user.followingCount following_count
       user.__typename 'User'
     end
   end

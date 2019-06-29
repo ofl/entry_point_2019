@@ -3,5 +3,7 @@ query User($name: String!) {
     id
     name
     avatarUrl
+    followerCount
+    followingCount
   }
 }

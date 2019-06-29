@@ -9,6 +9,26 @@
     <div class="card-content">
       <div class="content">{{ user.name }}</div>
     </div>
+    <footer class="card-footer">
+      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
+        <span class="has-text-grey-light">
+          <BIcon pack="fa" icon="user-friends" :type="followingType"/>
+          {{ user.followingCount }} followings
+        </span>
+      </a>
+      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
+        <span class="has-text-grey-light">
+          <BIcon pack="fa" icon="user-friends" :type="followingType"/>
+          {{ user.followerCount }} followers
+        </span>
+      </a>
+      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
+        <span class="has-text-grey-light">
+          <BIcon pack="fa" icon="user-plus" :type="followingType"/>
+          {{ followButtonLabel }}
+        </span>
+      </a>
+    </footer>
   </div>
 </template>
 
@@ -26,6 +46,13 @@ export default {
     }
   },
 
+  data() {
+    return {
+      isFollowing: false,
+      isFollowed: false
+    };
+  },
+
   computed: {
     isLoggedIn() {
       return !!this.currentUser;
@@ -34,6 +61,21 @@ export default {
       return !!this.user.avatarUrl
         ? this.user.avatarUrl
         : "../images/300x300.png";
+    },
+    isOwner() {
+      if (!this.isLoggedIn) {
+        return false;
+      }
+      return this.user.id == this.currentUser.id;
+    },
+    followingType() {
+      return this.isFollowing ? "is-primary" : null;
+    },
+    followerType() {
+      return this.isFollowed ? "is-primary" : null;
+    },
+    followButtonLabel() {
+      return this.isFollowing ? "Unfollow" : "Follow";
     }
   }
 };
