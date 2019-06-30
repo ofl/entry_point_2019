@@ -1,12 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :require_login, :check_format
 
-  private
-
-  def not_authenticated
-    redirect_to login_path, alert: 'Please login first'
-  end
-
   def render(*args, &block)
     if current_user
       gon.currentUser = {
@@ -23,11 +17,17 @@ class ApplicationController < ActionController::Base
     super
   end
 
+  private
+
+  def not_authenticated
+    redirect_to login_path, alert: 'Please login first'
+  end
+
   def check_format
     return unless request.get?
 
     return if params[:format].nil?
 
-    render nothing: true, status: 406 unless ['json', 'html'].include?(params[:format])
+    render nothing: true, status: 406 unless ['json', 'html', 'html'].include?(params[:format])
   end
 end
