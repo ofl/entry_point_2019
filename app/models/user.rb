@@ -50,6 +50,14 @@ class User < ApplicationRecord
     following_relationships.find_by(following_id: other_user.id).destroy
   end
 
+  def toggle_follow!(user)
+    is_followe_by_user = followed_by?(user) 
+    is_followe_by_user ? unfollow!(user) : follow!(user)
+
+    reload
+    self.followed_by_me = !is_followe_by_user
+  end
+
   def to_builder
     Jbuilder.new do |user|
       user.id id.to_s
