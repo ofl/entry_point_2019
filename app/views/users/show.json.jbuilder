@@ -5,4 +5,5 @@ json.user do
   json.avatarUrl @user.avatar_url
   json.followerCount @user.follower_count
   json.followingCount @user.following_count
+  json.followedByMe @user.followed_by?(current_user)
 end

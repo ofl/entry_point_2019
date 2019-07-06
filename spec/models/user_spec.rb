@@ -42,4 +42,28 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to contain_exactly(another_user) }
   end
+
+  describe 'following?' do
+    subject { user.following?(another_user) } 
+
+    let(:another_user) { create(:user) }
+
+    before do
+      user.follow!(another_user)
+    end
+
+    it { is_expected.to be_truthy }
+  end
+
+  describe 'followed_by?' do
+    subject { user.followed_by?(another_user) } 
+
+    let(:another_user) { create(:user) }
+
+    before do
+      another_user.follow!(user)
+    end
+
+    it { is_expected.to be_truthy }
+  end
 end

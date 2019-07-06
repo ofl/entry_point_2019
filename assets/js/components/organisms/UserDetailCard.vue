@@ -15,13 +15,13 @@
         class="card-footer-item"
       >
         <span class="has-text-grey-light">
-          <BIcon pack="fa" icon="user-friends" :type="followingType" />
+          <BIcon pack="fa" icon="user-friends" />
           {{ user.followingCount }} followings
         </span>
       </RouterLink>
       <RouterLink :to="{ name: 'Followers', params: { name: user.name } }" class="card-footer-item">
         <span class="has-text-grey-light">
-          <BIcon pack="fa" icon="user-friends" :type="followingType" />
+          <BIcon pack="fa" icon="user-friends" />
           {{ user.followerCount }} followers
         </span>
       </RouterLink>
@@ -50,10 +50,7 @@ export default {
   },
 
   data() {
-    return {
-      isFollowing: false,
-      isFollowed: false
-    };
+    return {};
   },
 
   computed: {
@@ -72,13 +69,10 @@ export default {
       return this.user.id == this.currentUser.id;
     },
     followingType() {
-      return this.isFollowing ? "is-primary" : null;
-    },
-    followerType() {
-      return this.isFollowed ? "is-primary" : null;
+      return this.user.followedByMe ? "is-primary" : null;
     },
     followButtonLabel() {
-      return this.isFollowing ? "Unfollow" : "Follow";
+      return this.user.followedByMe ? "Unfollow" : "Follow";
     }
   }
 };

@@ -84,7 +84,6 @@ export default {
         variables: { name: this.name },
         data: { followings: gon.followings }
       });
-      // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.followings = null;
     }
   }

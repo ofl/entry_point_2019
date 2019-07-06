@@ -16,6 +16,7 @@
 
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  attribute :followed_by_me, :boolean, default: false
 
   include AvatarUploader[:avatar]
 
@@ -35,6 +36,10 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following_relationships.where(following_id: other_user.id).exists?
+  end
+
+  def followed_by?(other_user)
+    self.followed_by_me = follower_relationships.where(follower_id: other_user.id).exists?
   end
 
   def follow!(other_user)
