@@ -8,7 +8,7 @@ class Queries::Users::Show < GraphQL::Schema::Resolver
 
   def resolve(name:)
     user = User.find_by(name: name)
-    user.followed_by?(context[:current_user])
+    user.followed_by?(context[:current_user]) if context[:current_user]
     user
   end
 end

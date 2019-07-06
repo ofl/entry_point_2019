@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
   let(:user) { create(:user) }
 
   describe 'followings' do
-    subject { user.followings } 
+    subject { user.followings }
 
     let(:another_user) { create(:user) }
 
@@ -32,7 +32,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'followers' do
-    subject { user.followers } 
+    subject { user.followers }
 
     let(:another_user) { create(:user) }
 
@@ -44,7 +44,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'following?' do
-    subject { user.following?(another_user) } 
+    subject { user.following?(another_user) }
 
     let(:another_user) { create(:user) }
 
@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'followed_by?' do
-    subject { user.followed_by?(another_user) } 
+    subject { user.followed_by?(another_user) }
 
     let(:another_user) { create(:user) }
 
@@ -65,5 +65,39 @@ RSpec.describe User, type: :model do
     end
 
     it { is_expected.to be_truthy }
+  end
+
+  describe 'follow!' do
+    subject { user.follow!(another_user) }
+
+    let(:another_user) { create(:user) }
+
+    it 'Relationshipが増えること' do
+      expect { subject }.to change(Relationship, :count).by(1)
+    end
+
+    it 'userのfollowing_countが増えること' do
+      expect(user.following_count).to eq 0
+      subject
+      expect(user.reload.following_count).to eq 1
+    end
+
+    it 'userのfollower_countが増えないこと' do
+      expect(user.follower_count).to eq 0
+      subject
+      expect(user.reload.follower_count).to eq 0
+    end
+
+    it 'another_userのfollowing_countが増えないこと' do
+      expect(another_user.following_count).to eq 0
+      subject
+      expect(another_user.reload.following_count).to eq 0
+    end
+
+    it 'another_userのfollower_countが増えること' do
+      expect(another_user.follower_count).to eq 0
+      subject
+      expect(another_user.reload.follower_count).to eq 1
+    end
   end
 end

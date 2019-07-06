@@ -50,12 +50,13 @@ class User < ApplicationRecord
     following_relationships.find_by(following_id: other_user.id).destroy
   end
 
-  def toggle_follow!(user)
-    is_followe_by_user = followed_by?(user) 
-    is_followe_by_user ? unfollow!(user) : follow!(user)
+  def toggle_followed_by!(other_user)
+    is_followed_by_user = followed_by?(other_user)
+    is_followed_by_user ? other_user.unfollow!(self) : other_user.follow!(self)
 
     reload
-    self.followed_by_me = !is_followe_by_user
+    self.followed_by_me = !is_followed_by_user
+    self
   end
 
   def to_builder

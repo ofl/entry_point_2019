@@ -19,8 +19,8 @@ class Relationship < ApplicationRecord
   belongs_to :follower, class_name: 'User'
   belongs_to :following, class_name: 'User'
 
-  counter_culture :follower, column_name: 'follower_count'
-  counter_culture :following, column_name: 'following_count'
+  counter_culture :follower, column_name: 'following_count'
+  counter_culture :following, column_name: 'follower_count'
 
   validates :follower_id, presence: true
   validates :following_id, presence: true

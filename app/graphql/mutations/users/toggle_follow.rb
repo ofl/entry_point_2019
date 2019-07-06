@@ -14,7 +14,7 @@ class Mutations::Users::ToggleFollow < GraphQL::Schema::RelayClassicMutation
     raise Errors::Unauthorized if current_user.nil?
 
     user = User.find_by!(name: name)
-    user.toggle_follow!(current_user)
+    user.toggle_followed_by!(current_user)
 
     { user: user, errors: [] }
   end
