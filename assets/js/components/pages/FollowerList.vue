@@ -28,10 +28,10 @@ export default {
       toolbarTitle: "user",
       currentUser: gon.currentUser,
       user: gon.user,
-      followers: gon.followers,
+      followers: gon.followers ? gon.followers : [],
       flashes: {},
-      hasInlineFollowersData: !!gon.followers,
-      hasInlineUserData: !!gon.user
+      hasInlineUserData: !!gon.user,
+      hasInlineFollowersData: !!gon.followers
     };
   },
 

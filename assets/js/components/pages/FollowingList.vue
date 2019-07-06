@@ -28,9 +28,10 @@ export default {
       toolbarTitle: "user",
       currentUser: gon.currentUser,
       user: gon.user,
-      followings: gon.followings,
+      followings: gon.followings ? gon.followings : [],
       flashes: {},
-      hasFollowingsData: !!gon.followings
+      hasInlineUserData: !!gon.user,
+      hasInlineFollowingsData: !!gon.followings
     };
   },
 
@@ -45,7 +46,7 @@ export default {
       query: CURRENT_USER_QUERY
     },
     user: {
-      query: FOLLWINGS_QUERY,
+      query: USER_DETAIL_QUERY,
       variables() {
         return {
           name: this.name
@@ -55,7 +56,7 @@ export default {
         return this.hasInlineUserData;
       }
     },
-    followers: {
+    followings: {
       query: FOLLWINGS_QUERY,
       variables() {
         return {

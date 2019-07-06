@@ -8,7 +8,7 @@
 import UserListTable from "../organisms/UserListTable.vue";
 
 export default {
-  name: "UserDetailContent",
+  name: "UserListContent",
 
   components: {
     UserListTable

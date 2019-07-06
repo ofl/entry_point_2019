@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img :src="avatarUrl" alt="Placeholder image">
+        <img :src="avatarUrl" alt="Placeholder image" />
       </figure>
     </div>
 
@@ -10,21 +10,24 @@
       <div class="content">{{ user.name }}</div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
+      <RouterLink
+        :to="{ name: 'Followings', params: { name: user.name } }"
+        class="card-footer-item"
+      >
         <span class="has-text-grey-light">
-          <BIcon pack="fa" icon="user-friends" :type="followingType"/>
+          <BIcon pack="fa" icon="user-friends" :type="followingType" />
           {{ user.followingCount }} followings
         </span>
-      </a>
-      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
+      </RouterLink>
+      <RouterLink :to="{ name: 'Followers', params: { name: user.name } }" class="card-footer-item">
         <span class="has-text-grey-light">
-          <BIcon pack="fa" icon="user-friends" :type="followingType"/>
+          <BIcon pack="fa" icon="user-friends" :type="followingType" />
           {{ user.followerCount }} followers
         </span>
-      </a>
+      </RouterLink>
       <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
         <span class="has-text-grey-light">
-          <BIcon pack="fa" icon="user-plus" :type="followingType"/>
+          <BIcon pack="fa" icon="user-plus" :type="followingType" />
           {{ followButtonLabel }}
         </span>
       </a>
