@@ -25,7 +25,7 @@
           {{ user.followerCount }} followers
         </span>
       </RouterLink>
-      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFavoriteBtn()">
+      <a href="#" class="card-footer-item" @click.stop.prevent="onClickFollowBtn()">
         <span class="has-text-grey-light">
           <BIcon pack="fa" icon="user-plus" :type="followingType" />
           {{ followButtonLabel }}
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import TOGGLE_FOLLOW_MUTATION from "../../gqls/toggleFollow.gql";
+
 export default {
   name: "UserDetailCard",
 
@@ -73,6 +75,37 @@ export default {
     },
     followButtonLabel() {
       return this.user.followedByMe ? "Unfollow" : "Follow";
+    }
+  },
+
+  methods: {
+    async toggleFollow() {
+      await this.$apollo
+        .mutate({
+          mutation: TOGGLE_FOLLOW_MUTATION,
+          variables: {
+            name: this.user.name
+          }
+        })
+        .then(data => {
+          // Result
+          const user = data.data.userToggleFollow.user;
+          this.updateFollowStatus(user.followerCount);
+        })
+        .catch(error => {
+          // Error
+          console.error(error);
+        });
+    },
+    updateFollowStatus(followerCount) {
+      this.user.followerCount = followerCount;
+    },
+    onClickFollowBtn() {
+      if (!this.isLoggedIn) {
+        this.$dialog.alert("Please login!");
+        return;
+      }
+      this.toggleFollow();
     }
   }
 };

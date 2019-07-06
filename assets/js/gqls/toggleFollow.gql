@@ -1,0 +1,10 @@
+mutation userToggleFollow($name: String!) {
+  userToggleFollow(input: { name: $name }) {
+    user {
+      id
+      name
+      followerCount
+      followedByMe
+    }
+  }
+}
