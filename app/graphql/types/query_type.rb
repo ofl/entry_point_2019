@@ -8,5 +8,7 @@ module Types
     field :article,      resolver: Queries::Articles::Show
     field :current_user, resolver: Queries::Users::CurrentUser
     field :user,         resolver: Queries::Users::Show
+    field :followings,   resolver: Queries::Users::Followings
+    field :followers,    resolver: Queries::Users::Followers
   end
 end
