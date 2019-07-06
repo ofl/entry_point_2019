@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2019_06_23_072703) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar_data", comment: "アバター画像情報"
-    t.integer "following_count"
-    t.integer "follower_count"
+    t.integer "following_count", default: 0, null: false
+    t.integer "follower_count", default: 0, null: false
   end
 
   add_foreign_key "articles", "users"
