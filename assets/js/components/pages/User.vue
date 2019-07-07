@@ -1,6 +1,6 @@
 <template>
   <GeneralTemplate :current-user="currentUser" :flashes="flashes">
-    <UserDetailContent v-if="user" :user="user" :user-name="name" :current-user="currentUser"/>
+    <UserDetailContent v-if="user" :user="user" :user-name="name" :current-user="currentUser" />
   </GeneralTemplate>
 </template>
 
@@ -29,6 +29,12 @@ export default {
   computed: {
     name() {
       return this.$route.params.name;
+    }
+  },
+
+  watch: {
+    user: function(val) {
+      document.title = `${val.name} | EP2019`;
     }
   },
 

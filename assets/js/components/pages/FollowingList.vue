@@ -69,6 +69,12 @@ export default {
     }
   },
 
+  watch: {
+    user: function(val) {
+      document.title = `${val.name}'s follwings list | EP2019`;
+    }
+  },
+
   mounted() {
     if (this.hasInlineUserData) {
       this.$apollo.provider.defaultClient.writeQuery({

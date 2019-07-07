@@ -41,6 +41,12 @@ export default {
     }
   },
 
+  watch: {
+    user: function(val) {
+      document.title = `${val.name}'s follwers list | EP2019`;
+    }
+  },
+
   apollo: {
     currentUser: {
       query: CURRENT_USER_QUERY
