@@ -1,40 +1,43 @@
 <template>
   <GeneralTemplate :current-user="currentUser" :flashes="flashes">
-    <UserDetailContent v-if="user" :user="user" :user-name="name" :current-user="currentUser" />
+    <UserListContent
+      v-if="user"
+      :user="user"
+      :user-name="name"
+      :current-user="currentUser"
+      :users="followings"
+    />
   </GeneralTemplate>
 </template>
 
 <script>
 import GeneralTemplate from "../templates/GeneralTemplate.vue";
-import UserDetailContent from "../organisms/UserDetailContent.vue";
+import UserListContent from "../organisms/UserListContent.vue";
 
 import USER_DETAIL_QUERY from "../../gqls/user.gql";
+import FOLLWINGS_QUERY from "../../gqls/followings.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
-  name: "UserDetail",
+  name: "FollowingList",
 
-  components: { GeneralTemplate, UserDetailContent },
+  components: { GeneralTemplate, UserListContent },
 
   data() {
     return {
       toolbarTitle: "user",
       currentUser: gon.currentUser,
       user: gon.user,
+      followings: gon.followings ? gon.followings : [],
       flashes: {},
-      hasInlineUserData: !!gon.article
+      hasInlineUserData: !!gon.user,
+      hasInlineFollowingsData: !!gon.followings
     };
   },
 
   computed: {
     name() {
       return this.$route.params.name;
-    }
-  },
-
-  watch: {
-    user: function(val) {
-      document.title = `${val.name} | EP2019`;
     }
   },
 
@@ -52,6 +55,23 @@ export default {
       skip() {
         return this.hasInlineUserData;
       }
+    },
+    followings: {
+      query: FOLLWINGS_QUERY,
+      variables() {
+        return {
+          name: this.name
+        };
+      },
+      skip() {
+        return this.hasInlineFollowingsData;
+      }
+    }
+  },
+
+  watch: {
+    user: function(val) {
+      document.title = `${val.name}'s follwings list | EP2019`;
     }
   },
 
@@ -62,8 +82,15 @@ export default {
         variables: { name: this.name },
         data: { user: gon.user }
       });
-      // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.user = null;
+    }
+    if (this.hasInlineFollowingsData) {
+      this.$apollo.provider.defaultClient.writeQuery({
+        query: FOLLWINGS_QUERY,
+        variables: { name: this.name },
+        data: { followings: gon.followings }
+      });
+      gon.followings = null;
     }
   }
 };

@@ -7,8 +7,8 @@ RSpec.describe 'Queries::Users::Show' do # rubocop:disable RSpec/DescribeClass
 
   let(:query) do
     <<~QUERY
-      query User($id: ID!){
-        user(id: $id) {
+      query User($name: String!){
+        user(name: $name) {
           id
           name
           avatarUrl
@@ -17,11 +17,11 @@ RSpec.describe 'Queries::Users::Show' do # rubocop:disable RSpec/DescribeClass
     QUERY
   end
   let(:operation_name) { 'User' }
-  let(:variables) { { id: id } }
+  let(:variables) { { name: name } }
 
 
-  context 'IDに該当するユーザーが存在する時' do
-    let(:id) { user.id }
+  context 'nameに該当するユーザーが存在する時' do
+    let(:name) { user.name }
     let(:expected_value) do
       {
         user: {
@@ -38,7 +38,7 @@ RSpec.describe 'Queries::Users::Show' do # rubocop:disable RSpec/DescribeClass
   end
 
   context 'IDに該当するユーザーが存在しない時' do
-    let(:id) { 999_999 }
+    let(:name) { 'foo' }
 
     let(:expected_value) do
       { user: nil }.deep_stringify_keys

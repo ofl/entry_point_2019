@@ -17,7 +17,7 @@
           <p class="title is-4">{{ article.title }}</p>
           <p class="subtitle is-6">
             <RouterLink
-              :to="{ name: 'User', params: { id: article.user.id } }"
+              :to="{ name: 'User', params: { name: article.user.name } }"
             >{{ article.user.name }}</RouterLink>
           </p>
         </div>

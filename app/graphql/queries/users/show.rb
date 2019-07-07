@@ -4,9 +4,11 @@ class Queries::Users::Show < GraphQL::Schema::Resolver
 
   type Types::UserType, null: true
 
-  argument :id, ID, required: true
+  argument :name, String, required: true
 
-  def resolve(id:)
-    User.find_by(id: id)
+  def resolve(name:)
+    user = User.find_by(name: name)
+    user.followed_by?(context[:current_user]) if context[:current_user]
+    user
   end
 end

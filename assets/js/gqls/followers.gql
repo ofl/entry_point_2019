@@ -1,0 +1,9 @@
+query Followers($name: String!) {
+  followers(name: $name) {
+    id
+    name
+    avatarUrl
+    followingCount
+    followerCount
+  }
+}

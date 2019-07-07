@@ -1,7 +1,10 @@
-query User($id: ID!) {
-  user(id: $id) {
+query User($name: String!) {
+  user(name: $name) {
     id
     name
     avatarUrl
+    followerCount
+    followingCount
+    followedByMe
   }
 }

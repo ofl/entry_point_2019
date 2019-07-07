@@ -15,7 +15,7 @@
         <div class="content">
           <p>
             <RouterLink
-              :to="{ name: 'User', params: { id: article.user.id } }"
+              :to="{ name: 'User', params: { name: article.user.name } }"
             >{{ article.user.name }}</RouterLink>
             {{ article.createdAt }} &nbsp;
             <span class="tag">Question</span>

@@ -12,6 +12,8 @@ import GqlArticleDetail from "./components/pages/GqlArticleDetail.vue";
 import SignUp from "./components/pages/SignUp.vue";
 import EditProfile from "./components/pages/EditProfile.vue";
 import User from "./components/pages/User.vue";
+import FollowerList from "./components/pages/FollowerList.vue";
+import FollowingList from "./components/pages/FollowingList.vue";
 
 Vue.use(VueRouter);
 
@@ -60,7 +62,17 @@ const routes = [
     name: "EditProfile"
   },
   {
-    path: "/users/:id",
+    path: "/users/:name/followings",
+    component: FollowingList,
+    name: "Followings"
+  },
+  {
+    path: "/users/:name/followers",
+    component: FollowerList,
+    name: "Followers"
+  },
+  {
+    path: "/users/:name",
     component: User,
     name: "User"
   }

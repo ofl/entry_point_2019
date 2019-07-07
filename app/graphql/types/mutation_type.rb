@@ -11,5 +11,7 @@ module Types
 
     field :create_account, mutation: Mutations::Account::Create
     field :update_profile, mutation: Mutations::Profile::Update
+
+    field :user_toggle_follow, mutation: Mutations::Users::ToggleFollow
   end
 end

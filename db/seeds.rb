@@ -47,3 +47,10 @@ unless Article.exists?
     end
   end
 end
+
+unless Relationship.exists?
+  3.times do |i|
+    create(:relationship, follower_id: users[i].id, following_id: users[i + 1].id)
+    create(:relationship, follower_id: users[i + 1].id, following_id: users[i].id)
+  end
+end

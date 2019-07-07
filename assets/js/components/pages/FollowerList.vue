@@ -1,28 +1,37 @@
 <template>
   <GeneralTemplate :current-user="currentUser" :flashes="flashes">
-    <UserDetailContent v-if="user" :user="user" :user-name="name" :current-user="currentUser" />
+    <UserListContent
+      v-if="user"
+      :user="user"
+      :user-name="name"
+      :current-user="currentUser"
+      :users="followers"
+    />
   </GeneralTemplate>
 </template>
 
 <script>
 import GeneralTemplate from "../templates/GeneralTemplate.vue";
-import UserDetailContent from "../organisms/UserDetailContent.vue";
+import UserListContent from "../organisms/UserListContent.vue";
 
 import USER_DETAIL_QUERY from "../../gqls/user.gql";
+import FOLLWERS_QUERY from "../../gqls/followers.gql";
 import CURRENT_USER_QUERY from "../../gqls/currentUser.gql";
 
 export default {
-  name: "UserDetail",
+  name: "FollowerList",
 
-  components: { GeneralTemplate, UserDetailContent },
+  components: { GeneralTemplate, UserListContent },
 
   data() {
     return {
       toolbarTitle: "user",
       currentUser: gon.currentUser,
       user: gon.user,
+      followers: gon.followers ? gon.followers : [],
       flashes: {},
-      hasInlineUserData: !!gon.article
+      hasInlineUserData: !!gon.user,
+      hasInlineFollowersData: !!gon.followers
     };
   },
 
@@ -34,7 +43,7 @@ export default {
 
   watch: {
     user: function(val) {
-      document.title = `${val.name} | EP2019`;
+      document.title = `${val.name}'s follwers list | EP2019`;
     }
   },
 
@@ -52,6 +61,17 @@ export default {
       skip() {
         return this.hasInlineUserData;
       }
+    },
+    followers: {
+      query: FOLLWERS_QUERY,
+      variables() {
+        return {
+          name: this.name
+        };
+      },
+      skip() {
+        return this.hasInlineFollowersData;
+      }
     }
   },
 
@@ -62,8 +82,15 @@ export default {
         variables: { name: this.name },
         data: { user: gon.user }
       });
-      // 別の記事詳細を表示した時にgon.articleを表示しないようにnullにする。
       gon.user = null;
+    }
+    if (this.hasInlineFollowersData) {
+      this.$apollo.provider.defaultClient.writeQuery({
+        query: FOLLWERS_QUERY,
+        variables: { name: this.name },
+        data: { followers: gon.followers }
+      });
+      gon.followers = null;
     }
   }
 };

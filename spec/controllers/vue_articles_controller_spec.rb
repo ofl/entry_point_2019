@@ -37,7 +37,9 @@ RSpec.describe VueArticlesController, type: :controller do
             __typename: 'User',
             avatarUrl: nil,
             id: user.id.to_s,
-            name: user.name
+            name: user.name,
+            followerCount: user.follower_count,
+            followingCount: user.following_count,
           }.stringify_keys
         }.stringify_keys
       )
@@ -69,7 +71,9 @@ RSpec.describe VueArticlesController, type: :controller do
             __typename: 'User',
             avatarUrl: nil,
             id: user.id.to_s,
-            name: user.name
+            name: user.name,
+            followerCount: user.follower_count,
+            followingCount: user.following_count,
           }.stringify_keys
         }.stringify_keys
       )

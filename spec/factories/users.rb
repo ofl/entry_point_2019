@@ -6,6 +6,8 @@
 #  avatar_data(アバター画像情報) :string
 #  crypted_password              :string           not null
 #  email                         :string(100)      not null
+#  follower_count                :integer          default(0), not null
+#  following_count               :integer          default(0), not null
 #  name                          :string(50)       not null
 #  salt                          :string           not null
 #  created_at                    :datetime         not null
