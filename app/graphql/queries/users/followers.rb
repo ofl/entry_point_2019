@@ -1,6 +1,6 @@
 class Queries::Users::Followers < GraphQL::Schema::Resolver
   graphql_name 'User Follower Index'
-  description 'フォロワーの一覧を取得する'
+  description '対象ユーザーをフォローしているユーザーの一覧を取得する'
 
   type [Types::UserType], null: false
 
