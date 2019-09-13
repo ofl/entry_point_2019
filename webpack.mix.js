@@ -25,7 +25,7 @@ mix.webpackConfig({
 
 mix.extend(
   "i18n",
-  new class {
+  new (class {
     webpackRules() {
       return [
         {
@@ -35,7 +35,7 @@ mix.extend(
         }
       ];
     }
-  }()
+  })()
 );
 
 mix

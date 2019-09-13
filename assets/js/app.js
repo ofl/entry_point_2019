@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueApollo from "vue-apollo";
 import Buefy from "buefy";
-import VeeValidate from "vee-validate";
+import { ValidationProvider, extend } from "vee-validate";
+import { required } from "vee-validate/dist/rules";
 import VueI18n from "vue-i18n";
 
 // apollo-upload-clientを利用するためApolloBoostをmigration(https://www.apollographql.com/docs/react/advanced/boost-migration)
@@ -18,9 +19,13 @@ import ArticleNewComponent from "./components/pages/ArticleNew.vue";
 
 import router from "./router";
 
+extend("required", {
+  ...required,
+  message: "The {field} is required"
+});
+
 Vue.use(VueApollo);
 Vue.use(Buefy);
-Vue.use(VeeValidate, { events: "" });
 Vue.use(VueI18n);
 
 Vue.prototype.$rails = window.gon;
@@ -75,6 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const vm = new Vue({
     el: "#app",
+    components: {
+      ValidationProvider
+    },
     apolloProvider,
     router,
     i18n

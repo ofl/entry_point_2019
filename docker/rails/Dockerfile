@@ -2,9 +2,9 @@ FROM ruby:2.5.1-alpine
 LABEL maintainer "towerofl <towerofl@gmail.com>"
 
 ENV APP_ROOT=/app \
-    DEV_PACKAGES="git build-base less libxml2-dev libxslt-dev tzdata openssl" \
-    LANG="C.UTF-8" \
-    RAILS_PACKAGES="postgresql-dev imagemagick"
+  DEV_PACKAGES="git build-base less linux-headers libxml2-dev libxslt-dev tzdata openssl" \
+  LANG="C.UTF-8" \
+  RAILS_PACKAGES="postgresql-dev imagemagick"
 
 # Install dependencies
 RUN \
