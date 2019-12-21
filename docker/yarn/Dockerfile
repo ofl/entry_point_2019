@@ -1,17 +1,17 @@
-FROM node:8.11.4-alpine
+FROM node:12.6-alpine
 LABEL maintainer "towerofl <towerofl@gmail.com>"
 
-ENV DEV_PACKAGES="build-base libpng-dev lcms2-dev bash"
+ENV DEV_PACKAGES="curl build-base libpng-dev lcms2-dev bash"
 
-RUN mkdir -p /app && \
-    mkdir -p /opt
 WORKDIR /app
 
-# Install dependencies
 RUN \
   set -x && \
-  apk update && apk upgrade && apk add --no-cache $DEV_PACKAGES && \
-  npm install -g npm && \
-  npm install -g yarn
+  apk update && \
+  apk add git && \
+  apk add --no-cache $DEV_PACKAGES && \
+  curl -o- -L https://yarnpkg.com/install.sh | sh
+
+ENV PATH $HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
 
 ENTRYPOINT ["yarn"]
